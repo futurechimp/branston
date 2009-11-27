@@ -27,6 +27,13 @@ class Story < ActiveRecord::Base
     gherkin += "\n\n"
     
     # Scenarios...
+    unless scenarios.blank?
+      scenarios.each do |scenario|
+        gherkin += "\tScenario: "
+        gherkin += scenario.title
+        gherkin += "\n"
+      end
+    end
     
     File.open(FEATURE_PATH + feature_filename, 'w') {|f| f.write(gherkin) }
   end

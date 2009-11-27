@@ -39,6 +39,10 @@ UserRole.blueprint do
   name
 end
 
+Scenario.blueprint do
+  title
+end
+
 Story.blueprint do
   title
   description
@@ -50,4 +54,6 @@ Story.blueprint(:in_progress) do
   points { 2 }
   iteration
 end
+
+
 
