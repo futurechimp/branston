@@ -43,3 +43,9 @@ Story.blueprint do
   points { 2 }
 end
 
+Story.blueprint(:with_iteration) do
+  description
+  points { 2 }
+  iteration
+end
+

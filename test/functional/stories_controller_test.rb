@@ -50,6 +50,22 @@ class StoriesControllerTest < ActionController::TestCase
         should "redirect to show" do
           assert_redirected_to story_path(assigns(:story))
         end
+
+        should "not be associated with an iteration" do
+          assert !assigns(:story).iteration
+        end
+
+        context "including an iteration id" do
+          setup do
+            assert_difference("Story.count") do
+              post :create, :story => Story.plan(:with_iteration)
+            end
+          end
+
+          should "be associated with an iteration" do
+            assert assigns(:story).iteration
+          end
+        end
       end
 
       context "with invalid params" do
