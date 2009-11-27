@@ -21,6 +21,13 @@ class Story < ActiveRecord::Base
 
   def make_feature
     gherkin = "Feature: #{title}\n"
+    gherkin += "\tAs an actor\n"
+    gherkin += "\t"
+    gherkin += description
+    gherkin += "\n\n"
+    
+    # Scenarios...
+    
     File.open(FEATURE_PATH + feature_filename, 'w') {|f| f.write(gherkin) }
   end
 end

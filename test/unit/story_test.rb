@@ -7,7 +7,8 @@ class StoryTest < ActiveSupport::TestCase
 
   context "a Story" do
     setup do
-      @story = Story.make(:title => "Product Search")
+      @story = Story.make(:title => "Product Search", :description => "I should" +
+        " be able to search for products by title")
     end
 
     teardown do
@@ -35,6 +36,8 @@ class StoryTest < ActiveSupport::TestCase
       f = File.open(feature_file, "r")
       begin
         assert_equal "Feature: Product Search\n", f.gets
+        assert_equal "\tAs an actor\n", f.gets
+        assert_equal "\tI should be able to search for products by title\n", f.gets
       ensure
         f.close
       end
