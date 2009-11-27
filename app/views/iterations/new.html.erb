@@ -13,11 +13,11 @@
   </p>
   <p>
     <%= f.label :start_date %><br />
-    <%= f.text_field :start_date %>
+    <%= f.calendar_date_select :start_date %>
   </p>
   <p>
     <%= f.label :end_date %><br />
-    <%= f.datetime_select :end_date %>
+    <%= f.calendar_date_select :end_date %>
   </p>
   <p>
     <%= f.submit 'Create' %>
@@ -25,3 +25,4 @@
 <% end %>
 
 <%= link_to 'Back', iterations_path %>
+

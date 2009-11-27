@@ -1,4 +1,7 @@
 class StoriesController < ApplicationController
+
+  layout 'main'
+
   # GET /stories
   # GET /stories.xml
   def index
@@ -83,3 +86,4 @@ class StoriesController < ApplicationController
     end
   end
 end
+
