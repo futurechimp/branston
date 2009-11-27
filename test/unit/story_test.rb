@@ -6,26 +6,37 @@ class StoryTest < ActiveSupport::TestCase
   
   context "a Story" do    
     setup do
-      @story = Story.make(:description => "purchase some products")
+      @story = Story.make(:title => "Product Search")
     end
     
-    should "have a unique description" do
+    teardown do
+      feature_file = 'test/features/' + @story.feature_filename
+      FileUtils.rm feature_file if File.exists? feature_file
+    end
+    
+    should "have a unique title" do
       assert_no_difference 'Story.count' do
         assert_raise ActiveRecord::RecordInvalid do
-          u = Story.make(:description => @story.description)          
-          assert u.errors.on(:description)
+          u = Story.make(:title => @story.title)          
+          assert u.errors.on(:title)
         end
       end
     end
     
     should "know by convention what its filename ought to be" do
-      assert_equal "purchase_some_products.feature", @story.feature_filename
+      assert_equal "product_search.feature", @story.feature_filename
     end
     
     should "generate a feature file that can be run by cucumber" do
       @story.make_feature
-      assert File.exists? 'test/features/' + @story.feature_filename
-      
+      feature_file = 'test/features/' + @story.feature_filename
+      assert File.exists? feature_file
+      f = File.open(feature_file, "r")
+      begin
+        assert_equal "Feature: Product Search\n", f.gets
+      ensure
+        f.close
+      end
     end
     
   end

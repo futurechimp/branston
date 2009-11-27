@@ -8,7 +8,8 @@ class StoriesControllerTest < ActionController::TestCase
     end
   
     teardown do
-      FileUtils.rm @story.feature_filename if File.exists? @story.feature_filename
+      feature_file = 'test/features/' + @story.feature_filename
+      FileUtils.rm feature_file if File.exists? feature_file
     end
 
     should "show a list of all the stories" do

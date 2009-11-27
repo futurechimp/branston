@@ -6,6 +6,7 @@ require 'faker'
 #
 Sham.define do
   name            { Faker::Lorem.words }
+  title           { Faker::Lorem.words }
   description     { Faker::Lorem.sentences }
   email           { Faker::Internet.email }
   login           { Faker::Name.first_name }
@@ -39,6 +40,7 @@ UserRole.blueprint do
 end
 
 Story.blueprint do
+  title
   description
   points { 2 }
 end
