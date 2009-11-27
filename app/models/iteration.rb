@@ -2,7 +2,7 @@ class Iteration < ActiveRecord::Base
 
   # Validations
   #
-  validates_presence_of :name
+  validates_presence_of :name, :velocity
 
   # Associations
   #
