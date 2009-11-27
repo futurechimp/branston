@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  velocity: 1
+  name: MyString
+  start_date: 
+  end_date: 2009-11-27 12:06:27
+
+two:
+  velocity: 1
+  name: MyString
+  start_date: 
+  end_date: 2009-11-27 12:06:27

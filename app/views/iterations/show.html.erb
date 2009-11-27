@@ -1,0 +1,23 @@
+<p>
+  <b>Velocity:</b>
+  <%=h @iteration.velocity %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @iteration.name %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%=h @iteration.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%=h @iteration.end_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_iteration_path(@iteration) %> |
+<%= link_to 'Back', iterations_path %>
