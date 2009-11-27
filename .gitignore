@@ -3,3 +3,4 @@ log/*.log
 db/schema.rb
 db/development_structure.sql
 *~
+test/features

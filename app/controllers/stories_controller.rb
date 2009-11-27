@@ -2,6 +2,12 @@ class StoriesController < ApplicationController
 
   layout 'main'
 
+  def generate_feature
+    @story = Story.find(params[:id])
+    @story.make_feature
+    render :text => 'done'
+  end
+  
   # GET /stories
   # GET /stories.xml
   def index

@@ -32,3 +32,6 @@ config.gem "thoughtbot-shoulda", :lib => false, :source => "http://gems.github.c
 config.gem "notahat-machinist", :lib => false, :source => "http://gems.github.com"
 config.gem 'webrat', :lib => false
 config.gem "faker", :lib => false
+
+FEATURE_PATH='test/features/'
+FileUtils.mkdir FEATURE_PATH unless File.exists? FEATURE_PATH

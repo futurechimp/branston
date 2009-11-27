@@ -40,5 +40,9 @@ class ActiveSupport::TestCase
   include AuthenticatedTestHelper
 
   Rails.backtrace_cleaner.add_silencer { |line| line =~ /lib\/shoulda/ }
+  
+  def assert_false(value, message = nil)
+    assert(value === false, message)
+  end
 end
 

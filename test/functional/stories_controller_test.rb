@@ -6,34 +6,45 @@ class StoriesControllerTest < ActionController::TestCase
     setup do
       @story = Story.make
     end
+  
+    teardown do
+      FileUtils.rm @story.feature_filename if File.exists? @story.feature_filename
+    end
 
-    should "get index" do
+    should "show a list of all the stories" do
       get :index
       assert_response :success
       assert_not_nil assigns(:stories)
     end
 
-    should "get edit" do
+    should "show a form to edit stories" do
       get :edit, :id => @story.to_param
       assert_response :success
     end
 
-    should "get new" do
+    should "show a form to add stories" do
       get :new
       assert_response :success
     end
 
-    should "show" do
+    should "show details about a story" do
       get :show, :id => @story.to_param
       assert_response :success
     end
 
-    should "destroy story" do
+    should "delete a story" do
       assert_difference('Story.count', -1) do
         delete :destroy, :id => @story.to_param
       end
 
       assert_redirected_to stories_path
+    end
+    
+    should "generate the cucumber feature file for a story" do
+      get :generate_feature, :id => @story.to_param, :path => 'test/features/'
+      assert_response :success
+      
+      assert File.exists? RAILS_ROOT + '/test/features/' + @story.feature_filename      
     end
 
     context "creating a story" do
