@@ -1,22 +1,23 @@
-<h1>Listing stories</h1>
-
-<table>
-  <tr>
-    <th>Description</th>
-    <th>Points</th>
-  </tr>
-
-<% @stories.each do |story| %>
-  <tr>
-    <td><%=h story.description %></td>
-    <td><%=h story.points %></td>
-    <td><%= link_to 'Show', story %></td>
-    <td><%= link_to 'Edit', edit_story_path(story) %></td>
-    <td><%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
 <%= link_to 'New story', new_story_path %>
+
+<div id="current-wrapper">
+  <h2>Current Stories</h2>
+  <ul id="current" class="accordion">
+  <% @stories.each do |story| %>
+    <li class="story">
+        <h3><a href="#"><%= truncate story.description, :length => 30 %></a></h3>
+        <p>
+          <span id="story_<%=story.id%>_points">Points: <%=h story.points %></span>
+          <span><%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %></span>
+          <p id="story_<%=story.id%>_description" class="editable"><%=h story.description %></p>
+        </p>
+    </li>
+    <% content_for :page_end do %>
+      <% javascript_tag do %>
+        $("story_#{story}.id_description").editable(edit_story_url(story));
+      <% end %>
+    <% end %>
+  <% end %>
+  </ul>
+</div>
+

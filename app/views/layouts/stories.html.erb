@@ -4,14 +4,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Stories: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold' %>
+  <title>Branston - Stories: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'style' %>
+  <%= stylesheet_link_tag 'ui-lightness/jquery-ui-1.7.2.custom' %>
+  <script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="javascripts/jquery-ui-1.7.2.custom.min.js"></script>
+  <script type="text/javascript" src="javascripts/jquery.jeditable.mini.js"></script>
+  <script type="text/javascript" src="javascripts/jquery-multiselect-drag-n-drop.js"></script>
+  <% content_for :page_end do %>
+  <script type="text/javascript">
+	  $(function(){
+		  // Accordions
+		  $(".accordion").accordion({ header: "h3" });
+      // Drag drop lists
+      $('ul').drag_drop_selectable();
+      // Editable fields
+      $(".editable").editable("http://www.google.co.uk");
+    });
+  </script>
+  <% end %>
 </head>
 <body>
+  <%= render :partial => "layouts/header" %>
 
-<p style="color: green"><%= flash[:notice] %></p>
+  <p style="color: green"><%= flash[:notice] %></p>
 
-<%= yield %>
+	<div id="page">
+		<div id="content">
+    <%= yield %>
+    </div>
+  </div>
 
+  <%= render :partial => "layouts/footer" %>
+  <%= yield :page_end %>
 </body>
 </html>
+
