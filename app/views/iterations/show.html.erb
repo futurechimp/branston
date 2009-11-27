@@ -18,6 +18,17 @@
   <%=h @iteration.end_date %>
 </p>
 
+<% unless @iteration.stories.empty? %>
+    <b>Stories</b>
+    <ul>
+    <% @iteration.stories.each do |story| %>
+
+      <li><%= story.description %> | <%= story.points %></li>
+
+    <% end %>
+    </ul>
+<% end %>
 
 <%= link_to 'Edit', edit_iteration_path(@iteration) %> |
 <%= link_to 'Back', iterations_path %>
+
