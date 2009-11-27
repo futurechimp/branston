@@ -1,4 +1,5 @@
 log/*.log
+log/test.log
 *.sqlite3
 db/schema.rb
 db/development_structure.sql
