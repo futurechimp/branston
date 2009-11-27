@@ -1,0 +1,6 @@
+/* App css */
+
+div#current-wrapper, div#backlog-wrapper {float:left;width:48%;margin-top:6px;}
+
+ul#current {margin-right:8px;}
+
