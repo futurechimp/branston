@@ -16,11 +16,13 @@ class StoriesControllerTest < ActionController::TestCase
     should "get edit" do
       get :edit, :id => @story.to_param
       assert_response :success
+      assert assigns(:iterations)
     end
 
     should "get new" do
       get :new
       assert_response :success
+      assert assigns(:iterations)
     end
 
     should "show" do
@@ -59,6 +61,7 @@ class StoriesControllerTest < ActionController::TestCase
 
         should "redisplay" do
           assert_template 'new'
+          assert assigns(:iterations)
         end
       end
     end
@@ -84,6 +87,7 @@ class StoriesControllerTest < ActionController::TestCase
 
         should "redisplay the edit template" do
           assert_template "edit"
+          assert assigns(:iterations)
         end
       end
     end

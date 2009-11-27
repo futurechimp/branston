@@ -2,6 +2,8 @@ class StoriesController < ApplicationController
 
   layout 'main'
 
+  before_filter :retrieve_iterations, :only =>  [:new, :edit, :create, :update]
+
   # GET /stories
   # GET /stories.xml
   def index
@@ -85,5 +87,12 @@ class StoriesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+
+  def retrieve_iterations
+    @iterations = Iteration.all
+  end
+
 end
 
