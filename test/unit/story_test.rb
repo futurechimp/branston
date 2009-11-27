@@ -5,6 +5,7 @@ class StoryTest < ActiveSupport::TestCase
   should_validate_presence_of :description, :points
 
   should_belong_to :iteration
+  should_belong_to :author
 
   context "The Story class" do
 
