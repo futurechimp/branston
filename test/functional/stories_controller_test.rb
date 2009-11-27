@@ -58,7 +58,7 @@ class StoriesControllerTest < ActionController::TestCase
         context "including an iteration id" do
           setup do
             assert_difference("Story.count") do
-              post :create, :story => Story.plan(:with_iteration)
+              post :create, :story => Story.plan(:in_progress)
             end
           end
 

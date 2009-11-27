@@ -8,5 +8,9 @@ class Story < ActiveRecord::Base
   #
   belongs_to :iteration
 
+  # Named scopes
+  #
+  named_scope :in_progress, :conditions => ['iteration_id IS NOT ?', nil]
+
 end
 

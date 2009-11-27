@@ -43,7 +43,7 @@ Story.blueprint do
   points { 2 }
 end
 
-Story.blueprint(:with_iteration) do
+Story.blueprint(:in_progress) do
   description
   points { 2 }
   iteration
