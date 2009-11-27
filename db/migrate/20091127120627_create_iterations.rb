@@ -3,7 +3,7 @@ class CreateIterations < ActiveRecord::Migration
     create_table :iterations do |t|
       t.integer :velocity
       t.string :name
-      t.datetim :start_date
+      t.datetime :start_date
       t.datetime :end_date
 
       t.timestamps
@@ -14,3 +14,4 @@ class CreateIterations < ActiveRecord::Migration
     drop_table :iterations
   end
 end
+
