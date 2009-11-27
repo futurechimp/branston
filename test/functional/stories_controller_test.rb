@@ -21,11 +21,13 @@ class StoriesControllerTest < ActionController::TestCase
     should "show a form to edit stories" do
       get :edit, :id => @story.to_param
       assert_response :success
+      assert assigns(:iterations)
     end
 
     should "show a form to add stories" do
       get :new
       assert_response :success
+      assert assigns(:iterations)
     end
 
     should "show details about a story" do
@@ -60,6 +62,22 @@ class StoriesControllerTest < ActionController::TestCase
         should "redirect to show" do
           assert_redirected_to story_path(assigns(:story))
         end
+
+        should "not be associated with an iteration" do
+          assert !assigns(:story).iteration
+        end
+
+        context "including an iteration id" do
+          setup do
+            assert_difference("Story.count") do
+              post :create, :story => Story.plan(:in_progress)
+            end
+          end
+
+          should "be associated with an iteration" do
+            assert assigns(:story).iteration
+          end
+        end
       end
 
       context "with invalid params" do
@@ -71,6 +89,7 @@ class StoriesControllerTest < ActionController::TestCase
 
         should "redisplay" do
           assert_template 'new'
+          assert assigns(:iterations)
         end
       end
     end
@@ -96,6 +115,7 @@ class StoriesControllerTest < ActionController::TestCase
 
         should "redisplay the edit template" do
           assert_template "edit"
+          assert assigns(:iterations)
         end
       end
     end
