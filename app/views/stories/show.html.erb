@@ -1,4 +1,9 @@
 <p>
+  <b>Title:</b>
+  <%=h @story.title %>
+</p>
+
+<p>
   <b>Description:</b>
   <%=h @story.description %>
 </p>
@@ -8,10 +13,11 @@
   <%=h @story.points %>
 </p>
 
-<%= link_to_remote 'Generate Story', :update => "output", 
+<%= link_to_remote 'Generate Story', :update => "output",
 :url => generate_feature_story_path, :method => 'get' %>
 
-<span id="output"></span> | 
+<span id="output"></span> |
 
 <%= link_to 'Edit', edit_story_path(@story) %> |
 <%= link_to 'Back', stories_path %>
+
