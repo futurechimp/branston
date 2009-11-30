@@ -3,25 +3,12 @@
 <% form_for(@iteration) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :velocity %><br />
-    <%= f.text_field :velocity %>
-  </p>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :start_date %><br />
-    <%= f.text_field :start_date %>
-  </p>
-  <p>
-    <%= f.label :end_date %><br />
-    <%= f.datetime_select :end_date %>
-  </p>
+   <%= render :partial => 'form', :locals => {:f => f } %>
+
   <p>
     <%= f.submit 'Create' %>
   </p>
 <% end %>
 
 <%= link_to 'Back', iterations_path %>
+

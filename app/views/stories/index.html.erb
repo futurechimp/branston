@@ -1,5 +1,18 @@
 <%= link_to 'New story', new_story_path %>
 
+<% content_for :page_end do %>
+<script type="text/javascript">// TODO Move me to stories index
+  $(function(){
+	  // Accordions
+	  $(".accordion").accordion({ header: "h3" });
+    // Drag drop lists
+    $('ul').drag_drop_selectable();
+    // Editable fields
+    $(".editable").editable("http://www.google.co.uk");
+  });
+</script>
+<% end %>
+
 <div id="current-wrapper">
   <h2>Current Stories</h2>
   <ul id="current" class="accordion">

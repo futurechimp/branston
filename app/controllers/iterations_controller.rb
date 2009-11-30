@@ -1,4 +1,7 @@
 class IterationsController < ApplicationController
+
+  layout 'main'
+
   # GET /iterations
   # GET /iterations.xml
   def index
@@ -83,3 +86,4 @@ class IterationsController < ApplicationController
     end
   end
 end
+

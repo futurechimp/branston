@@ -1,6 +1,13 @@
 class Iteration < ActiveRecord::Base
 
-  validates_presence_of :name
+  # Validations
+  #
+  validates_presence_of :name, :velocity
 
+  # Associations
+  #
+  has_many :stories
+  has_many :participations
+  has_many :geeks, :through => :participations, :class_name => "User"
 end
 

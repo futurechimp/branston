@@ -1,0 +1,13 @@
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :points %><br />
+    <%= f.text_field :points %>
+  </p>
+  <p>
+    <%= f.label :iteration %><br/>
+    <%= f.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]} %>
+  </p>
+
