@@ -1,0 +1,17 @@
+<!-- stories/_story_card.html.erb -->
+    <li class="story">
+        <h3><a href="#" id="story_<%=story.id%>_title"><%= truncate story.title, :length => 35 %></a></h3>
+        <p>
+          <span id="story_<%=story.id%>_points">(<%= story.points %> Points)</span>&nbsp;
+          <span><%= link_to "Delete &raquo;", story, :confirm => 'Are you sure?', :method => :delete %></span>
+          <br/>
+          <span id="story_<%=story.id%>_description" class="description"><%=h story.description %></span>
+        </p>
+    </li>
+    <% content_for :page_end do %>
+      <% javascript_tag do %>
+        $("#story_<%= story.id %>_title").editable('<%= story_url(story) %>.js',{ method: "PUT", name: "story[title]" });
+        $("#story_<%= story.id %>_description").editable('<%= story_url(story) %>.js',{ method: "PUT", name: "story[description]", type:'textarea', submit: "Save", cancel: "Cancel" });
+      <% end %>
+    <% end %>
+

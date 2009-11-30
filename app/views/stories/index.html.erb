@@ -1,4 +1,4 @@
-<%= link_to 'New story', new_story_path %>
+<%= link_to 'New story', new_story_path, :class => "add" %>
 
 <% content_for :page_end do %>
 <script type="text/javascript">
@@ -7,8 +7,6 @@
 	  $(".accordion").accordion({ header: "h3" });
     // Drag drop lists
     $('ul').drag_drop_selectable();
-    // Editable fields
-    // $(".editable").editable("http://www.google.co.uk");
   });
 </script>
 <% end %>
@@ -17,21 +15,7 @@
   <h2>Current Stories</h2>
   <ul id="current" class="accordion">
   <% @stories.each do |story| %>
-    <li class="story">
-        <h3><a href="#"><span id="story_<%=story.id%>_title"><%= truncate story.title, :length => 35 %></span></a></h3>
-        <p>
-          <span id="story_<%=story.id%>_points">(<%= story.points %> Points)</span>&nbsp;
-          <span><%= link_to "Delete &raquo;", story, :confirm => 'Are you sure?', :method => :delete %></span>
-          <br/>
-          <span id="story_<%=story.id%>_description" class="editable"><%=h story.description %></span>
-        </p>
-    </li>
-    <% content_for :page_end do %>
-      <% javascript_tag do %>
-        $("#story_<%= story.id %>_title").editable('<%= edit_story_url(story) %>');
-        $("#story_<%= story.id %>_description").editable('<%= edit_story_url(story) %>');
-      <% end %>
-    <% end %>
+    <%= render :partial => "story_card", :locals => {:story => story} %>
   <% end %>
   </ul>
 </div>

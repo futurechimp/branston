@@ -1,6 +1,19 @@
 /* App css */
+.clear-left {clear:left;}
+
 
 div#current-wrapper, div#backlog-wrapper {float:left;width:48%;margin-top:6px;}
 
 ul#current {margin-right:8px;}
+
+li.story span.description {display:block;height:90px;width:100%;}
+
+div#content a.add { background: url(/images/icons/plus_icon_30x30.png) no-repeat left; padding-left:34px; font:1.1em verdana,arial,sans-serif; display:block; height:30px; line-height:25px;text-decoration:none;}
+div#content a.add:hover {text-decoration:underline;}
+
+div#content a.back { background: url(/images/icons/back_icon_30x23.png) no-repeat left; padding-left:34px; font:1.1em verdana,arial,sans-serif; display:block; height:28px; line-height:25px;text-decoration:none;}
+div#content a.add:hover {text-decoration:underline;}
+
+p.form-fields label {clear:left;float:left;text-align:right;display:block;width:100px;}
+p.form-fields input, p.form-fields textarea, p.form-fields select { float:left;margin-left:20px; }
 
