@@ -20,9 +20,10 @@
     <li class="story">
         <h3><a href="#"><%= truncate story.description, :length => 30 %></a></h3>
         <p>
-          <span id="story_<%=story.id%>_points">Points: <%=h story.points %></span>
-          <span><%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %></span>
-          <p id="story_<%=story.id%>_description" class="editable"><%=h story.description %></p>
+          <span id="story_<%=story.id%>_points">(<%= story.points %> Points)</span>&nbsp;
+          <span><%= link_to "Delete &raquo;", story, :confirm => 'Are you sure?', :method => :delete %></span>
+          <br/>
+          <span id="story_<%=story.id%>_description" class="editable"><%=h story.description %></span>
         </p>
     </li>
     <% content_for :page_end do %>
