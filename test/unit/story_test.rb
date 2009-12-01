@@ -8,10 +8,8 @@ class StoryTest < ActiveSupport::TestCase
 
   context "a Story" do
     setup do
-      @story = Story.make_unsaved(:title => "Product Search", :description => "I should" +
-        " be able to search for products by title")
-      @story.scenarios.make(:title => "Try searching for 'Dizzy Rascal'")
-      @story.save!
+      @story = Factory.make_story(:title => "Product Search", 
+        :description => "I should be able to search for products by title")
     end
 
     teardown do
@@ -44,7 +42,11 @@ class StoryTest < ActiveSupport::TestCase
         assert_equal "\tI should be able to search for products by title\n", f.gets
         #empty line
         f.gets
-        assert_equal "\tScenario: Try searching for 'Dizzy Rascal'\n", f.gets
+        assert_equal "\tScenario: #{@story.scenarios.first.title}\n", f.gets
+        assert_equal "\tGiven #{@story.scenarios.first.preconditions.first}\n", f.gets
+        assert_equal "\tAnd #{@story.scenarios.first.preconditions.last}\n", f.gets
+        assert_equal "\tThen #{@story.scenarios.first.outcomes.first}\n", f.gets
+        assert_equal "\tAnd #{@story.scenarios.first.outcomes.last}\n", f.gets
       ensure
         f.close
       end

@@ -33,6 +33,21 @@ class Story < ActiveRecord::Base
         gherkin += "\tScenario: "
         gherkin += scenario.title
         gherkin += "\n"
+        
+        unless scenario.preconditions.blank?
+          scenario.preconditions.each_with_index do |p, i|
+            gherkin += "\tGiven #{p}\n" if i == 0
+            gherkin += "\tAnd #{p}\n" unless i == 0
+          end
+        end
+        
+        unless scenario.outcomes.blank?
+          scenario.outcomes.each_with_index do |o, i|
+            gherkin += "\tThen #{o}\n" if i==0
+            gherkin += "\tAnd #{o}\n" unless i==0
+          end
+        end
+        
       end
     end
     
