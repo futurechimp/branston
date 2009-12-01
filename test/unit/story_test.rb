@@ -8,12 +8,16 @@ class StoryTest < ActiveSupport::TestCase
 
   context "a Story" do
     setup do
-      @story = Story.make(:title => "Product Search")
+      @story = Story.make_unsaved(:title => "Product Search", :description => "I should" +
+        " be able to search for products by title")
+      @story.scenarios.make(:title => "Try searching for 'Dizzy Rascal'")
+      @story.save!
     end
 
     teardown do
       feature_file = 'test/features/' + @story.feature_filename
       FileUtils.rm feature_file if File.exists? feature_file
+      Story.delete_all
     end
 
     should "have a unique title" do
@@ -36,6 +40,11 @@ class StoryTest < ActiveSupport::TestCase
       f = File.open(feature_file, "r")
       begin
         assert_equal "Feature: Product Search\n", f.gets
+        assert_equal "\tAs an actor\n", f.gets
+        assert_equal "\tI should be able to search for products by title\n", f.gets
+        #empty line
+        f.gets
+        assert_equal "\tScenario: Try searching for 'Dizzy Rascal'\n", f.gets
       ensure
         f.close
       end
