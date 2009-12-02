@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  description: MyString
-  scenario_id: 1
-
-two:
-  description: MyString
-  scenario_id: 1
