@@ -1,5 +1,7 @@
-<h2>Iterations</h2>
-
+<div class="index-head">
+  <h2>Iterations</h2>
+  <%= link_to 'New iteration', new_iteration_path, :class => "add" %>
+</div>
 <table class="iterations">
   <tr>
     <th>Velocity</th>
@@ -24,8 +26,6 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New iteration', new_iteration_path, :class => "add" %>
+<br/>
+<%= link_to 'New iteration', new_iteration_path, :class => "add" if @iterations.size > 10 %>
 

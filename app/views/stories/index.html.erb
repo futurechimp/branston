@@ -1,20 +1,50 @@
-<%= link_to 'New story', new_story_path, :class => "add" %>
+<div class="index-head">
+  <h2>User Stories</h2>
+  <%= link_to 'New story', new_story_path, :class => "add" %>
+</div>
 
 <% content_for :page_end do %>
 <script type="text/javascript">
 document.observe("dom:loaded", function() {
-  <% @stories.each do |story| %>
+  <% @current_stories.each do |story| -%>
   new Draggable('<%= element_id(story) %>');
-  <% end %>
+  <% end -%>
+  <% @backlog_stories.each do |story| -%>
+  new Draggable('<%= element_id(story) %>');
+  <% end -%>
   new Accordion("current_stories", 2);
+  new Accordion("backlog_stories", 2);
 });
 </script>
 <% end %>
 
 <div id="current-wrapper">
-  <h2>Current Stories</h2>
+  <h3>Current Stories</h3>
   <div id="current_stories" class="accordion">
-  <% @stories.each do |story| %>
+  <% @current_stories.each do |story| %>
+    <% @story = story -%>
+    <div id="<%= element_id(story) %>" class="story">
+      <div class="accordion-toggle">
+        <%= in_place_editor_field 'story', 'title' %>
+      </div>
+      <div class="accordion-content">
+        <p>
+          (<%= in_place_editor_field 'story', 'points' %>) Points
+          &nbsp;&nbsp;&nbsp;
+          <span><%= link_to "Delete &raquo;", story, :confirm => 'Are you sure?', :method => :delete %></span>
+          <br/>
+          <%= in_place_editor_field 'story', 'description' %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div>
+
+<div id="backlog-wrapper">
+  <h3>Story Backlog</h3>
+  <div id="backlog_stories" class="accordion">
+  <% @backlog_stories.each do |story| %>
     <% @story = story -%>
     <div id="<%= element_id(story) %>" class="story">
       <div class="accordion-toggle">
