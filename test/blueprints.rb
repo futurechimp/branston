@@ -8,6 +8,7 @@ Sham.define do
   name            { Faker::Lorem.words }
   title           { Faker::Lorem.sentence }
   description     { Faker::Lorem.sentence }
+  notes           { Faker::Lorem.sentences }
   email           { Faker::Internet.email }
   login           { Faker::Name.first_name }
 end
@@ -25,6 +26,11 @@ end
 
 Precondition.blueprint do
   description
+end
+
+Release.blueprint do
+  release_date { Date.today + 20 }
+  notes
 end
 
 User.blueprint do
