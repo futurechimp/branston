@@ -42,5 +42,6 @@ Rails::Initializer.run do |config|
   
   FEATURE_PATH='features/'
   FileUtils.mkdir FEATURE_PATH unless File.exists? FEATURE_PATH
+  FileUtils.mkdir FEATURE_PATH + 'step_definitions' unless File.exists? FEATURE_PATH + 'step_definitions'
 end
 

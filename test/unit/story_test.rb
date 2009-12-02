@@ -12,12 +12,14 @@ class StoryTest < ActiveSupport::TestCase
     setup do
       @story = Factory.make_story(:title => "Product Search", 
         :description => "I should be able to search for products by title")
+      @feature_file = FEATURE_PATH + @story.feature_filename
+      @step_file = FEATURE_PATH + @story.step_filename
     end
 
-    teardown do
-      feature_file = 'test/features/' + @story.feature_filename
-      FileUtils.rm feature_file if File.exists? feature_file
-      Story.delete_all
+    teardown do      
+      FileUtils.rm @feature_file if File.exists? @feature_file
+      FileUtils.rm @step_file if File.exists? @step_file
+      #Story.delete_all
     end
 
     should "have a unique title" do
@@ -35,20 +37,40 @@ class StoryTest < ActiveSupport::TestCase
 
     should "generate a feature file that can be run by cucumber" do
       @story.make_feature
-      feature_file = 'test/features/' + @story.feature_filename
-      assert File.exists? feature_file
-      f = File.open(feature_file, "r")
+      assert File.exists? @feature_file
+      
+      f = File.open(@feature_file, "r")
       begin
         assert_equal "Feature: Product Search\n", f.gets
         assert_equal "\tAs an actor\n", f.gets
         assert_equal "\tI should be able to search for products by title\n", f.gets
-        #empty line
-        f.gets
+        f.gets # empty line
         assert_equal "\tScenario: #{@story.scenarios.first.title}\n", f.gets
         assert_equal "\tGiven #{@story.scenarios.first.preconditions.first}\n", f.gets
         assert_equal "\tAnd #{@story.scenarios.first.preconditions.last}\n", f.gets
         assert_equal "\tThen #{@story.scenarios.first.outcomes.first}\n", f.gets
         assert_equal "\tAnd #{@story.scenarios.first.outcomes.last}\n", f.gets
+        assert_equal "\n", f.gets
+      ensure
+        f.close
+      end
+    end
+    
+    should "generate a skeleton step definition file" do
+      @story.make_steps
+      assert File.exists? @step_file
+      f = File.open(@step_file, "r")
+      begin
+        for i in 0..1
+          for j in 0..1
+            pc = @story.scenarios[i].preconditions[j]
+            assert_equal "Given /^#{pc}$/ do\n", f.gets
+            assert_equal "\t#TODO: Define these steps\n", f.gets
+            assert_equal "end\n", f.gets
+            assert_equal "\n", f.gets
+          end
+        end
+        assert_equal "\n", f.gets
       ensure
         f.close
       end

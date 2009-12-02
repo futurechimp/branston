@@ -19,6 +19,35 @@ class Story < ActiveRecord::Base
   def feature_filename
     title.parameterize('_').to_s + '.feature'
   end
+  
+  def step_filename
+    "step_definitions/" + title.parameterize('_').to_s + '_steps.rb'
+  end
+  
+  def generate
+    make_steps
+    make_feature
+  end
+  
+  def make_steps
+    steps = ""
+    
+    unless scenarios.blank?
+      scenarios.each do |s| 
+        unless s.preconditions.blank?
+          s.preconditions.each do |p|
+            steps += "Given /^#{p}$/ do\n"
+            steps += "\t#TODO: Define these steps\n"
+            steps += "end\n\n"
+          end
+        end
+      end
+    end
+    
+    steps += "\n"
+    
+    File.open(FEATURE_PATH + step_filename, 'w') {|f| f.write(steps) }
+  end
 
   def make_feature
     gherkin = "Feature: #{title}\n"
@@ -48,6 +77,7 @@ class Story < ActiveRecord::Base
           end
         end
         
+        gherkin += "\n"
       end
     end
     
