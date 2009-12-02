@@ -1,26 +1,31 @@
-<h1>Listing iterations</h1>
-
-<table>
+<div class="index-head">
+  <h2>Iterations</h2>
+  <%= link_to 'New iteration', new_iteration_path, :class => "add" %>
+</div>
+<table class="iterations">
   <tr>
     <th>Velocity</th>
-    <th>Name</th>
+    <th class="name">Name</th>
     <th>Start date</th>
     <th>End date</th>
+    <th>&nbsp;</th>
   </tr>
 
 <% @iterations.each do |iteration| %>
-  <tr>
-    <td><%=h iteration.velocity %></td>
-    <td><%=h iteration.name %></td>
-    <td><%=h iteration.start_date %></td>
-    <td><%=h iteration.end_date %></td>
-    <td><%= link_to 'Show', iteration %></td>
-    <td><%= link_to 'Edit', edit_iteration_path(iteration) %></td>
-    <td><%= link_to 'Destroy', iteration, :confirm => 'Are you sure?', :method => :delete %></td>
+  <% @iteration = iteration -%>
+  <tr class="<%=cycle('odd','even')%>">
+    <td><%= in_place_editor_field 'iteration', 'velocity' %></td>
+    <td><%= in_place_editor_field 'iteration', 'name' %></td>
+    <td><%=h iteration.start_date.strftime('%d/%m/%Y') %></td>
+    <td><%=h iteration.end_date.strftime('%d/%m/%Y') %></td>
+    <td>
+      <%= link_to 'Show', iteration %>&nbsp;&nbsp;&bull;
+      <%= link_to 'Edit', edit_iteration_path(iteration) %>&nbsp;&nbsp;&bull;
+      <%= link_to 'Destroy', iteration, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>
+<br/>
+<%= link_to 'New iteration', new_iteration_path, :class => "add" if @iterations.size > 10 %>
 
-<br />
-
-<%= link_to 'New iteration', new_iteration_path %>

@@ -3,6 +3,10 @@ class StoriesController < ApplicationController
   layout 'main'
   before_filter :retrieve_iterations, :only =>  [:new, :edit, :create, :update]
 
+  in_place_edit_for :story, :title
+  in_place_edit_for :story, :description
+  in_place_edit_for :story, :points
+
   def generate_feature
     @story = Story.find(params[:id])
     @story.make_feature
@@ -12,7 +16,8 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.xml
   def index
-    @stories = Story.all
+    @current_stories = Story.in_progress
+    @backlog_stories = Story.find :all, :conditions => "iteration_id IS NULL"
 
     respond_to do |format|
       format.html # index.html.erb

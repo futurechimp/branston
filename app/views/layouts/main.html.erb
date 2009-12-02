@@ -7,13 +7,9 @@
   <title>Branston - <%= controller.action_name %></title>
   <%= stylesheet_link_tag 'application' %>
   <%= stylesheet_link_tag 'style' %>
-  <%= stylesheet_link_tag 'ui-lightness/jquery-ui-1.7.2.custom' %>
   <%= javascript_include_tag :defaults %>
   <%= calendar_date_select_includes "red" %>
-  <script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
-  <script type="text/javascript" src="javascripts/jquery-ui-1.7.2.custom.min.js"></script>
-  <script type="text/javascript" src="javascripts/jquery.jeditable.mini.js"></script>
-  <script type="text/javascript" src="javascripts/jquery-multiselect-drag-n-drop.js"></script>
+  <%= javascript_include_tag 'accordion' %>
 </head>
 <body>
   <%= render :partial => "layouts/header" %>
