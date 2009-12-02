@@ -12,8 +12,12 @@ document.observe("dom:loaded", function() {
   <% @backlog_stories.each do |story| -%>
   new Draggable('<%= element_id(story) %>');
   <% end -%>
-  new Accordion("current_stories", 2);
+  <% unless @current_stories.nil? or @current_stories.empty? -%>
+  new Accordion("current_stories", 1);
+  <% end -%>
+  <% unless @backlog_stories.nil? or @backlog_stories.empty? -%>
   new Accordion("backlog_stories", 2);
+  <% end -%>
 });
 </script>
 <% end %>

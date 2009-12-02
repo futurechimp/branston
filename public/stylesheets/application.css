@@ -41,27 +41,18 @@ div.accordion {
 div.accordion-toggle{
 	position: relative; /* required for effect */
 	z-index: 10;		/* required for effect */
-	background: #fde3aa;
+	background: #ffff66;
 	background-position: bottom;
 	cursor: pointer;
-	margin-bottom: 1px;
 	padding: 9px 14px 6px 14px;
 	border-top: 1px solid #5d5852;
 }
 
 div.accordion-toggle:hover, div.accordion-toggle-active{
-	background-color: #fde1a5;
+	background-color: #ffff99;
 	border-top: 1px solid #a06b55;
 }
 
-div.accordion-content{
-    overflow: hidden;	/* required for effect */
-	background: #fdf5e0;
-    padding: 0;
-}
-
-div.accordion-content p {
-	margin: 9px 24px 6px 24px;
-    line-height:28px;
-}
+div.accordion-content { overflow: hidden; background: #ffff99; padding: 0; }
+div.accordion-content p { margin: 9px 24px 6px 24px; line-height:28px; }
 
