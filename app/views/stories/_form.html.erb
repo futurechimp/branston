@@ -1,17 +1,17 @@
-  <p>
-    <%= f.label :title %><br />
+  <p class="form-fields">
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </p>
-  <p>
-    <%= f.label :description %><br />
+  <p class="form-fields">
+    <%= f.label :description %>
     <%= f.text_area :description %>
   </p>
-  <p>
-    <%= f.label :points %><br />
-    <%= f.text_field :points %>
+  <p class="form-fields">
+    <%= f.label :points %>
+    <%= f.select :points, (1..10).to_a %>
   </p>
-  <p>
-    <%= f.label :iteration %><br/>
+  <p class="form-fields">
+    <%= f.label :iteration %>
     <%= f.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]} %>
   </p>
 

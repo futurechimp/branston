@@ -5,15 +5,19 @@ class StoryTest < ActiveSupport::TestCase
   should_validate_presence_of :description, :points
   should_have_many :scenarios
   should_have_one :user_role
+  should_belong_to :iteration
+  should_belong_to :author
 
   context "a Story" do
     setup do
-      @story = Story.make(:title => "Product Search")
+      @story = Factory.make_story(:title => "Product Search", 
+        :description => "I should be able to search for products by title")
     end
 
     teardown do
       feature_file = 'test/features/' + @story.feature_filename
       FileUtils.rm feature_file if File.exists? feature_file
+      Story.delete_all
     end
 
     should "have a unique title" do
@@ -36,6 +40,15 @@ class StoryTest < ActiveSupport::TestCase
       f = File.open(feature_file, "r")
       begin
         assert_equal "Feature: Product Search\n", f.gets
+        assert_equal "\tAs an actor\n", f.gets
+        assert_equal "\tI should be able to search for products by title\n", f.gets
+        #empty line
+        f.gets
+        assert_equal "\tScenario: #{@story.scenarios.first.title}\n", f.gets
+        assert_equal "\tGiven #{@story.scenarios.first.preconditions.first}\n", f.gets
+        assert_equal "\tAnd #{@story.scenarios.first.preconditions.last}\n", f.gets
+        assert_equal "\tThen #{@story.scenarios.first.outcomes.first}\n", f.gets
+        assert_equal "\tAnd #{@story.scenarios.first.outcomes.last}\n", f.gets
       ensure
         f.close
       end

@@ -68,15 +68,16 @@ class StoriesController < ApplicationController
   # PUT /stories/1.xml
   def update
     @story = Story.find(params[:id])
-
     respond_to do |format|
       if @story.update_attributes(params[:story])
         flash[:notice] = 'Story was successfully updated.'
         format.html { redirect_to(@story) }
         format.xml  { head :ok }
+        format.js { render :text => params[:story].values[0] } # TODO this smells bad.
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
+        format.js { head :ok }
       end
     end
   end

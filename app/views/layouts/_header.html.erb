@@ -1,0 +1,30 @@
+<!-- layouts/_header.html.erb -->
+  <div id="logo">
+		<h1><a href="#">Branston  </a></h1>
+		<p><em> Small chunk pickle</em></p>
+	</div>
+	<hr />
+	<!-- end #logo -->
+	<div id="header">
+		<div id="menu">
+			<ul>
+				<li><a href="#overview-tab" class="first">Overview</a></li>
+				<li><a href="#releases-tab">Releases</a></li>
+				<li<%= tab_on("iterations") %>><a href="/iterations">Iterations</a></li>
+				<li<%= tab_on("stories") %>><a href="/stories">Stories</a></li>
+			</ul>
+		</div>
+		<!-- end #menu -->
+		<div id="search">
+			<form method="get" action="">
+				<fieldset>
+				<input type="text" name="s" id="search-text" size="15" />
+				<input type="submit" id="search-submit" value="GO" />
+				</fieldset>
+			</form>
+		</div>
+		<!-- end #search -->
+	</div>
+	<!-- end #header -->
+	<!-- end #header-wrapper -->
+

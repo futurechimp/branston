@@ -1,22 +1,22 @@
-<h1>Listing stories</h1>
+<%= link_to 'New story', new_story_path, :class => "add" %>
 
-<table>
-  <tr>
-    <th>Description</th>
-    <th>Points</th>
-  </tr>
-
-<% @stories.each do |story| %>
-  <tr>
-    <td><%=h story.description %></td>
-    <td><%=h story.points %></td>
-    <td><%= link_to 'Show', story %></td>
-    <td><%= link_to 'Edit', edit_story_path(story) %></td>
-    <td><%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% content_for :page_end do %>
+<script type="text/javascript">
+  $(function(){
+	  // Accordions
+	  $(".accordion").accordion({ header: "h3" });
+    // Drag drop lists
+    $('ul').drag_drop_selectable();
+  });
+</script>
 <% end %>
-</table>
 
-<br />
+<div id="current-wrapper">
+  <h2>Current Stories</h2>
+  <ul id="current" class="accordion">
+  <% @stories.each do |story| %>
+    <%= render :partial => "story_card", :locals => {:story => story} %>
+  <% end %>
+  </ul>
+</div>
 
-<%= link_to 'New story', new_story_path %>

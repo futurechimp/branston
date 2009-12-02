@@ -5,11 +5,11 @@
 
   <%= render :partial => 'form', :locals => {:f => f} %>
 
-  <p>
+  <p class="clear-left">
     <%= f.submit 'Update' %>
   </p>
 <% end %>
 
 <%= link_to 'Show', @story %> |
-<%= link_to 'Back', stories_path %>
+<%= link_to 'Back', stories_path, :class => "back" %>
 
