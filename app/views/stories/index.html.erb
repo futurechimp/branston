@@ -2,21 +2,35 @@
 
 <% content_for :page_end do %>
 <script type="text/javascript">
-  $(function(){
-	  // Accordions
-	  $(".accordion").accordion({ header: "h3" });
-    // Drag drop lists
-    $('ul').drag_drop_selectable();
-  });
+document.observe("dom:loaded", function() {
+  <% @stories.each do |story| %>
+  new Draggable('<%= element_id(story) %>');
+  <% end %>
+  new Accordion("current_stories", 2);
+});
 </script>
 <% end %>
 
 <div id="current-wrapper">
   <h2>Current Stories</h2>
-  <ul id="current" class="accordion">
+  <div id="current_stories" class="accordion">
   <% @stories.each do |story| %>
-    <%= render :partial => "story_card", :locals => {:story => story} %>
+    <% @story = story -%>
+    <div id="<%= element_id(story) %>" class="story">
+      <div class="accordion-toggle">
+        <%= in_place_editor_field 'story', 'title' %>
+      </div>
+      <div class="accordion-content">
+        <p>
+          (<%= in_place_editor_field 'story', 'points' %>) Points
+          &nbsp;&nbsp;&nbsp;
+          <span><%= link_to "Delete &raquo;", story, :confirm => 'Are you sure?', :method => :delete %></span>
+          <br/>
+          <%= in_place_editor_field 'story', 'description' %>
+        </p>
+      </div>
+    </div>
   <% end %>
-  </ul>
+  </div>
 </div>
 

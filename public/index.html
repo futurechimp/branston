@@ -1,42 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--
-Design by Free CSS Templates
-http://www.freecsstemplates.org
-Released for free under a Creative Commons Attribution 2.5 License
-
-Name       : Guarantee
-Description: A two-column, fixed-width design for 1024x768 screen resolutions.
-Version    : 1.0
-Released   : 20091101
-
--->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Branston</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta name="keywords" content="agile, user story, project, planning, iteration" />
+<meta name="description" content="Agile planning software built around user stories." />
 <link href="stylesheets/style.css" rel="stylesheet" type="text/css" />
 <link href="stylesheets/application.css" rel="stylesheet" type="text/css" />
-<link href="stylesheets/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
-<script type="text/javascript" src="javascripts/jquery-ui-1.7.2.custom.min.js"></script>
-<script type="text/javascript" src="javascripts/jquery.jeditable.mini.js"></script>
-<script type="text/javascript" src="javascripts/jquery-multiselect-drag-n-drop.js"></script>
-<script type="text/javascript">
-	$(function(){
-		// Accordion
-		$("#backlog").accordion({ header: "h3" });
-        $("#current").accordion({ header: "h3" });
-
-        mychange = function ( $list ){
-            $( '#'+$list.attr('id')+'_serialised').html( $.dds.serialize( $list.attr('id')) );
-        }
-        $('ul').drag_drop_selectable();
-        $(".editable").editable("http://www.google.co.uk");
-
-    });
-</script>
 </head>
 <body>
 	<div id="logo">
@@ -48,10 +18,10 @@ Released   : 20091101
 	<div id="header">
 		<div id="menu">
 			<ul>
-				<li><a href="#overview-tab" class="first">Overview</a></li>
-				<li><a href="#releases-tab">Releases</a></li>
-				<li><a href="#iterations-tab">Iterations</a></li>
-				<li class="current_page_item"><a href="#stories-tab">Stories</a></li>
+				<li class="current_page_item"><a href="#overview-tab" class="first">Overview</a></li>
+				<li><a href="/releases">Releases</a></li>
+				<li><a href="/iterations">Iterations</a></li>
+				<li><a href="/stories">Stories</a></li>
 			</ul>
 		</div>
 		<!-- end #menu -->
@@ -69,40 +39,9 @@ Released   : 20091101
 	<!-- end #header-wrapper -->
 	<div id="page">
 		<div id="content">
-            <div id="current-wrapper">
-                <h2>Current Stories</h2>
-                <ul id="current" class="accordion">
-                    <li class="story">
-                        <h3><a href="#">A user must be able to login</a></h3>
-                        <p class="editable">Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, volutpat.</p>
-                    </li>
-                    <li class="story">
-                        <h3><a href="#">An admin must be able to add a free competition</a></h3>
-                        <p class="editable">Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, volutpat.</p>
-                    </li>
-                    <li class="story">
-                        <h3><a href="#">A user must be able to enter a free competition without making a payment</a></h3>
-                        <p class="editable">Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, volutpat.</p>
-                    </li>
-                </ul>
-            </div>
-            <div id="backlog-wrapper">
-                <h2>Story Stack</h2>
-                <ul id="backlog" class="accordion">
-                    <li class="story">
-                        <h3><a href="#">A user must be able to pay to enter a non-free competition</a></h3>
-                        <p class="editable">Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, volutpat.</p>
-                    </li>
-                    <li class="story">
-                        <h3><a href="#">An admin must be able to add a non-free competition</a></h3>
-                        <p class="editable">Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, volutpat.</p>
-                    </li>
-                    <li class="story">
-                        <h3><a href="#">A user must only be able to enter a non-free competition by making a payment</a></h3>
-                        <p class="editable">Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, volutpat.</p>
-                    </li>
-                </ul>
-            </div>
+            <h2>Welcome to Branston</h2>
+            <p>In an emergency session Tuesday, members of the Supreme Metal Council strongly condemned the increasing use of the metal hand sign in lay society, claiming that its meaning has become perverted by overuse.</p>
+            <p></p>
 		</div><!-- end #content -->
 		<div id="sidebar">
 			<ul>

@@ -2,6 +2,9 @@ class IterationsController < ApplicationController
 
   layout 'main'
 
+  in_place_edit_for :iteration, :velocity
+  in_place_edit_for :iteration, :name
+
   # GET /iterations
   # GET /iterations.xml
   def index
