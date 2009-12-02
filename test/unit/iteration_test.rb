@@ -6,6 +6,8 @@ class IterationTest < ActiveSupport::TestCase
 
   should_have_many :stories
   should_have_many :geeks, :through => :participations
-
+  should_have_many :participations
+  should_belong_to :release
+  
 end
 

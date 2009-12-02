@@ -6,5 +6,15 @@ require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
-
+ 
 require 'tasks/rails'
+
+require 'rcov/rcovtask'
+
+task :default => [:rcov]
+
+Rcov::RcovTask.new do |t|
+  t.test_files = FileList['test/**/*test.rb'] 
+  t.rcov_opts << "--sort coverage --failure-threshold=100 -Ilib:test --rails"
+  t.rcov_opts << "--exclude '/gems/,/usr/,/Library,lib/authenticated_test_helper.rb,lib/authenticated_system.rb,app/helpers/users_helper.rb'"
+end

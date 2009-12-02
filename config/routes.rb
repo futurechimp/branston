@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :releases
+
   map.resources :user_roles
   map.resources :stories, :member => { :generate_feature => :get }
   map.resources :iterations

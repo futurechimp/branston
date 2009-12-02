@@ -26,6 +26,13 @@ class UserRolesControllerTest < ActionController::TestCase
       assert_redirected_to user_role_path(assigns(:user_role))
     end
     
+    should "display validation errors on create" do
+      assert_no_difference('UserRole.count') do
+        post :create, :user_role => { :name => nil }
+        assert_template :new
+      end
+    end
+    
     should "show user_role" do
       get :show, :id => @user_role.to_param
       assert_response :success
@@ -37,8 +44,17 @@ class UserRolesControllerTest < ActionController::TestCase
     end
     
     should "update user_role" do
-      put :update, :id => @user_role.to_param, :user_role => { }
-      assert_redirected_to user_role_path(assigns(:user_role))
+      assert_no_difference('UserRole.count') do
+        put :update, :id => @user_role.to_param, :user_role => UserRole.plan
+        assert_redirected_to user_role_path(assigns(:user_role))
+      end
+    end
+    
+    should "show validation errors on update" do
+      assert_no_difference('UserRole.count') do
+        put :update, :id => @user_role.to_param, :user_role => { :name => nil }
+        assert_template :edit
+      end
     end
     
     should "destroy user_role" do

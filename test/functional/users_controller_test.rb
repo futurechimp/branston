@@ -12,6 +12,11 @@ class UsersControllerTest < ActionController::TestCase
       assert_response :redirect
     end
   end
+  
+  def test_should_allow_new
+    get :new
+    assert_response :success
+  end
 
   def test_should_require_login_on_signup
     assert_no_difference 'User.count' do

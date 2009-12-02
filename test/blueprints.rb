@@ -6,8 +6,9 @@ require 'faker'
 #
 Sham.define do
   name            { Faker::Lorem.words }
-  title           { Faker::Lorem.words }
-  description     { Faker::Lorem.sentences }
+  title           { Faker::Lorem.sentence }
+  description     { Faker::Lorem.sentence }
+  notes           { Faker::Lorem.sentences }
   email           { Faker::Internet.email }
   login           { Faker::Name.first_name }
 end
@@ -17,6 +18,19 @@ end
 Iteration.blueprint do
   velocity { 1 }
   name
+end
+
+Outcome.blueprint do
+  description
+end
+
+Precondition.blueprint do
+  description
+end
+
+Release.blueprint do
+  release_date { Date.today + 20 }
+  notes
 end
 
 User.blueprint do
@@ -39,6 +53,10 @@ UserRole.blueprint do
   name
 end
 
+Scenario.blueprint do
+  title
+end
+
 Story.blueprint do
   title
   description
@@ -50,4 +68,25 @@ Story.blueprint(:in_progress) do
   points { 2 }
   iteration
 end
+
+module Factory
+  class << self
+    
+    def make_story(story_options = {})
+      story = Story.make(story_options)
+      2.times { story.scenarios << make_scenario }
+      return story
+    end
+    
+    def make_scenario
+      scenario = Scenario.make
+      2.times { scenario.preconditions.make }
+      2.times { scenario.outcomes.make }
+      return scenario
+    end
+    
+  end
+end
+
+
 

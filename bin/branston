@@ -1,0 +1,4 @@
+PORT=3970
+
+echo "Starting Branston Server on port http://localhost:$PORT/"
+ruby script/server -p $PORT -e production -d >> /dev/null
