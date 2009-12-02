@@ -6,7 +6,7 @@ class StoriesControllerTest < ActionController::TestCase
     setup do
       @story = Story.make
     end
-  
+
     teardown do
       feature_file = 'test/features/' + @story.feature_filename
       FileUtils.rm feature_file if File.exists? feature_file
@@ -15,7 +15,7 @@ class StoriesControllerTest < ActionController::TestCase
     should "show a list of all the stories" do
       get :index
       assert_response :success
-      assert_not_nil assigns(:stories)
+      assert_not_nil assigns(:backlog_stories)
     end
 
     should "show a form to edit stories" do
@@ -42,11 +42,10 @@ class StoriesControllerTest < ActionController::TestCase
 
       assert_redirected_to stories_path
     end
-    
+
     should "generate the cucumber feature file for a story" do
       get :generate_feature, :id => @story.to_param, :path => 'test/features/'
       assert_response :success
-      
       assert File.exists? FEATURE_PATH + @story.feature_filename
       assert File.exists? FEATURE_PATH + @story.step_filename
     end

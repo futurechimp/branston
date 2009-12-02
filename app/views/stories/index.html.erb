@@ -13,7 +13,7 @@ document.observe("dom:loaded", function() {
   new Draggable('<%= element_id(story) %>');
   <% end -%>
   <% unless @current_stories.nil? or @current_stories.empty? -%>
-  new Accordion("current_stories", 1);
+  new Accordion("current_stories", 2);
   <% end -%>
   <% unless @backlog_stories.nil? or @backlog_stories.empty? -%>
   new Accordion("backlog_stories", 2);
