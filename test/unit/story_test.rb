@@ -19,7 +19,6 @@ class StoryTest < ActiveSupport::TestCase
     teardown do      
       FileUtils.rm @feature_file if File.exists? @feature_file
       FileUtils.rm @step_file if File.exists? @step_file
-      #Story.delete_all
     end
 
     should "have a unique title" do
@@ -46,10 +45,10 @@ class StoryTest < ActiveSupport::TestCase
         assert_equal "\tI should be able to search for products by title\n", f.gets
         f.gets # empty line
         assert_equal "\tScenario: #{@story.scenarios.first.title}\n", f.gets
-        assert_equal "\tGiven #{@story.scenarios.first.preconditions.first}\n", f.gets
-        assert_equal "\tAnd #{@story.scenarios.first.preconditions.last}\n", f.gets
-        assert_equal "\tThen #{@story.scenarios.first.outcomes.first}\n", f.gets
-        assert_equal "\tAnd #{@story.scenarios.first.outcomes.last}\n", f.gets
+        assert_equal "\t\tGiven #{@story.scenarios.first.preconditions.first}\n", f.gets
+        assert_equal "\t\t\tAnd #{@story.scenarios.first.preconditions.last}\n", f.gets
+        assert_equal "\t\tThen #{@story.scenarios.first.outcomes.first}\n", f.gets
+        assert_equal "\t\t\tAnd #{@story.scenarios.first.outcomes.last}\n", f.gets
         assert_equal "\n", f.gets
       ensure
         f.close
@@ -61,15 +60,30 @@ class StoryTest < ActiveSupport::TestCase
       assert File.exists? @step_file
       f = File.open(@step_file, "r")
       begin
-        for i in 0..1
-          for j in 0..1
-            pc = @story.scenarios[i].preconditions[j]
-            assert_equal "Given /^#{pc}$/ do\n", f.gets
-            assert_equal "\t#TODO: Define these steps\n", f.gets
-            assert_equal "end\n", f.gets
-            assert_equal "\n", f.gets
-          end
-        end
+        pc = @story.scenarios.first.preconditions[0]
+        assert_equal "Given #{pc.regexp.to_s} do |a|\n", f.gets
+        assert_equal "\t#TODO: Define these steps\n", f.gets
+        assert_equal "end\n", f.gets
+        assert_equal "\n", f.gets
+        
+        pc = @story.scenarios.first.preconditions[1]
+        assert_equal "Given #{pc.regexp.to_s} do |a, b|\n", f.gets
+        assert_equal "\t#TODO: Define these steps\n", f.gets
+        assert_equal "end\n", f.gets
+        assert_equal "\n", f.gets
+        
+        pc = @story.scenarios.last.preconditions[0]
+        assert_equal "Given #{pc.regexp.to_s} do |a|\n", f.gets
+        assert_equal "\t#TODO: Define these steps\n", f.gets
+        assert_equal "end\n", f.gets
+        assert_equal "\n", f.gets
+        
+        pc = @story.scenarios.last.preconditions[1]
+        assert_equal "Given #{pc.regexp.to_s} do |a, b|\n", f.gets
+        assert_equal "\t#TODO: Define these steps\n", f.gets
+        assert_equal "end\n", f.gets
+        assert_equal "\n", f.gets
+        
         assert_equal "\n", f.gets
       ensure
         f.close

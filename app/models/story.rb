@@ -36,7 +36,14 @@ class Story < ActiveRecord::Base
       scenarios.each do |s| 
         unless s.preconditions.blank?
           s.preconditions.each do |p|
-            steps += "Given /^#{p}$/ do\n"
+            steps += "Given #{p.regexp} do |"
+            for i in 0..p.variables.size-1
+              steps += ALPHABET[i]
+              steps += ", "
+            end
+            steps = steps.chop
+            steps = steps.chop
+            steps += "|\n"
             steps += "\t#TODO: Define these steps\n"
             steps += "end\n\n"
           end
@@ -65,15 +72,15 @@ class Story < ActiveRecord::Base
         
         unless scenario.preconditions.blank?
           scenario.preconditions.each_with_index do |p, i|
-            gherkin += "\tGiven #{p}\n" if i == 0
-            gherkin += "\tAnd #{p}\n" unless i == 0
+            gherkin += "\t\tGiven #{p}\n" if i == 0
+            gherkin += "\t\t\tAnd #{p}\n" unless i == 0
           end
         end
         
         unless scenario.outcomes.blank?
           scenario.outcomes.each_with_index do |o, i|
-            gherkin += "\tThen #{o}\n" if i==0
-            gherkin += "\tAnd #{o}\n" unless i==0
+            gherkin += "\t\tThen #{o}\n" if i==0
+            gherkin += "\t\t\tAnd #{o}\n" unless i==0
           end
         end
         
