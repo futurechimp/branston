@@ -67,7 +67,6 @@ class OutcomesControllerTest < ActionController::TestCase
       end
     end
 
-
     should "update outcome" do
       put :update, :id => @outcome.to_param, :outcome => { }
       assert_redirected_to outcome_path(assigns(:outcome))
