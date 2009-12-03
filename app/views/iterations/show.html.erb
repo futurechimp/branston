@@ -18,6 +18,11 @@
   <%=h @iteration.end_date %>
 </p>
 
+<p>
+  <b>Release:</b>
+  <%=h @iteration.release.release_date if @iteration.release %>
+</p>
+
 <% unless @iteration.stories.empty? %>
     <b>Stories</b>
     <ul>
