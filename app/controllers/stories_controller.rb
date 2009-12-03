@@ -78,11 +78,9 @@ class StoriesController < ApplicationController
         flash[:notice] = 'Story was successfully updated.'
         format.html { redirect_to(@story) }
         format.xml  { head :ok }
-        format.js { render :text => params[:story].values[0] } # TODO this smells bad.
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
-        format.js { head :ok }
       end
     end
   end
@@ -98,6 +96,7 @@ class StoriesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
 
   private
 
