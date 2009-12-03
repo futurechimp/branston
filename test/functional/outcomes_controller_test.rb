@@ -18,11 +18,57 @@ class OutcomesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    should "create outcome" do
-      assert_difference('Outcome.count') do
-        post :create, :outcome => { }
+    context "creating an outcome" do
+      context "with valid params" do
+        setup do
+          assert_difference('Outcome.count') do
+            post :create, :outcome => { :description => "Foo" }
+          end
+        end
+
+        should "redirect after creation" do
+          assert_redirected_to outcome_path(assigns(:outcome))
+        end
+
       end
 
+      context "with invalid params" do
+        setup do
+          assert_no_difference('Outcome.count') do
+            post :create, :outcome => { }
+          end
+        end
+
+        should "redisplay" do
+          assert_response :success
+        end
+      end
+    end
+
+    context "updating an outcome" do
+      context "with valid params" do
+        setup do
+          put :update, :id => @outcome.to_param, :outcome => {:description =>  "bar" }
+        end
+
+        should "redirect after update" do
+          assert_redirected_to outcome_path(assigns(:outcome))
+        end
+      end
+
+      context "with invalid params" do
+        setup do
+          put :update, :id => @outcome.to_param, :outcome => {:description => "" }
+        end
+
+        should "redisplay" do
+          assert_response :success
+        end
+      end
+    end
+
+    should "update outcome" do
+      put :update, :id => @outcome.to_param, :outcome => { }
       assert_redirected_to outcome_path(assigns(:outcome))
     end
 
@@ -36,10 +82,6 @@ class OutcomesControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    should "update outcome" do
-      put :update, :id => @outcome.to_param, :outcome => { }
-      assert_redirected_to outcome_path(assigns(:outcome))
-    end
 
     should "destroy outcome" do
       assert_difference('Outcome.count', -1) do

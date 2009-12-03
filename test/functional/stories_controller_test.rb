@@ -46,8 +46,8 @@ class StoriesControllerTest < ActionController::TestCase
     should "generate the cucumber feature file for a story" do
       get :generate_feature, :id => @story.to_param, :path => 'test/features/'
       assert_response :success
-
-      assert File.exists? RAILS_ROOT + '/test/features/' + @story.feature_filename
+      assert File.exists? FEATURE_PATH + @story.feature_filename
+      assert File.exists? FEATURE_PATH + @story.step_filename
     end
 
     context "creating a story" do

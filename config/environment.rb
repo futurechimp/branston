@@ -39,8 +39,11 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
-  
-  FEATURE_PATH='features/'
+
+  FEATURE_PATH='features/' unless defined?(FEATURE_PATH)
   FileUtils.mkdir FEATURE_PATH unless File.exists? FEATURE_PATH
+  FileUtils.mkdir FEATURE_PATH + 'step_definitions' unless File.exists? FEATURE_PATH + 'step_definitions'
+
+  ALPHABET = ("a".."z").to_a unless defined?(ALPHABET)
 end
 

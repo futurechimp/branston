@@ -35,3 +35,7 @@ config.gem "faker", :lib => false
 
 FEATURE_PATH='test/features/'
 FileUtils.mkdir FEATURE_PATH unless File.exists? FEATURE_PATH
+FileUtils.mkdir FEATURE_PATH + 'step_definitions' unless File.exists? FEATURE_PATH + 'step_definitions'
+
+require 'ruby-debug'
+Debugger.start
