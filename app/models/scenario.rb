@@ -10,9 +10,5 @@ class Scenario < ActiveRecord::Base
   #
   validates_presence_of :title
 
-  # Macros
-  #
-  named_scope :by_story, lambda { |story| { :conditions => ["story_id = ?", story.id] }}
-
 end
 

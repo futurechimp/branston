@@ -1,0 +1,2 @@
+page.replace_html "#{element_id(@scenario,'preconditions')}", :partial => "preconditions"
+

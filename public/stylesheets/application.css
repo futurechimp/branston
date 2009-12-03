@@ -1,9 +1,12 @@
 /* App css */
 .clear-left {clear:left;}
 
+#flash_notice {display:block;border:2px solid green;color:green;background:#CCFFCC;padding:6px;margin:8px auto 8px auto;width:30%;text-align:center;}
+
 /* Wrappers for story lists */
-div#current-wrapper, div#backlog-wrapper {float:left;width:48%;margin-top:6px;}
-div#current {margin:6px 8px 0;}
+div#current-wrapper, div#backlog-wrapper {float:left;width:48%;margin-top:6px;border:1px solid #321114;}
+div#current-wrapper h3, div#backlog-wrapper h3 {padding:3px; font-weight:bold; text-transform:none; font-size:1.4em;}
+div#current-wrapper {margin-right:8px;}
 
 /* Add/Back link styling */
 div#content a.add { background: url(/images/icons/plus_icon_30x30.png) no-repeat left; padding-left:34px; font:1.1em verdana,arial,sans-serif; display:block; height:30px; line-height:25px;text-decoration:none;}
@@ -23,12 +26,12 @@ div.index-head h2 {float:left;}
 div.index-head a.add {float:right;}
 
 /* Index tables TODO: rename class */
-table.iterations { width: 100%; }
-table.iterations th { -moz-border-radius: 5px; -webkit-border-radius: 5px; background:#4b3226; color:#fff; font-weight:bold; height:24px; padding:0 5px 0 5px; }
-table.iterations th.name {width:35%;}
-table.iterations tr.even {background:#fdf5e0;}
-table.iterations tr.odd {background:#f4e7c5;}
-table.iterations td {text-align:center; padding:4px; color:#321114;}
+table.index { width: 100%; }
+table.index th { -moz-border-radius: 5px; -webkit-border-radius: 5px; background:#4b3226; color:#fff; font-weight:bold; height:24px; padding:0 5px 0 5px; }
+table.index th.name {width:35%;}
+table.index tr.even {background:#fdf5e0;}
+table.index tr.odd {background:#f4e7c5;}
+table.index td {text-align:center; padding:4px; color:#321114;}
 
 /* Accordion styles */
 
@@ -47,12 +50,7 @@ div.accordion-toggle{
 
 div.accordion-toggle span.in_place_editor_field {font-weight:bold;}
 div.accordion-toggle a.delete {float:right;}
-
-div.accordion-toggle:hover, div.accordion-toggle-active{
-	background-color: #ffff99;
-	border-top: 1px solid #a06b55;
-}
-
+div.accordion-toggle:hover, div.accordion-toggle-active{ background-color: #ffff99; border-top: 1px solid #a06b55; }
 div.accordion-content { overflow: hidden; background: #ffff99; padding: 0; }
 div.accordion-content p { margin: 9px 24px 6px 24px; line-height:28px; }
 

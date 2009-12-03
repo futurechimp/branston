@@ -4,17 +4,18 @@ class PreconditionsControllerTest < ActionController::TestCase
 
   context "The PreconditionsController" do
     setup do
+      @scenario = Scenario.make
       @precondition = Precondition.make
     end
 
     should "get index" do
-      get :index
+      get :index, :scenario_id => @scenario.id
       assert_response :success
       assert_not_nil assigns(:preconditions)
     end
 
     should "get new" do
-      get :new
+      get :new, :scenario_id => @scenario.id
       assert_response :success
     end
 
@@ -22,7 +23,7 @@ class PreconditionsControllerTest < ActionController::TestCase
       context "with valid params" do
         setup do
           assert_difference('Precondition.count') do
-            post :create, :precondition => { :description => "Foo" }
+            post :create, :precondition => { :description => "Foo" }, :scenario_id => @scenario.id
           end
         end
 
@@ -35,7 +36,7 @@ class PreconditionsControllerTest < ActionController::TestCase
       context "with invalid params" do
         setup do
           assert_no_difference('Precondition.count') do
-            post :create, :precondition => { }
+            post :create, :precondition => { }, :scenario_id => @scenario.id
           end
         end
 
@@ -54,7 +55,7 @@ class PreconditionsControllerTest < ActionController::TestCase
     context "updating a precondition" do
       context "with valid params" do
         setup do
-          put :update, :id => @precondition.to_param, :precondition => { :description => "Bar" }
+          put :update, :id => @precondition.to_param, :precondition => { :description => "Bar" }, :scenario_id => @scenario.id
         end
         should "redirect to show" do
           assert_redirected_to precondition_path(assigns(:precondition))
@@ -63,7 +64,7 @@ class PreconditionsControllerTest < ActionController::TestCase
 
       context "with invalid params" do
         setup do
-          put :update, :id => @precondition.to_param, :precondition => { :description => "" }
+          put :update, :id => @precondition.to_param, :precondition => { :description => "" }, :scenario_id => @scenario.id
         end
 
         should "redisplay" do
@@ -78,17 +79,17 @@ class PreconditionsControllerTest < ActionController::TestCase
 
 
     should "show precondition" do
-      get :show, :id => @precondition.to_param
+      get :show, :id => @precondition.to_param, :scenario_id => @scenario.id
       assert_response :success
     end
 
     should "get edit" do
-      get :edit, :id => @precondition.to_param
+      get :edit, :id => @precondition.to_param, :scenario_id => @scenario.id
       assert_response :success
     end
 
     should "update precondition" do
-      put :update, :id => @precondition.to_param, :precondition => { }
+      put :update, :id => @precondition.to_param, :precondition => { }, :scenario_id => @scenario.id
       assert_redirected_to precondition_path(assigns(:precondition))
     end
 

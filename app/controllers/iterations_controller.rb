@@ -32,6 +32,7 @@ class IterationsController < ApplicationController
   # GET /iterations/new
   # GET /iterations/new.xml
   def new
+    @releases = Release.all
     @iteration = Iteration.new
 
     respond_to do |format|
@@ -42,6 +43,7 @@ class IterationsController < ApplicationController
 
   # GET /iterations/1/edit
   def edit
+    @releases = Release.all
     @iteration = Iteration.find(params[:id])
   end
 
@@ -53,7 +55,7 @@ class IterationsController < ApplicationController
     respond_to do |format|
       if @iteration.save
         flash[:notice] = 'Iteration was successfully created.'
-        format.html { redirect_to(@iteration) }
+        format.html { redirect_to iterations_path }
         format.xml  { render :xml => @iteration, :status => :created, :location => @iteration }
       else
         @releases = Release.all
@@ -71,7 +73,7 @@ class IterationsController < ApplicationController
     respond_to do |format|
       if @iteration.update_attributes(params[:iteration])
         flash[:notice] = 'Iteration was successfully updated.'
-        format.html { redirect_to(@iteration) }
+        format.html { redirect_to iterations_path }
         format.xml  { head :ok }
       else
         @releases = Release.all

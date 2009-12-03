@@ -14,7 +14,9 @@
 <body>
   <%= render :partial => "layouts/header" %>
 
-  <p style="color: green" id="flash_notice"><%= flash[:notice] %></p>
+  <% if flash[:notice] %>
+    <div id="flash_notice"><%= flash[:notice] %></div>
+  <% end %>
 
 	<div id="page">
 		<div id="content">

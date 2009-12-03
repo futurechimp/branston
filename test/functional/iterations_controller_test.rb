@@ -65,7 +65,7 @@ class IterationsControllerTest < ActionController::TestCase
           end
 
           should "redirect to show" do
-            assert_redirected_to iteration_path(assigns(:iteration))
+            assert_redirected_to iterations_path
           end
 
           context "including a release_id" do
@@ -109,7 +109,7 @@ class IterationsControllerTest < ActionController::TestCase
           end
 
           should "redirect to show" do
-            assert_redirected_to iteration_url(assigns(:iteration))
+            assert_redirected_to iterations_path
           end
 
           context "including a release_id" do

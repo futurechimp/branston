@@ -2,7 +2,7 @@
   <h2>Iterations</h2>
   <%= link_to 'New iteration', new_iteration_path, :class => "add" %>
 </div>
-<table class="iterations">
+<table class="index">
   <tr>
     <th>Velocity</th>
     <th class="name">Name</th>
@@ -21,7 +21,7 @@
     <td>
       <%= link_to 'Show', iteration %>&nbsp;&nbsp;&bull;
       <%= link_to 'Edit', edit_iteration_path(iteration) %>&nbsp;&nbsp;&bull;
-      <%= link_to 'Destroy', iteration, :confirm => 'Are you sure?', :method => :delete %>
+      <%= link_to 'Destroy', iteration, :confirm => 'Are you sure you want to delete this iteration?', :method => :delete %>
     </td>
   </tr>
 <% end %>

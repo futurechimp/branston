@@ -1,11 +1,13 @@
 class ScenariosController < ApplicationController
 
-  before_filter :find_story, :except => :set_scenario_title
+  layout 'main'
+
+  before_filter :find_story, :except => [:destroy, :set_scenario_title]
 
   in_place_edit_for :scenario, :title
 
   def index
-    @scenarios = Scenario.find :all, :conditions => ["story_id = ?", @story.id]
+    @scenarios = @story.scenarios
     respond_to do |format|
       format.html
       format.js { render :partial => "scenarios" }
@@ -47,10 +49,11 @@ class ScenariosController < ApplicationController
     @scenario.story = @story
     respond_to do |format|
       if @scenario.save
+        @scenarios = @story.scenarios
         flash[:notice] = 'Scenario was successfully created.'
         format.html { redirect_to story_scenario_path(@story, @scenario) }
         format.xml  { render :xml => @scenario, :status => :created, :location => @scenario }
-        format.js { @scenarios = Scenario.find :all, :conditions => ["story_id = ?", @story.id] }
+        format.js
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @scenario.errors, :status => :unprocessable_entity }
@@ -81,8 +84,9 @@ class ScenariosController < ApplicationController
     @scenario.destroy
 
     respond_to do |format|
-      format.html { redirect_to(story_scenarios_url(@story)) }
+      format.html { redirect_to(story_scenarios_path(@scenario.story_id)) }
       format.xml  { head :ok }
+      format.js
     end
   end
 
