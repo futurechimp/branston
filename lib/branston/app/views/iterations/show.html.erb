@@ -1,0 +1,39 @@
+<p>
+  <b>Velocity:</b>
+  <%=h @iteration.velocity %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @iteration.name %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%=h @iteration.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%=h @iteration.end_date %>
+</p>
+
+<p>
+  <b>Release:</b>
+  <%=h @iteration.release.release_date if @iteration.release %>
+</p>
+
+<% unless @iteration.stories.empty? %>
+    <b>Stories</b>
+    <ul>
+    <% @iteration.stories.each do |story| %>
+
+      <li><%= story.description %> | <%= story.points %></li>
+
+    <% end %>
+    </ul>
+<% end %>
+
+<%= link_to 'Edit', edit_iteration_path(@iteration) %> |
+<%= link_to 'Back', iterations_path %>
+

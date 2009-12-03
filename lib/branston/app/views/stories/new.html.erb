@@ -1,0 +1,13 @@
+<h2>New story</h2>
+
+<% form_for(@story) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => 'form', :locals => {:f => f} %>
+
+  <p class="form-navigation">
+    <%= link_to 'Back', stories_path, :class => "back" %>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+

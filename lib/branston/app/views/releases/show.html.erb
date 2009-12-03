@@ -1,0 +1,13 @@
+<p>
+  <b>Release date:</b>
+  <%=h @release.release_date %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%=h @release.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_release_path(@release) %> |
+<%= link_to 'Back', releases_path %>

@@ -1,0 +1,24 @@
+  <p class="form-fields">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p class="form-fields">
+    <%= f.label :velocity %>
+    <%= f.text_field :velocity %>
+  </p>
+  <p class="form-fields">
+    <%= f.label :start_date %>
+    <%= f.calendar_date_select :start_date %>
+  </p>
+  <p class="form-fields">
+    <%= f.label :end_date %>
+    <%= f.calendar_date_select :end_date %>
+  </p>
+
+  <% unless @releases.nil? -%>
+  <p class="form-fields">
+    <%= f.label :release %>
+    <%= f.select :release_id, @releases.map {|release| [release.release_date.strftime('%d/%m/%Y'), release.id]} %>
+  </p>
+  <% end -%>
+

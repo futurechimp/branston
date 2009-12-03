@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
-require File.dirname(__FILE__) + '/../lib/branston'
+require File.dirname(__FILE__) + '/../lib/branston/lib/branston'
 Branston.new(ARGV)
+

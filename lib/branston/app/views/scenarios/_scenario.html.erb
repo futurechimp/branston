@@ -1,0 +1,27 @@
+<!-- scenarios/_scenario.html.erb -->
+    <div id="<%= element_id(@scenario) %>" class="scenario">
+    <% if @scenario.created_at.nil? -%>
+      <% remote_form_for :scenario, @scenario, :url => story_scenarios_path(@story) do |f| -%>
+      <p class="form-fields">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </p>
+      <p class="form-navigation"><%= f.submit 'Create' %></p>
+      <% end -%>
+    <% else -%>
+      <p>
+        <%= in_place_editor_field 'scenario', 'title' %>
+        &nbsp;&bull;
+        <%= link_to_remote "Delete", :update => element_id(@story,'scenarios'), :url => story_scenario_path(@story,@scenario), :confirm => 'Delete this scenario?', :method => :delete, :class => "delete" %>
+      </p>
+      <div id="<%= element_id(@scenario,'preconditions') %>" class="preconditions">
+        <%= link_to_remote "View test preconditions", :update => element_id(@scenario,'preconditions'),
+          :url => preconditions_path(:scenario_id => @scenario.id), :method => :get %>
+      </div>
+      <div id="<%= element_id(@scenario,'outcomes') %>" class="outcomes">
+        <%= link_to_remote "View expected results", :update => element_id(@scenario,'outcomes'),
+          :url => outcomes_path(:scenario_id => @scenario.id), :method => :get %>
+      </div>
+    <% end -%>
+    </div>
+

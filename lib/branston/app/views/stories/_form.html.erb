@@ -1,0 +1,17 @@
+  <p class="form-fields">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+  <p class="form-fields">
+    <%= f.label :description %>
+    <%= f.text_area :description, :size => "60x8" %>
+  </p>
+  <p class="form-fields">
+    <%= f.label :points %>
+    <%= f.select :points, (1..10).to_a %>
+  </p>
+  <p class="form-fields">
+    <%= f.label :iteration %>
+    <%= f.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]} %>
+  </p>
+

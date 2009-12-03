@@ -1,0 +1,10 @@
+<!-- preconditions/_preconditions.html.erb -->
+  <div>
+    <%= link_to_remote '(+) New condition', :update => element_id(@scenario,'preconditions'),
+      :url => new_precondition_path(:scenario_id => @scenario.id), :method => 'GET' %>
+    <% @preconditions.each do |precondition| %>
+      <% @precondition = precondition -%>
+      <%= render :partial => "precondition" %>
+    <% end %>
+  </div>
+

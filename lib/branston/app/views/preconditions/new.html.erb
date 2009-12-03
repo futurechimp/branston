@@ -1,0 +1,16 @@
+<h2>Add precondition</h2>
+
+<% form_for @precondition do |f| %>
+  <%= f.error_messages %>
+
+  <p class="form-fields">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </p>
+
+  <p class="form-navigation">
+    <%= link_to 'Back', preconditions_path %>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+

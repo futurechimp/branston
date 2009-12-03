@@ -1,20 +1,53 @@
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
-
-require(File.join(File.dirname(__FILE__), 'config', 'boot'))
-
+require 'rubygems'
 require 'rake'
+
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gem|
+    gem.name = "branston"
+    gem.summary = %Q{TODO: one-line summary of your gem}
+    gem.description = %Q{TODO: longer description of your gem}
+    gem.email = "dave@boomer"
+    gem.homepage = "http://github.com/futurechimp/branston"
+    gem.authors = ["dave@boomer"]
+    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+  end
+  Jeweler::GemcutterTasks.new
+rescue LoadError
+  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
+end
+
 require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/test_*.rb'
+  test.verbose = true
+end
+
+begin
+  require 'rcov/rcovtask'
+  Rcov::RcovTask.new do |test|
+    test.libs << 'test'
+    test.pattern = 'test/**/test_*.rb'
+    test.verbose = true
+  end
+rescue LoadError
+  task :rcov do
+    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+  end
+end
+
+task :test => :check_dependencies
+
+task :default => :test
+
 require 'rake/rdoctask'
- 
-require 'tasks/rails'
+Rake::RDocTask.new do |rdoc|
+  version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
-require 'rcov/rcovtask'
-
-task :default => [:rcov]
-
-Rcov::RcovTask.new do |t|
-  t.test_files = FileList['test/**/*test.rb'] 
-  t.rcov_opts << "--sort coverage --failure-threshold=100 -Ilib:test --rails"
-  t.rcov_opts << "--exclude '/gems/,/usr/,/Library,lib/authenticated_test_helper.rb,lib/authenticated_system.rb,app/helpers/users_helper.rb'"
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "branston #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
 end

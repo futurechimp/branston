@@ -1,2 +1,0 @@
-page.replace_html "#{element_id(@scenario,'outcomes')}", :partial => "outcomes"
-

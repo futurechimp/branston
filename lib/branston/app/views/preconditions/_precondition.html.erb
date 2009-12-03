@@ -1,0 +1,19 @@
+<!-- preconditions/_precondition.html.erb -->
+    <div id="<%= element_id(@precondition) %>" class="precondition">
+    <% if @precondition.created_at.nil? -%>
+      <% remote_form_for @precondition do |f| -%>
+      <%= hidden_field_tag 'scenario_id', @scenario.id %>
+      <p class="form-fields-small">
+        <%= f.label :description %>
+        <%= f.text_field :description %>
+      </p>
+      <p class="form-navigation"><%= f.submit 'Create' %></p>
+      <% end -%>
+    <% else -%>
+      <p>
+        <%= in_place_editor_field 'precondition', 'description' %>&nbsp;&bull;
+        <%= link_to_remote "Delete", :url => @precondition, :confirm => 'Delete this condition?', :method => :delete, :class => "delete" %>
+      </p>
+    <% end -%>
+    </div>
+

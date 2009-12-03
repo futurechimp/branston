@@ -1,0 +1,42 @@
+<div class="index-head">
+  <h2>User Stories</h2>
+  <%= link_to 'New story', new_story_path, :class => "add" %>
+</div>
+
+<% content_for :page_end do %>
+<script type="text/javascript">
+document.observe("dom:loaded", function() {
+  <% @current_stories.each do |story| -%>
+  new Draggable('<%= element_id(story) %>');
+  <% end -%>
+  <% @backlog_stories.each do |story| -%>
+  new Draggable('<%= element_id(story) %>');
+  <% end -%>
+  <% unless @current_stories.nil? or @current_stories.empty? -%>
+  new Accordion("current_stories", 1);
+  <% end -%>
+  <% unless @backlog_stories.nil? or @backlog_stories.empty? -%>
+  new Accordion("backlog_stories", 1);
+  <% end -%>
+});
+</script>
+<% end %>
+
+<div id="current-wrapper">
+  <h3>Current Stories</h3>
+  <div id="current_stories" class="accordion">
+  <% @current_stories.each do |story| %>
+    <%= render :partial => "story", :locals => { :story => story } %>
+  <% end %>
+  </div>
+</div>
+
+<div id="backlog-wrapper">
+  <h3>Story Backlog</h3>
+  <div id="backlog_stories" class="accordion">
+  <% @backlog_stories.each do |story| %>
+    <%= render :partial => "story", :locals => { :story => story } %>
+  <% end %>
+  </div>
+</div>
+
