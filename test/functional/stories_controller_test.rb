@@ -60,7 +60,7 @@ class StoriesControllerTest < ActionController::TestCase
         end
 
         should "redirect to show" do
-          assert_redirected_to story_path(assigns(:story))
+          assert_redirected_to stories_path
         end
 
         should "not be associated with an iteration" do

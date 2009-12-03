@@ -92,8 +92,7 @@ class ScenariosControllerTest < ActionController::TestCase
       assert_difference('Scenario.count', -1) do
         delete :destroy, :id => @scenario.to_param, :story_id => @story.to_param
       end
-
-      assert_redirected_to story_scenarios_path(@story)
+      assert_redirected_to stories_path
     end
   end
 end

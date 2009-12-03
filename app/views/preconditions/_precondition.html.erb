@@ -12,7 +12,7 @@
     <% else -%>
       <p>
         <%= in_place_editor_field 'precondition', 'description' %>&nbsp;&bull;
-        <%= link_to "Delete", @precondition, :confirm => 'Delete this condition?', :method => :delete, :class => "delete" %>
+        <%= link_to_remote "Delete", :update => element_id(@scenario,'preconditions'), :url => @precondition, :confirm => 'Delete this condition?', :method => :delete, :class => "delete" %>
       </p>
     <% end -%>
     </div>

@@ -1,4 +1,9 @@
 class OutcomesController < ApplicationController
+
+  before_filter :find_scenario, :except => [:destroy, :set_outcome_description]
+
+  in_place_edit_for :precondition, :description
+
   # GET /outcomes
   # GET /outcomes.xml
   def index
@@ -41,7 +46,8 @@ class OutcomesController < ApplicationController
   # POST /outcomes.xml
   def create
     @outcome = Outcome.new(params[:outcome])
-
+    @outcome.scenario = @scenario
+    @outcomes = @scenario.outcomes
     respond_to do |format|
       if @outcome.save
         flash[:notice] = 'Outcome was successfully created.'
@@ -80,6 +86,12 @@ class OutcomesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(outcomes_url) }
       format.xml  { head :ok }
+      format.js
     end
   end
+
+  def find_scenario
+    @scenario = Scenario.find(params[:scenario_id]) if @scenario.nil?
+  end
 end
+

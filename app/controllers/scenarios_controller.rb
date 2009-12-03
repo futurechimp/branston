@@ -2,7 +2,7 @@ class ScenariosController < ApplicationController
 
   layout 'main'
 
-  before_filter :find_story, :except => :set_scenario_title
+  before_filter :find_story, :except => [:destroy, :set_scenario_title]
 
   in_place_edit_for :scenario, :title
 
@@ -84,8 +84,9 @@ class ScenariosController < ApplicationController
     @scenario.destroy
 
     respond_to do |format|
-      format.html { redirect_to(story_scenarios_url(@story)) }
+      format.html { redirect_to(stories_path) }
       format.xml  { head :ok }
+      format.js
     end
   end
 

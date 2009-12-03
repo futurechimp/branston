@@ -2,8 +2,10 @@ class PreconditionsController < ApplicationController
 
   layout 'main'
 
-  before_filter :find_scenario
-  before_filter :find_story
+  before_filter :find_scenario, :except => [:destroy, :set_precondition_description]
+
+  in_place_edit_for :precondition, :description
+  #before_filter :find_story
 
   # GET /preconditions
   # GET /preconditions.xml
@@ -88,13 +90,15 @@ class PreconditionsController < ApplicationController
     @precondition.destroy
 
     respond_to do |format|
-      format.html { redirect_to(preconditions_url) }
+      format.html { redirect_to(preconditions_url(:scenario_id => @precondition.scenario_id)) }
       format.xml  { head :ok }
+      format.js
     end
   end
 
   private
 
+  # TODO - Not needed.
   def find_story
     @story = @scenario.story unless @scenario.nil?
     @story = Story.find(params[:story_id]) if @story.nil?
@@ -103,5 +107,6 @@ class PreconditionsController < ApplicationController
   def find_scenario
     @scenario = Scenario.find(params[:scenario_id]) if @scenario.nil?
   end
+
 end
 
