@@ -4,12 +4,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :preconditions
 
   map.resources :releases
+  map.resources :iterations
 
   map.resources :user_roles
   map.resources :stories, :member => { :generate_feature => :get } do |r|
     r.resources :scenarios
   end
-  map.resources :iterations
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
