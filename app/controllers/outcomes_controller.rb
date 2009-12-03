@@ -12,6 +12,7 @@ class OutcomesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @outcomes }
+      format.js { render :partial => 'outcomes' }
     end
   end
 
@@ -34,6 +35,7 @@ class OutcomesController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @outcome }
+      format.js { render :partial => 'outcome' }
     end
   end
 
@@ -53,6 +55,7 @@ class OutcomesController < ApplicationController
         flash[:notice] = 'Outcome was successfully created.'
         format.html { redirect_to(@outcome) }
         format.xml  { render :xml => @outcome, :status => :created, :location => @outcome }
+        format.js
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @outcome.errors, :status => :unprocessable_entity }

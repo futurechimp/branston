@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
     r.resources :scenarios
   end
   map.resources :preconditions
+  map.resources :outcomes
   map.resources :iterations
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'

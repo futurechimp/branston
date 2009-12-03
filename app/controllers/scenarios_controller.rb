@@ -84,7 +84,7 @@ class ScenariosController < ApplicationController
     @scenario.destroy
 
     respond_to do |format|
-      format.html { redirect_to(stories_path) }
+      format.html { redirect_to(story_scenarios_path(@scenario.story_id)) }
       format.xml  { head :ok }
       format.js
     end
