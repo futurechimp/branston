@@ -1,4 +1,10 @@
 module StoryGenerator
+  
+  ALPHABET = ("a".."z").to_a unless defined?(ALPHABET)
+  
+  FEATURE_PATH='features/' unless defined?(FEATURE_PATH)
+  FileUtils.mkdir FEATURE_PATH unless File.exists? FEATURE_PATH
+  FileUtils.mkdir FEATURE_PATH + 'step_definitions' unless File.exists? FEATURE_PATH + 'step_definitions'
 
   def generate(story)
     @story = story
@@ -8,16 +14,20 @@ module StoryGenerator
 
   def feature_filename
     @story = self if @story.nil?
-    @story.title.parameterize('_').to_s + '.feature'
+    clean_title(@story.title) + '.feature'
   end
 
   def step_filename
     @story = self if @story.nil?
-    "step_definitions/" + @story.title.parameterize('_').to_s + '_steps.rb'
+    "step_definitions/" + clean_title(@story.title) + '_steps.rb'
   end
 
   private
-
+  
+  def clean_title(string)
+    string.strip.gsub(' ', '_').gsub('"', '').downcase
+  end
+  
   def make_steps(story)
     steps = ""
 
@@ -25,15 +35,42 @@ module StoryGenerator
       story.scenarios.each do |s|
         unless s.preconditions.empty?
           s.preconditions.each do |p|
-            steps += "Given #{regexp(p.description)} do |"
-            for i in 0..variables(p.description).size-1
-              steps += ALPHABET[i]
-              steps += ", "
+            steps += "Given #{regexp(p.description)} do"
+            vars = variables(p.description)
+            unless vars.empty?
+              steps += " |"
+              for i in 0..variables(p.description).size-1
+                steps += ALPHABET[i]
+                steps += ", "
+              end
+              steps = steps.chop
+              steps = steps.chop
+              steps += "|"
             end
-            steps = steps.chop
-            steps = steps.chop
-            steps += "|\n"
+            steps += "\n"
             steps += "\t#TODO: Define these steps\n"
+            steps += "\tpending\n"
+            steps += "end\n\n"
+          end
+        end
+        
+        unless s.outcomes.empty?
+          s.outcomes.each do |o|
+            steps += "Then #{regexp(o.description)} do"
+            vars = variables(o.description)
+            unless vars.empty?
+              steps += " |"
+              for i in 0..variables(o.description).size-1
+                steps += ALPHABET[i]
+                steps += ", "
+              end
+              steps = steps.chop
+              steps = steps.chop
+              steps += "|"
+            end
+            steps += "\n"
+            steps += "\t#TODO: Define these steps\n"
+            steps += "\tpending\n"
             steps += "end\n\n"
           end
         end
@@ -52,20 +89,21 @@ module StoryGenerator
     gherkin += "\n\n"
 
     # Scenarios...
-    unless story.scenarios.blank?
+    unless story.scenarios.empty?
       story.scenarios.each do |scenario|
+        gherkin += "\t@wip\n"
         gherkin += "\tScenario: "
         gherkin += scenario.title
         gherkin += "\n"
 
-        unless scenario.preconditions.blank?
+        unless scenario.preconditions.empty?
           scenario.preconditions.each_with_index do |p, i|
             gherkin += "\t\tGiven #{p.description}\n" if i == 0
             gherkin += "\t\t\tAnd #{p.description}\n" unless i == 0
           end
         end
 
-        unless scenario.outcomes.blank?
+        unless scenario.outcomes.empty?
           scenario.outcomes.each_with_index do |o, i|
             gherkin += "\t\tThen #{o.description}\n" if i==0
             gherkin += "\t\t\tAnd #{o.description}\n" unless i==0

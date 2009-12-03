@@ -21,6 +21,7 @@ class ClientTest < ActiveSupport::TestCase
         assert_equal "\tAs an actor\n", f.gets
         assert_equal "\tI should be able to search for products by title\n", f.gets
         f.gets # empty line
+        assert_equal "\t@wip\n", f.gets
         assert_equal "\tScenario: I search for \"planes\"\n", f.gets
         assert_equal "\t\tGiven I search for \"planes\"\n", f.gets
         assert_equal "\t\t\tAnd \"planetoid\" is a fancy word for \"planet\"\n", f.gets
@@ -37,11 +38,19 @@ class ClientTest < ActiveSupport::TestCase
       begin
         assert_equal "Given /^I search for \"([^\\\"]*)\"$/ do |a|\n", f.gets
         assert_equal "\t#TODO: Define these steps\n", f.gets
+        assert_equal "\tpending\n", f.gets
         assert_equal "end\n", f.gets
         assert_equal "\n", f.gets
 
         assert_equal "Given /^\"([^\\\"]*)\" is a fancy word for \"([^\\\"]*)\"$/ do |a, b|\n", f.gets
         assert_equal "\t#TODO: Define these steps\n", f.gets
+        assert_equal "\tpending\n", f.gets
+        assert_equal "end\n", f.gets
+        assert_equal "\n", f.gets
+        
+        assert_equal "Then /^A competition should appear$/ do\n", f.gets
+        assert_equal "\t#TODO: Define these steps\n", f.gets
+        assert_equal "\tpending\n", f.gets
         assert_equal "end\n", f.gets
         assert_equal "\n", f.gets
 
