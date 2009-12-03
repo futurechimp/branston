@@ -29,11 +29,13 @@ class IterationsControllerTest < ActionController::TestCase
       should "get edit" do
         get :edit, :id => @iteration.to_param
         assert_response :success
+        assert assigns(:releases)
       end
 
       should "get new" do
         get :new
         assert_response :success
+        assert assigns(:releases)
       end
 
       should "show iteration" do
@@ -58,9 +60,26 @@ class IterationsControllerTest < ActionController::TestCase
             end
           end
 
+          should "not be assigned to a release" do
+            assert assigns(:iteration).release.nil?
+          end
+
           should "redirect to show" do
             assert_redirected_to iteration_path(assigns(:iteration))
           end
+
+          context "including a release_id" do
+            setup do
+              assert_difference("Iteration.count") do
+                post :create, :iteration => Iteration.plan.merge(:release_id => Release.make.to_param)
+              end
+            end
+
+            should "be assigned to a release" do
+              assert assigns(:iteration).release
+            end
+          end
+
         end
 
         context "with invalid params" do
@@ -73,6 +92,11 @@ class IterationsControllerTest < ActionController::TestCase
           should "redisplay" do
             assert_template 'new'
           end
+
+          should "retrieve all releases" do
+            assert assigns(:releases)
+          end
+
         end
       end
 
@@ -80,12 +104,22 @@ class IterationsControllerTest < ActionController::TestCase
         context "with valid parameters" do
           setup do
             assert_no_difference("Iteration.count") do
-              put :update,{ :id => @iteration.id,  :iteration => {:name => "bar"}}
+              put :update,{ :id => @iteration.to_param,  :iteration => {:name => "bar"}}
             end
           end
 
           should "redirect to show" do
             assert_redirected_to iteration_url(assigns(:iteration))
+          end
+
+          context "including a release_id" do
+            setup do
+              put :update, :id => @iteration.to_param, :iteration => {:release_id => Release.make.to_param}
+            end
+
+            should "be assigned to a release" do
+              assert assigns(:iteration).release
+            end
           end
 
         end
@@ -97,6 +131,10 @@ class IterationsControllerTest < ActionController::TestCase
 
           should "redisplay the edit template" do
             assert_template "edit"
+          end
+
+          should "retrieve all releases" do
+            assert assigns(:releases)
           end
         end
       end
