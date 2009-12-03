@@ -69,24 +69,30 @@ Story.blueprint(:in_progress) do
   iteration
 end
 
+Outcome.blueprint do
+  description
+end
+
+Precondition.blueprint do
+  description
+end
+
 module Factory
   class << self
-    
+
     def make_story(story_options = {})
       story = Story.make(story_options)
       2.times { story.scenarios << make_scenario }
       return story
     end
-    
+
     def make_scenario
       scenario = Scenario.make
       2.times { scenario.preconditions.make }
       2.times { scenario.outcomes.make }
       return scenario
     end
-    
+
   end
 end
-
-
 
