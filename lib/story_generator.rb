@@ -35,15 +35,42 @@ module StoryGenerator
       story.scenarios.each do |s|
         unless s.preconditions.empty?
           s.preconditions.each do |p|
-            steps += "Given #{regexp(p.description)} do |"
-            for i in 0..variables(p.description).size-1
-              steps += ALPHABET[i]
-              steps += ", "
+            steps += "Given #{regexp(p.description)} do"
+            vars = variables(p.description)
+            unless vars.empty?
+              steps += " |"
+              for i in 0..variables(p.description).size-1
+                steps += ALPHABET[i]
+                steps += ", "
+              end
+              steps = steps.chop
+              steps = steps.chop
+              steps += "|"
             end
-            steps = steps.chop
-            steps = steps.chop
-            steps += "|\n"
+            steps += "\n"
             steps += "\t#TODO: Define these steps\n"
+            steps += "\tpending\n"
+            steps += "end\n\n"
+          end
+        end
+        
+        unless s.outcomes.empty?
+          s.outcomes.each do |o|
+            steps += "Then #{regexp(o.description)} do"
+            vars = variables(o.description)
+            unless vars.empty?
+              steps += " |"
+              for i in 0..variables(o.description).size-1
+                steps += ALPHABET[i]
+                steps += ", "
+              end
+              steps = steps.chop
+              steps = steps.chop
+              steps += "|"
+            end
+            steps += "\n"
+            steps += "\t#TODO: Define these steps\n"
+            steps += "\tpending\n"
             steps += "end\n\n"
           end
         end
@@ -64,6 +91,7 @@ module StoryGenerator
     # Scenarios...
     unless story.scenarios.empty?
       story.scenarios.each do |scenario|
+        gherkin += "\t@wip\n"
         gherkin += "\tScenario: "
         gherkin += scenario.title
         gherkin += "\n"
