@@ -1,11 +1,12 @@
 require 'net/http'
 require "rexml/document"
 require 'ostruct'
+require 'lib/story_generator'
 include StoryGenerator
 
 class Client
-  
-  Net::HTTP.start('localhost' , 3000) {|http|
+
+  Net::HTTP.start('192.168.0.158' , 3000) {|http|
     req = Net::HTTP::Get.new('/stories/2.xml')
     response = http.request(req)
     xml = REXML::Document.new response.body
@@ -20,23 +21,24 @@ class Client
       s.preconditions = []
       s.outcomes = []
       s.title = scenario.elements["scenario/title"].text
-      
+
       scenario.elements.each("scenario/preconditions/precondition") { |precondition|
         p = OpenStruct.new
         p.description = precondition.elements["description"].text
         s.preconditions << p
       }
-      
+
       scenario.elements.each("scenario/outcomes/outcome") { |outcome|
         o = OpenStruct.new
         o.description = outcome.elements["description"].text
         s.outcomes << o
       }
-      
+
       story.scenarios << s
     }
-    
+
     generate(story)
   }
-  
+
 end
+
