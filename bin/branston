@@ -1,4 +1,12 @@
 #!/usr/bin/env ruby
 require File.dirname(__FILE__) + '/../lib/branston/lib/branston'
-Branston.new(ARGV)
+require 'thin'
+
+rackup_file = "#{File.dirname(__FILE__)}/../lib/branston/config.ru"
+
+argv = ARGV
+argv << ["-R", rackup_file] unless ARGV.include?("-R")
+argv << ["-p", "2001"] unless ARGV.include?("-p")
+
+Thin::Runner.new(argv.flatten).run!
 
