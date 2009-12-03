@@ -1,7 +1,9 @@
+require 'fileutils'
+
 module StoryGenerator
-  
+
   ALPHABET = ("a".."z").to_a unless defined?(ALPHABET)
-  
+
   FEATURE_PATH='features/' unless defined?(FEATURE_PATH)
   FileUtils.mkdir FEATURE_PATH unless File.exists? FEATURE_PATH
   FileUtils.mkdir FEATURE_PATH + 'step_definitions' unless File.exists? FEATURE_PATH + 'step_definitions'
@@ -23,11 +25,11 @@ module StoryGenerator
   end
 
   private
-  
+
   def clean_title(string)
     string.strip.gsub(' ', '_').gsub('"', '').downcase
   end
-  
+
   def make_steps(story)
     steps = ""
 
@@ -53,7 +55,7 @@ module StoryGenerator
             steps += "end\n\n"
           end
         end
-        
+
         unless s.outcomes.empty?
           s.outcomes.each do |o|
             steps += "Then #{regexp(o.description)} do"
