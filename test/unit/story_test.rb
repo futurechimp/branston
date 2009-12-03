@@ -1,4 +1,5 @@
 require 'test_helper'
+include StoryGenerator
 
 class StoryTest < ActiveSupport::TestCase
 
@@ -16,9 +17,9 @@ class StoryTest < ActiveSupport::TestCase
       @step_file = FEATURE_PATH + @story.step_filename
     end
 
-    teardown do      
-      FileUtils.rm @feature_file if File.exists? @feature_file
-      FileUtils.rm @step_file if File.exists? @step_file
+    teardown do
+      FileUtils.rm @feature_file if @feature_file != nil and File.exists? @feature_file
+      FileUtils.rm @step_file if @step_file != nil and File.exists? @step_file
     end
 
     should "have a unique title" do
@@ -35,7 +36,7 @@ class StoryTest < ActiveSupport::TestCase
     end
 
     should "generate a feature file that can be run by cucumber" do
-      @story.make_feature
+      @story.generate(@story)
       assert File.exists? @feature_file
       
       f = File.open(@feature_file, "r")
@@ -56,30 +57,30 @@ class StoryTest < ActiveSupport::TestCase
     end
     
     should "generate a skeleton step definition file" do
-      @story.make_steps
+      @story.generate(@story)
       assert File.exists? @step_file
       f = File.open(@step_file, "r")
       begin
         pc = @story.scenarios.first.preconditions[0]
-        assert_equal "Given #{pc.regexp.to_s} do |a|\n", f.gets
+        assert_equal "Given #{regexp(pc.to_s)} do |a|\n", f.gets
         assert_equal "\t#TODO: Define these steps\n", f.gets
         assert_equal "end\n", f.gets
         assert_equal "\n", f.gets
         
         pc = @story.scenarios.first.preconditions[1]
-        assert_equal "Given #{pc.regexp.to_s} do |a, b|\n", f.gets
+        assert_equal "Given #{regexp(pc.to_s)} do |a, b|\n", f.gets
         assert_equal "\t#TODO: Define these steps\n", f.gets
         assert_equal "end\n", f.gets
         assert_equal "\n", f.gets
         
         pc = @story.scenarios.last.preconditions[0]
-        assert_equal "Given #{pc.regexp.to_s} do |a|\n", f.gets
+        assert_equal "Given #{regexp(pc.to_s)} do |a|\n", f.gets
         assert_equal "\t#TODO: Define these steps\n", f.gets
         assert_equal "end\n", f.gets
         assert_equal "\n", f.gets
         
         pc = @story.scenarios.last.preconditions[1]
-        assert_equal "Given #{pc.regexp.to_s} do |a, b|\n", f.gets
+        assert_equal "Given #{regexp(pc.to_s)} do |a, b|\n", f.gets
         assert_equal "\t#TODO: Define these steps\n", f.gets
         assert_equal "end\n", f.gets
         assert_equal "\n", f.gets

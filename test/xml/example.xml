@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<story>
+  <author-id type="integer" nil="true"/>
+  <created-at type="datetime">2009-12-02T14:24:34Z</created-at>
+  <description>I should be able to search for products by title</description>
+  <id type="integer">2</id>
+  <iteration-id type="integer" nil="true"/>
+  <points type="integer">1</points>
+  <title>Product Search</title>
+  <updated-at type="datetime">2009-12-02T14:24:34Z</updated-at>
+  <scenarios type="array">
+    <scenario>
+      <created-at type="datetime" nil="true"/>
+      <id type="integer">3</id>
+      <story-id type="integer">2</story-id>
+      <title>I search for "planes"</title>
+      <updated-at type="datetime" nil="true"/>
+      <preconditions type="array">
+        <precondition>
+          <created-at type="datetime" nil="true"/>
+          <description>I search for "planes"</description>
+          <id type="integer">1</id>
+          <scenario-id type="integer">3</scenario-id>
+          <updated-at type="datetime" nil="true"/>
+        </precondition>
+        <precondition>
+          <created-at type="datetime" nil="true"/>
+          <description>"planetoid" is a fancy word for "planet"</description>
+          <id type="integer">2</id>
+          <scenario-id type="integer">3</scenario-id>
+          <updated-at type="datetime" nil="true"/>
+        </precondition>
+      </preconditions>
+      <outcomes type="array">
+        <outcome>
+          <created-at type="datetime" nil="true"/>
+          <description>A competition should appear</description>
+          <id type="integer">1</id>
+          <scenario-id type="integer">3</scenario-id>
+          <updated-at type="datetime" nil="true"/>
+        </outcome>
+      </outcomes>
+    </scenario>
+  </scenarios>
+</story>

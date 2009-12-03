@@ -44,6 +44,6 @@ Rails::Initializer.run do |config|
   FileUtils.mkdir FEATURE_PATH unless File.exists? FEATURE_PATH
   FileUtils.mkdir FEATURE_PATH + 'step_definitions' unless File.exists? FEATURE_PATH + 'step_definitions'
   
-  ALPHABET = ("a".."z").to_a
+   ALPHABET = ("a".."z").to_a
 end
 

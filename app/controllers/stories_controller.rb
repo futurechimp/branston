@@ -8,8 +8,8 @@ class StoriesController < ApplicationController
   in_place_edit_for :story, :points
 
   def generate_feature
-    @story = Story.find(params[:id])
-    @story.generate
+    @story = Story.find(params[:id], :include => :scenarios)
+    @story.generate(@story)
     render :text => 'done'
   end
 
@@ -32,7 +32,8 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @story }
+      format.xml  { render :xml => (@story.to_xml :include => { :scenarios => { 
+      :include => [:preconditions, :outcomes] } } ) }
     end
   end
 
