@@ -2,7 +2,7 @@ class ReleasesController < ApplicationController
 
   layout 'main'
 
-  in_place_edit_for :release, :release_notes
+  in_place_edit_for :release, :notes
 
   # GET /releases
   # GET /releases.xml
