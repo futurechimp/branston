@@ -2,8 +2,9 @@
 .clear-left {clear:left;}
 
 /* Wrappers for story lists */
-div#current-wrapper, div#backlog-wrapper {float:left;width:48%;margin-top:6px;}
-div#current {margin:6px 8px 0;}
+div#current-wrapper, div#backlog-wrapper {float:left;width:48%;margin-top:6px;border:1px solid #321114;}
+div#current-wrapper h3, div#backlog-wrapper h3 {padding:3px; font-weight:bold; text-transform:none; font-size:1.4em;}
+div#current-wrapper {margin-right:8px;}
 
 /* Add/Back link styling */
 div#content a.add { background: url(/images/icons/plus_icon_30x30.png) no-repeat left; padding-left:34px; font:1.1em verdana,arial,sans-serif; display:block; height:30px; line-height:25px;text-decoration:none;}
@@ -47,12 +48,7 @@ div.accordion-toggle{
 
 div.accordion-toggle span.in_place_editor_field {font-weight:bold;}
 div.accordion-toggle a.delete {float:right;}
-
-div.accordion-toggle:hover, div.accordion-toggle-active{
-	background-color: #ffff99;
-	border-top: 1px solid #a06b55;
-}
-
+div.accordion-toggle:hover, div.accordion-toggle-active{ background-color: #ffff99; border-top: 1px solid #a06b55; }
 div.accordion-content { overflow: hidden; background: #ffff99; padding: 0; }
 div.accordion-content p { margin: 9px 24px 6px 24px; line-height:28px; }
 

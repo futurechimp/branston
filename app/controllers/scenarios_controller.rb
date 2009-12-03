@@ -1,5 +1,7 @@
 class ScenariosController < ApplicationController
 
+  layout 'main'
+
   before_filter :find_story, :except => :set_scenario_title
 
   in_place_edit_for :scenario, :title
@@ -23,10 +25,11 @@ class ScenariosController < ApplicationController
     @scenario.story = @story
     respond_to do |format|
       if @scenario.save
+        @scenarios = @story.scenarios
         flash[:notice] = 'Scenario was successfully created.'
         format.html { redirect_to(@scenario) }
         format.xml  { render :xml => @scenario, :status => :created, :location => @scenario }
-        format.js { @scenarios = Scenario.find :all, :conditions => ["story_id = ?", @story.id] }
+        format.js
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @scenario.errors, :status => :unprocessable_entity }
@@ -35,7 +38,7 @@ class ScenariosController < ApplicationController
   end
 
   def index
-    @scenarios = Scenario.find :all, :conditions => ["story_id = ?", @story.id]
+    @scenarios = @story.scenarios
     respond_to do |format|
       format.html
       format.js { render :partial => "scenarios" }

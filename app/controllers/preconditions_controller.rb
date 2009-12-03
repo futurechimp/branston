@@ -1,12 +1,19 @@
 class PreconditionsController < ApplicationController
+
+  layout 'main'
+
+  before_filter :find_scenario
+  before_filter :find_story
+
   # GET /preconditions
   # GET /preconditions.xml
   def index
-    @preconditions = Precondition.all
+    @preconditions = @scenario.preconditions
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @preconditions }
+      format.js { render :partial => 'preconditions' }
     end
   end
 
@@ -29,6 +36,7 @@ class PreconditionsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @precondition }
+      format.js { render :partial => 'precondition' }
     end
   end
 
@@ -41,12 +49,14 @@ class PreconditionsController < ApplicationController
   # POST /preconditions.xml
   def create
     @precondition = Precondition.new(params[:precondition])
-
+    @precondition.scenario = @scenario
+    @preconditions = @scenario.preconditions
     respond_to do |format|
       if @precondition.save
         flash[:notice] = 'Precondition was successfully created.'
         format.html { redirect_to(@precondition) }
         format.xml  { render :xml => @precondition, :status => :created, :location => @precondition }
+        format.js
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @precondition.errors, :status => :unprocessable_entity }
@@ -82,4 +92,16 @@ class PreconditionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+
+  def find_story
+    @story = @scenario.story unless @scenario.nil?
+    @story = Story.find(params[:story_id]) if @story.nil?
+  end
+
+  def find_scenario
+    @scenario = Scenario.find(params[:scenario_id]) if @scenario.nil?
+  end
 end
+

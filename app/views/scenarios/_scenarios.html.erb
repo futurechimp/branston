@@ -1,10 +1,10 @@
 <!-- scenarios/_scenario.html.erb -->
-  <p>
+  <div>
     <%= link_to_remote '(+) New test', :update => element_id(@story,'content'),
       :url => new_story_scenario_path(@story), :method => 'GET' %>
     <% @scenarios.each do |scenario| %>
       <% @scenario = scenario -%>
       <%= render :partial => "scenario" %>
     <% end %>
-  </p>
+  </div>
 

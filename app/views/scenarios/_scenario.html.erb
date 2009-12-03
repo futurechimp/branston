@@ -1,18 +1,23 @@
 <!-- scenarios/_scenario.html.erb -->
-<% if @scenario.created_at.nil? -%>
-  <% remote_form_for :scenario, @scenario, :url => story_scenarios_path(@story) do |f| -%>
-  <p class="form-fields">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </p>
-  <p class="form-navigation"><%= f.submit 'Create' %></p>
-  <% end -%>
-<% else -%>
-  <p>
-    <%= in_place_editor_field 'scenario', 'title' %>
-  </p>
-  <p>
-    (+) Add precondition
-  </p>
-<% end -%>
+    <div id="<%= element_id(@scenario) %>" class="scenario">
+    <% if @scenario.created_at.nil? -%>
+      <% remote_form_for :scenario, @scenario, :url => story_scenarios_path(@story) do |f| -%>
+      <p class="form-fields">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </p>
+      <p class="form-navigation"><%= f.submit 'Create' %></p>
+      <% end -%>
+    <% else -%>
+      <p>
+        <%= in_place_editor_field 'scenario', 'title' %>
+        &nbsp;&bull;
+        <%= link_to "Delete", @precondition, :confirm => 'Delete this scenario?', :method => :delete, :class => "delete" %>
+      </p>
+      <div id="<%= element_id(@scenario,'preconditions') %>" class="preconditions">
+        <%= link_to_remote "View test preconditions", :update => element_id(@scenario,'preconditions'),
+          :url => preconditions_path(:scenario_id => @scenario.id), :method => 'GET' %>
+      </div>
+    <% end -%>
+    </div>
 
