@@ -20,6 +20,8 @@ end
 Iteration.blueprint do
   velocity { 1 }
   name
+  start_date { Date.today }
+  end_date { Date.today + 14 }
 end
 
 Outcome.blueprint do
@@ -77,23 +79,21 @@ end
 
 module Factory
   class << self
-    
+
     def make_story(story_options = {})
       story = Story.make(story_options)
       2.times { story.scenarios << make_scenario }
       return story
     end
-    
+
     def make_scenario
       scenario = Scenario.make
       scenario.preconditions.make
       scenario.preconditions.make(:longer)
-      2.times { scenario.outcomes.make }      
+      2.times { scenario.outcomes.make }
       return scenario
     end
-    
+
   end
 end
-
-
 
