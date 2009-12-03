@@ -14,4 +14,10 @@
     <%= f.label :end_date %>
     <%= f.calendar_date_select :end_date %>
   </p>
+  <% unless @releases.nil? -%>
+  <p class="form-fields">
+    <%= f.label :release %>
+    <%= f.select :release_id, @releases.map {|release| [release.release_date.strftime('%d/%m/%Y'), release.id]} %>
+  </p>
+  <% end -%>
 

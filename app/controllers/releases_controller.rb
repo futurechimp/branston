@@ -1,7 +1,9 @@
 class ReleasesController < ApplicationController
-  
+
   layout 'main'
-  
+
+  in_place_edit_for :release, :release_notes
+
   # GET /releases
   # GET /releases.xml
   def index
@@ -86,3 +88,4 @@ class ReleasesController < ApplicationController
     end
   end
 end
+

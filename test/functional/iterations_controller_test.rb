@@ -59,7 +59,7 @@ class IterationsControllerTest < ActionController::TestCase
           end
 
           should "redirect to show" do
-            assert_redirected_to iteration_path(assigns(:iteration))
+            assert_redirected_to iterations_path
           end
         end
 
@@ -85,7 +85,7 @@ class IterationsControllerTest < ActionController::TestCase
           end
 
           should "redirect to show" do
-            assert_redirected_to iteration_url(assigns(:iteration))
+            assert_redirected_to iterations_path
           end
 
         end

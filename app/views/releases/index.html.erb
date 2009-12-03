@@ -1,22 +1,28 @@
-<h1>Listing releases</h1>
+<div class="index-head">
+  <h2>Releases</h2>
+  <%= link_to 'New release', new_release_path, :class => "add" %>
+</div>
 
-<table>
+<table class="index">
   <tr>
     <th>Release date</th>
     <th>Notes</th>
+    <th>&nbsp;</th>
   </tr>
 
 <% @releases.each do |release| %>
-  <tr>
+  <% @release = release -%>
+  <tr class="<%=cycle('odd','even')%>">
     <td><%=h release.release_date %></td>
-    <td><%=h release.notes %></td>
-    <td><%= link_to 'Show', release %></td>
-    <td><%= link_to 'Edit', edit_release_path(release) %></td>
-    <td><%= link_to 'Destroy', release, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= in_place_editor_field 'release', 'notes' %></td>
+    <td>
+      <%= link_to 'Show', release %>&nbsp;&nbsp;&bull;
+      <%= link_to 'Edit', edit_release_path(release) %>&nbsp;&nbsp;&bull;
+      <%= link_to 'Destroy', release, :confirm => 'Are you sure you want to delete this release?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>
-
 <br />
+<%= link_to 'New release', new_release_path, :class => "add" if @releases.size > 10  %>
 
-<%= link_to 'New release', new_release_path %>
