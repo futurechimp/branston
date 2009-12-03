@@ -5,6 +5,8 @@ class IterationsController < ApplicationController
   in_place_edit_for :iteration, :velocity
   in_place_edit_for :iteration, :name
 
+  before_filter :find_all_releases, :only => [:new, :edit]
+
   # GET /iterations
   # GET /iterations.xml
   def index
@@ -54,6 +56,7 @@ class IterationsController < ApplicationController
         format.html { redirect_to(@iteration) }
         format.xml  { render :xml => @iteration, :status => :created, :location => @iteration }
       else
+        @releases = Release.all
         format.html { render :action => "new" }
         format.xml  { render :xml => @iteration.errors, :status => :unprocessable_entity }
       end
@@ -71,6 +74,7 @@ class IterationsController < ApplicationController
         format.html { redirect_to(@iteration) }
         format.xml  { head :ok }
       else
+        @releases = Release.all
         format.html { render :action => "edit" }
         format.xml  { render :xml => @iteration.errors, :status => :unprocessable_entity }
       end
@@ -88,5 +92,12 @@ class IterationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+
+  def find_all_releases
+    @releases = Release.all
+  end
+
 end
 

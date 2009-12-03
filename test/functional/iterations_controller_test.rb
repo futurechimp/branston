@@ -29,11 +29,13 @@ class IterationsControllerTest < ActionController::TestCase
       should "get edit" do
         get :edit, :id => @iteration.to_param
         assert_response :success
+        assert assigns(:releases)
       end
 
       should "get new" do
         get :new
         assert_response :success
+        assert assigns(:releases)
       end
 
       should "show iteration" do
@@ -73,6 +75,11 @@ class IterationsControllerTest < ActionController::TestCase
           should "redisplay" do
             assert_template 'new'
           end
+
+          should "retrieve all releases" do
+            assert assigns(:releases)
+          end
+
         end
       end
 
@@ -97,6 +104,10 @@ class IterationsControllerTest < ActionController::TestCase
 
           should "redisplay the edit template" do
             assert_template "edit"
+          end
+
+          should "retrieve all releases" do
+            assert assigns(:releases)
           end
         end
       end
