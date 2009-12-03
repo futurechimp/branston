@@ -63,6 +63,7 @@ end
 
 Scenario.blueprint do
   title
+  story
 end
 
 Story.blueprint do

@@ -4,6 +4,24 @@ class ScenariosController < ApplicationController
 
   in_place_edit_for :scenario, :title
 
+  def index
+    @scenarios = Scenario.find :all, :conditions => ["story_id = ?", @story.id]
+    respond_to do |format|
+      format.html
+      format.js { render :partial => "scenarios" }
+    end
+  end
+
+  # GET /scenarios/1
+  # GET /scenarios/1.xml
+  def show
+    @scenario = Scenario.find(params[:id])
+
+    respond_to do |format|
+      format.html # scenario.html.erb
+      format.xml  { render :xml => @scenario }
+    end
+  end
 
   # GET /stories/:story_id/scenarios/new
   # GET /stories/:story_id/scenarios/new.xml
@@ -16,6 +34,12 @@ class ScenariosController < ApplicationController
     end
   end
 
+
+  # GET /scenarios/1/edit
+  def edit
+    @scenario = Scenario.find(params[:id])
+  end
+
   # POST /stories/:story_id/scenarios
   # POST /stories/:story_id/scenarios.xml
   def create
@@ -24,7 +48,7 @@ class ScenariosController < ApplicationController
     respond_to do |format|
       if @scenario.save
         flash[:notice] = 'Scenario was successfully created.'
-        format.html { redirect_to(@scenario) }
+        format.html { redirect_to story_scenario_path(@story, @scenario) }
         format.xml  { render :xml => @scenario, :status => :created, :location => @scenario }
         format.js { @scenarios = Scenario.find :all, :conditions => ["story_id = ?", @story.id] }
       else
@@ -34,13 +58,34 @@ class ScenariosController < ApplicationController
     end
   end
 
-  def index
-    @scenarios = Scenario.find :all, :conditions => ["story_id = ?", @story.id]
+  # PUT /scenarios/1
+  # PUT /scenarios/1.xml
+  def update
+    @scenario = Scenario.find(params[:id])
     respond_to do |format|
-      format.html
-      format.js { render :partial => "scenarios" }
+      if @scenario.update_attributes(params[:scenario])
+        flash[:notice] = 'Scenario was successfully updated.'
+        format.html { redirect_to story_scenario_path(@story, @scenario) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @scenario.errors, :status => :unprocessable_entity }
+      end
     end
   end
+
+  # DELETE /stories/1
+  # DELETE /stories/1.xml
+  def destroy
+    @scenario = Scenario.find(params[:id])
+    @scenario.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(story_scenarios_url(@story)) }
+      format.xml  { head :ok }
+    end
+  end
+
 
   private
 
