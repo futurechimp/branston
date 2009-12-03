@@ -1,7 +1,8 @@
 require 'test_helper'
+require "rexml/document"
 
 class ClientTest < ActiveSupport::TestCase
-  
+
   context "The Branston Client" do
     setup do
       @feature_file = FEATURE_PATH + 'product_search.feature'
@@ -10,10 +11,10 @@ class ClientTest < ActiveSupport::TestCase
       REXML::Document.stubs(:new).returns(mock_xml)
       Client.new
     end
-    
+
     should "generate a feature file that can be run by cucumber" do
       assert File.exists? @feature_file
-      
+
       f = File.open(@feature_file, "r")
       begin
         assert_equal "Feature: Product Search\n", f.gets
@@ -29,8 +30,8 @@ class ClientTest < ActiveSupport::TestCase
         f.close
       end
     end
-    
-    should "generate a skeleton step definition file" do      
+
+    should "generate a skeleton step definition file" do
       assert File.exists? @step_file
       f = File.open(@step_file, "r")
       begin
@@ -38,20 +39,20 @@ class ClientTest < ActiveSupport::TestCase
         assert_equal "\t#TODO: Define these steps\n", f.gets
         assert_equal "end\n", f.gets
         assert_equal "\n", f.gets
-        
+
         assert_equal "Given /^\"([^\\\"]*)\" is a fancy word for \"([^\\\"]*)\"$/ do |a, b|\n", f.gets
         assert_equal "\t#TODO: Define these steps\n", f.gets
         assert_equal "end\n", f.gets
         assert_equal "\n", f.gets
-        
+
         assert_equal "\n", f.gets
       ensure
         f.close
       end
     end
-    
-    
+
+
   end
-  
+
 end
 
