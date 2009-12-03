@@ -10,5 +10,6 @@ class Iteration < ActiveRecord::Base
   has_many :participations
   has_many :geeks, :through => :participations, :class_name => "User"
   belongs_to :release
+
 end
 

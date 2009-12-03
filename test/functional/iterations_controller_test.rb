@@ -60,9 +60,26 @@ class IterationsControllerTest < ActionController::TestCase
             end
           end
 
+          should "not be assigned to a release" do
+            assert assigns(:iteration).release.nil?
+          end
+
           should "redirect to show" do
             assert_redirected_to iteration_path(assigns(:iteration))
           end
+
+          context "including a release_id" do
+            setup do
+              assert_difference("Iteration.count") do
+                post :create, :iteration => Iteration.plan.merge(:release_id => Release.make.to_param)
+              end
+            end
+
+            should "be assigned to a release" do
+              assert assigns(:iteration).release
+            end
+          end
+
         end
 
         context "with invalid params" do
@@ -87,12 +104,22 @@ class IterationsControllerTest < ActionController::TestCase
         context "with valid parameters" do
           setup do
             assert_no_difference("Iteration.count") do
-              put :update,{ :id => @iteration.id,  :iteration => {:name => "bar"}}
+              put :update,{ :id => @iteration.to_param,  :iteration => {:name => "bar"}}
             end
           end
 
           should "redirect to show" do
             assert_redirected_to iteration_url(assigns(:iteration))
+          end
+
+          context "including a release_id" do
+            setup do
+              put :update, :id => @iteration.to_param, :iteration => {:release_id => Release.make.to_param}
+            end
+
+            should "be assigned to a release" do
+              assert assigns(:iteration).release
+            end
           end
 
         end
