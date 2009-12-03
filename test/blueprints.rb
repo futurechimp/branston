@@ -1,16 +1,18 @@
 require 'machinist/active_record'
 require 'sham'
 require 'faker'
+require 'faker_extras'
 
 # Shams - generated filler values
 #
 Sham.define do
-  name            { Faker::Lorem.words }
-  title           { Faker::Lorem.sentence }
-  description     { Faker::Lorem.sentence }
-  notes           { Faker::Lorem.sentences }
-  email           { Faker::Internet.email }
-  login           { Faker::Name.first_name }
+  name               { Faker::Lorem.words }
+  title              { Faker::Lorem.sentence }
+  description        { Faker::Stories.single_precondition }
+  long_description   { Faker::Stories.double_precondition }
+  notes              { Faker::Lorem.sentences }
+  email              { Faker::Internet.email }
+  login              { Faker::Name.first_name }
 end
 
 # Model class blueprints
@@ -26,6 +28,10 @@ end
 
 Precondition.blueprint do
   description
+end
+
+Precondition.blueprint(:longer) do
+  description { Sham.long_description }
 end
 
 Release.blueprint do
@@ -80,8 +86,9 @@ module Factory
     
     def make_scenario
       scenario = Scenario.make
-      2.times { scenario.preconditions.make }
-      2.times { scenario.outcomes.make }
+      scenario.preconditions.make
+      scenario.preconditions.make(:longer)
+      2.times { scenario.outcomes.make }      
       return scenario
     end
     

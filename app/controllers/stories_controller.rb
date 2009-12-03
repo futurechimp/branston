@@ -9,7 +9,7 @@ class StoriesController < ApplicationController
 
   def generate_feature
     @story = Story.find(params[:id])
-    @story.make_feature
+    @story.generate
     render :text => 'done'
   end
 
