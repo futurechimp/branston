@@ -1,4 +1,4 @@
-require 'lib/branston/lib/client'
+require File.dirname(__FILE__) + '/../lib/client'
 
 class Branston
 
@@ -16,7 +16,7 @@ class Branston
     else
       if args[0] == "server"
         puts "Starting Branston Server on port http://localhost:#{PORT}/"
-        system("ruby lib/branston/script/server -p #{PORT} -e development &>> /dev/null &")
+        system("ruby #{File.dirname(__FILE__)}/../script/server -p #{PORT} -e production &>> /dev/null &")
       elsif args[0] == 'generate'
         Client.new(*args)
       else

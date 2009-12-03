@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "branston"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{An experiment in turning user stories into cucumber files}
+    gem.description = %Q{An experiment in turning user stories into cucumber files}
     gem.email = "dave@boomer"
     gem.homepage = "http://github.com/futurechimp/branston"
     gem.authors = ["dave@boomer"]
@@ -51,3 +51,4 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+

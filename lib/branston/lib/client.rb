@@ -1,7 +1,7 @@
 require 'net/http'
 require "rexml/document"
 require 'ostruct'
-require 'lib/branston/lib/story_generator'
+require File.dirname(__FILE__) + '/../lib/story_generator'
 include StoryGenerator
 
 class Client
