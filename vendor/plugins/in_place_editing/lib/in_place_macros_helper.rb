@@ -9,16 +9,16 @@ module InPlaceMacrosHelper
   #     <input type="submit" value="ok"/>
   #     <a onclick="javascript to cancel the editing">cancel</a>
   #   </form>
-  # 
+  #
   # The form is serialized and sent to the server using an AJAX call, the action on
   # the server should process the value and return the updated value in the body of
   # the reponse. The element will automatically be updated with the changed value
   # (as returned from the server).
-  # 
+  #
   # Required +options+ are:
   # <tt>:url</tt>::       Specifies the url where the updated value should
   #                       be sent after the user presses "ok".
-  # 
+  #
   # Addtional +options+ are:
   # <tt>:rows</tt>::              Number of rows (more than 1 will use a TEXTAREA)
   # <tt>:cols</tt>::              Number of characters the text input should span (works for both INPUT and TEXTAREA)
@@ -54,19 +54,19 @@ module InPlaceMacrosHelper
     js_options['cols'] = options[:cols] if options[:cols]
     js_options['size'] = options[:size] if options[:size]
     js_options['externalControl'] = "'#{options[:external_control]}'" if options[:external_control]
-    js_options['loadTextURL'] = "'#{url_for(options[:load_text_url])}'" if options[:load_text_url]        
+    js_options['loadTextURL'] = "'#{url_for(options[:load_text_url])}'" if options[:load_text_url]
     js_options['ajaxOptions'] = options[:options] if options[:options]
     js_options['htmlResponse'] = !options[:script] if options[:script]
     js_options['callback']   = "function(form) { return #{options[:with]} }" if options[:with]
     js_options['clickToEditText'] = %('#{options[:click_to_edit_text]}') if options[:click_to_edit_text]
     js_options['textBetweenControls'] = %('#{options[:text_between_controls]}') if options[:text_between_controls]
     function << (', ' + options_for_javascript(js_options)) unless js_options.empty?
-    
+
     function << ')'
 
     javascript_tag(function)
   end
-  
+
   # Renders the value of the specified object and method with in-place editing capabilities.
   def in_place_editor_field(object, method, tag_options = {}, in_place_editor_options = {})
     instance_tag = ::ActionView::Helpers::InstanceTag.new(object, method, self)
@@ -74,7 +74,9 @@ module InPlaceMacrosHelper
                    :id => "#{object}_#{method}_#{instance_tag.object.id}_in_place_editor",
                    :class => "in_place_editor_field"}.merge!(tag_options)
     in_place_editor_options[:url] = in_place_editor_options[:url] || url_for({ :action => "set_#{object}_#{method}", :id => instance_tag.object.id })
-    tag = content_tag(tag_options.delete(:tag), h(instance_tag.value(instance_tag.object)),tag_options)
+    value = instance_tag.value(instance_tag.object) || in_place_editor_options[:default_value] || "(Click to edit)"
+    tag = content_tag(tag_options.delete(:tag), h(value),tag_options)
     return tag + in_place_editor(tag_options[:id], in_place_editor_options)
   end
 end
+

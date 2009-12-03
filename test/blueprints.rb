@@ -77,6 +77,14 @@ Story.blueprint(:in_progress) do
   iteration
 end
 
+Outcome.blueprint do
+  description
+end
+
+Precondition.blueprint do
+  description
+end
+
 module Factory
   class << self
 

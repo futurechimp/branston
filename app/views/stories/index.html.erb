@@ -26,21 +26,7 @@ document.observe("dom:loaded", function() {
   <h3>Current Stories</h3>
   <div id="current_stories" class="accordion">
   <% @current_stories.each do |story| %>
-    <% @story = story -%>
-    <div id="<%= element_id(story) %>" class="story">
-      <div class="accordion-toggle">
-        <%= in_place_editor_field 'story', 'title' %>
-      </div>
-      <div class="accordion-content">
-        <p>
-          (<%= in_place_editor_field 'story', 'points' %>) Points
-          &nbsp;&nbsp;&nbsp;
-          <span><%= link_to "Delete &raquo;", story, :confirm => 'Are you sure?', :method => :delete %></span>
-          <br/>
-          <%= in_place_editor_field 'story', 'description' %>
-        </p>
-      </div>
-    </div>
+    <%= render :partial => "story", :locals => { :story => story } %>
   <% end %>
   </div>
 </div>
@@ -49,21 +35,7 @@ document.observe("dom:loaded", function() {
   <h3>Story Backlog</h3>
   <div id="backlog_stories" class="accordion">
   <% @backlog_stories.each do |story| %>
-    <% @story = story -%>
-    <div id="<%= element_id(story) %>" class="story">
-      <div class="accordion-toggle">
-        <%= in_place_editor_field 'story', 'title' %>
-      </div>
-      <div class="accordion-content">
-        <p>
-          (<%= in_place_editor_field 'story', 'points' %>) Points
-          &nbsp;&nbsp;&nbsp;
-          <span><%= link_to "Delete &raquo;", story, :confirm => 'Are you sure?', :method => :delete %></span>
-          <br/>
-          <%= in_place_editor_field 'story', 'description' %>
-        </p>
-      </div>
-    </div>
+    <%= render :partial => "story", :locals => { :story => story } %>
   <% end %>
   </div>
 </div>
