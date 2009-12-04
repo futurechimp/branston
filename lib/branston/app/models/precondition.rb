@@ -11,5 +11,6 @@ class Precondition < ActiveRecord::Base
   def to_s
     read_attribute(:description)
   end
-  
+
 end
+
