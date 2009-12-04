@@ -17,5 +17,17 @@ class Story < ActiveRecord::Base
   # Named scopes
   #
   named_scope :in_progress, :conditions => ['iteration_id IS NOT ?', nil]
+  
+  before_save :set_slug
+  
+  def to_param
+    title.parameterize
+  end
+  
+  private
+  def set_slug
+    self.slug = self.to_param
+  end
+    
 end
 

@@ -22,6 +22,15 @@ class StoryTest < ActiveSupport::TestCase
       FileUtils.rm @step_file if @step_file != nil and File.exists? @step_file
     end
     
+    should "set a slug when its saved" do
+      assert_not_nil @story.slug
+      assert_equal 'product-search', @story.slug
+      
+      @story.title = "updated title"
+      assert @story.save
+      assert_equal 'updated-title', @story.slug
+    end
+    
     should "have a unique title" do
       assert_no_difference 'Story.count' do
         assert_raise ActiveRecord::RecordInvalid do
@@ -133,8 +142,7 @@ class StoryTest < ActiveSupport::TestCase
       assert Story.respond_to?("in_progress")
     end
     
-    
-    context "named_scope in_progress" do
+        context "named_scope in_progress" do
       setup do
         Story.make
         Story.make(:in_progress)

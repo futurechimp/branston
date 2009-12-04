@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091202105555) do
+ActiveRecord::Schema.define(:version => 20091204173634) do
 
   create_table "iterations", :force => true do |t|
     t.integer  "velocity"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20091202105555) do
     t.datetime "updated_at"
     t.string   "title",        :limit => 40
     t.integer  "author_id"
+    t.string   "slug",                       :default => "", :null => false
   end
 
   create_table "user_roles", :force => true do |t|

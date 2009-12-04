@@ -8,7 +8,11 @@ class StoriesController < ApplicationController
   in_place_edit_for :story, :points
 
   def generate_feature
-    @story = Story.find(params[:id], :include => :scenarios)
+    @story = Story.find_by_slug(params[:id])
+    if @story.nil?
+      @story = Story.find(:first, :include => :scenarios, 
+        :conditions => ['slug LIKE ?', "%#{id}%"] )
+    end
     @story.generate(@story)
     render :text => 'done'
   end
@@ -28,11 +32,16 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.xml
   def show
-    @story = Story.find(params[:id])
+    @story = Story.find_by_slug(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => (@story.to_xml :include => { :scenarios => {
+      format.xml  {        
+        if @story.nil?
+          @story = Story.find(:first, :include => :scenarios, 
+            :conditions => ['slug LIKE ?', "%#{params[:id]}%"] )
+        end
+        render :xml => (@story.to_xml :include => { :scenarios => {
       :include => [:preconditions, :outcomes] } } ) }
       format.js { render :partial => 'story' }
     end
@@ -51,7 +60,7 @@ class StoriesController < ApplicationController
 
   # GET /stories/1/edit
   def edit
-    @story = Story.find(params[:id])
+    @story = Story.find_by_slug(params[:id])
   end
 
   # POST /stories
@@ -74,7 +83,7 @@ class StoriesController < ApplicationController
   # PUT /stories/1
   # PUT /stories/1.xml
   def update
-    @story = Story.find(params[:id])
+    @story = Story.find_by_slug(params[:id])
     respond_to do |format|
       if @story.update_attributes(params[:story])
         flash[:notice] = 'Story was successfully updated.'
@@ -90,7 +99,7 @@ class StoriesController < ApplicationController
   # DELETE /stories/1
   # DELETE /stories/1.xml
   def destroy
-    @story = Story.find(params[:id])
+    @story = Story.find_by_slug(params[:id])
     @story.destroy
 
     respond_to do |format|

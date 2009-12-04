@@ -49,7 +49,8 @@ class Client
    
   def get_xml
     Net::HTTP.start(options[:Host] , options[:Port]) { |http|
-      req = Net::HTTP::Get.new("/stories/#{options[:feature_id]}.xml")
+      req = Net::HTTP::Get.new("/stories/#{options[:feature]}.xml")
+      puts "generating /stories/#{options[:feature]}.xml"
       response = http.request(req)
       xml = REXML::Document.new response.body
       return xml

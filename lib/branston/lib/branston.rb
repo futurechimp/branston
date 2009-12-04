@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../lib/client'
 require 'optparse'
 require 'ftools'
 
-BRANSTON_HOME='.branston'
+BRANSTON_HOME= Dir.pwd + '/.branston'
 PORT = 3970
 
 class Branston
@@ -49,8 +49,8 @@ class Branston
           "Access a branston server on the specified port.", "Default: #{PORT}") { |v| options[:Port] = v }
         opts.on("-b", "--binding=ip", String,
           "Access a branston server on the specified ip.", "Default: 0.0.0.0") { |v| options[:Host] = v }
-        opts.on("-f", "--feature=id", Integer,
-          "Generate a feature for the given story id.") { |v| options[:feature_id] = v }
+        opts.on("-f", "--feature=name", String,
+          "Generate a feature for the given story regular expression.") { |v| options[:feature] = v }
         actions << 'generator'
       }
       opts.separator ""
