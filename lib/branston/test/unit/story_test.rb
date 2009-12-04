@@ -45,7 +45,6 @@ class StoryTest < ActiveSupport::TestCase
         assert_equal "\tAs an actor\n", f.gets
         assert_equal "\tI should be able to search for products by title\n", f.gets
         f.gets # empty line
-        assert_equal "\t@wip\n", f.gets
         assert_equal "\tScenario: #{@story.scenarios.first.title}\n", f.gets
         assert_equal "\t\tGiven #{@story.scenarios.first.preconditions.first}\n", f.gets
         assert_equal "\t\t\tAnd #{@story.scenarios.first.preconditions.last}\n", f.gets

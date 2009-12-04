@@ -6,3 +6,5 @@ db/development_structure.sql
 test/features
 coverage
 tmp
+pkq
+lib/branston/log/*.log
