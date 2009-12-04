@@ -2,12 +2,12 @@ class OutcomesController < ApplicationController
 
   before_filter :find_scenario, :except => [:destroy, :set_outcome_description]
 
-  in_place_edit_for :precondition, :description
+  in_place_edit_for :outcome, :description
 
   # GET /outcomes
   # GET /outcomes.xml
   def index
-    @outcomes = Outcome.all
+    @outcomes = @scenario.outcomes
 
     respond_to do |format|
       format.html # index.html.erb
@@ -95,7 +95,7 @@ class OutcomesController < ApplicationController
   end
 
   def find_scenario
-    @scenario = Scenario.find(params[:scenario_id]) if @scenario.nil?
+    @scenario = Scenario.find(params[:scenario_id])
   end
 end
 
