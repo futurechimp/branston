@@ -1,7 +1,7 @@
 class ScenariosController < ApplicationController
 
   layout 'main'
-
+  before_filter :login_required
   before_filter :find_story, :except => [:destroy, :set_scenario_title]
 
   in_place_edit_for :scenario, :title

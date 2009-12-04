@@ -2,6 +2,8 @@ class ReleasesController < ApplicationController
 
   layout 'main'
 
+  before_filter :login_required
+
   in_place_edit_for :release, :notes
 
   # GET /releases

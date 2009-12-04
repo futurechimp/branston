@@ -4,6 +4,7 @@ class OutcomesControllerTest < ActionController::TestCase
 
   context "The OutcomesController" do
     setup do
+      login_as(User.make)
       @scenario = Scenario.make
       @outcome = Outcome.make
     end

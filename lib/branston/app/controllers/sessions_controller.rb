@@ -1,5 +1,7 @@
-# This controller handles the login/logout function of the site.  
+# This controller handles the login/logout function of the site.
 class SessionsController < ApplicationController
+
+  layout 'main'
 
   # render new.rhtml
   def new
@@ -39,3 +41,4 @@ protected
     logger.warn "Failed login for '#{params[:login]}' from #{request.remote_ip} at #{Time.now.utc}"
   end
 end
+

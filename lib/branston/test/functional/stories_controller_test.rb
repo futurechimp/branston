@@ -4,6 +4,7 @@ class StoriesControllerTest < ActionController::TestCase
 
   context "The StoriesController" do
     setup do
+      login_as(User.make)
       @story = Story.make
     end
 

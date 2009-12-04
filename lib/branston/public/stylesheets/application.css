@@ -57,9 +57,9 @@ div.accordion-toggle-active {border-bottom:none;}
 div.accordion-content { overflow: hidden; background: #ffff99; padding: 0; border-left: 1px solid #a06b55; border-right: 1px solid #a06b55; border-bottom:1px solid #a06b55; min-width:449px; }
 div.accordion-content p { margin: 9px 24px 6px 24px; line-height:28px; }
 
-div.scenarios {clear:left;min-height:100px;margin:2px;padding:3px;}
+div.scenarios {clear:left;min-height:100px;margin:2px 4px 2px 4px;padding:3px;}
 div.scenario{border:1px dotted #b19d67;padding:3px;margin-bottom:2px;}
-div.scenarios-head h3, div.scenarios-head a {float:left;margin-left:4px;}
+div.scenarios-head h4, div.scenarios-head a {float:left;margin-left:6px;}
 div.scenarios-head a.add-small {float:right;margin-right:3px;}
 div.scenarios-foot {padding:3px;}
 
