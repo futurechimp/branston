@@ -12,3 +12,4 @@ argv << ["-e", "production"] unless ARGV.include?("-e")
 
 Thin::Runner.new(argv.flatten).run!
 
+

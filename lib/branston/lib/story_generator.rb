@@ -93,7 +93,6 @@ module StoryGenerator
     # Scenarios...
     unless story.scenarios.empty?
       story.scenarios.each do |scenario|
-        gherkin += "\t@wip\n"
         gherkin += "\tScenario: "
         gherkin += scenario.title
         gherkin += "\n"

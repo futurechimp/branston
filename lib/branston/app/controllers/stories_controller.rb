@@ -32,8 +32,9 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => (@story.to_xml :include => { :scenarios => { 
+      format.xml  { render :xml => (@story.to_xml :include => { :scenarios => {
       :include => [:preconditions, :outcomes] } } ) }
+      format.js { render :partial => 'story' }
     end
   end
 

@@ -5,7 +5,6 @@ class PreconditionsController < ApplicationController
   before_filter :find_scenario, :except => [:destroy, :set_precondition_description]
 
   in_place_edit_for :precondition, :description
-  #before_filter :find_story
 
   # GET /preconditions
   # GET /preconditions.xml
@@ -15,7 +14,7 @@ class PreconditionsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @preconditions }
-      format.js { render :partial => 'preconditions' }
+      format.js
     end
   end
 
@@ -34,11 +33,12 @@ class PreconditionsController < ApplicationController
   # GET /preconditions/new.xml
   def new
     @precondition = Precondition.new
-
+    @preconditions = @scenario.preconditions
+    @preconditions.push @precondition
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @precondition }
-      format.js { render :partial => 'precondition' }
+      format.js
     end
   end
 
@@ -97,12 +97,6 @@ class PreconditionsController < ApplicationController
   end
 
   private
-
-  # TODO - Not needed.
-  def find_story
-    @story = @scenario.story unless @scenario.nil?
-    @story = Story.find(params[:story_id]) if @story.nil?
-  end
 
   def find_scenario
     @scenario = Scenario.find(params[:scenario_id]) if @scenario.nil?
