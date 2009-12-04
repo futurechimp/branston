@@ -3,7 +3,7 @@
     <div id="<%= element_id(story) %>" class="story">
       <div class="accordion-toggle">
         <%= in_place_editor_field 'story', 'title' %>
-        <%= link_to "Delete", story, :confirm => 'Delete this story?', :method => :delete, :class => "delete" %>
+        <%= link_to image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"), story, :confirm => 'Delete this story?', :method => :delete, :class => "delete-small" %>
       </div>
       <div id="<%= element_id(story,'scenarios') %>" class="accordion-content">
         <p>

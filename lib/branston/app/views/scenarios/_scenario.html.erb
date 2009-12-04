@@ -10,8 +10,7 @@
     <% else -%>
       <div class="scenario-title">
         <%= in_place_editor_field 'scenario', 'title' %>
-        &nbsp;&bull;
-        <%= link_to_remote "Delete", :url => story_scenario_path(@story,@scenario), :confirm => 'Delete this scenario?', :method => :delete, :class => "delete-small" %>
+        <%= link_to_remote image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"), {:url => story_scenario_path(@story,@scenario), :confirm => 'Delete this scenario?', :method => :delete}, :class => "delete-small" %>
       </div>
       <div id="<%= element_id(@scenario,'preconditions') %>" class="preconditions">
         <%= link_to_remote "Preconditions",
