@@ -12,7 +12,7 @@ class OutcomesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @outcomes }
-      format.js { render :partial => 'outcomes' }
+      format.js
     end
   end
 
@@ -31,11 +31,12 @@ class OutcomesController < ApplicationController
   # GET /outcomes/new.xml
   def new
     @outcome = Outcome.new
-
+    @outcomes = @scenario.outcomes
+    @outcomes.push @outcome
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @outcome }
-      format.js { render :partial => 'outcome' }
+      format.js
     end
   end
 

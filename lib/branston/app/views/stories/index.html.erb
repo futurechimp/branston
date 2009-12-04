@@ -7,10 +7,10 @@
 <script type="text/javascript">
 document.observe("dom:loaded", function() {
   <% @current_stories.each do |story| -%>
-  new Draggable('<%= element_id(story) %>');
+  //new Draggable('<%= element_id(story) %>');
   <% end -%>
   <% @backlog_stories.each do |story| -%>
-  new Draggable('<%= element_id(story) %>');
+  //new Draggable('<%= element_id(story) %>');
   <% end -%>
   <% unless @current_stories.nil? or @current_stories.empty? -%>
   new Accordion("current_stories", 1);
