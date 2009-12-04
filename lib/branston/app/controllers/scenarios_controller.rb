@@ -10,7 +10,7 @@ class ScenariosController < ApplicationController
     @scenarios = @story.scenarios
     respond_to do |format|
       format.html
-      format.js { render :partial => "scenarios" }
+      format.js
     end
   end
 
@@ -29,10 +29,12 @@ class ScenariosController < ApplicationController
   # GET /stories/:story_id/scenarios/new.xml
   def new
     @scenario = Scenario.new
+    @scenarios = @story.scenarios
+    @scenarios.push @scenario
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @story }
-      format.js   { render :partial => "scenario" }
+      format.js
     end
   end
 

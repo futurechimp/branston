@@ -1,6 +1,6 @@
   <p class="form-fields">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :size => 52 %>
   </p>
   <p class="form-fields">
     <%= f.label :description %>
@@ -12,6 +12,6 @@
   </p>
   <p class="form-fields">
     <%= f.label :iteration %>
-    <%= f.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]} %>
+    <%= f.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]}.insert(0,["Not Assigned",'']) %>
   </p>
 
