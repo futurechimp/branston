@@ -7,13 +7,18 @@ class ClientTest < ActiveSupport::TestCase
     setup do
       @feature_file = FEATURE_PATH + 'product_search.feature'
       @step_file = FEATURE_PATH + '/step_definitions/product_search_steps.rb'
+      @options = {
+        :Port        => 3970,
+        :Host        => "0.0.0.0",
+        :fid         => 1
+      }
     end
     
     context "A complete story" do
       setup do
         mock_xml = File.new(RAILS_ROOT + "/test/xml/example.xml")
         
-        client = Client.new
+        client = Client.new(@options)
         client.stubs(:get_xml).returns(REXML::Document.new mock_xml)
         client.generate_story_files
       end
@@ -70,7 +75,7 @@ class ClientTest < ActiveSupport::TestCase
       setup do        
         mock_xml = File.new(RAILS_ROOT + "/test/xml/no_scenarios.xml")
         
-        client = Client.new
+        client = Client.new(@options)
         client.stubs(:get_xml).returns(REXML::Document.new mock_xml)
         client.generate_story_files
       end

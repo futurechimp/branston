@@ -1,10 +1,12 @@
 require File.dirname(__FILE__) + '/../lib/client'
+require 'optparse'
+require 'ftools'
 
 BRANSTON_HOME='/home/daniel/.branston'
+PORT = 3970
 
 class Branston
   
-  PORT=3970
   attr_accessor :args
   
   def initialize(args)
@@ -13,42 +15,9 @@ class Branston
   end
   
   def go
-    if args.empty?
-      usage
-    else
-      if args[0] == "server"
-        launch_branston_server
-      elsif args[0] == 'generate'
-        Client.new(*args).generate_story_files
-      else
-        usage
-      end
-    end
-  end
-  
-  private
-  def usage
-    puts "usage: branston server"
-  end
-  
-  def launch_branston_server
-    require 'active_support'
-    require 'action_controller'
-    
-    require 'ftools'
-    require 'optparse'
-
-    File.makedirs BRANSTON_HOME
-    
-    # TODO: Push Thin adapter upstream so we don't need worry about requiring it
-    begin
-      require_library_or_gem 'thin'
-    rescue Exception
-      # Thin not available
-    end
     
     options = {
-      :Port        => 3970,
+      :Port        => PORT,
       :Host        => "0.0.0.0",
       :environment => (ENV['RAILS_ENV'] || "production").dup,
       :detach      => true,
@@ -57,14 +26,52 @@ class Branston
     }
     
     ARGV.clone.options do |opts|
-      opts.on("-p", "--port=port", Integer,
-        "Runs Branston on the specified port.", "Default: 3000") { |v| options[:Port] = v }
-      opts.on("-b", "--binding=ip", String,
-        "Binds Branston to the specified ip.", "Default: 0.0.0.0") { |v| options[:Host] = v }
-      opts.on("-P", "--path=/path", String, "Runs Branston mounted at a specific path.", "Default: /") { |v| options[:path] = v }
+      opts.on("-s", "--server", String, "Run a Branston Server") { 
+        opts.on("-p", "--port=port", Integer,
+          "Runs Branston on the specified port.", "Default: #{PORT}") { |v| options[:Port] = v }
+        opts.on("-b", "--binding=ip", String,
+          "Binds Branston to the specified ip.", "Default: 0.0.0.0") { |v| options[:Host] = v }
+        opts.on("-P", "--path=/path", String, "Runs Branston mounted at a specific path.", "Default: /") { |v| options[:path] = v }
+        @server = true
+      }
+      opts.on("-g", "--generate", String, "Generate a feature from a Branston Server") { 
+         opts.on("-p", "--port=port", Integer,
+          "Access a branston server on the specified port.", "Default: #{PORT}") { |v| options[:Port] = v }
+        opts.on("-b", "--binding=ip", String,
+          "Access a branston server on the specified ip.", "Default: 0.0.0.0") { |v| options[:Host] = v }
+        opts.on("-f", "--feature=id", Integer,
+          "Generate a feature for the given story id.") { |v| options[:feature_id] = v }
+        @generator = true
+      }
       opts.separator ""
       opts.on("-h", "--help", "Show this help message.") { puts opts; exit }
       opts.parse!
+      
+      if ARGV.empty? or (!@server and !@generator) or (@server and @generator)
+        puts opts; exit       
+      end
+    end
+    
+    if @server
+      launch_branston_server(options)
+    elsif @generator
+      Client.new(options).generate_story_files
+    end
+  end
+  
+  private
+  
+  def launch_branston_server(options)
+    require 'active_support'
+    require 'action_controller'
+
+    File.makedirs BRANSTON_HOME
+    
+    # TODO: Push Thin adapter upstream so we don't need worry about requiring it
+    begin
+      require_library_or_gem 'thin'
+    rescue Exception
+      # Thin not available
     end
     
     server = Rack::Handler.get(ARGV.first) rescue nil

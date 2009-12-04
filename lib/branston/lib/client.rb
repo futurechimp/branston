@@ -6,16 +6,16 @@ include StoryGenerator
 
 class Client
   
-  attr_accessor :args
+  attr_accessor :options
   
-  def initialize(*args)
-    self.args = args
+  def initialize(options)
+    self.options = options
   end
   
   def generate_story_files
     
     @xml = get_xml
-    
+    #puts @xml
     unless @xml.nil?
       root = @xml.root
       story = OpenStruct.new
@@ -48,8 +48,8 @@ class Client
   end
    
   def get_xml
-    Net::HTTP.start(args[1] , args[2]) { |http|
-      req = Net::HTTP::Get.new(args[3])
+    Net::HTTP.start(options[:Host] , options[:Port]) { |http|
+      req = Net::HTTP::Get.new("/stories/#{options[:feature_id]}.xml")
       response = http.request(req)
       xml = REXML::Document.new response.body
       return xml
