@@ -5,10 +5,10 @@
 
 Gem::Specification.new do |s|
   s.name = %q{branston}
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["dave@boomer"]
+  s.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
   s.date = %q{2009-12-04}
   s.default_executable = %q{branston}
   s.description = %q{An experiment in turning user stories into cucumber files}
@@ -239,7 +239,6 @@ Gem::Specification.new do |s|
      "lib/branston/script/runner",
      "lib/branston/script/server",
      "lib/branston/test/blueprints.rb",
-     "lib/branston/test/features/step_definitions/sequi_natus_pariatur_voluptatem_incidunt_facere_qui_minima_impedit._steps.rb",
      "lib/branston/test/fixtures/outcomes.yml",
      "lib/branston/test/fixtures/preconditions.yml",
      "lib/branston/test/functional/iterations_controller_test.rb",

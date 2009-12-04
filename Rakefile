@@ -9,7 +9,7 @@ begin
     gem.description = %Q{An experiment in turning user stories into cucumber files}
     gem.email = "dave@boomer"
     gem.homepage = "http://github.com/futurechimp/branston"
-    gem.authors = ["dave@boomer"]
+    gem.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
     gem.files = FileList['lib/**/*'].to_a
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
