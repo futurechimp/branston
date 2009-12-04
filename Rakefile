@@ -11,6 +11,7 @@ begin
     gem.homepage = "http://github.com/futurechimp/branston"
     gem.authors = ["dave@boomer"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.files = FileList['lib/**/*'].to_a
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

@@ -39,7 +39,13 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
-end
-#ActiveRecord::Base.logger = nil
+  
+  #config.log_level = :none
+  #config.logger = Logger.root
+#  ActiveRecord::Base.logger = nil
 #  ActionController::Base.logger = nil
+  
+end
+
+
 
