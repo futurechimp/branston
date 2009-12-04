@@ -13721,3 +13721,493 @@ Processing UsersController#create (for 0.0.0.0 at 2009-12-04 12:10:38) [POST]
 Rendering users/new
 Completed in 22ms (View: 17, DB: 1) | 200 OK [http://test.host/register?user%5Bemail%5D=quire%40example.com&user%5Blogin%5D=quire&user%5Bpassword%5D=&user%5Bpassword_confirmation%5D=quire69]
 >>>>>>> deb2e1f0d929146ca8d7ec655a30b4c783938520:lib/branston/log/test.log
+  [4;36;1mPrecondition Create (0.4ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'A product called "onion chutney"')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;36;1mPrecondition Create (0.3ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'A product called "onion chutney"')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;36;1mPrecondition Create (0.2ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Vel voluptate "aliquid" et doloribus sint eum ad sequi. ')[0m
+  [4;35;1mPrecondition Load (0.4ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;36;1mPrecondition Create (0.1ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Vel voluptate "aliquid" et doloribus "sint" eum ad sequi Alias omnis tenetur assumenda eligendi nisi. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;36;1mPrecondition Create (0.3ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'A product called "onion chutney"')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;36;1mPrecondition Create (0.1ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Alias omnis "tenetur" assumenda eligendi nisi. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;36;1mPrecondition Create (0.2ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Voluptas quo "minima" sapiente voluptatibus "sit" Iusto est architecto dolorum omnis provident. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" IS NULL) LIMIT 1[0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" IS NULL) LIMIT 1[0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Vel voluptate aliquid et doloribus sint ') LIMIT 1[0m
+  [4;35;1mStory Create (0.2ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Vel voluptate aliquid et doloribus sint eum ad sequi.', '2009-12-04 12:49:53', 2, 'Voluptas quo "minima" sapiente voluptatibus sit. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;35;1mIteration Create (0.3ms)[0m   [0mINSERT INTO "iterations" ("name", "start_date", "created_at", "updated_at", "release_id", "velocity", "end_date") VALUES('--- 
+- aut
+- qui
+- animi
+', '2009-12-04 00:00:00', '2009-12-04 12:49:53', '2009-12-04 12:49:53', NULL, 1, '2009-12-18 00:00:00')[0m
+  [4;36;1mIteration Load (0.4ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Alias omnis tenetur assumenda eligendi n') LIMIT 1[0m
+  [4;36;1mStory Create (0.1ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Alias omnis tenetur assumenda eligendi nisi.', '2009-12-04 12:49:53', 2, 'Iusto est "architecto" dolorum omnis provident. ', NULL, 1)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 2) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE (iteration_id IS NOT NULL) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Product Search') LIMIT 1[0m
+  [4;36;1mStory Create (0.2ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Product Search', '2009-12-04 12:49:53', 2, 'I should be able to search for products by title', NULL, NULL)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;36;1mStory Load (6.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Iusto est architecto dolorum omnis provi') LIMIT 1[0m
+  [4;35;1mStory Create (0.2ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Iusto est architecto dolorum omnis provident.', '2009-12-04 12:49:53', 2, 'Delectus esse "atque" odit quos et. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 2) [0m
+  [4;35;1mScenario Create (0.2ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:49:53', 'Voluptas quo minima sapiente voluptatibus sit.', '2009-12-04 12:49:53', 2)[0m
+  [4;36;1mScenario Load (0.3ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Quia omnis "molestiae" voluptatem. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Delectus esse "atque" odit quos "et" Quia omnis molestiae voluptatem. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;35;1mOutcome Create (0.2ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Velit sit "sed" consequuntur. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 1) [0m
+  [4;35;1mOutcome Create (0.2ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Totam vero "explicabo" eligendi voluptas amet voluptate voluptas ut. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 2) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:49:53', "story_id" = 1 WHERE "id" = 1[0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Quia omnis molestiae voluptatem.') LIMIT 1[0m
+  [4;35;1mStory Create (0.1ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Quia omnis molestiae voluptatem.', '2009-12-04 12:49:53', 2, 'Perspiciatis non "animi" rerum quisquam et. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 3) [0m
+  [4;35;1mScenario Create (0.2ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:49:53', 'Delectus esse atque odit quos et.', '2009-12-04 12:49:53', 3)[0m
+  [4;36;1mScenario Load (0.3ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 2) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Consequuntur temporibus "optio" iste. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Velit sit "sed" consequuntur Totam "vero" explicabo eligendi voluptas amet voluptate voluptas ut. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 4) [0m
+  [4;35;1mOutcome Create (0.2ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Esse quis "deserunt" minima sit voluptas. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 3) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Voluptatem omnis "blanditiis" enim. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 4) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:49:53', "story_id" = 1 WHERE "id" = 2[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "scenarios" WHERE ("scenarios".story_id = 1) [0m
+  [4;35;1mScenario Load (0.4ms)[0m   [0mSELECT * FROM "scenarios" WHERE ("scenarios".story_id = 1) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "preconditions" WHERE ("preconditions".scenario_id = 1) [0m
+  [4;35;1mPrecondition Load (0.4ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions".scenario_id = 1) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "outcomes" WHERE ("outcomes".scenario_id = 1) [0m
+  [4;35;1mOutcome Load (0.4ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes".scenario_id = 1) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "preconditions" WHERE ("preconditions".scenario_id = 2) [0m
+  [4;35;1mPrecondition Load (0.4ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions".scenario_id = 2) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "outcomes" WHERE ("outcomes".scenario_id = 2) [0m
+  [4;35;1mOutcome Load (0.4ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes".scenario_id = 2) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Product Search') LIMIT 1[0m
+  [4;35;1mStory Create (0.3ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Product Search', '2009-12-04 12:49:53', 2, 'I should be able to search for products by title', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Totam vero explicabo eligendi voluptas a') LIMIT 1[0m
+  [4;36;1mStory Create (0.2ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Totam vero explicabo eligendi voluptas amet voluptate voluptas ut.', '2009-12-04 12:49:53', 2, 'Aut omnis "quia" earum et corporis nobis iure. ', NULL, NULL)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 2) [0m
+  [4;36;1mScenario Create (0.2ms)[0m   [0;1mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:49:53', 'Velit sit sed consequuntur.', '2009-12-04 12:49:53', 2)[0m
+  [4;35;1mScenario Load (0.3ms)[0m   [0mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 1) [0m
+  [4;36;1mPrecondition Create (0.2ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Et aut "voluptas" eius deserunt dolor. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;36;1mPrecondition Create (0.2ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Perspiciatis non "animi" rerum quisquam "et" Consequuntur temporibus optio iste. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;36;1mOutcome Create (0.2ms)[0m   [0;1mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Quam est "voluptatem" nihil. ')[0m
+  [4;35;1mOutcome Load (0.3ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 1) [0m
+  [4;36;1mOutcome Create (0.1ms)[0m   [0;1mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Omnis vitae "maiores" ad. ')[0m
+  [4;35;1mOutcome Load (0.3ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 2) [0m
+  [4;36;1mScenario Update (0.2ms)[0m   [0;1mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:49:53', "story_id" = 1 WHERE "id" = 1[0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Consequuntur temporibus optio iste.') LIMIT 1[0m
+  [4;36;1mStory Create (0.1ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Consequuntur temporibus optio iste.', '2009-12-04 12:49:53', 2, 'Magnam officia "blanditiis" recusandae temporibus et amet eaque adipisci. ', NULL, NULL)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 3) [0m
+  [4;36;1mScenario Create (0.1ms)[0m   [0;1mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:49:53', 'Perspiciatis non animi rerum quisquam et.', '2009-12-04 12:49:53', 3)[0m
+  [4;35;1mScenario Load (0.3ms)[0m   [0mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 2) [0m
+  [4;36;1mPrecondition Create (0.1ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Alias voluptate "neque" qui nostrum. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;36;1mPrecondition Create (0.1ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Esse quis "deserunt" minima sit "voluptas" Voluptatem omnis blanditiis enim. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 4) [0m
+  [4;36;1mOutcome Create (0.1ms)[0m   [0;1mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Accusantium voluptatum "rerum" eos hic. ')[0m
+  [4;35;1mOutcome Load (0.3ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 3) [0m
+  [4;36;1mOutcome Create (0.1ms)[0m   [0;1mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Et voluptatum "sint" nesciunt voluptate qui rerum est. ')[0m
+  [4;35;1mOutcome Load (0.3ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 4) [0m
+  [4;36;1mScenario Update (0.2ms)[0m   [0;1mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:49:53', "story_id" = 1 WHERE "id" = 2[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "scenarios" WHERE ("scenarios".story_id = 1) [0m
+  [4;36;1mScenario Load (0.4ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios".story_id = 1) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "preconditions" WHERE ("preconditions".scenario_id = 1) [0m
+  [4;36;1mPrecondition Load (0.4ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions".scenario_id = 1) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "outcomes" WHERE ("outcomes".scenario_id = 1) [0m
+  [4;36;1mOutcome Load (0.4ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes".scenario_id = 1) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "preconditions" WHERE ("preconditions".scenario_id = 2) [0m
+  [4;36;1mPrecondition Load (0.4ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions".scenario_id = 2) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "outcomes" WHERE ("outcomes".scenario_id = 2) [0m
+  [4;36;1mOutcome Load (0.4ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes".scenario_id = 2) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Product Search') LIMIT 1[0m
+  [4;36;1mStory Create (0.2ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Product Search', '2009-12-04 12:49:53', 2, 'I should be able to search for products by title', NULL, NULL)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Voluptatem omnis blanditiis enim.') LIMIT 1[0m
+  [4;35;1mStory Create (0.2ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Voluptatem omnis blanditiis enim.', '2009-12-04 12:49:53', 2, 'Molestiae quia "vitae" quos. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 2) [0m
+  [4;35;1mScenario Create (0.2ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:49:53', 'Esse quis deserunt minima sit voluptas.', '2009-12-04 12:49:53', 2)[0m
+  [4;36;1mScenario Load (0.3ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Voluptates tempora "atque" quis. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Aut omnis "quia" earum et "corporis" nobis iure Et aut voluptas eius deserunt dolor. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;35;1mOutcome Create (0.3ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Totam corrupti "dolor" quo animi nemo. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 1) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Autem aliquam "non" reiciendis. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 2) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:49:53', "story_id" = 1 WHERE "id" = 1[0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Et aut voluptas eius deserunt dolor.') LIMIT 1[0m
+  [4;35;1mStory Create (0.1ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Et aut voluptas eius deserunt dolor.', '2009-12-04 12:49:53', 2, 'In voluptas "nulla" maxime voluptatem tenetur soluta voluptatem voluptatum. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 3) [0m
+  [4;35;1mScenario Create (0.1ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:49:53', 'Aut omnis quia earum et corporis nobis iure.', '2009-12-04 12:49:53', 3)[0m
+  [4;36;1mScenario Load (0.3ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 2) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Architecto temporibus "sit" voluptatem. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Quam est "voluptatem" nihil Omnis "vitae" maiores ad. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 4) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Quis accusamus "quam" quas commodi modi accusantium quis. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 3) [0m
+  [4;35;1mOutcome Create (0.2ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Aut occaecati "accusantium" assumenda minima sint. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 4) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:49:53', "story_id" = 1 WHERE "id" = 2[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Product Search') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Product Search') LIMIT 1[0m
+  [4;36;1mStory Create (0.2ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Product Search', '2009-12-04 12:49:53', 2, 'I should be able to search for products by title', NULL, NULL)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Omnis vitae maiores ad.') LIMIT 1[0m
+  [4;35;1mStory Create (0.2ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:53', 'Omnis vitae maiores ad.', '2009-12-04 12:49:53', 2, 'Aut aut "quo" sit repellendus omnis eum. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 2) [0m
+  [4;35;1mScenario Create (0.2ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:49:53', 'Quam est voluptatem nihil.', '2009-12-04 12:49:53', 2)[0m
+  [4;36;1mScenario Load (0.3ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Facilis commodi "odit" quisquam. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Magnam officia "blanditiis" recusandae temporibus "et" amet eaque adipisci Alias voluptate neque qui nostrum. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;35;1mOutcome Create (0.3ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Porro voluptatem "aut" facere. ')[0m
+  [4;36;1mOutcome Load (0.4ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 1) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:49:53', '2009-12-04 12:49:53', 'Quo est "dignissimos" ut. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 2) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:49:54', "story_id" = 1 WHERE "id" = 1[0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Alias voluptate neque qui nostrum.') LIMIT 1[0m
+  [4;35;1mStory Create (0.1ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:49:54', 'Alias voluptate neque qui nostrum.', '2009-12-04 12:49:54', 2, 'Sunt laboriosam "excepturi" delectus. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 3) [0m
+  [4;35;1mScenario Create (0.1ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:49:54', 'Magnam officia blanditiis recusandae temporibus et amet eaque adipisci.', '2009-12-04 12:49:54', 3)[0m
+  [4;36;1mScenario Load (0.3ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 2) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:54', '2009-12-04 12:49:54', 'Et culpa "autem" possimus. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:54', '2009-12-04 12:49:54', 'Accusantium voluptatum "rerum" eos hic "Et" voluptatum sint nesciunt voluptate qui rerum est. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 4) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:54', '2009-12-04 12:49:54', 'Qui dolores "excepturi" laudantium. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 3) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:49:54', '2009-12-04 12:49:54', 'Reprehenderit minima "autem" sed aut sunt. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 4) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:49:54', "story_id" = 1 WHERE "id" = 2[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'aric.smith@kautzergoyette.name') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '3fa828654fc0c1b9c6f8a29c5b2b12b9c1451b37', '2009-11-29 12:49:54', '3fda439ec8715d3ea6cc21e9e0755e9ad06547cd', '2009-12-05 12:49:54', '2009-12-04 12:49:54', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'aric.smith@kautzergoyette.name')[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'alysson@wittingcorwin.biz') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '7b6fbf3ef207e7139cafe739e0bb437017db8964', '2009-11-29 12:49:54', 'f1c1968db8e39bfdee761c09a08899ca74078e7e', '2009-12-05 12:49:54', '2009-12-04 12:49:54', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'alysson@wittingcorwin.biz')[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin2' AND "users".id <> 1) LIMIT 1[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'alysson@wittingcorwin.biz' AND "users".id <> 1) LIMIT 1[0m
+  [4;35;1mUser Update (0.3ms)[0m   [0mUPDATE "users" SET "updated_at" = '2009-12-04 12:49:54', "login" = 'quentin2' WHERE "id" = 1[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'quentin2') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'greg@lesch.us') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '358e9295a9898ca82273da33ba76d51b9022ef58', '2009-11-29 12:49:54', '171989e2ff604910ddf6abf10783807cff955247', '2009-12-05 12:49:54', '2009-12-04 12:49:54', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'greg@lesch.us')[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mUser Update (0.2ms)[0m   [0mUPDATE "users" SET "updated_at" = '2009-12-04 12:49:54', "remember_token" = '57c9dff96f43d8d24ce7485114af294892470eec', "remember_token_expires_at" = '2009-12-18 12:49:54' WHERE "id" = 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'willy@harber.info') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '7e3bf73fa2b97975928c75f7a2da82fd0cf1b34e', '2009-11-29 12:49:54', '3b406e81269a7d6916f4756294a382bf270fd3b9', '2009-12-05 12:49:54', '2009-12-04 12:49:54', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'willy@harber.info')[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mUser Update (0.2ms)[0m   [0;1mUPDATE "users" SET "updated_at" = '2009-12-04 12:49:54', "remember_token" = '570f49e8d2729b2248130f159f080d94ba9fa59f', "remember_token_expires_at" = '2009-12-11 12:49:54' WHERE "id" = 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'scottie@lakinroberts.info') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '4300d4b9c242f7b3eaf2b9dfd9da5eaa426de45b', '2009-11-29 12:49:54', '823b67013b43d8909674aa7cc3b7e8ec5110856d', '2009-12-05 12:49:54', '2009-12-04 12:49:54', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'scottie@lakinroberts.info')[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mUser Update (0.2ms)[0m   [0mUPDATE "users" SET "updated_at" = '2009-12-04 12:49:54', "remember_token" = '9a0aaef2c63256060e620444d46b01e470e2ca47', "remember_token_expires_at" = '2009-12-11 12:49:54' WHERE "id" = 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'marge_simonis@beahanolson.com') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '3f0be753c18a6e3dd21e4d68acb965130e2642ff', '2009-11-29 12:49:54', 'beabdaca8ecd52901f8565fa5df2dcf2bcc04da6', '2009-12-05 12:49:54', '2009-12-04 12:49:54', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'marge_simonis@beahanolson.com')[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin' AND "users".id <> 1) LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'marge_simonis@beahanolson.com' AND "users".id <> 1) LIMIT 1[0m
+  [4;36;1mUser Update (0.1ms)[0m   [0;1mUPDATE "users" SET "updated_at" = '2009-12-04 12:49:54', "crypted_password" = '515a8e0064b5b33b2f5b6600738525c34d15528e' WHERE "id" = 1[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'ben@luettgenkling.biz') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '08800912f101115732846c79e2fff760cc2c28cc', '2009-11-29 12:49:54', '9827a3ec95456a874affca4a29a4f41aff08c92b', '2009-12-05 12:49:54', '2009-12-04 12:49:54', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'ben@luettgenkling.biz')[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mUser Update (0.2ms)[0m   [0;1mUPDATE "users" SET "updated_at" = '2009-12-04 12:49:54', "remember_token" = '25a511c2de597ccb69a534741d377566123d17cc', "remember_token_expires_at" = '2009-12-18 12:49:54' WHERE "id" = 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'bud.gaylord@corwin.biz') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', 'c6a61477bf051d77974f8dbf52af278abf1d5d7d', '2009-11-29 12:49:54', '97454ae57403e9c0c465594613e1bde50abfe137', '2009-12-05 12:49:54', '2009-12-04 12:49:54', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'bud.gaylord@corwin.biz')[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mUser Update (0.2ms)[0m   [0mUPDATE "users" SET "updated_at" = '2009-12-04 12:49:54', "remember_token" = 'b82495ffba1bcbde9082619655e8b91253d1e3f6', "remember_token_expires_at" = '2009-12-18 12:49:54' WHERE "id" = 1[0m
+  [4;36;1mUser Update (0.1ms)[0m   [0;1mUPDATE "users" SET "updated_at" = '2009-12-04 12:49:54', "remember_token" = NULL, "remember_token_expires_at" = NULL WHERE "id" = 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'fern') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'irving.adams@bosco.us') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', 'f77aadc2b93c8a212ac1c470eeba80d98828225e', '2009-12-04 12:49:54', '4c38c4e7212b48b6bcba6ea246082be4fc8890a1', NULL, '2009-12-04 12:49:54', NULL, 'fern', 'irving.adams@bosco.us')[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'aric') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" IS NULL) LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" IS NULL) LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'izabella@sawaynmurazik.us') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'fred') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'nayeli_becker@ziemann.com') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'eliseo') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'fatima@jenkinsgleason.name') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mPrecondition Create (0.4ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'A product called "onion chutney"')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;36;1mPrecondition Create (0.3ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'A product called "onion chutney"')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;36;1mPrecondition Create (0.1ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Vel voluptate "aliquid" et doloribus sint eum ad sequi. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;36;1mPrecondition Create (0.2ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Vel voluptate "aliquid" et doloribus "sint" eum ad sequi Alias omnis tenetur assumenda eligendi nisi. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;36;1mPrecondition Create (0.3ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'A product called "onion chutney"')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;36;1mPrecondition Create (0.1ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Alias omnis "tenetur" assumenda eligendi nisi. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;36;1mPrecondition Create (0.2ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(NULL, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Voluptas quo "minima" sapiente voluptatibus "sit" Iusto est architecto dolorum omnis provident. ')[0m
+  [4;35;1mPrecondition Load (0.4ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" IS NULL) LIMIT 1[0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" IS NULL) LIMIT 1[0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Vel voluptate aliquid et doloribus sint ') LIMIT 1[0m
+  [4;35;1mStory Create (0.2ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:22', 'Vel voluptate aliquid et doloribus sint eum ad sequi.', '2009-12-04 12:50:22', 2, 'Voluptas quo "minima" sapiente voluptatibus sit. ', NULL, NULL)[0m
+  [4;36;1mStory Load (1.2ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;35;1mIteration Create (0.2ms)[0m   [0mINSERT INTO "iterations" ("name", "start_date", "created_at", "updated_at", "release_id", "velocity", "end_date") VALUES('--- 
+- aut
+- qui
+- animi
+', '2009-12-04 00:00:00', '2009-12-04 12:50:22', '2009-12-04 12:50:22', NULL, 1, '2009-12-18 00:00:00')[0m
+  [4;36;1mIteration Load (0.4ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Alias omnis tenetur assumenda eligendi n') LIMIT 1[0m
+  [4;36;1mStory Create (0.1ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:22', 'Alias omnis tenetur assumenda eligendi nisi.', '2009-12-04 12:50:22', 2, 'Iusto est "architecto" dolorum omnis provident. ', NULL, 1)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 2) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE (iteration_id IS NOT NULL) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Product Search') LIMIT 1[0m
+  [4;36;1mStory Create (0.2ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:22', 'Product Search', '2009-12-04 12:50:22', 2, 'I should be able to search for products by title', NULL, NULL)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Iusto est architecto dolorum omnis provi') LIMIT 1[0m
+  [4;35;1mStory Create (6.1ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:22', 'Iusto est architecto dolorum omnis provident.', '2009-12-04 12:50:22', 2, 'Delectus esse "atque" odit quos et. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 2) [0m
+  [4;35;1mScenario Create (0.2ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:50:22', 'Voluptas quo minima sapiente voluptatibus sit.', '2009-12-04 12:50:22', 2)[0m
+  [4;36;1mScenario Load (0.4ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Quia omnis "molestiae" voluptatem. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Delectus esse "atque" odit quos "et" Quia omnis molestiae voluptatem. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;35;1mOutcome Create (0.2ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Velit sit "sed" consequuntur. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 1) [0m
+  [4;35;1mOutcome Create (0.2ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Totam vero "explicabo" eligendi voluptas amet voluptate voluptas ut. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 2) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:50:22', "story_id" = 1 WHERE "id" = 1[0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Quia omnis molestiae voluptatem.') LIMIT 1[0m
+  [4;35;1mStory Create (0.2ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:22', 'Quia omnis molestiae voluptatem.', '2009-12-04 12:50:22', 2, 'Perspiciatis non "animi" rerum quisquam et. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 3) [0m
+  [4;35;1mScenario Create (0.2ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:50:22', 'Delectus esse atque odit quos et.', '2009-12-04 12:50:22', 3)[0m
+  [4;36;1mScenario Load (0.3ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 2) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Consequuntur temporibus "optio" iste. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Velit sit "sed" consequuntur Totam "vero" explicabo eligendi voluptas amet voluptate voluptas ut. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 4) [0m
+  [4;35;1mOutcome Create (0.2ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Esse quis "deserunt" minima sit voluptas. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 3) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:22', '2009-12-04 12:50:22', 'Voluptatem omnis "blanditiis" enim. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 4) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:50:22', "story_id" = 1 WHERE "id" = 2[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "scenarios" WHERE ("scenarios".story_id = 1) [0m
+  [4;35;1mScenario Load (0.4ms)[0m   [0mSELECT * FROM "scenarios" WHERE ("scenarios".story_id = 1) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "preconditions" WHERE ("preconditions".scenario_id = 1) [0m
+  [4;35;1mPrecondition Load (0.4ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions".scenario_id = 1) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "outcomes" WHERE ("outcomes".scenario_id = 1) [0m
+  [4;35;1mOutcome Load (0.4ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes".scenario_id = 1) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "preconditions" WHERE ("preconditions".scenario_id = 2) [0m
+  [4;35;1mPrecondition Load (0.4ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions".scenario_id = 2) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "outcomes" WHERE ("outcomes".scenario_id = 2) [0m
+  [4;35;1mOutcome Load (0.4ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes".scenario_id = 2) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Product Search') LIMIT 1[0m
+  [4;35;1mStory Create (0.3ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:23', 'Product Search', '2009-12-04 12:50:23', 2, 'I should be able to search for products by title', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Totam vero explicabo eligendi voluptas a') LIMIT 1[0m
+  [4;36;1mStory Create (0.2ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:23', 'Totam vero explicabo eligendi voluptas amet voluptate voluptas ut.', '2009-12-04 12:50:23', 2, 'Aut omnis "quia" earum et corporis nobis iure. ', NULL, NULL)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 2) [0m
+  [4;36;1mScenario Create (0.2ms)[0m   [0;1mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:50:23', 'Velit sit sed consequuntur.', '2009-12-04 12:50:23', 2)[0m
+  [4;35;1mScenario Load (0.3ms)[0m   [0mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 1) [0m
+  [4;36;1mPrecondition Create (0.2ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Et aut "voluptas" eius deserunt dolor. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;36;1mPrecondition Create (0.2ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Perspiciatis non "animi" rerum quisquam "et" Consequuntur temporibus optio iste. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;36;1mOutcome Create (0.2ms)[0m   [0;1mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Quam est "voluptatem" nihil. ')[0m
+  [4;35;1mOutcome Load (0.3ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 1) [0m
+  [4;36;1mOutcome Create (0.1ms)[0m   [0;1mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Omnis vitae "maiores" ad. ')[0m
+  [4;35;1mOutcome Load (0.3ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 2) [0m
+  [4;36;1mScenario Update (0.2ms)[0m   [0;1mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:50:23', "story_id" = 1 WHERE "id" = 1[0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Consequuntur temporibus optio iste.') LIMIT 1[0m
+  [4;36;1mStory Create (0.1ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:23', 'Consequuntur temporibus optio iste.', '2009-12-04 12:50:23', 2, 'Magnam officia "blanditiis" recusandae temporibus et amet eaque adipisci. ', NULL, NULL)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 3) [0m
+  [4;36;1mScenario Create (0.2ms)[0m   [0;1mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:50:23', 'Perspiciatis non animi rerum quisquam et.', '2009-12-04 12:50:23', 3)[0m
+  [4;35;1mScenario Load (0.3ms)[0m   [0mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 2) [0m
+  [4;36;1mPrecondition Create (0.1ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Alias voluptate "neque" qui nostrum. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;36;1mPrecondition Create (0.1ms)[0m   [0;1mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Esse quis "deserunt" minima sit "voluptas" Voluptatem omnis blanditiis enim. ')[0m
+  [4;35;1mPrecondition Load (0.3ms)[0m   [0mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 4) [0m
+  [4;36;1mOutcome Create (0.2ms)[0m   [0;1mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Accusantium voluptatum "rerum" eos hic. ')[0m
+  [4;35;1mOutcome Load (0.4ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 3) [0m
+  [4;36;1mOutcome Create (0.1ms)[0m   [0;1mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Et voluptatum "sint" nesciunt voluptate qui rerum est. ')[0m
+  [4;35;1mOutcome Load (0.4ms)[0m   [0mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 4) [0m
+  [4;36;1mScenario Update (0.2ms)[0m   [0;1mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:50:23', "story_id" = 1 WHERE "id" = 2[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "scenarios" WHERE ("scenarios".story_id = 1) [0m
+  [4;36;1mScenario Load (0.4ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios".story_id = 1) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "preconditions" WHERE ("preconditions".scenario_id = 1) [0m
+  [4;36;1mPrecondition Load (0.4ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions".scenario_id = 1) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "outcomes" WHERE ("outcomes".scenario_id = 1) [0m
+  [4;36;1mOutcome Load (0.4ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes".scenario_id = 1) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "preconditions" WHERE ("preconditions".scenario_id = 2) [0m
+  [4;36;1mPrecondition Load (0.4ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions".scenario_id = 2) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "outcomes" WHERE ("outcomes".scenario_id = 2) [0m
+  [4;36;1mOutcome Load (0.4ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes".scenario_id = 2) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Product Search') LIMIT 1[0m
+  [4;36;1mStory Create (0.2ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:23', 'Product Search', '2009-12-04 12:50:23', 2, 'I should be able to search for products by title', NULL, NULL)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Voluptatem omnis blanditiis enim.') LIMIT 1[0m
+  [4;35;1mStory Create (0.2ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:23', 'Voluptatem omnis blanditiis enim.', '2009-12-04 12:50:23', 2, 'Molestiae quia "vitae" quos. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 2) [0m
+  [4;35;1mScenario Create (0.2ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:50:23', 'Esse quis deserunt minima sit voluptas.', '2009-12-04 12:50:23', 2)[0m
+  [4;36;1mScenario Load (0.3ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Voluptates tempora "atque" quis. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Aut omnis "quia" earum et "corporis" nobis iure Et aut voluptas eius deserunt dolor. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;35;1mOutcome Create (0.3ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Totam corrupti "dolor" quo animi nemo. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 1) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Autem aliquam "non" reiciendis. ')[0m
+  [4;36;1mOutcome Load (0.4ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 2) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:50:23', "story_id" = 1 WHERE "id" = 1[0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Et aut voluptas eius deserunt dolor.') LIMIT 1[0m
+  [4;35;1mStory Create (0.1ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:23', 'Et aut voluptas eius deserunt dolor.', '2009-12-04 12:50:23', 2, 'In voluptas "nulla" maxime voluptatem tenetur soluta voluptatem voluptatum. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 3) [0m
+  [4;35;1mScenario Create (0.1ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:50:23', 'Aut omnis quia earum et corporis nobis iure.', '2009-12-04 12:50:23', 3)[0m
+  [4;36;1mScenario Load (0.4ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 2) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Architecto temporibus "sit" voluptatem. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Quam est "voluptatem" nihil Omnis "vitae" maiores ad. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 4) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Quis accusamus "quam" quas commodi modi accusantium quis. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 3) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Aut occaecati "accusantium" assumenda minima sint. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 4) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:50:23', "story_id" = 1 WHERE "id" = 2[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Product Search') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Product Search') LIMIT 1[0m
+  [4;36;1mStory Create (0.2ms)[0m   [0;1mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:23', 'Product Search', '2009-12-04 12:50:23', 2, 'I should be able to search for products by title', NULL, NULL)[0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Omnis vitae maiores ad.') LIMIT 1[0m
+  [4;35;1mStory Create (0.2ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:23', 'Omnis vitae maiores ad.', '2009-12-04 12:50:23', 2, 'Aut aut "quo" sit repellendus omnis eum. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 2) [0m
+  [4;35;1mScenario Create (0.2ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:50:23', 'Quam est voluptatem nihil.', '2009-12-04 12:50:23', 2)[0m
+  [4;36;1mScenario Load (0.3ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.2ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Facilis commodi "odit" quisquam. ')[0m
+  [4;36;1mPrecondition Load (0.4ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 1) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Magnam officia "blanditiis" recusandae temporibus "et" amet eaque adipisci Alias voluptate neque qui nostrum. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 2) [0m
+  [4;35;1mOutcome Create (0.3ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Porro voluptatem "aut" facere. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 1) [0m
+  [4;35;1mOutcome Create (0.2ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(1, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Quo est "dignissimos" ut. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 2) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:50:23', "story_id" = 1 WHERE "id" = 1[0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Alias voluptate neque qui nostrum.') LIMIT 1[0m
+  [4;35;1mStory Create (0.1ms)[0m   [0mINSERT INTO "stories" ("created_at", "title", "updated_at", "points", "description", "author_id", "iteration_id") VALUES('2009-12-04 12:50:23', 'Alias voluptate neque qui nostrum.', '2009-12-04 12:50:23', 2, 'Sunt laboriosam "excepturi" delectus. ', NULL, NULL)[0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 3) [0m
+  [4;35;1mScenario Create (0.2ms)[0m   [0mINSERT INTO "scenarios" ("created_at", "title", "updated_at", "story_id") VALUES('2009-12-04 12:50:23', 'Magnam officia blanditiis recusandae temporibus et amet eaque adipisci.', '2009-12-04 12:50:23', 3)[0m
+  [4;36;1mScenario Load (0.3ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios"."id" = 2) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Et culpa "autem" possimus. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 3) [0m
+  [4;35;1mPrecondition Create (0.1ms)[0m   [0mINSERT INTO "preconditions" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Accusantium voluptatum "rerum" eos hic "Et" voluptatum sint nesciunt voluptate qui rerum est. ')[0m
+  [4;36;1mPrecondition Load (0.3ms)[0m   [0;1mSELECT * FROM "preconditions" WHERE ("preconditions"."id" = 4) [0m
+  [4;35;1mOutcome Create (0.1ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Qui dolores "excepturi" laudantium. ')[0m
+  [4;36;1mOutcome Load (0.3ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 3) [0m
+  [4;35;1mOutcome Create (0.2ms)[0m   [0mINSERT INTO "outcomes" ("scenario_id", "created_at", "updated_at", "description") VALUES(2, '2009-12-04 12:50:23', '2009-12-04 12:50:23', 'Reprehenderit minima "autem" sed aut sunt. ')[0m
+  [4;36;1mOutcome Load (0.4ms)[0m   [0;1mSELECT * FROM "outcomes" WHERE ("outcomes"."id" = 4) [0m
+  [4;35;1mScenario Update (0.2ms)[0m   [0mUPDATE "scenarios" SET "updated_at" = '2009-12-04 12:50:23', "story_id" = 1 WHERE "id" = 2[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;35;1mUser Load (6.8ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'aric.smith@kautzergoyette.name') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '81635d461818473b14d8afcac353e94982308d5c', '2009-11-29 12:50:23', 'b9441c552fb339f6434b4216037ba0c10901c71b', '2009-12-05 12:50:23', '2009-12-04 12:50:23', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'aric.smith@kautzergoyette.name')[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'alysson@wittingcorwin.biz') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', 'a590bc449fcd25afd79346c8050c06802abacf76', '2009-11-29 12:50:23', '338840f382805e992353382104599bfbe5521a6f', '2009-12-05 12:50:23', '2009-12-04 12:50:23', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'alysson@wittingcorwin.biz')[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin2' AND "users".id <> 1) LIMIT 1[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'alysson@wittingcorwin.biz' AND "users".id <> 1) LIMIT 1[0m
+  [4;35;1mUser Update (0.4ms)[0m   [0mUPDATE "users" SET "updated_at" = '2009-12-04 12:50:23', "login" = 'quentin2' WHERE "id" = 1[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'quentin2') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'greg@lesch.us') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '11cffdac3b4c833dfee1c043d2a88044ff0b372f', '2009-11-29 12:50:23', 'b2bc7b23016276ca6168f2e5b5b53f648613ca02', '2009-12-05 12:50:23', '2009-12-04 12:50:23', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'greg@lesch.us')[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mUser Update (0.2ms)[0m   [0mUPDATE "users" SET "updated_at" = '2009-12-04 12:50:23', "remember_token" = '53ef2fc8cbfe84e2e473828675b76412a364be3b', "remember_token_expires_at" = '2009-12-18 12:50:23' WHERE "id" = 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'willy@harber.info') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '9c6c81a367ce7d679f362cb4ed116f8b29035548', '2009-11-29 12:50:23', 'eaa16cbff3b4624b6028b853c71403ec10cdc025', '2009-12-05 12:50:23', '2009-12-04 12:50:23', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'willy@harber.info')[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mUser Update (0.2ms)[0m   [0;1mUPDATE "users" SET "updated_at" = '2009-12-04 12:50:23', "remember_token" = 'd8cb078badcc89aea88f20d0a8280fc7b920d430', "remember_token_expires_at" = '2009-12-11 12:50:23' WHERE "id" = 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'scottie@lakinroberts.info') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '432868e47b00766dec6f0e443815d2d16494c1d9', '2009-11-29 12:50:23', '0a5346b953c643346fa1bc43311d21c4efda8d40', '2009-12-05 12:50:23', '2009-12-04 12:50:23', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'scottie@lakinroberts.info')[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mUser Update (0.2ms)[0m   [0mUPDATE "users" SET "updated_at" = '2009-12-04 12:50:23', "remember_token" = '6877ec15c9abe860f0da2118154ca685b8e4c225', "remember_token_expires_at" = '2009-12-11 12:50:23' WHERE "id" = 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'marge_simonis@beahanolson.com') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '7e0feb2786f83d3a6d5db221b92c3ea6e5b81db2', '2009-11-29 12:50:23', '8a9a92869bd22aa47b4c4ace5a5ba673f44a044d', '2009-12-05 12:50:23', '2009-12-04 12:50:23', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'marge_simonis@beahanolson.com')[0m
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin' AND "users".id <> 1) LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'marge_simonis@beahanolson.com' AND "users".id <> 1) LIMIT 1[0m
+  [4;36;1mUser Update (0.1ms)[0m   [0;1mUPDATE "users" SET "updated_at" = '2009-12-04 12:50:23', "crypted_password" = 'b7d229100fcee674709b93d2f8395baa4c2b8624' WHERE "id" = 1[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'ben@luettgenkling.biz') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '05110081714c6637c9d2053153c99f93e085a54e', '2009-11-29 12:50:23', '8da3b468410b403abc9c95219edcc75991ae6063', '2009-12-05 12:50:23', '2009-12-04 12:50:23', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'ben@luettgenkling.biz')[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mUser Update (0.2ms)[0m   [0;1mUPDATE "users" SET "updated_at" = '2009-12-04 12:50:23', "remember_token" = '73f587447b923ddc43f3899475817504c9064b78', "remember_token_expires_at" = '2009-12-18 12:50:23' WHERE "id" = 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'quentin') LIMIT 1[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'bud.gaylord@corwin.biz') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', 'd0ab867ac15843fd718b231e967e2eda7c6da927', '2009-11-29 12:50:23', 'fd57f0c08dda64c4fbbfd462df936d5319c56905', '2009-12-05 12:50:23', '2009-12-04 12:50:23', '77de68daecd823babbb58edb1c8e14d7106e83bb', 'quentin', 'bud.gaylord@corwin.biz')[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mUser Update (0.2ms)[0m   [0mUPDATE "users" SET "updated_at" = '2009-12-04 12:50:23', "remember_token" = 'f8541bc762518c45181c187976f78c9cab93ae54', "remember_token_expires_at" = '2009-12-18 12:50:23' WHERE "id" = 1[0m
+  [4;36;1mUser Update (0.1ms)[0m   [0;1mUPDATE "users" SET "updated_at" = '2009-12-04 12:50:23', "remember_token" = NULL, "remember_token_expires_at" = NULL WHERE "id" = 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'fern') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'irving.adams@bosco.us') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "remember_token", "login", "email") VALUES('', '0f935914f359d555e594e09d1a516a05555f0cc2', '2009-12-04 12:50:23', '4ae7394623965f33be36b508f33f54a4f2079a7f', NULL, '2009-12-04 12:50:23', NULL, 'fern', 'irving.adams@bosco.us')[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'aric') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" IS NULL) LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" IS NULL) LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'izabella@sawaynmurazik.us') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'fred') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'nayeli_becker@ziemann.com') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'eliseo') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'fatima@jenkinsgleason.name') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
