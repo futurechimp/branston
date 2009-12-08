@@ -4,7 +4,7 @@ class StoriesControllerTest < ActionController::TestCase
 
   context "The StoriesController" do
     setup do
-      @story = Story.make
+      @story = Factory.make_story
     end
 
     teardown do
@@ -98,7 +98,7 @@ class StoriesControllerTest < ActionController::TestCase
       context "with valid parameters" do
         setup do
           assert_no_difference("Story.count") do
-            put :update,{ :id => @story.id,  :story => {:description => "bar"}}
+            put :update,{ :id => @story.to_param,  :story => {:description => "bar"}}
           end
         end
 
@@ -110,7 +110,7 @@ class StoriesControllerTest < ActionController::TestCase
 
       context "with invalid parameters" do
         setup do
-          put :update, :id => @story.id, :story => {:description => ""}
+          put :update, :id => @story.to_param, :story => {:description => ""}
         end
 
         should "redisplay the edit template" do

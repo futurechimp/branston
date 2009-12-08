@@ -4,7 +4,7 @@
 #flash_notice {display:block;border:2px solid green;color:green;background:#CCFFCC;padding:6px;margin:8px auto 8px auto;width:30%;text-align:center;}
 
 /* Wrappers for story lists */
-div#current-wrapper, div#backlog-wrapper {float:left;width:48%;margin-top:6px;border:1px solid #321114;-moz-border-radius: 5px; -webkit-border-radius: 5px;}
+div#current-wrapper, div#backlog-wrapper {float:left;width:48%;margin-top:6px;}
 div#current-wrapper h3, div#backlog-wrapper h3 {padding:3px; font-weight:bold; text-transform:none; font-size:1.4em;}
 div#current-wrapper {margin-right:8px;}
 
@@ -45,14 +45,15 @@ div.accordion-toggle{
 	background-position: bottom;
 	cursor: pointer;
 	padding: 9px 14px 10px 14px;
-	border-top: 1px solid #5d5852; border-left: 1px solid #a06b55; border-right: 1px solid #a06b55;
+	border:1px solid #5d5852;
     -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -webkit-border-radius: 5px;
 }
 
 div.accordion-toggle span.in_place_editor_field {font-weight:bold;}
 div.accordion-toggle a.delete {float:right;}
 div.accordion-toggle:hover, div.accordion-toggle-active{ background-color: #ffff99;}
-div.accordion-content { overflow: hidden; background: #ffff99; padding: 0; }
+div.accordion-toggle-active {border-bottom:none;}
+div.accordion-content { overflow: hidden; background: #ffff99; padding: 0; border-left: 1px solid #a06b55; border-right: 1px solid #a06b55; border-bottom:1px solid #a06b55; }
 div.accordion-content p { margin: 9px 24px 6px 24px; line-height:28px; }
 
 div.scenarios {clear:left;min-height:100px;margin:2px;padding:3px;}
@@ -60,6 +61,8 @@ div.scenario{border:1px dotted #b19d67;padding:3px;margin-bottom:2px;}
 div.scenarios-head h3, div.scenarios-head a {float:left;margin-left:4px;}
 div.scenarios-head a.add-small {float:right;margin-right:3px;}
 div.scenarios-foot {padding:3px;}
+
+div.scenario-title span {border-bottom:1px dotted grey;}
 
 div.preconditions, div.outcomes {border-bottom:1px dotted grey;}
 

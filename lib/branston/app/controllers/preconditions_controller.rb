@@ -99,7 +99,7 @@ class PreconditionsController < ApplicationController
   private
 
   def find_scenario
-    @scenario = Scenario.find(params[:scenario_id]) if @scenario.nil?
+    @scenario = Scenario.find(params[:scenario_id])
   end
 
 end
