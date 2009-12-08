@@ -110,7 +110,6 @@ Gem::Specification.new do |s|
      "lib/branston/app/views/user_roles/show.html.erb",
      "lib/branston/app/views/users/_user_bar.html.erb",
      "lib/branston/app/views/users/new.html.erb",
-     "lib/branston/config.ru",
      "lib/branston/config/boot.rb",
      "lib/branston/config/database.yml",
      "lib/branston/config/environment.rb",
