@@ -1,7 +1,7 @@
 <!-- stories/_story.html.erb -->
     <% @story = story -%>
     <div id="<%= element_id(story) %>" class="story">
-      <div class="accordion-toggle">
+      <div class="accordion-toggle<%= ' accordion-toggle-active' if @active %>">
         <%= in_place_editor_field 'story', 'title' %>
         <%= link_to image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"), story, :confirm => 'Delete this story?', :method => :delete, :class => "delete-small" %>
       </div>
@@ -19,7 +19,7 @@
             </div>
             <% end -%>
           <% end -%>
-          <div><%= link_to_remote "Scenarios", :url => story_scenarios_path(@story), :method => 'GET' %></div>
+          <div><%= link_to_remote "Scenarios &raquo;", :url => story_scenarios_path(@story), :method => 'GET' %></div>
         </div>
         <p>
           <%= in_place_editor_field 'story', 'description' %>

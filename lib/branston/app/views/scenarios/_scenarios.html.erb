@@ -10,7 +10,7 @@
     <% end %>
   </div>
   <div class="scenarios-foot">
-    <%= link_to_remote '&laquo; Back to story overview', {:update => element_id(@story),
-    :url => story_path(@story), :method => 'GET'}, :class => 'back-small' %>
+    <%= link_to_remote '&laquo; Back to story overview', {:url => story_path(@story), :method => 'GET'}, 
+    :class => 'back-small' %>
   </div>
 

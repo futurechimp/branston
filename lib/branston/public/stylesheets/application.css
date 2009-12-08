@@ -53,7 +53,7 @@ div.accordion-toggle{
 div.accordion-toggle span.in_place_editor_field {float:left;font-weight:bold;display:inline-block;height:18px;}
 div.accordion-toggle a.delete-small, div.accordion-content a.delete-small {float:right;}
 div.accordion-toggle:hover, div.accordion-toggle-active{ background-color: #ffff99;}
-div.accordion-toggle-active {border-bottom:none;}
+div.accordion-toggle-active {border-bottom:1px dotted grey;}
 div.accordion-content { overflow: hidden; background: #ffff99; padding: 0; border-left: 1px solid #a06b55; border-right: 1px solid #a06b55; border-bottom:1px solid #a06b55; min-width:449px; }
 div.accordion-content p { margin: 9px 24px 6px 24px; line-height:28px; }
 
@@ -69,6 +69,6 @@ div.scenario-title span {float:left;display:inline-block;height:18px;}
 div.preconditions, div.outcomes {border-bottom:1px dotted grey;clear:left;}
 div.preconditions ol li, div.outcomes ol li { margin:2px; font-size:0.95em;}
 
-div.story-props {display:block;height:50px;}
+div.story-props {display:block;height:30px;border-bottom:1px dotted grey;padding-top:4px;}
 div.story-props div {display:inline-block;float:left;margin-left:20px;line-height:25px;}
 

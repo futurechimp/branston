@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
 
   layout 'main'
   before_filter :login_required
-  before_filter :retrieve_iterations, :only =>  [:new, :edit, :create, :update, :index]
+  before_filter :retrieve_iterations, :only =>  [:new, :edit, :create, :update, :index, :show] # so everything?
 
   in_place_edit_for :story, :title
   in_place_edit_for :story, :description
@@ -35,7 +35,7 @@ class StoriesController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => (@story.to_xml :include => { :scenarios => {
       :include => [:preconditions, :outcomes] } } ) }
-      format.js { render :partial => 'story' }
+      format.js { @active = true }
     end
   end
 
