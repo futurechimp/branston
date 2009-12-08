@@ -102,10 +102,10 @@ class Branston
     
     puts "Branston server starting on http://#{options[:Host]}:#{options[:Port]}#{options[:path]}"
     
-    # Process.daemon
-    # pid = options[:directory] + "/pids/server.pid"
-    # File.open(pid, 'w'){ |f| f.write(Process.pid) }
-    # at_exit { File.delete(pid) if File.exist?(pid) }
+    Process.daemon
+    pid = options[:directory] + "/pids/server.pid"
+    File.open(pid, 'w'){ |f| f.write(Process.pid) }
+    at_exit { File.delete(pid) if File.exist?(pid) }
     
     ENV["RAILS_ENV"] = options[:environment]
     RAILS_ENV.replace(options[:environment]) if defined?(RAILS_ENV)
