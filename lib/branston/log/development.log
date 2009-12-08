@@ -3969,3 +3969,533 @@ Rendered layouts/_meta (0.1ms)
 Rendered layouts/_header (0.3ms)
 Rendered layouts/_footer (0.1ms)
 Completed in 117ms (View: 67, DB: 2) | 200 OK [http://localhost/stories]
+  [4;36;1mSQL (1.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.9ms)[0m   [0;1mCREATE TABLE "iterations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "velocity" integer, "name" varchar(255), "start_date" datetime, "end_date" datetime, "created_at" datetime, "updated_at" datetime, "release_id" integer) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (18.0ms)[0m   [0;1mCREATE TABLE "outcomes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar(255), "scenario_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.9ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (5.3ms)[0m   [0;1mCREATE TABLE "participations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "iteration_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (1.1ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (15.7ms)[0m   [0;1mCREATE TABLE "preconditions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar(255), "scenario_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (1.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (4.4ms)[0m   [0;1mCREATE TABLE "releases" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "release_date" date, "notes" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (1.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (5.4ms)[0m   [0;1mCREATE TABLE "scenarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "story_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (1.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mCREATE TABLE "stories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" text, "points" integer, "iteration_id" integer, "created_at" datetime, "updated_at" datetime, "title" varchar(40), "author_id" integer) [0m
+  [4;35;1mSQL (1.7ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (32.6ms)[0m   [0;1mCREATE TABLE "user_roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime, "story_id" integer) [0m
+  [4;35;1mSQL (1.9ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (4.2ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime) [0m
+  [4;35;1mSQL (4.0ms)[0m   [0mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (3.9ms)[0m   [0mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;36;1mSQL (5.2ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (2.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (28.9ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20091202105555')[0m
+  [4;36;1mSQL (2.8ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20091127120627')[0m
+  [4;35;1mSQL (8.3ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20091127172849')[0m
+  [4;36;1mSQL (2.5ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20091127164446')[0m
+  [4;35;1mSQL (2.3ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20091127122422')[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20091127172950')[0m
+  [4;35;1mSQL (2.4ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20091127114237')[0m
+  [4;36;1mSQL (3.3ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20091127144645')[0m
+  [4;35;1mSQL (28.1ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20091127164217')[0m
+  [4;36;1mSQL (3.7ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20091127131037')[0m
+  [4;35;1mSQL (3.3ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20091127173744')[0m
+  [4;36;1mSQL (26.7ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20091127164705')[0m
+
+
+Processing ScenariosController#index (for 127.0.0.1 at 2009-12-08 11:27:20) [GET]
+  Parameters: {"authenticity_token"=>"v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q=", "story_id"=>"3"}
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mStory Load (0.6ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 3) [0m
+Rendering scenarios/index
+  [4;36;1mScenario Load (0.6ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios".story_id = 3) [0m
+Rendered scenarios/_scenario (24.3ms)
+Rendered scenarios/_scenarios (34.4ms)
+Completed in 226ms (View: 49, DB: 2) | 200 OK [http://localhost/stories/3/scenarios?authenticity_token=v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q%3D]
+
+
+Processing StoriesController#show (for 127.0.0.1 at 2009-12-08 11:27:22) [GET]
+  Parameters: {"authenticity_token"=>"v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q=", "id"=>"3"}
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mStory Load (0.5ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 3) [0m
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:74)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:76)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:74)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:92)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:92)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:99)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:99)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_named_route_call at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:155)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_named_route_call at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:170)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_named_route_call at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:170)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from model_name_from_record_or_class at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/record_identifier.rb:101)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from model_name_from_record_or_class at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/record_identifier.rb:101)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from extract_options! at /var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/array/extract_options.rb:15)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_expiry at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route_set.rb:340)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from generated code (/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route.rb:160)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:74)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:76)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from story_scenarios_path at (eval):3)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from story_scenarios_path at (eval):3)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:74)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:76)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+Rendered stories/_story (27.6ms)
+Completed in 131ms (View: 52, DB: 1) | 200 OK [http://localhost/stories/3?authenticity_token=v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q%3D]
+
+
+Processing IterationsController#index (for 127.0.0.1 at 2009-12-08 12:08:27) [GET]
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.7ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+Rendering template within layouts/main
+Rendering iterations/index
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.8ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 714ms (View: 625, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2009-12-08 12:08:31) [GET]
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (1.0ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id IS NULL) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mStory Load (0.9ms)[0m   [0;1mSELECT * FROM "stories" WHERE (iteration_id IS NOT NULL) [0m
+ERROR: compiling _run_erb_app47views47stories47_story46html46erb_locals_object_story RAISED compile error
+/home/steve/Development/Head/branston/branston/lib/branston/app/views/stories/_story.html.erb:14: syntax error, unexpected '}', expecting ')'
+...> element_id(@story,'points')} ).to_s); @output_buffer.conca...
+                              ^
+Function body:           def _run_erb_app47views47stories47_story46html46erb_locals_object_story(local_assigns)
+            old_output_buffer = output_buffer;story = local_assigns[:story];object = local_assigns[:object];;@output_buffer = '';  __in_erb_template=true ; @output_buffer.concat "<!-- stories/_story.html.erb -->\n    "
+;  @story = story 
+@output_buffer.concat "    <div id=\""; @output_buffer.concat(( element_id(story) ).to_s); @output_buffer.concat "\" class=\"story\">\n      <div class=\"accordion-toggle\">\n        "
+
+; @output_buffer.concat(( in_place_editor_field 'story', 'title' ).to_s); @output_buffer.concat "\n        "
+; @output_buffer.concat(( link_to image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"), story, :confirm => 'Delete this story?', :method => :delete, :class => "delete-small" ).to_s); @output_buffer.concat "\n      </div>\n      <div id=\""
+
+; @output_buffer.concat(( element_id(story,'scenarios') ).to_s); @output_buffer.concat "\" class=\"accordion-content\">\n        <div class=\"story-props\">\n          "
+
+;  remote_form_for :story, @story, :url => "#{story_path(@story)}.js" do |f| 
+@output_buffer.concat "            "; @output_buffer.concat(( hidden_field_tag '_method', 'PUT' ).to_s); @output_buffer.concat "\n            "
+; @output_buffer.concat(( hidden_field_tag 'id', @story.id ).to_s); @output_buffer.concat "  \n            <div>\n              "
+
+; @output_buffer.concat(( f.select :points, (1..10).to_a, :id => element_id(@story,'points')} ).to_s); @output_buffer.concat " Points\n            </div>\n            "
+
+;  unless @iterations.nil? or @iterations.size == 0 
+@output_buffer.concat "            <div>\n              "
+; @output_buffer.concat(( f.select :iteration_id, @iterations.map{|i|[i.name,i.id]}, {:prompt => "Assign Iteration"}, :id => element_id(@story,'iterations') ).to_s); @output_buffer.concat "\n            </div>\n            "
+
+;  end 
+@output_buffer.concat "          ";  end 
+@output_buffer.concat "          <div>"; @output_buffer.concat(( link_to_remote "Scenarios", :url => story_scenarios_path(@story), :method => 'GET' ).to_s); @output_buffer.concat "</div>\n        </div>\n        <p>\n          "
+
+
+; @output_buffer.concat(( in_place_editor_field 'story', 'description' ).to_s); @output_buffer.concat "\n        </p>\n      </div>\n    </div>\n    \n"
+
+
+
+
+;  content_for :page_end do 
+@output_buffer.concat "<script type=\"text/javascript\">\ndocument.observe(\"dom:loaded\", function() {\n  $(\""
+
+; @output_buffer.concat(( element_id(@story, 'points') ).to_s); @output_buffer.concat "\").observe(\"change\", Util.Form.selectChange);\n  $(\""
+; @output_buffer.concat(( element_id(@story, 'iterations') ).to_s); @output_buffer.concat "\").observe(\"change\", Util.Form.selectChange);\n});\n</script>\n"
+
+
+;  end 
+@output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: /home/steve/Development/Head/branston/branston/lib/branston/app/views/stories/_story.html.erb:41:in `compile!'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/renderable.rb:61:in `compile'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/renderable.rb:28:in `render'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:20:in `render'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:26:in `benchmark'
+/var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:26:in `benchmark'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:19:in `render'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/template.rb:205:in `render_template'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:44:in `render_partial'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/partials.rb:184:in `render_partial'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/base.rb:267:in `render'
+/home/steve/Development/Head/branston/branston/lib/branston/app/views/stories/index.html.erb:39:in `_run_erb_app47views47stories47index46html46erb'
+/var/lib/gems/1.8/gems/activerecord-2.3.5/lib/active_record/named_scope.rb:109:in `each'
+/var/lib/gems/1.8/gems/activerecord-2.3.5/lib/active_record/named_scope.rb:109:in `__send__'
+/var/lib/gems/1.8/gems/activerecord-2.3.5/lib/active_record/named_scope.rb:109:in `each'
+/home/steve/Development/Head/branston/branston/lib/branston/app/views/stories/index.html.erb:38:in `_run_erb_app47views47stories47index46html46erb'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/renderable.rb:34:in `send'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/renderable.rb:34:in `render'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/base.rb:306:in `with_template'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/renderable.rb:30:in `render'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/template.rb:205:in `render_template'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/base.rb:265:in `render'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/base.rb:348:in `_render_with_layout'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/base.rb:262:in `render'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/base.rb:1250:in `render_for_file'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/base.rb:951:in `render_without_benchmark'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:51:in `render'
+/var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:51:in `render'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/mime_responds.rb:135:in `send'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/mime_responds.rb:135:in `custom'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/mime_responds.rb:179:in `call'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/mime_responds.rb:179:in `respond'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/mime_responds.rb:173:in `each'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/mime_responds.rb:173:in `respond'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/mime_responds.rb:107:in `respond_to'
+/home/steve/Development/Head/branston/branston/lib/branston/app/controllers/stories_controller.rb:23:in `index'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/base.rb:1331:in `send'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/base.rb:1331:in `perform_action_without_filters'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/filters.rb:617:in `call_filters'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/flash.rb:146:in `perform_action'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/base.rb:532:in `send'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/base.rb:532:in `process_without_filters'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/filters.rb:606:in `process'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/base.rb:391:in `process'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/base.rb:386:in `call'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route_set.rb:437:in `call'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:87:in `dispatch'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:121:in `_call'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:130:in `build_middleware_stack'
+/var/lib/gems/1.8/gems/activerecord-2.3.5/lib/active_record/query_cache.rb:29:in `call'
+/var/lib/gems/1.8/gems/activerecord-2.3.5/lib/active_record/query_cache.rb:29:in `call'
+/var/lib/gems/1.8/gems/activerecord-2.3.5/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+/var/lib/gems/1.8/gems/activerecord-2.3.5/lib/active_record/query_cache.rb:9:in `cache'
+/var/lib/gems/1.8/gems/activerecord-2.3.5/lib/active_record/query_cache.rb:28:in `call'
+/var/lib/gems/1.8/gems/activerecord-2.3.5/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/string_coercion.rb:25:in `call'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/head.rb:9:in `call'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/methodoverride.rb:24:in `call'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/params_parser.rb:15:in `call'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/session/cookie_store.rb:93:in `call'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/failsafe.rb:26:in `call'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/lock.rb:11:in `call'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/lock.rb:11:in `synchronize'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/lock.rb:11:in `call'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:114:in `call'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/reloader.rb:34:in `run'
+/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:108:in `call'
+/var/lib/gems/1.8/gems/rails-2.3.5/lib/rails/rack/static.rb:31:in `call'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/urlmap.rb:46:in `call'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `each'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `call'
+/var/lib/gems/1.8/gems/rails-2.3.5/lib/rails/rack/log_tailer.rb:17:in `call'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/content_length.rb:13:in `call'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/chunked.rb:15:in `call'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/handler/mongrel.rb:64:in `process'
+/var/lib/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+/var/lib/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+/var/lib/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+/var/lib/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/var/lib/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+/var/lib/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+/var/lib/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+/var/lib/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+/var/lib/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+/var/lib/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+/var/lib/gems/1.8/gems/rack-1.0.1/lib/rack/handler/mongrel.rb:34:in `run'
+/var/lib/gems/1.8/gems/rails-2.3.5/lib/commands/server.rb:111
+/usr/lib/ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/usr/lib/ruby/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+/home/steve/Development/Head/branston/branston/lib/branston/app/views/stories/_story.html.erb:14: syntax error, unexpected '}', expecting ')'
+...> element_id(@story,'points')} ).to_s); @output_buffer.conca...
+                              ^) on line #14 of app/views/stories/_story.html.erb:
+11:             <%= hidden_field_tag '_method', 'PUT' %>
+12:             <%= hidden_field_tag 'id', @story.id %>  
+13:             <div>
+14:               <%= f.select :points, (1..10).to_a, :id => element_id(@story,'points')} %> Points
+15:             </div>
+16:             <% unless @iterations.nil? or @iterations.size == 0 -%>
+17:             <div>
+
+    app/views/stories/_story.html.erb:41:in `compile!'
+    app/views/stories/index.html.erb:39
+    app/views/stories/index.html.erb:38
+    app/controllers/stories_controller.rb:23:in `index'
+
+Rendered rescues/_trace (286.5ms)
+Rendered rescues/_request_and_response (2.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2009-12-08 12:08:58) [GET]
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.7ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id IS NULL) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mStory Load (0.9ms)[0m   [0;1mSELECT * FROM "stories" WHERE (iteration_id IS NOT NULL) [0m
+Rendered stories/_story (25.2ms)
+Rendered stories/_story (14.8ms)
+Rendered stories/_story (14.5ms)
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.3ms)
+Rendered layouts/_footer (0.1ms)
+Completed in 121ms (View: 72, DB: 3) | 200 OK [http://localhost/stories]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2009-12-08 12:10:27) [GET]
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.7ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id IS NULL) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mStory Load (1.1ms)[0m   [0;1mSELECT * FROM "stories" WHERE (iteration_id IS NOT NULL) [0m
+Rendered stories/_story (28.2ms)
+Rendered stories/_story (16.9ms)
+Rendered stories/_story (16.7ms)
+Rendered layouts/_meta (0.2ms)
+Rendered layouts/_header (0.3ms)
+Rendered layouts/_footer (0.2ms)
+Completed in 194ms (View: 82, DB: 3) | 200 OK [http://localhost/stories]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2009-12-08 12:11:15) [GET]
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.7ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id IS NULL) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mStory Load (1.0ms)[0m   [0;1mSELECT * FROM "stories" WHERE (iteration_id IS NOT NULL) [0m
+Rendered stories/_story (23.0ms)
+Rendered stories/_story (15.8ms)
+Rendered stories/_story (16.1ms)
+Rendered layouts/_meta (0.2ms)
+Rendered layouts/_header (0.3ms)
+Rendered layouts/_footer (0.2ms)
+Completed in 121ms (View: 69, DB: 3) | 200 OK [http://localhost/stories]
+
+
+Processing StoriesController#update to js (for 127.0.0.1 at 2009-12-08 12:11:19) [PUT]
+  Parameters: {"story"=>{"points"=>"7", "iteration_id"=>"1"}, "authenticity_token"=>"v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q=", "id"=>"1"}
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.7ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mStory Load (0.5ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'A user enters a competition' AND "stories".id <> 1) LIMIT 1[0m
+  [4;35;1mStory Update (0.3ms)[0m   [0mUPDATE "stories" SET "updated_at" = '2009-12-08 12:11:19', "points" = 7 WHERE "id" = 1[0m
+Redirected to http://localhost:3001/stories
+Completed in 65ms (DB: 2) | 302 Found [http://localhost/stories/1.js]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2009-12-08 12:11:19) [GET]
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.8ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT * FROM "stories" WHERE (iteration_id IS NULL) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;35;1mStory Load (3.1ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id IS NOT NULL) [0m
+Rendered stories/_story (21.5ms)
+Rendered stories/_story (14.7ms)
+Rendered stories/_story (14.8ms)
+Rendered layouts/_meta (0.2ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.2ms)
+Completed in 117ms (View: 65, DB: 5) | 200 OK [http://localhost/stories]
+
+
+Processing ScenariosController#index (for 127.0.0.1 at 2009-12-08 12:11:40) [GET]
+  Parameters: {"authenticity_token"=>"v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q=", "story_id"=>"1"}
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mStory Load (0.6ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+Rendering scenarios/index
+  [4;36;1mScenario Load (26.4ms)[0m   [0;1mSELECT * FROM "scenarios" WHERE ("scenarios".story_id = 1) [0m
+Rendered scenarios/_scenario (19.3ms)
+Rendered scenarios/_scenarios (64.0ms)
+Completed in 152ms (View: 42, DB: 28) | 200 OK [http://localhost/stories/1/scenarios?authenticity_token=v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q%3D]
+
+
+Processing StoriesController#show (for 127.0.0.1 at 2009-12-08 12:11:45) [GET]
+  Parameters: {"authenticity_token"=>"v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q=", "id"=>"1"}
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mStory Load (0.5ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:74)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:76)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:74)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:92)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:92)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:99)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:99)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_named_route_call at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:155)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_named_route_call at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:170)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_named_route_call at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:170)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from model_name_from_record_or_class at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/record_identifier.rb:101)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from model_name_from_record_or_class at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/record_identifier.rb:101)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from extract_options! at /var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/array/extract_options.rb:15)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_expiry at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route_set.rb:340)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from generated code (/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route.rb:160)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from extract_options! at /var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/array/extract_options.rb:15)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_expiry at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route_set.rb:340)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from generated code (/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route.rb:160)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from _run_erb_app47views47stories47_story46html46erb_locals_object_story at /home/steve/Development/Head/branston/branston/lib/branston/app/views/stories/_story.html.erb:12)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from content_tag at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/active_record_helper.rb:258)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from content_tag at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/active_record_helper.rb:258)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from content_tag at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/active_record_helper.rb:259)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from story_scenarios_path at (eval):3)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from story_scenarios_path at (eval):3)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:74)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:76)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+Rendered stories/_story (26.1ms)
+Completed in 70ms (View: 28, DB: 1) | 200 OK [http://localhost/stories/1?authenticity_token=v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q%3D]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2009-12-08 12:13:09) [GET]
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.7ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id IS NULL) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mStory Load (1.0ms)[0m   [0;1mSELECT * FROM "stories" WHERE (iteration_id IS NOT NULL) [0m
+Rendered stories/_story (24.0ms)
+Rendered stories/_story (16.9ms)
+Rendered stories/_story (16.7ms)
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.3ms)
+Rendered layouts/_footer (0.1ms)
+Completed in 180ms (View: 72, DB: 2) | 200 OK [http://localhost/stories]
+
+
+Processing ScenariosController#index (for 127.0.0.1 at 2009-12-08 12:13:16) [GET]
+  Parameters: {"authenticity_token"=>"v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q=", "story_id"=>"1"}
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mStory Load (0.5ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+Rendering scenarios/index
+  [4;35;1mScenario Load (0.5ms)[0m   [0mSELECT * FROM "scenarios" WHERE ("scenarios".story_id = 1) [0m
+Rendered scenarios/_scenario (10.0ms)
+Rendered scenarios/_scenarios (19.5ms)
+Completed in 74ms (View: 22, DB: 2) | 200 OK [http://localhost/stories/1/scenarios?authenticity_token=v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q%3D]
+
+
+Processing StoriesController#show (for 127.0.0.1 at 2009-12-08 12:13:18) [GET]
+  Parameters: {"authenticity_token"=>"v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q=", "id"=>"1"}
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mStory Load (0.6ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."id" = 1) [0m
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:74)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:76)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:74)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:92)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:92)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:99)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from polymorphic_url at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:99)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_named_route_call at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:155)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_named_route_call at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:170)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_named_route_call at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/polymorphic_routes.rb:170)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from model_name_from_record_or_class at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/record_identifier.rb:101)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from model_name_from_record_or_class at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/record_identifier.rb:101)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from extract_options! at /var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/array/extract_options.rb:15)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_expiry at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route_set.rb:340)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from generated code (/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route.rb:160)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from extract_options! at /var/lib/gems/1.8/gems/activesupport-2.3.5/lib/active_support/core_ext/array/extract_options.rb:15)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from build_expiry at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route_set.rb:340)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from generated code (/var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_controller/routing/route.rb:160)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from _run_erb_app47views47stories47_story46html46erb_locals_object_story at /home/steve/Development/Head/branston/branston/lib/branston/app/views/stories/_story.html.erb:12)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from content_tag at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/active_record_helper.rb:258)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from content_tag at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/active_record_helper.rb:258)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from content_tag at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/active_record_helper.rb:259)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from story_scenarios_path at (eval):3)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from story_scenarios_path at (eval):3)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:74)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from in_place_editor_field at /home/steve/Development/Head/branston/branston/lib/branston/vendor/plugins/in_place_editing/lib/in_place_macros_helper.rb:76)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from value at /var/lib/gems/1.8/gems/actionpack-2.3.5/lib/action_view/helpers/form_helper.rb:838)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+DEPRECATION WARNING: @story will no longer be implicitly assigned to story. (called from element_id at /home/steve/Development/Head/branston/branston/lib/branston/app/helpers/application_helper.rb:8)
+Rendered stories/_story (27.1ms)
+Completed in 128ms (View: 29, DB: 1) | 200 OK [http://localhost/stories/1?authenticity_token=v55IKY2dFYghoH1JKKsgDYP9RQhcydbDNg1HqqwNZ4Q%3D]

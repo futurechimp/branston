@@ -7,15 +7,17 @@
       </div>
       <div id="<%= element_id(story,'scenarios') %>" class="accordion-content">
         <div class="story-props">
-          <div><%= in_place_editor_field 'story', 'points' %> Points</div>
-          <% unless @iterations.nil? or @iterations.size == 0 -%>
-          <div>
-            <% remote_form_for :story, @story, :url => "#{story_path(@story)}.js" do |f| -%>
-              <%= hidden_field_tag '_method', 'PUT' %>
-              <%= hidden_field_tag 'id', @story.id %>
+          <% remote_form_for :story, @story, :url => "#{story_path(@story)}.js" do |f| -%>
+            <%= hidden_field_tag '_method', 'PUT' %>
+            <%= hidden_field_tag 'id', @story.id %>  
+            <div>
+              <%= f.select :points, (1..10).to_a, {}, :id => element_id(@story,'points') %> Points
+            </div>
+            <% unless @iterations.nil? or @iterations.size == 0 -%>
+            <div>
               <%= f.select :iteration_id, @iterations.map{|i|[i.name,i.id]}, {:prompt => "Assign Iteration"}, :id => element_id(@story,'iterations') %>
+            </div>
             <% end -%>
-          </div>
           <% end -%>
           <div><%= link_to_remote "Scenarios", :url => story_scenarios_path(@story), :method => 'GET' %></div>
         </div>
@@ -28,11 +30,8 @@
 <% content_for :page_end do -%>
 <script type="text/javascript">
 document.observe("dom:loaded", function() {
-  $("<%= element_id(@story, 'iterations') %>").observe("change",function(e) {
-    var el = e.element();
-    if (el.options[el.options.selectedIndex].value != "") el.form.submit();
-    return false;
-  });
+  $("<%= element_id(@story, 'points') %>").observe("change", Util.Form.selectChange);
+  $("<%= element_id(@story, 'iterations') %>").observe("change", Util.Form.selectChange);
 });
 </script>
 <% end -%>
