@@ -6,6 +6,14 @@
 <% content_for :page_end do %>
 <script type="text/javascript">
 document.observe("dom:loaded", function() {
+  // Extend Accordion class to force some dynamic DOM elements to appear.
+  Accordion.addMethods({
+      forceExpand : function() {
+          var scenarios = $('.scenarios');
+          if (scenarios && scenarios.length > 0)
+              new Effect.Scale(scenarios[0], 100, {scaleY:true,scaleX:false,scaleMode:'contents'});
+      }
+  });
   <% @current_stories.each do |story| -%>
   //new Draggable('<%= element_id(story) %>');
   <% end -%>
@@ -13,10 +21,12 @@ document.observe("dom:loaded", function() {
   //new Draggable('<%= element_id(story) %>');
   <% end -%>
   <% unless @current_stories.nil? or @current_stories.empty? -%>
-  new Accordion("current_stories", 1);
+  var currentStories = new Accordion("current_stories", 1);
+  $('accordion-toggle').each(function(e) {e.observe('click', currentStories.forceExpand);});
   <% end -%>
   <% unless @backlog_stories.nil? or @backlog_stories.empty? -%>
-  new Accordion("backlog_stories", 1);
+  var backlogStories = new Accordion("backlog_stories", 1);
+  $('accordion-toggle').each(function(e) {e.observe('click', backlogStories.forceExpand);});
   <% end -%>
 });
 </script>

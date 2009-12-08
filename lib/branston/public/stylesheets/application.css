@@ -69,3 +69,6 @@ div.scenario-title span {float:left;display:inline-block;height:18px;}
 div.preconditions, div.outcomes {border-bottom:1px dotted grey;clear:left;}
 div.preconditions ol li, div.outcomes ol li { margin:2px; font-size:0.95em;}
 
+div.story-props {display:block;height:50px;}
+div.story-props div {display:inline-block;float:left;margin-left:20px;line-height:25px;}
+
