@@ -5,14 +5,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{branston}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
   s.date = %q{2009-12-09}
+  s.default_executable = %q{branston}
   s.description = %q{Cucumber and more!}
   s.email = %q{dave.hrycyszyn@headlondon.com}
-  s.executables = ["features", "branston"]
+  s.executables = ["branston"]
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
@@ -155,7 +156,6 @@ Gem::Specification.new do |s|
      "lib/branston/coverage/index.html",
      "lib/branston/coverage/jquery-1.3.2.min.js",
      "lib/branston/coverage/jquery.tablesorter.min.js",
-     "lib/branston/coverage/lib-client_rb.html",
      "lib/branston/coverage/lib-faker_extras_rb.html",
      "lib/branston/coverage/lib-story_generator_rb.html",
      "lib/branston/coverage/print.css",
@@ -177,6 +177,7 @@ Gem::Specification.new do |s|
      "lib/branston/db/migrate/20091202105555_create_releases.rb",
      "lib/branston/db/migrate/20091204173634_add_slug_to_stories.rb",
      "lib/branston/db/pristine.sqlite3",
+     "lib/branston/db/production.sqlite3",
      "lib/branston/db/schema.rb",
      "lib/branston/db/seeds.rb",
      "lib/branston/db/test.sqlite3",
@@ -311,9 +312,6 @@ Gem::Specification.new do |s|
      "lib/branston/test/unit/user_test.rb",
      "lib/branston/test/xml/example.xml",
      "lib/branston/test/xml/no_scenarios.xml",
-     "lib/branston/tmp/performance/BrowsingTest#test_homepage_process_time_flat.txt",
-     "lib/branston/tmp/performance/BrowsingTest#test_homepage_process_time_graph.html",
-     "lib/branston/tmp/performance/BrowsingTest#test_homepage_process_time_tree.txt",
      "lib/branston/vendor/plugins/calendar_date_select-1.15/History.txt",
      "lib/branston/vendor/plugins/calendar_date_select-1.15/MIT-LICENSE",
      "lib/branston/vendor/plugins/calendar_date_select-1.15/Manifest.txt",
