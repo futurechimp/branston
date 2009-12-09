@@ -10,17 +10,16 @@ class ClientTest < ActiveSupport::TestCase
       @options = {
         :Port        => 3970,
         :Host        => "0.0.0.0",
-        :fid         => 1
+        :feature     => 1
       }
+      @client = Client.new @options
     end
     
     context "A complete story" do
       setup do
         mock_xml = File.new(RAILS_ROOT + "/test/xml/example.xml")
-        
-        client = Client.new(@options)
-        client.stubs(:get_xml).returns(REXML::Document.new mock_xml)
-        client.generate_story_files
+        @client.stubs(:get_xml).returns(REXML::Document.new mock_xml)
+        @client.generate_story_files
       end
       
       should "generate a feature file that can be run by cucumber" do
@@ -74,10 +73,8 @@ class ClientTest < ActiveSupport::TestCase
     context "A story without scenarios" do
       setup do        
         mock_xml = File.new(RAILS_ROOT + "/test/xml/no_scenarios.xml")
-        
-        client = Client.new(@options)
-        client.stubs(:get_xml).returns(REXML::Document.new mock_xml)
-        client.generate_story_files
+        @client.stubs(:get_xml).returns(REXML::Document.new mock_xml)
+        @client.generate_story_files
       end
       
       should "generate just the story outline and an empty step file" do
@@ -93,6 +90,34 @@ class ClientTest < ActiveSupport::TestCase
         ensure
           f.close
         end
+      end
+    end
+    
+    context "The get_xml method" do
+      should "fail gracefully" do
+        @client.get_xml
+        assert_equal ["Could not connect to Branston server on 0.0.0.0:3970: " +
+          "Connection refused - connect(2)\nIs Branston running?"], @client.errors
+      end
+      
+      should "work, don't worry about it" do
+        Net::HTTP.stubs(:start).returns(true)
+        @client.get_xml
+      end
+    end
+    
+    context "The process_xml method" do
+      should "fail gracefully" do
+        @client.process_xml nil
+        assert_equal ["Did not recieve XML data for story 1.\nIs the Branston " +
+          "server running, and have you provided the correct story name?"], @client.errors
+        @client.process_xml REXML::Document.new
+        assert_equal ["Did not recieve XML data for story 1.\nIs the Branston " +
+          "server running, and have you provided the correct story name?"], @client.errors
+        
+        @client.process_xml REXML::Document.new.add_element 'story'
+        assert_equal ["Could not generate feature: undefined method `text' for " +
+          "nil:NilClass"], @client.errors
       end
     end
     
