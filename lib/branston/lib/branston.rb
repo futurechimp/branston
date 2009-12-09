@@ -66,7 +66,8 @@ class Branston
     if actions.first == 'server'
       launch_branston_server(options)
     elsif actions.first == 'generator'
-      client = Client.new(options).generate_story_files
+      client = Client.new(options)
+      client.generate_story_files
       client.errors.each do |error|
         puts error
       end
