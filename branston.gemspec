@@ -5,22 +5,20 @@
 
 Gem::Specification.new do |s|
   s.name = %q{branston}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
-  s.date = %q{2009-12-08}
-  s.default_executable = %q{branston}
+  s.date = %q{2009-12-09}
   s.description = %q{Cucumber and more!}
   s.email = %q{dave.hrycyszyn@headlondon.com}
-  s.executables = ["branston"]
+  s.executables = ["features", "branston"]
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
   ]
   s.files = [
-    "lib/branston.rb",
-     "lib/branston/README",
+    "lib/branston/README",
      "lib/branston/Rakefile",
      "lib/branston/app/controllers/application_controller.rb",
      "lib/branston/app/controllers/iterations_controller.rb",
@@ -104,13 +102,14 @@ Gem::Specification.new do |s|
      "lib/branston/app/views/stories/index.html.erb",
      "lib/branston/app/views/stories/new.html.erb",
      "lib/branston/app/views/stories/show.html.erb",
+     "lib/branston/app/views/stories/show.js.rjs",
+     "lib/branston/app/views/stories/update.js.rjs",
      "lib/branston/app/views/user_roles/edit.html.erb",
      "lib/branston/app/views/user_roles/index.html.erb",
      "lib/branston/app/views/user_roles/new.html.erb",
      "lib/branston/app/views/user_roles/show.html.erb",
      "lib/branston/app/views/users/_user_bar.html.erb",
      "lib/branston/app/views/users/new.html.erb",
-     "lib/branston/config.ru",
      "lib/branston/config/boot.rb",
      "lib/branston/config/database.yml",
      "lib/branston/config/environment.rb",
@@ -156,6 +155,7 @@ Gem::Specification.new do |s|
      "lib/branston/coverage/index.html",
      "lib/branston/coverage/jquery-1.3.2.min.js",
      "lib/branston/coverage/jquery.tablesorter.min.js",
+     "lib/branston/coverage/lib-client_rb.html",
      "lib/branston/coverage/lib-faker_extras_rb.html",
      "lib/branston/coverage/lib-story_generator_rb.html",
      "lib/branston/coverage/print.css",
@@ -176,7 +176,7 @@ Gem::Specification.new do |s|
      "lib/branston/db/migrate/20091127173744_add_author_id_to_story.rb",
      "lib/branston/db/migrate/20091202105555_create_releases.rb",
      "lib/branston/db/migrate/20091204173634_add_slug_to_stories.rb",
-     "lib/branston/db/production.sqlite3",
+     "lib/branston/db/pristine.sqlite3",
      "lib/branston/db/schema.rb",
      "lib/branston/db/seeds.rb",
      "lib/branston/db/test.sqlite3",
@@ -193,6 +193,7 @@ Gem::Specification.new do |s|
      "lib/branston/lib/faker_extras.rb",
      "lib/branston/lib/story_generator.rb",
      "lib/branston/lib/tasks/cucumber.rake",
+     "lib/branston/lib/tasks/make_pristine_copy.rake",
      "lib/branston/log/cucumber.log",
      "lib/branston/log/development.log",
      "lib/branston/log/test.log",
@@ -221,6 +222,7 @@ Gem::Specification.new do |s|
      "lib/branston/public/images/rails.png",
      "lib/branston/public/javascripts/accordion.js",
      "lib/branston/public/javascripts/application.js",
+     "lib/branston/public/javascripts/calendar_date_select/calendar_date_select.js",
      "lib/branston/public/javascripts/calendar_date_select/calendar_date_select.prototype.js",
      "lib/branston/public/javascripts/calendar_date_select/format_american.js",
      "lib/branston/public/javascripts/calendar_date_select/format_db.js",
@@ -309,49 +311,9 @@ Gem::Specification.new do |s|
      "lib/branston/test/unit/user_test.rb",
      "lib/branston/test/xml/example.xml",
      "lib/branston/test/xml/no_scenarios.xml",
-     "lib/branston/vendor/plugins/calendar_date_select/History.txt",
-     "lib/branston/vendor/plugins/calendar_date_select/MIT-LICENSE",
-     "lib/branston/vendor/plugins/calendar_date_select/Manifest.txt",
-     "lib/branston/vendor/plugins/calendar_date_select/Rakefile",
-     "lib/branston/vendor/plugins/calendar_date_select/Readme.txt",
-     "lib/branston/vendor/plugins/calendar_date_select/init.rb",
-     "lib/branston/vendor/plugins/calendar_date_select/js_test/functional/cds_test.html",
-     "lib/branston/vendor/plugins/calendar_date_select/js_test/prototype.js",
-     "lib/branston/vendor/plugins/calendar_date_select/js_test/test.css",
-     "lib/branston/vendor/plugins/calendar_date_select/js_test/unit/cds_helper_methods.html",
-     "lib/branston/vendor/plugins/calendar_date_select/js_test/unittest.js",
-     "lib/branston/vendor/plugins/calendar_date_select/lib/calendar_date_select.rb",
-     "lib/branston/vendor/plugins/calendar_date_select/lib/calendar_date_select/calendar_date_select.rb",
-     "lib/branston/vendor/plugins/calendar_date_select/lib/calendar_date_select/form_helpers.rb",
-     "lib/branston/vendor/plugins/calendar_date_select/lib/calendar_date_select/includes_helper.rb",
-     "lib/branston/vendor/plugins/calendar_date_select/public/blank_iframe.html",
-     "lib/branston/vendor/plugins/calendar_date_select/public/images/calendar_date_select/calendar.gif",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/calendar_date_select.jquery.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/calendar_date_select.prototype.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/format_american.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/format_db.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/format_euro_24hr.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/format_euro_24hr_ymd.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/format_finnish.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/format_german.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/format_hyphen_ampm.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/format_iso_date.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/format_italian.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/locale/de.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/locale/fi.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/locale/fr.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/locale/pl.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/locale/pt.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/javascripts/calendar_date_select/locale/ru.js",
-     "lib/branston/vendor/plugins/calendar_date_select/public/stylesheets/calendar_date_select/blue.css",
-     "lib/branston/vendor/plugins/calendar_date_select/public/stylesheets/calendar_date_select/default.css",
-     "lib/branston/vendor/plugins/calendar_date_select/public/stylesheets/calendar_date_select/plain.css",
-     "lib/branston/vendor/plugins/calendar_date_select/public/stylesheets/calendar_date_select/red.css",
-     "lib/branston/vendor/plugins/calendar_date_select/public/stylesheets/calendar_date_select/silver.css",
-     "lib/branston/vendor/plugins/calendar_date_select/spec/calendar_date_select/calendar_date_select_spec.rb",
-     "lib/branston/vendor/plugins/calendar_date_select/spec/calendar_date_select/form_helpers_spec.rb",
-     "lib/branston/vendor/plugins/calendar_date_select/spec/calendar_date_select/includes_helper_spec.rb",
-     "lib/branston/vendor/plugins/calendar_date_select/spec/spec_helper.rb",
+     "lib/branston/tmp/performance/BrowsingTest#test_homepage_process_time_flat.txt",
+     "lib/branston/tmp/performance/BrowsingTest#test_homepage_process_time_graph.html",
+     "lib/branston/tmp/performance/BrowsingTest#test_homepage_process_time_tree.txt",
      "lib/branston/vendor/plugins/in_place_editing/README",
      "lib/branston/vendor/plugins/in_place_editing/Rakefile",
      "lib/branston/vendor/plugins/in_place_editing/init.rb",
@@ -440,17 +402,20 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rails>, [">= 2.3.5"])
       s.add_runtime_dependency(%q<calendar_date_select>, [">= 1.15"])
       s.add_runtime_dependency(%q<cucumber>, ["= 0.4.4"])
+      s.add_runtime_dependency(%q<webrat>, [">= 0.5.3"])
     else
       s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
       s.add_dependency(%q<rails>, [">= 2.3.5"])
       s.add_dependency(%q<calendar_date_select>, [">= 1.15"])
       s.add_dependency(%q<cucumber>, ["= 0.4.4"])
+      s.add_dependency(%q<webrat>, [">= 0.5.3"])
     end
   else
     s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
     s.add_dependency(%q<rails>, [">= 2.3.5"])
     s.add_dependency(%q<calendar_date_select>, [">= 1.15"])
     s.add_dependency(%q<cucumber>, ["= 0.4.4"])
+    s.add_dependency(%q<webrat>, [">= 0.5.3"])
   end
 end
 

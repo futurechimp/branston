@@ -42,6 +42,7 @@ class Branston
         opts.on("-P", "--path=/path", String, "Runs Branston mounted at a specific path.", "Default: /") { |v| options[:path] = v }
         opts.on("-w", "--working=directory", String, "Run branston in the given " + 
           "directory, the same directory that you branston --initialised into", "Default: .branston") { |v| options[:directory] =v }
+        opts.on("-fg", "--foreground", String) { |v| options[:foreground] = true }
         actions << 'server'
       }
       opts.on("-g", "--generate", String, "Generate a feature from a Branston Server") { 
@@ -102,10 +103,12 @@ class Branston
     
     puts "Branston server starting on http://#{options[:Host]}:#{options[:Port]}#{options[:path]}"
     
-    # Process.daemon
-    # pid = options[:directory] + "/pids/server.pid"
-    # File.open(pid, 'w'){ |f| f.write(Process.pid) }
-    # at_exit { File.delete(pid) if File.exist?(pid) }
+    unless options[:foreground]
+      Process.daemon
+      pid = options[:directory] + "/pids/server.pid"
+      File.open(pid, 'w'){ |f| f.write(Process.pid) }
+      at_exit { File.delete(pid) if File.exist?(pid) }
+    end
     
     ENV["RAILS_ENV"] = options[:environment]
     RAILS_ENV.replace(options[:environment]) if defined?(RAILS_ENV)
