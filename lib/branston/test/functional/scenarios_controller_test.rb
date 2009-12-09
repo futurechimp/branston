@@ -4,6 +4,7 @@ class ScenariosControllerTest < ActionController::TestCase
 
   context "The ScenariosController" do
     setup do
+      login_as(User.make)
       @scenario = Scenario.make
       @story = @scenario.story
     end

@@ -1,5 +1,6 @@
 class OutcomesController < ApplicationController
 
+  before_filter :login_required
   before_filter :find_scenario, :except => [:destroy, :set_outcome_description]
 
   in_place_edit_for :outcome, :description

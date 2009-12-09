@@ -76,7 +76,7 @@ class Branston
   def initialise_branston(options)
     File.makedirs options[:directory]
     unless File.exists? options[:directory] + "/branston.sqlite3"
-      File.copy File.dirname(__FILE__) + "/../db/development.sqlite3", 
+      File.copy File.dirname(__FILE__) + "/../db/pristine.sqlite3", 
       options[:directory] + "/branston.sqlite3"
     end
     

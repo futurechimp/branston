@@ -1,7 +1,7 @@
 class PreconditionsController < ApplicationController
 
   layout 'main'
-
+  before_filter :login_required
   before_filter :find_scenario, :except => [:destroy, :set_precondition_description]
 
   in_place_edit_for :precondition, :description

@@ -4,6 +4,7 @@ class PreconditionsControllerTest < ActionController::TestCase
 
   context "The PreconditionsController" do
     setup do
+      login_as(User.make)
       @scenario = Scenario.make
       @precondition = Precondition.make
     end

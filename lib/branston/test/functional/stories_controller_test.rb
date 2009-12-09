@@ -3,13 +3,16 @@ require 'test_helper'
 class StoriesControllerTest < ActionController::TestCase
 
   context "The StoriesController" do
-    setup do
+    setup do     
+      login_as(User.make)
       @story = Factory.make_story
     end
 
     teardown do
-      feature_file = 'test/features/' + @story.feature_filename
+      feature_file = FEATURE_PATH + @story.feature_filename
       FileUtils.rm feature_file if File.exists? feature_file
+      step_file = FEATURE_PATH + @story.step_filename
+      FileUtils.rm step_file if File.exists? step_file
     end
 
     should "show a list of all the stories" do

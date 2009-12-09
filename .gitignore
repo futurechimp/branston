@@ -7,3 +7,4 @@ test/features
 coverage
 tmp
 pkg
+lib/branston/log/*.log

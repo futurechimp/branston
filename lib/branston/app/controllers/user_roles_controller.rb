@@ -1,4 +1,9 @@
 class UserRolesController < ApplicationController
+
+  layout 'main'
+
+  before_filter :login_required
+
   # GET /user_roles
   # GET /user_roles.xml
   def index
@@ -83,3 +88,4 @@ class UserRolesController < ApplicationController
     end
   end
 end
+

@@ -2,31 +2,73 @@
        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <title>The change you wanted was rejected (422)</title>
-	<style type="text/css">
-		body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-		div.dialog {
-			width: 25em;
-			padding: 0 4em;
-			margin: 4em auto 0 auto;
-			border: 1px solid #ccc;
-			border-right-color: #999;
-			border-bottom-color: #999;
-		}
-		h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-	</style>
-</head>
+  <!-- layouts/_meta.html.erb -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta name="keywords" content="Agile, user story, scenario, velocity" />
+<meta name="description" content="Branston - the agile user story scenario builder." />
 
+
+  <title>Branston - index</title>
+  <link href="/stylesheets/application.css?1259856030" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/style.css?1259845118" media="screen" rel="stylesheet" type="text/css" />
+
+</head>
 <body>
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <h1>The change you wanted was rejected.</h1>
-    <p>Maybe you tried to change something you didn't have access to.</p>
-    <p>In any case there's no need to get into a pickle about it, you can always <a href="javascript:history.back()">go back</a>.</p>
+  <!-- layouts/_header.html.erb -->
+  <div id="logo">
+		<h1><a href="#">Branston  </a></h1>
+		<p><em> Small chunk pickle</em></p>
+	</div>
+	<hr />
+
+	<!-- end #logo -->
+	<div id="header">
+		<div id="menu">
+			<ul>
+				<li ><a href="/" class="first">Overview</a></li>
+				<li  class="current_page_item"><a href="/releases">Releases</a></li>
+				<li ><a href="/iterations">Iterations</a></li>
+
+				<li ><a href="/stories">Stories</a></li>
+			</ul>
+		</div>
+		<!-- end #menu -->
+		<div id="search">
+			<form method="get" action="">
+				<fieldset>
+				<input type="text" name="s" id="search-text" size="15" />
+
+				<input type="submit" id="search-submit" value="GO" />
+				</fieldset>
+			</form>
+		</div>
+		<!-- end #search -->
+	</div>
+	<!-- end #header -->
+	<!-- end #header-wrapper -->
+
+
+
+
+	<div id="page">
+		<div id="content">
+          <!-- This file lives in public/422.html -->
+          <div class="dialog">
+            <h1>The change you wanted was rejected.</h1>
+            <p>Maybe you tried to change something you didn't have access to.</p>
+            <p>You can always <a href="javascript:history.back()">go back</a> to get out of this pickle.</p>
+          </div>
+       </div>
   </div>
+
+  <!-- layouts/_footer.html.erb -->
+	<div style="clear: both;">&nbsp;</div>
+
+  <div id="footer">
+		<p>Copyright (c) 2008 HeadLondon.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+	</div>
+	<!-- end #footer -->
 </body>
 </html>
 

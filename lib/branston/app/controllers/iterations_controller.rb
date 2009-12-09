@@ -5,6 +5,7 @@ class IterationsController < ApplicationController
   in_place_edit_for :iteration, :velocity
   in_place_edit_for :iteration, :name
 
+  before_filter :login_required
   before_filter :find_all_releases, :only => [:new, :edit]
 
   # GET /iterations

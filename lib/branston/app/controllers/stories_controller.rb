@@ -1,7 +1,8 @@
 class StoriesController < ApplicationController
 
   layout 'main'
-  before_filter :retrieve_iterations, :only =>  [:new, :edit, :create, :update]
+  before_filter :login_required
+  before_filter :retrieve_iterations, :only =>  [:new, :edit, :create, :update, :index, :show] # so everything?
 
   in_place_edit_for :story, :title
   in_place_edit_for :story, :description
@@ -43,7 +44,7 @@ class StoriesController < ApplicationController
         end
         render :xml => (@story.to_xml :include => { :scenarios => {
       :include => [:preconditions, :outcomes] } } ) }
-      format.js { render :partial => 'story' }
+      format.js { @active = true }
     end
   end
 
@@ -89,6 +90,7 @@ class StoriesController < ApplicationController
         flash[:notice] = 'Story was successfully updated.'
         format.html { redirect_to(@story) }
         format.xml  { head :ok }
+        format.js { redirect_to stories_path }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }

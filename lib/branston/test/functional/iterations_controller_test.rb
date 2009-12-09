@@ -4,9 +4,14 @@ class IterationsControllerTest < ActionController::TestCase
 
   context "The IterationsController" do
 
+    setup do
+      @user = User.make
+    end
+
     context "when there are no iterations yet" do
 
       should "get index" do
+        login_as(@user)
         get :index
         assert_response :success
         assert_not_nil assigns(:iterations)
@@ -17,6 +22,7 @@ class IterationsControllerTest < ActionController::TestCase
     context "when at least one iteration exists" do
 
       setup do
+        login_as(@user)
         @iteration = Iteration.make
       end
 
@@ -55,6 +61,7 @@ class IterationsControllerTest < ActionController::TestCase
 
         context "with valid params" do
           setup do
+            login_as(@user)
             assert_difference("Iteration.count") do
               post :create, :iteration => Iteration.plan
             end
@@ -84,6 +91,7 @@ class IterationsControllerTest < ActionController::TestCase
 
         context "with invalid params" do
           setup do
+            login_as(@user)
             assert_no_difference("Iteration.count") do
               post :create, :iteration => {}
             end
@@ -103,6 +111,7 @@ class IterationsControllerTest < ActionController::TestCase
       context "updating an iteration" do
         context "with valid parameters" do
           setup do
+            login_as(@user)
             assert_no_difference("Iteration.count") do
               put :update,{ :id => @iteration.to_param,  :iteration => {:name => "bar"}}
             end
