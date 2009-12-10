@@ -6,11 +6,15 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "branston"
     gem.summary = %Q{An experiment in turning user stories into cucumber files}
-    gem.description = %Q{An experiment in turning user stories into cucumber files}
-    gem.email = "dave@boomer"
+    gem.description = %Q{Cucumber and more!}
+    gem.email = "dave.hrycyszyn@headlondon.com"
     gem.homepage = "http://github.com/futurechimp/branston"
     gem.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.add_dependency "rails", ">= 2.3.5"
+    gem.add_dependency "calendar_date_select", ">= 1.15"
+    gem.add_dependency "cucumber", "=0.4.4"
+    gem.add_dependency "webrat", ">=0.5.3"
     gem.files = FileList['lib/**/*'].to_a
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end

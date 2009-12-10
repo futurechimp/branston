@@ -83,10 +83,11 @@ class ScenariosController < ApplicationController
   # DELETE /stories/1.xml
   def destroy
     @scenario = Scenario.find(params[:id])
+    @story = @scenario.story
     @scenario.destroy
 
     respond_to do |format|
-      format.html { redirect_to(story_scenarios_path(@scenario.story_id)) }
+      format.html { redirect_to(story_scenarios_path(@story)) }
       format.xml  { head :ok }
       format.js
     end
@@ -96,7 +97,7 @@ class ScenariosController < ApplicationController
   private
 
   def find_story
-    @story = Story.find(params[:story_id]) if @story.nil?
+    @story = Story.find_by_slug(params[:story_id]) if @story.nil?
   end
 
 end

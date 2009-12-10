@@ -1,9 +1,17 @@
 = branston
 
-Description goes here.
+
+== Installation
+
+There's a bit of a dependency chain needed to get things running.  Cucumber has a dependency on Nokogiri, which itself has some libxml related dependencies including a dependency on a C compiler. On a clean Debian/Ubuntu box, this...
+
+ sudo apt-get install libxml-ruby  libxml2-dev libxslt-ruby libxslt-dev build-essential
+ sudo gem install branston
+
+...currently does the trick.
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
@@ -14,4 +22,5 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2009 dave@boomer. See LICENSE for details.
+Copyright (c) 2009 dave@boomer. See LICENSE for details.sudo apt-get install libxml2 libxml2-ruby
+
