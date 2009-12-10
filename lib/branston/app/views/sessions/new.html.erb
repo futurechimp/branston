@@ -1,21 +1,33 @@
 <h1>Log In</h1>
 
-<% form_tag session_path do -%>
-<p class="form-fields">
-  <%= label_tag 'login' %>
-  <%= text_field_tag 'login', @login %>
-</p>
-
-<p class="form-fields">
-  <%= label_tag 'password' %>
-  <%= password_field_tag 'password', nil %>
-</p>
-
-<!-- Uncomment this if you want this functionality
-<p><%= label_tag 'remember_me', 'Remember me' %>
-<%= check_box_tag 'remember_me', '1', @remember_me %></p>
--->
-
-<p class="form-navigtion"><%= submit_tag 'Log in' %></p>
-<% end -%>
-
+<div id="login">
+  
+  <% form_tag session_path do -%>
+  
+  <p class="form-fields">
+    <%= label_tag 'login' %>
+    <%= text_field_tag 'login', @login %>
+  </p>
+  
+  <p class="form-fields">
+    <%= label_tag 'password' %>
+    <%= password_field_tag 'password', nil %>
+  </p>
+  
+  <p class="form-fields">
+    <%= label_tag 'remember_me', 'Remember me' %>
+    <%= check_box_tag 'remember_me', '1', @remember_me %>
+  </p>
+  
+ 
+   <p id="login-button" class="form-navigtion"><%= submit_tag 'Log in' %></p>
+  <% end -%>
+  
+  
+  
+  <div style="clear:both">
+    <p>If you are lacking a Branston account, 
+    <%=link_to 'click here to register!', signup_path %>
+    </p>
+  </div>
+</div>
