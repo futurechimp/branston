@@ -15,7 +15,8 @@ begin
     gem.add_dependency "calendar_date_select", ">= 1.15"
     gem.add_dependency "cucumber", "=0.4.4"
     gem.add_dependency "webrat", ">=0.5.3"
-#    gem.files = FileList['lib/**/*'].to_a
+    gem.add_dependency "sqlite3-ruby", ">=0"
+    gem.files = FileList['lib/**/*'].to_a
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
