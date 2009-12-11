@@ -14,12 +14,6 @@ document.observe("dom:loaded", function() {
               new Effect.Scale(scenarios[0], 100, {scaleY:true,scaleX:false,scaleMode:'contents'});
       }
   });
-  <% @current_stories.each do |story| -%>
-  //new Draggable('<%= element_id(story) %>');
-  <% end -%>
-  <% @backlog_stories.each do |story| -%>
-  //new Draggable('<%= element_id(story) %>');
-  <% end -%>
   <% unless @current_stories.nil? or @current_stories.empty? -%>
   var currentStories = new Accordion("current_stories", 1);
   //$('accordion-toggle').each(function(e) {e.observe('click', currentStories.forceExpand);});
