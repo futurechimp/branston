@@ -1,6 +1,24 @@
-= branston
+= Branston =
 
-Description goes here.
+A user story tracker that generates gherkin files and step definitions for use
+with the cucumber testing framework.
+
+= Installation =
+
+sudo gem install branston
+
+= Example Usage =
+
+rails test
+cd test
+rake db:migrate
+ruby script/generate cucumber
+branston -i
+branston -s
+(write some stories)
+branston -g -f your-story-name
+rake cucumber:all
+(implement the steps and code to make it pass)
 
 == Note on Patches/Pull Requests
  

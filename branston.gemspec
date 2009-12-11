@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{branston}
-  s.version = "0.3.4"
+  s.version = "0.3.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
-  s.date = %q{2009-12-10}
+  s.date = %q{2009-12-11}
   s.default_executable = %q{branston}
   s.description = %q{Cucumber and more!}
   s.email = %q{dave.hrycyszyn@headlondon.com}
@@ -19,7 +19,15 @@ Gem::Specification.new do |s|
      "README.rdoc"
   ]
   s.files = [
-    "lib/branston/README",
+    ".document",
+     ".gitignore",
+     "LICENSE",
+     "README.rdoc",
+     "Rakefile",
+     "VERSION",
+     "bin/branston",
+     "branston.gemspec",
+     "lib/branston/README",
      "lib/branston/Rakefile",
      "lib/branston/app/controllers/application_controller.rb",
      "lib/branston/app/controllers/iterations_controller.rb",
@@ -126,7 +134,6 @@ Gem::Specification.new do |s|
      "lib/branston/config/initializers/site_keys.rb",
      "lib/branston/config/locales/en.yml",
      "lib/branston/config/routes.rb",
-     "lib/branston/db/development.sqlite3",
      "lib/branston/db/development_structure.sql",
      "lib/branston/db/migrate/20091127114237_create_users.rb",
      "lib/branston/db/migrate/20091127120627_create_iterations.rb",
@@ -159,7 +166,6 @@ Gem::Specification.new do |s|
      "lib/branston/lib/tasks/cucumber.rake",
      "lib/branston/lib/tasks/make_pristine_copy.rake",
      "lib/branston/log/cucumber.log",
-     "lib/branston/log/development.log",
      "lib/branston/public/404.html",
      "lib/branston/public/422.html",
      "lib/branston/public/500.html",
