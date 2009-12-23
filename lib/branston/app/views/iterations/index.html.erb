@@ -19,7 +19,8 @@
     <td><%=h iteration.start_date.strftime('%d/%m/%Y') unless iteration.start_date.nil? %></td>
     <td><%=h iteration.end_date.strftime('%d/%m/%Y') unless iteration.end_date.nil? %></td>
     <td>
-      <%= link_to 'Show', iteration %>&nbsp;&nbsp;&bull;
+      <%=link_to 'Show', iteration_path(iteration) %>&nbsp;&nbsp;&bull;
+      <%=link_to 'Stories', iteration_stories_path(iteration) %>&nbsp;&nbsp;&bull;
       <%= link_to 'Edit', edit_iteration_path(iteration) %>&nbsp;&nbsp;&bull;
       <%= link_to 'Destroy', iteration, :confirm => 'Are you sure you want to delete this iteration?', :method => :delete %>
     </td>

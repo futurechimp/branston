@@ -2,7 +2,9 @@ class StoriesController < ApplicationController
 
   layout 'main'
   before_filter :login_required, :except => [:show, :generate_feature]
-  before_filter :retrieve_iterations, :except =>  [:generate_feature, :destroy]
+  before_filter :retrieve_iterations, :except => [:generate_feature]
+  before_filter :load_iteration
+
   in_place_edit_for :story, :title
   in_place_edit_for :story, :description
   in_place_edit_for :story, :points
@@ -20,8 +22,9 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.xml
   def index
-    @current_stories = Story.in_progress
-    @backlog_stories = Story.find :all, :conditions => "iteration_id IS NULL"
+    @current_stories = Story.for_iteration(@iteration.id).in_progress
+    @backlog_stories = Story.for_iteration(@iteration.id).unassigned
+    @completed_stories = Story.for_iteration(@iteration.id).completed
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,8 +45,8 @@ class StoriesController < ApplicationController
         :include => [:preconditions, :outcomes] } } ) }
           format.js { @active = true }
       else
-        format.html { render_optional_error_file 404 }
-        format.all  { render :nothing => true, :status => 404 }
+          format.html { render_optional_error_file 404 }
+          format.all  { render :nothing => true, :status => 404 }
       end
     end
   end
@@ -68,11 +71,12 @@ class StoriesController < ApplicationController
   # POST /stories.xml
   def create
     @story = Story.new(params[:story])
+    @story.author = current_user
 
     respond_to do |format|
       if @story.save
         flash[:notice] = 'Story was successfully created.'
-        format.html { redirect_to stories_url }
+        format.html { redirect_to iteration_stories_url(@iteration) }
         format.xml  { render :xml => @story, :status => :created, :location => @story }
       else
         format.html { render :action => "new" }
@@ -88,9 +92,9 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if @story.update_attributes(params[:story])
         flash[:notice] = 'Story was successfully updated.'
-        format.html { redirect_to(@story) }
+        format.html { redirect_to iteration_story_path(@iteration, @story) }
         format.xml  { head :ok }
-        format.js { redirect_to stories_path }
+        format.js { redirect_to iteration_stories_path(@iteration) }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
@@ -105,7 +109,7 @@ class StoriesController < ApplicationController
     @story.destroy
 
     respond_to do |format|
-      format.html { redirect_to(stories_url) }
+      format.html { redirect_to iteration_stories_path(@iteration) }
       format.xml  { head :ok }
     end
   end
@@ -117,5 +121,8 @@ class StoriesController < ApplicationController
     @iterations = Iteration.all
   end
 
+  def load_iteration
+    @iteration = Iteration.find(params[:iteration_id])
+  end
 end
 
