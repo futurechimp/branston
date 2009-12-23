@@ -1,3 +1,4 @@
+<div style="width:38%;float:left">
 <p>
   <b>Velocity:</b>
   <%=h @iteration.velocity %>
@@ -33,7 +34,11 @@
     <% end %>
     </ul>
 <% end %>
-
 <%= link_to 'Edit', edit_iteration_path(@iteration) %> |
 <%= link_to 'Back', iterations_path %>
+</div>
+
+<div style="width:58%;float:right">
+<%= burndown_chart @iteration, @iteration_data %>
+</div>
 

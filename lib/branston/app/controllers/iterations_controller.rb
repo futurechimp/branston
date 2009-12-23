@@ -24,6 +24,8 @@ class IterationsController < ApplicationController
   def show
     @iteration = Iteration.find(params[:id])
 
+    @iteration_data = @iteration.burndown_data
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @iteration }
