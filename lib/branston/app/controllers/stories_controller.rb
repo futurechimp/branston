@@ -22,7 +22,8 @@ class StoriesController < ApplicationController
     # GET /stories.xml
     def index
       @current_stories = Story.in_progress
-      @backlog_stories = Story.find :all, :conditions => "iteration_id IS NULL"
+      @backlog_stories = Story.unassigned
+      @completed_stories = Story.completed
       
       respond_to do |format|
         format.html # index.html.erb
@@ -69,6 +70,7 @@ class StoriesController < ApplicationController
       # POST /stories.xml
       def create
         @story = Story.new(params[:story])
+        @story.author = current_user
         
         respond_to do |format|
           if @story.save

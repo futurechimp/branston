@@ -4,7 +4,9 @@
       <div class="accordion-toggle<%= ' accordion-toggle-active' if @active %>">
         <%= in_place_editor_field 'story', 'title' %>
         <%= link_to image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"), story, :confirm => 'Delete this story?', :method => :delete, :class => "delete-small" %>
+        <div style="clear:left">By <%=@story.author%></div>  
       </div>
+      
       <div id="<%= element_id(story,'scenarios') %>" class="accordion-content">
         <div class="story-props">
           <% remote_form_for :story, @story, :url => "#{story_path(@story)}.js" do |f| -%>
@@ -13,13 +15,22 @@
             <div>
               <%= f.select :points, (1..10).to_a, {}, :id => element_id(@story,'points') %> Points
             </div>
-            <% unless @iterations.nil? or @iterations.size == 0 -%>
             <div>
-              <%= f.select :iteration_id, @iterations.map{|i|[i.name,i.id]}, {:prompt => "Assign Iteration"}, :id => element_id(@story,'iterations') %>
+              <%= f.label :status %>
+              <%= f.select :status, ['new', 'in_progress', 'completed'], {},
+              :id => element_id(@story, 'status') %>
+            </div>
+            <% unless @iterations.empty? -%>
+            <div>
+              <%= f.select :iteration_id, @iterations.map{|i|[i.name,i.id]}, 
+              {:prompt => "Assign Iteration"}, :id => element_id(@story,'iterations') %>
             </div>
             <% end -%>
           <% end -%>
-          <div><%= link_to_remote "Scenarios &raquo;", :url => story_scenarios_path(@story), :method => 'GET' %></div>
+          <div>
+            <%= link_to_remote "Scenarios &raquo;", :method => 'GET',
+            :url => story_scenarios_path(@story)  %>
+          </div>
         </div>
         <p>
           <%= in_place_editor_field 'story', 'description' %>
@@ -31,7 +42,10 @@
 <script type="text/javascript">
 document.observe("dom:loaded", function() {
   $("<%= element_id(@story, 'points') %>").observe("change", Util.Form.selectChange);
+  <% unless @iterations.empty? %>
   $("<%= element_id(@story, 'iterations') %>").observe("change", Util.Form.selectChange);
+  <% end %>
+  $("<%= element_id(@story, 'status') %>").observe("change", Util.Form.selectChange);
 });
 </script>
 <% end -%>

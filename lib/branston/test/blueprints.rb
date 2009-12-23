@@ -68,14 +68,18 @@ end
 
 Story.blueprint do
   title
+  iteration
   description
   points { 2 }
+  author { User.make }
 end
 
 Story.blueprint(:in_progress) do
-  description
-  points { 2 }
-  iteration
+  status { 'in_progress' }
+end
+
+Story.blueprint(:completed) do
+  status { 'completed' }
 end
 
 Outcome.blueprint do

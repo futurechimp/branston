@@ -16,9 +16,34 @@ class Story < ActiveRecord::Base
 
   # Named scopes
   #
-  named_scope :in_progress, :conditions => ['iteration_id IS NOT ?', nil]
+  named_scope :unassigned, :conditions => 'status = "new"'
+  named_scope :in_progress, :conditions => 'status = "in_progress"'
+  named_scope :completed, :conditions => 'status = "completed"'
+  named_scope :for_iteration, lambda { |id| { :conditions => ['iteration_id = ?',
+  id] } }
   
   before_save :set_slug
+  
+  # Story states
+  # New - A story that has been drafted, but is not being worked on
+  # In Progress - A story that is being actioned by a member of the development 
+  # team
+  # Completed - A story that has been implemented and tested by the development 
+  # team
+  #
+  state_machine :status, :initial => :new do
+    state :new
+    state :in_progress
+    state :completed
+    
+    event :assign do
+      transition :new => :in_progress
+    end
+    
+    event :finish do
+      transition :in_progress => :completed
+    end
+  end
   
   def to_param
     title.parameterize

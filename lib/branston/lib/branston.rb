@@ -39,9 +39,11 @@ class Branston
           "Runs Branston on the specified port.", "Default: #{PORT}") { |v| options[:Port] = v }
         opts.on("-b", "--binding=ip", String,
           "Binds Branston to the specified ip.", "Default: 0.0.0.0") { |v| options[:Host] = v }
-        opts.on("-P", "--path=/path", String, "Runs Branston mounted at a specific path.", "Default: /") { |v| options[:path] = v }
+        opts.on("-P", "--path=/path", String, "Runs Branston mounted at a " + 
+          "specific path.", "Default: /") { |v| options[:path] = v }
         opts.on("-w", "--working=directory", String, "Run branston in the given " + 
-          "directory, the same directory that you branston --initialised into", "Default: .branston") { |v| options[:directory] =v }
+          "directory, the same directory that you branston --initialised into", 
+        "Default: .branston") { |v| options[:directory] =v }
         opts.on("-fg", "--foreground", String) { |v| options[:foreground] = true }
         actions << 'server'
       }

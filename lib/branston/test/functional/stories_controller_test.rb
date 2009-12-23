@@ -8,8 +8,9 @@ class StoriesControllerTest < ActionController::TestCase
     end
     
     context "with a logged-in user" do
-      setup do     
-        login_as(User.make)   
+      setup do
+        @user = User.make
+        login_as(@user)
       end
       
       teardown do
@@ -67,8 +68,12 @@ class StoriesControllerTest < ActionController::TestCase
             assert_redirected_to stories_path
           end
           
-          should "not be associated with an iteration" do
-            assert !assigns(:story).iteration
+          should "be associated with an iteration" do
+            assert assigns(:story).iteration
+          end
+          
+          should "remember who authored it" do
+            assert_equal @user, assigns(:story).author
           end
           
           context "including an iteration id" do
