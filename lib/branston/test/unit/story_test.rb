@@ -26,15 +26,28 @@ class StoryTest < ActiveSupport::TestCase
       assert @story.new?
     end
     
-    should "transist to in_progress" do
-      assert @story.assign
-      assert @story.in_progress?
-    end
+    context "transisted to in_progress" do
+      setup do
+        assert @story.assign
+      end
     
-    should "transist to completed" do
-      assert @story.assign
-      assert @story.finish
-      assert @story.completed?
+      should "transist to in_progress" do
+        assert @story.in_progress?
+      end
+      
+      context "then transisted to completed" do
+        setup do
+          assert @story.finish
+        end
+        
+        should "transist to completed" do
+          assert @story.completed?
+        end
+    
+        should "set the completed date when in the completed state" do
+          assert_equal Date.today, @story.completed_date
+        end
+      end
     end
     
     should "set a slug when its saved" do

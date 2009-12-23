@@ -43,6 +43,10 @@ class Story < ActiveRecord::Base
     event :finish do
       transition :in_progress => :completed
     end
+    
+    after_transition any => :completed do |story, transition|
+      story.completed_date = Date.today
+    end
   end
   
   def to_param
