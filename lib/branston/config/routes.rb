@@ -5,10 +5,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :releases
   map.resources :iterations, :except => 'show' do |i|
-    i.resources :stories, :member => { :generate_feature => :get } do |r|
+    i.resources :stories do |r|
       r.resources :scenarios
     end
   end
+  
+  map.client_generate '/stories/:id.:format', :controller => 'stories', :action => 'show'
 
   map.resources :user_roles
 

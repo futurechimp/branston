@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{branston}
-  s.version = "0.3.6"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
-  s.date = %q{2009-12-11}
+  s.date = %q{2009-12-23}
   s.default_executable = %q{branston}
   s.description = %q{Cucumber and more!}
   s.email = %q{dave.hrycyszyn@headlondon.com}
@@ -177,6 +177,7 @@ Gem::Specification.new do |s|
      "lib/branston/db/migrate/20091127173744_add_author_id_to_story.rb",
      "lib/branston/db/migrate/20091202105555_create_releases.rb",
      "lib/branston/db/migrate/20091204173634_add_slug_to_stories.rb",
+     "lib/branston/db/migrate/20091223100903_add_status_to_story.rb",
      "lib/branston/db/pristine.sqlite3",
      "lib/branston/db/schema.rb",
      "lib/branston/db/seeds.rb",
@@ -427,7 +428,85 @@ Gem::Specification.new do |s|
      "lib/branston/vendor/plugins/restful_authentication/notes/Trustification.txt",
      "lib/branston/vendor/plugins/restful_authentication/rails/init.rb",
      "lib/branston/vendor/plugins/restful_authentication/restful-authentication.gemspec",
-     "lib/branston/vendor/plugins/restful_authentication/tasks/auth.rake"
+     "lib/branston/vendor/plugins/restful_authentication/tasks/auth.rake",
+     "lib/branston/vendor/plugins/state_machine/CHANGELOG.rdoc",
+     "lib/branston/vendor/plugins/state_machine/LICENSE",
+     "lib/branston/vendor/plugins/state_machine/README.rdoc",
+     "lib/branston/vendor/plugins/state_machine/Rakefile",
+     "lib/branston/vendor/plugins/state_machine/examples/AutoShop_state.png",
+     "lib/branston/vendor/plugins/state_machine/examples/Car_state.png",
+     "lib/branston/vendor/plugins/state_machine/examples/TrafficLight_state.png",
+     "lib/branston/vendor/plugins/state_machine/examples/Vehicle_state.png",
+     "lib/branston/vendor/plugins/state_machine/examples/auto_shop.rb",
+     "lib/branston/vendor/plugins/state_machine/examples/car.rb",
+     "lib/branston/vendor/plugins/state_machine/examples/merb-rest/controller.rb",
+     "lib/branston/vendor/plugins/state_machine/examples/merb-rest/model.rb",
+     "lib/branston/vendor/plugins/state_machine/examples/merb-rest/view_edit.html.erb",
+     "lib/branston/vendor/plugins/state_machine/examples/merb-rest/view_index.html.erb",
+     "lib/branston/vendor/plugins/state_machine/examples/merb-rest/view_new.html.erb",
+     "lib/branston/vendor/plugins/state_machine/examples/merb-rest/view_show.html.erb",
+     "lib/branston/vendor/plugins/state_machine/examples/rails-rest/controller.rb",
+     "lib/branston/vendor/plugins/state_machine/examples/rails-rest/migration.rb",
+     "lib/branston/vendor/plugins/state_machine/examples/rails-rest/model.rb",
+     "lib/branston/vendor/plugins/state_machine/examples/rails-rest/view_edit.html.erb",
+     "lib/branston/vendor/plugins/state_machine/examples/rails-rest/view_index.html.erb",
+     "lib/branston/vendor/plugins/state_machine/examples/rails-rest/view_new.html.erb",
+     "lib/branston/vendor/plugins/state_machine/examples/rails-rest/view_show.html.erb",
+     "lib/branston/vendor/plugins/state_machine/examples/traffic_light.rb",
+     "lib/branston/vendor/plugins/state_machine/examples/vehicle.rb",
+     "lib/branston/vendor/plugins/state_machine/init.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/assertions.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/callback.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/condition_proxy.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/eval_helpers.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/event.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/event_collection.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/extensions.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/guard.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/integrations.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/integrations/active_record.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/integrations/active_record/locale.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/integrations/active_record/observer.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/integrations/data_mapper.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/integrations/data_mapper/observer.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/integrations/sequel.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/machine.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/machine_collection.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/matcher.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/matcher_helpers.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/node_collection.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/state.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/state_collection.rb",
+     "lib/branston/vendor/plugins/state_machine/lib/state_machine/transition.rb",
+     "lib/branston/vendor/plugins/state_machine/state_machine.gemspec",
+     "lib/branston/vendor/plugins/state_machine/tasks/state_machine.rake",
+     "lib/branston/vendor/plugins/state_machine/tasks/state_machine.rb",
+     "lib/branston/vendor/plugins/state_machine/test/classes/switch.rb",
+     "lib/branston/vendor/plugins/state_machine/test/functional/state_machine_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/test_helper.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/assertions_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/callback_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/condition_proxy_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/eval_helpers_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/event_collection_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/event_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/guard_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/integrations/active_record_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/integrations/data_mapper_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/integrations/sequel_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/integrations_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/invalid_event_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/invalid_transition_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/machine_collection_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/machine_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/matcher_helpers_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/matcher_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/node_collection_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/state_collection_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/state_machine_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/state_test.rb",
+     "lib/branston/vendor/plugins/state_machine/test/unit/transition_test.rb"
   ]
   s.homepage = %q{http://github.com/futurechimp/branston}
   s.rdoc_options = ["--charset=UTF-8"]
