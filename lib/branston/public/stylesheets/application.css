@@ -17,7 +17,7 @@ div#content a.add-small {background:url(/images/icons/plus_icon_15x15.png) no-re
 
 /* Form field and submit button styles.  */
 p.form-fields label {clear:left;float:left;text-align:right;display:block;width:100px;}
-p.form-fields input, p.form-fields textarea, p.form-fields select, p.form-fields img { float:left;margin-left:10px; }
+p.form-fields input, p.form-fields textarea, p.form-fields select, p.form-fields img { margin-left:20px; }
 p.form-navigation {clear:left;margin-left:100px;padding-top:20px;}
 p.form-navigation a, p.form-navigation input {float:left; margin-left:20px;}
 

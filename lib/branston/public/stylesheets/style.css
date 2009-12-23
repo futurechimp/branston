@@ -176,6 +176,33 @@ hr { display: none; }
 	color: #FFFFFF;
 }
 
+#login {
+  margin-left: auto;
+  margin-right: auto;
+  width : 400px;
+  text-align: center;
+}
+
+#login label {
+font-size : 13pt;
+width : 150px;
+}
+
+#login input
+{
+  border : 1px solid #DDD;
+  width : 200px;
+  padding: 10px;
+  margin-left : 20px;
+  font-size : 15pt;
+}
+
+#login-button input { 
+  margin-left : 170px;
+  width : 100px;
+  padding : 2px;
+}
+
 /* Page */
 
 #page {

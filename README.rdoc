@@ -1,14 +1,30 @@
-= branston
+= Branston =
+A user story tracker that generates gherkin files and step definitions for use
+with the cucumber testing framework.
 
+== Installation ==
 
-== Installation
-
-There's a bit of a dependency chain needed to get things running.  Cucumber has a dependency on Nokogiri, which itself has some libxml related dependencies including a dependency on a C compiler. On a clean Debian/Ubuntu box, this...
+There's a bit of a dependency chain needed to get things running.  Cucumber has 
+a dependency on Nokogiri, which itself has some libxml related dependencies 
+including a dependency on a C compiler. On a clean Debian/Ubuntu box, this...
 
  sudo apt-get install libxml-ruby  libxml2-dev libxslt-ruby libxslt-dev build-essential sqlite3
  sudo gem install branston
 
 ...currently does the trick.
+
+= Example Usage =
+
+rails test
+cd test
+rake db:migrate
+ruby script/generate cucumber
+branston -i
+branston -s
+(write some stories)
+branston -g -f your-story-name
+rake cucumber:all
+(implement the steps and code to make it pass)
 
 == Note on Patches/Pull Requests
 

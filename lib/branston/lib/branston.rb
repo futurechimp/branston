@@ -117,8 +117,9 @@ class Branston
     ENV["RAILS_ENV"] = options[:environment]
     RAILS_ENV.replace(options[:environment]) if defined?(RAILS_ENV)
     
+    $BRANSTON_LOG_PATH = options[:directory] + '/log'
     require File.dirname(__FILE__) + "/../config/environment"
-    
+
     ActiveRecord::Base.establish_connection(
       :adapter => 'sqlite3',
       :database =>  options[:directory] + '/branston.sqlite3',
