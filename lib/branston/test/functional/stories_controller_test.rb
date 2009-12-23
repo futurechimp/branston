@@ -5,6 +5,8 @@ class StoriesControllerTest < ActionController::TestCase
   context "The StoriesController" do
     setup do
       @story = Factory.make_story
+      @in_progress = Factory.make_story(:status => "in_progress")
+      @completed = Factory.make_story(:status => "completed")
     end
     
     context "with a logged-in user" do
@@ -24,6 +26,14 @@ class StoriesControllerTest < ActionController::TestCase
         get :index
         assert_response :success
         assert_not_nil assigns(:backlog_stories)
+        assert_not_nil assigns(:completed_stories)
+        assert_not_nil assigns(:current_stories)
+        assert_equal 1, assigns(:backlog_stories).size
+        assert_equal 1, assigns(:completed_stories).size
+        assert_equal 1, assigns(:current_stories).size
+        assert assigns(:backlog_stories).include? @story
+        assert assigns(:current_stories).include? @in_progress
+        assert assigns(:completed_stories).include? @completed
       end
       
       should "show a form to edit stories" do
@@ -37,8 +47,6 @@ class StoriesControllerTest < ActionController::TestCase
         assert_response :success
         assert assigns(:iterations)
       end
-      
-      
       
       should "delete a story" do
         assert_difference('Story.count', -1) do

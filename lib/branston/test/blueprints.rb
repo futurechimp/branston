@@ -63,7 +63,6 @@ end
 
 Scenario.blueprint do
   title
-  story
 end
 
 Story.blueprint do
@@ -95,12 +94,12 @@ module Factory
 
     def make_story(story_options = {})
       story = Story.make(story_options)
-      2.times { story.scenarios << make_scenario }
+      2.times { story.scenarios << make_scenario(story) }
       return story
     end
 
-    def make_scenario
-      scenario = Scenario.make
+    def make_scenario(story)
+      scenario = Scenario.make(:story => story)
       scenario.preconditions.make
       scenario.preconditions.make(:longer)
       2.times { scenario.outcomes.make }
