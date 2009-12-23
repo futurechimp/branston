@@ -2,7 +2,7 @@ class ScenariosController < ApplicationController
 
   layout 'main'
   before_filter :login_required
-  before_filter :find_story, :except => [:destroy, :set_scenario_title]
+  before_filter :load_iteration_and_story, :except => [:set_scenario_title]
 
   in_place_edit_for :scenario, :title
 
@@ -53,7 +53,7 @@ class ScenariosController < ApplicationController
       if @scenario.save
         @scenarios = @story.scenarios
         flash[:notice] = 'Scenario was successfully created.'
-        format.html { redirect_to story_scenario_path(@story, @scenario) }
+        format.html { redirect_to iteration_story_scenario_path(@iteration, @story, @scenario) }
         format.xml  { render :xml => @scenario, :status => :created, :location => @scenario }
         format.js
       else
@@ -70,7 +70,7 @@ class ScenariosController < ApplicationController
     respond_to do |format|
       if @scenario.update_attributes(params[:scenario])
         flash[:notice] = 'Scenario was successfully updated.'
-        format.html { redirect_to story_scenario_path(@story, @scenario) }
+        format.html { redirect_to iteration_story_scenario_path(@iteration, @story, @scenario) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -87,7 +87,7 @@ class ScenariosController < ApplicationController
     @scenario.destroy
 
     respond_to do |format|
-      format.html { redirect_to(story_scenarios_path(@story)) }
+      format.html { redirect_to(iteration_story_scenarios_path(@iteration, @story)) }
       format.xml  { head :ok }
       format.js
     end
@@ -96,8 +96,9 @@ class ScenariosController < ApplicationController
 
   private
 
-  def find_story
+  def load_iteration_and_story
     @story = Story.find_by_slug(params[:story_id]) if @story.nil?
+    @iteration = Iteration.find(params[:iteration_id])
   end
 
 end

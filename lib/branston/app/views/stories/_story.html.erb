@@ -3,13 +3,15 @@
     <div id="<%= element_id(story) %>" class="story">
       <div class="accordion-toggle<%= ' accordion-toggle-active' if @active %>">
         <%= in_place_editor_field 'story', 'title' %>
-        <%= link_to image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"), story, :confirm => 'Delete this story?', :method => :delete, :class => "delete-small" %>
+        <%= link_to image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"), 
+        iteration_story_path(@iteration, @story), :confirm => 'Delete this story?', 
+        :method => :delete, :class => "delete-small" %>
         <div style="clear:left">By <%=@story.author%></div>  
       </div>
       
       <div id="<%= element_id(story,'scenarios') %>" class="accordion-content">
         <div class="story-props">
-          <% remote_form_for :story, @story, :url => "#{story_path(@story)}.js" do |f| -%>
+          <% remote_form_for :story, @story, :url => "#{iteration_stories_path(@iteration)}.js" do |f| -%>
             <%= hidden_field_tag '_method', 'PUT' %>
             <%= hidden_field_tag 'id', @story.id %>  
             <div>
@@ -22,19 +24,21 @@
             </div>
             <% unless @iterations.empty? -%>
             <div>
+              <%= f.label :iteration_id, "Iteration" %>
               <%= f.select :iteration_id, @iterations.map{|i|[i.name,i.id]}, 
               {:prompt => "Assign Iteration"}, :id => element_id(@story,'iterations') %>
             </div>
             <% end -%>
           <% end -%>
-          <div>
-            <%= link_to_remote "Scenarios &raquo;", :method => 'GET',
-            :url => story_scenarios_path(@story)  %>
-          </div>
         </div>
         <p>
           <%= in_place_editor_field 'story', 'description' %>
         </p>
+        
+        <div>
+          <%= link_to_remote "Scenarios &raquo;", :method => 'GET',
+          :url => iteration_story_scenarios_path(@iteration, @story)  %>
+        </div>
       </div>
     </div>
     
