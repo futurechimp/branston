@@ -11,7 +11,7 @@
       
       <div id="<%= element_id(story,'scenarios') %>" class="accordion-content">
         <div class="story-props">
-          <% remote_form_for :story, @story, :url => "#{iteration_stories_path(@iteration)}.js" do |f| -%>
+          <% remote_form_for :story, @story, :url => "#{iteration_story_path(@iteration, @story)}.js" do |f| -%>
             <%= hidden_field_tag '_method', 'PUT' %>
             <%= hidden_field_tag 'id', @story.id %>  
             <div>
