@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :releases
   map.resources :iterations, :except => 'show' do |i|
-    i.resources :stories do |r|
+    i.resources :stories, :member => { :generate_feature => :get } do |r|
       r.resources :scenarios
     end
   end
