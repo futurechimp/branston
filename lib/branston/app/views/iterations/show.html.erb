@@ -34,6 +34,30 @@
     </ul>
 <% end %>
 
+
+<p>
+<%
+# TODO: When available use iteration attrs to make this fully dynamic
+# Should go in helper.
+#
+work_days = []
+start = @iteration.start_date.to_date
+finish = @iteration.end_date.to_date
+(start..finish).to_a.each do |date|
+    work_days.push date.strftime('%d/%m') unless date.wday == 0 or date.wday == 6
+end
+data = [104,84,79,67,57,39]
+while work_days.length > data.length
+    data.push data[data.length - 1] # Keep repeating the last value
+end
+-%>
+<%= image_tag Gchart.line(:size => '500x300',
+            :title => "#{@iteration.name} burndown",
+            :data => data, :axis_with_labels => 'x,y',
+            :axis_labels => [work_days, ['0','26','52','76','104']]) %>
+
+</p>
+
 <%= link_to 'Edit', edit_iteration_path(@iteration) %> |
 <%= link_to 'Back', iterations_path %>
 
