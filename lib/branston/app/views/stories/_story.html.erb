@@ -5,7 +5,7 @@
         <%= in_place_editor_field 'story', 'title', {}, :url => {
           :action => "set_story_title", :id => @story.id,
         :iteration_id => @iteration.to_param } %> &nbsp;
-        <%= clippy("branston -f -g #{@story.to_param} -b #{request.host} -p #{request.port} ", "#FFFF99") %>
+        <%= clippy("branston -g -f #{@story.to_param} -b #{request.host} -p #{request.port} ", "#FFFF99") %>
         <%= link_to image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"),
         iteration_story_path(@iteration, @story), :confirm => 'Delete this story?',
         :method => :delete, :class => "delete-small" %>
@@ -19,7 +19,7 @@
             <%= hidden_field_tag 'id', @story.id %>
             <div>
               <%= f.select :points, (1..10).to_a, {}, :id => element_id(@story,'points') %> Points
-            </div>
+                </div>
             <div>
               <%= f.label :status %>
               <%= f.select :status, ['new', 'in_progress', 'completed'], {},
