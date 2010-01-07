@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{branston}
-  s.version = "0.4.3"
+  s.version = "0.4.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
@@ -204,6 +204,7 @@ Gem::Specification.new do |s|
      "lib/branston/public/500.html",
      "lib/branston/public/blank_iframe.html",
      "lib/branston/public/favicon.ico",
+     "lib/branston/public/flash/clippy.swf",
      "lib/branston/public/images/agplv3.png",
      "lib/branston/public/images/branston_pickle_bg.png",
      "lib/branston/public/images/calendar_date_select/calendar.gif",
