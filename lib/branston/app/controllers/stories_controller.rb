@@ -1,3 +1,17 @@
+#    This file is part of Branston.
+#
+#    Branston is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation.
+#
+#    Branston is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with Branston.  If not, see <http://www.gnu.org/licenses/>.
+
 class StoriesController < ApplicationController
 
   layout 'main'
@@ -46,54 +60,11 @@ class StoriesController < ApplicationController
           render :xml => (@story.to_xml :include => { :scenarios => {
         :include => [:preconditions, :outcomes] } } ) }
           format.js { @active = true }
-<<<<<<< HEAD:lib/branston/app/controllers/stories_controller.rb
-        else
-          format.html {
-            @iteration = load_iteration
-            render_optional_error_file 404
-          }
-=======
       else
           format.html { render_optional_error_file 404 }
->>>>>>> steventux/master:lib/branston/app/controllers/stories_controller.rb
           format.all  { render :nothing => true, :status => 404 }
       end
     end
-<<<<<<< HEAD:lib/branston/app/controllers/stories_controller.rb
-
-    # GET /stories/new
-    # GET /stories/new.xml
-    def new
-      @story = Story.new(:iteration => @iteration)
-
-      respond_to do |format|
-        format.html # new.html.erb
-        format.xml  { render :xml => @story }
-      end
-    end
-
-    # GET /stories/1/edit
-    def edit
-      @story = Story.find_by_slug(params[:id])
-    end
-
-    # POST /stories
-    # POST /stories.xml
-    def create
-      @story = Story.new(params[:story])
-      @story.author = current_user
-
-      respond_to do |format|
-        if @story.save
-          flash[:notice] = 'Story was successfully created.'
-          format.html { redirect_to iteration_stories_url(@iteration) }
-          format.xml  { render :xml => @story, :status => :created, :location => @story }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
-        end
-      end
-=======
   end
 
   # GET /stories/new
@@ -104,7 +75,6 @@ class StoriesController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @story }
->>>>>>> steventux/master:lib/branston/app/controllers/stories_controller.rb
     end
   end
 
@@ -118,6 +88,7 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(params[:story])
     @story.author = current_user
+    @story.iteration = @iteration
 
     respond_to do |format|
       if @story.save
