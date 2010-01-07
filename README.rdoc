@@ -80,9 +80,6 @@ automatically get access to the stories.  We use our Branston server on a
 private intranet and haven't bothered to get it ready for public-facing use yet.
 In general we only use the user accounts to see who did what.
 
-*
-
-
 == Note on Patches/Pull Requests
 
 * Fork the project.
