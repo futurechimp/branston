@@ -76,6 +76,18 @@ cucumber test. Implement the steps and code to make it pass.
 
 * There is no multi-project support yet.
 
+== Help options
+
+Running
+
+ branston -h
+
+will show a basic help message.  To get help on any of the top-level options, you add "-h" after that option, e.g.
+
+ branston -s -h
+
+will list out the help options for the branston server.
+
 == Note on Patches/Pull Requests
 
 * Fork the project.
