@@ -17,7 +17,7 @@ class StoriesController < ApplicationController
   layout 'main'
   before_filter :login_required, :except => [:show, :generate_feature]
   before_filter :retrieve_iterations, :except => [:generate_feature]
-  before_filter :load_iteration
+  before_filter :load_iteration, :except => [:generate_feature, :show]
 
   in_place_edit_for :story, :title
   in_place_edit_for :story, :description
