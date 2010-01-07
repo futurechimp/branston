@@ -5,9 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "branston"
-    gem.summary = %Q{An experiment in turning user stories into cucumber files}
-    gem.description = %Q{A user story tracker that generates gherkin files and
-      step definitions for use with the cucumber testing framework.}
+    gem.summary = %Q{An experiment in turning agile user stories into cucumber files}
+    gem.description = %Q{An agile user story tracker that generates gherkin files and step definitions for use with the cucumber testing framework.}
     gem.email = "dave.hrycyszyn@headlondon.com"
     gem.homepage = "http://github.com/futurechimp/branston"
     gem.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
