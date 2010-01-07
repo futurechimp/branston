@@ -40,6 +40,16 @@ This will start the Branston server on port 3970.  By default, the server binds
 to the IP 0.0.0.0, so don't do this on a public-facing box unless you want to
 make your Branston server available to the entire internet.
 
+Writing stories is a two-step process.  Stories are laid out so that they look
+somewhat like the recipe cards we use in our agile processes;  on the front
+of the card, we write the user story itself, on the "back" of the card are the
+testing scenarios for the story.  Start off by writing the basic story as your
+first step.
+
+Once the story itself is done, you can write one or more scenarios for the
+story. Each testing scenario describes a concrete  test involving a user, some
+preconditions, and one or more testable outcomes for the story.
+
 Once you've got some stories with acceptance conditions, you can make your
 Rails app and start generating cucumber test code.  Try this:
 
@@ -55,9 +65,23 @@ do:
  branston -g -f add-video
  rake cucumber:all
 
-Branston will
+Branston will generate webrat step definition files and the skeleton of a
+cucumber test. Implement the steps and code to make it pass.
 
-Then, you implement the steps and code to make it pass.
+== Known problems
+
+* Generating cucumber code for a story twice, or step definition files with
+identical names, will wipe out any customizations you did the first time
+through.  This sucks and is no fun.  We'll get around to fixing it unless
+you get around to fixing it first (pull requests welcome).
+
+* The security is at present somewhat ludicrous, anyone can sign up and
+automatically get access to the stories.  We use our Branston server on a
+private intranet and haven't bothered to get it ready for public-facing use yet.
+In general we only use the user accounts to see who did what.
+
+*
+
 
 == Note on Patches/Pull Requests
 
@@ -65,7 +89,7 @@ Then, you implement the steps and code to make it pass.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
   future version unintentionally.
-* Commit, do not mess with rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Commit, do not mess with rakefile, version, or history. If you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull.
 * Send me a pull request. Bonus points for topic branches.
 
 == Copyright
