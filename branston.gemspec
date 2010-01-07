@@ -5,18 +5,17 @@
 
 Gem::Specification.new do |s|
   s.name = %q{branston}
-  s.version = "0.4.2"
+  s.version = "0.4.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
   s.date = %q{2010-01-07}
   s.default_executable = %q{branston}
-  s.description = %q{Cucumber and more!}
+  s.description = %q{An agile user story tracker that generates gherkin files and step definitions for use with the cucumber testing framework.}
   s.email = %q{dave.hrycyszyn@headlondon.com}
   s.executables = ["branston"]
   s.extra_rdoc_files = [
-    "LICENSE",
-     "README.rdoc"
+    "README.rdoc"
   ]
   s.files = [
     "lib/branston/README",
@@ -156,6 +155,7 @@ Gem::Specification.new do |s|
      "lib/branston/coverage/index.html",
      "lib/branston/coverage/jquery-1.3.2.min.js",
      "lib/branston/coverage/jquery.tablesorter.min.js",
+     "lib/branston/coverage/lib-client_rb.html",
      "lib/branston/coverage/lib-faker_extras_rb.html",
      "lib/branston/coverage/lib-story_generator_rb.html",
      "lib/branston/coverage/print.css",
@@ -204,6 +204,7 @@ Gem::Specification.new do |s|
      "lib/branston/public/500.html",
      "lib/branston/public/blank_iframe.html",
      "lib/branston/public/favicon.ico",
+     "lib/branston/public/images/agplv3.png",
      "lib/branston/public/images/branston_pickle_bg.png",
      "lib/branston/public/images/calendar_date_select/calendar.gif",
      "lib/branston/public/images/icons/back_icon_30x23.png",
@@ -509,7 +510,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{An experiment in turning user stories into cucumber files}
+  s.summary = %q{An experiment in turning agile user stories into cucumber files}
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
