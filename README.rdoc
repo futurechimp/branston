@@ -59,14 +59,20 @@ Rails app and start generating cucumber test code.  Try this:
  ruby script/generate cucumber
 
 Now, let's assume you've got a story called "add video".  You want to turn the
-scenarios for that story into executable cucumber test code, so here's what you
-do:
+scenarios for that story into executable cucumber test code, so click on the
+little "clippy" swf next to your story title, and you'll get the generator
+code copied onto your clipboard.  It might look like this:
 
- branston -g -f add-video
+ branston -g -f add-video -p 3970 -b 192.168.0.43
+
+Change directory into the root of your Rails project, paste that generator code
+into your terminal and hit enter.  The Branston client will generate the
+cucumber steps for that user story.  Then you can run:
+
  rake cucumber:all
 
-Branston will generate webrat step definition files and the skeleton of a
-cucumber test. Implement the steps and code to make it pass.
+You'll see some failures. Implement the steps and code to make your cucumber
+tests pass.
 
 == Known problems
 
