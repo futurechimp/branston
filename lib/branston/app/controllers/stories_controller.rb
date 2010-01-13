@@ -1,10 +1,23 @@
+#    This file is part of Branston.
+#
+#    Branston is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation.
+#
+#    Branston is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with Branston.  If not, see <http://www.gnu.org/licenses/>.
+
 class StoriesController < ApplicationController
   
   layout 'main'
   before_filter :login_required, :except => [:show, :generate_feature]
   before_filter :retrieve_iterations, :except => [:generate_feature, :show]
   before_filter :load_iteration, :except => [:generate_feature, :show]
-  
   in_place_edit_for :story, :title
   in_place_edit_for :story, :description
   in_place_edit_for :story, :points
@@ -12,13 +25,12 @@ class StoriesController < ApplicationController
   def generate_feature
     @story = Story.find_by_slug(params[:id])
     if @story.nil?
-      @story = Story.find(:first, :include => :scenarios, 
-        :conditions => ['slug LIKE ?', "%#{id}%"] )
+      @story = Story.find(:first, :include => :scenarios, :conditions => ['slug LIKE ?', "%#{id}%"] )
     end
     @story.generate(@story)
     render :text => 'done'
   end
-    
+  
   # GET /stories
   # GET /stories.xml
   def index
@@ -77,11 +89,12 @@ class StoriesController < ApplicationController
     def create
       @story = Story.new(params[:story])
       @story.author = current_user
+      @story.iteration = @iteration
       
       respond_to do |format|
         if @story.save
           flash[:notice] = 'Story was successfully created.'
-          format.html { redirect_to iteration_stories_url(@iteration) }
+          format.html { redirect_to iteration_stories_path(@iteration) }
           format.xml  { render :xml => @story, :status => :created, :location => @story }
         else
           format.html { render :action => "new" }
@@ -90,7 +103,7 @@ class StoriesController < ApplicationController
       end
     end
     
-    # PUT /stories/1
+    # PUT /stories/"1
     # PUT /stories/1.xml
     def update
       @story = Story.find_by_slug(params[:id])
@@ -116,6 +129,8 @@ class StoriesController < ApplicationController
           format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
         end
       end
+      
+      
     end
     
     # DELETE /stories/1
@@ -141,5 +156,4 @@ class StoriesController < ApplicationController
       @iteration = Iteration.find(params[:iteration_id])
     end    
   end
-  
 
