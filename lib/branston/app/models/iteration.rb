@@ -12,14 +12,14 @@ class Iteration < ActiveRecord::Base
   belongs_to :release
 
   def burndown_data
-    Iteration.find_by_sql [
-      "SELECT SUM(points) AS total_points,
-        COUNT(points) AS points,
+    Story.find_by_sql [
+      "SELECT SUM(points) AS points,
         completed_date
       FROM stories
       WHERE iteration_id = ?
       AND status = 'completed'
-      GROUP BY completed_date", id
+      GROUP BY completed_date
+      ORDER bY completed_date", id
     ]
   end
 

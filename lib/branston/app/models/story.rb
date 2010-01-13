@@ -49,6 +49,8 @@ class Story < ActiveRecord::Base
     end
   end
   
+  attr_protected :status
+  
   def to_param
     title.parameterize
   end

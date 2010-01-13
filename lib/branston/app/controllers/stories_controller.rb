@@ -94,6 +94,17 @@ class StoriesController < ApplicationController
     # PUT /stories/1.xml
     def update
       @story = Story.find_by_slug(params[:id])
+      
+      if params[:story] and params[:story][:status]
+        if params[:story][:status] == 'in_progress'
+          @story.assign
+        end
+        
+        if params[:story][:status] == 'completed'
+          @story.finish
+        end
+      end
+      
       respond_to do |format|
         if @story.update_attributes(params[:story])
           flash[:notice] = 'Story was successfully updated.'

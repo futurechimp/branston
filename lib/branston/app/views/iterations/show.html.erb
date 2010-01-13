@@ -1,44 +1,50 @@
-<div style="width:38%;float:left">
-<p>
-  <b>Velocity:</b>
-  <%=h @iteration.velocity %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%=h @iteration.name %>
-</p>
-
-<p>
-  <b>Start date:</b>
-  <%=h @iteration.start_date %>
-</p>
-
-<p>
-  <b>End date:</b>
-  <%=h @iteration.end_date %>
-</p>
-
-<p>
-  <b>Release:</b>
-  <%=h @iteration.release.release_date if @iteration.release %>
-</p>
-
-<% unless @iteration.stories.empty? %>
-    <b>Stories</b>
-    <ul>
-    <% @iteration.stories.each do |story| %>
-
-      <li><%= story.description %> | <%= story.points %></li>
-
-    <% end %>
-    </ul>
-<% end %>
-<%= link_to 'Edit', edit_iteration_path(@iteration) %> |
-<%= link_to 'Back', iterations_path %>
+<div id="burndown_chart">
+  <%= burndown_chart @iteration, @iteration_data %>
 </div>
 
-<div style="width:58%;float:right">
-<%= burndown_chart @iteration, @iteration_data %>
+<div id="iteration_stats">
+  <h3>Iteration Stats</h3>
+  
+  <p>
+    <b>Velocity:</b>
+    <%=h @iteration.velocity %>
+  </p>
+  
+  <p>
+    <b>Name:</b>
+    <%=h @iteration.name %>
+  </p>
+  
+  <p>
+    <b>Start date:</b>
+    <%=h @iteration.start_date %>
+  </p>
+  
+  <p>
+    <b>End date:</b>
+    <%=h @iteration.end_date %>
+  </p>
+  
+  <p>
+    <b>Release:</b>
+    <%=h @iteration.release.release_date if @iteration.release %>
+  </p>
+  
+  <% unless @iteration.stories.empty? %>
+      <b>Stories</b>
+      <ul>
+      <% @iteration.stories.each do |story| %>
+  
+        <li><%= story.description %> | <%= story.points %></li>
+  
+      <% end %>
+      </ul>
+  <% end %>
 </div>
+  
+  <%= link_to 'Edit', edit_iteration_path(@iteration) %> |
+  <%= link_to 'Back', iterations_path %> | 
+  <%=link_to 'Stories', iteration_stories_path(@iteration) %>
+  
+  
 
