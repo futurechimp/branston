@@ -1,6 +1,6 @@
 <div class="index-head">
-  <h2>User Stories</h2>
-  <%= link_to 'New story', new_story_path, :class => "add" %>
+  <h2>Iteration #<%=@iteration.name%> Stories</h2>
+  <%= link_to 'New story', new_iteration_story_path(@iteration), :class => "add" %>
 </div>
 
 <% content_for :page_end do %>
@@ -14,12 +14,6 @@ document.observe("dom:loaded", function() {
               new Effect.Scale(scenarios[0], 100, {scaleY:true,scaleX:false,scaleMode:'contents'});
       }
   });
-  <% @current_stories.each do |story| -%>
-  //new Draggable('<%= element_id(story) %>');
-  <% end -%>
-  <% @backlog_stories.each do |story| -%>
-  //new Draggable('<%= element_id(story) %>');
-  <% end -%>
   <% unless @current_stories.nil? or @current_stories.empty? -%>
   var currentStories = new Accordion("current_stories", 1);
   //$('accordion-toggle').each(function(e) {e.observe('click', currentStories.forceExpand);});
@@ -44,9 +38,28 @@ document.observe("dom:loaded", function() {
 <div id="backlog-wrapper">
   <h3>Story Backlog</h3>
   <div id="backlog_stories" class="accordion">
-  <% @backlog_stories.each do |story| %>
+  <% if @backlog_stories.empty? %>
+    <%=link_to "Write some more!", new_iteration_story_path(@iteration) %>
+  <% else %>
+    <% @backlog_stories.each do |story| %>
+      <%= render :partial => "story", :locals => { :story => story } %>
+    <% end %>
+  <% end %>
+  </div>
+</div>
+
+<% unless @completed_stories.empty? %>
+
+<div style="clear:both">
+</div>
+
+<div id="current-wrapper">
+  <h3>Completed Stories</h3>
+  <div id="completed_stories" class="accordion">
+  <% @completed_stories.each do |story| %>
     <%= render :partial => "story", :locals => { :story => story } %>
   <% end %>
   </div>
 </div>
 
+<% end %>

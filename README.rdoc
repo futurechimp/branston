@@ -1,17 +1,115 @@
-= branston
+= Branston
 
-Description goes here.
+A user story tracker that generates gherkin files and step
+definitions for use with the cucumber testing framework.
+
+After installation, Branston acts as both a server and a client.  The server
+allows you to create accounts, log in, create user stories, and group them into
+iterations and releases.  Individual user stories can be given acceptance
+conditions so that the geeks developing them know when they're done.
+
+Once a user story has been given acceptance conditions, it's possible to write a
+cucumber test for it.  On a developer machine, the Branston client allows a
+developer to auto-generate cucumber tests from the user stories on the server.
+
+== Installation
+
+There's a bit of a dependency chain needed to get things running.  Cucumber has
+a dependency on Nokogiri, which itself has some libxml related dependencies
+including a dependency on a C compiler. On a clean Debian/Ubuntu box, this...
+
+ sudo apt-get install libxml-ruby  libxml2-dev libxslt-ruby libxslt-dev build-essential sqlite3
+ sudo gem install branston
+
+...currently does the trick.
+
+= Example Usage
+
+First, initialize a branston server:
+
+ branston -i
+
+Initialization will make a hidden folder in the present working directory (called
+".branston") and make a sqlite3 database and necessary config files.
+
+Then, start the server:
+
+ branston -s
+
+This will start the Branston server on port 3970.  By default, the server binds
+to the IP 0.0.0.0, so don't do this on a public-facing box unless you want to
+make your Branston server available to the entire internet.
+
+Writing stories is a two-step process.  Stories are laid out so that they look
+somewhat like the recipe cards we use in our agile processes;  on the front
+of the card, we write the user story itself, on the "back" of the card are the
+testing scenarios for the story.  Start off by writing the basic story as your
+first step.
+
+Once the story itself is done, you can write one or more scenarios for the
+story. Each testing scenario describes a concrete  test involving a user, some
+preconditions, and one or more testable outcomes for the story.
+
+Once you've got some stories with acceptance conditions, you can make your
+Rails app and start generating cucumber test code.  Try this:
+
+ rails test
+ cd test
+ rake db:migrate
+ ruby script/generate cucumber
+
+Now, let's assume you've got a story called "add video".  You want to turn the
+scenarios for that story into executable cucumber test code, so click on the
+little "clippy" swf next to your story title, and you'll get the generator
+code copied onto your clipboard.  It might look like this:
+
+ branston -g -f add-video -p 3970 -b 192.168.0.43
+
+Change directory into the root of your Rails project, paste that generator code
+into your terminal and hit enter.  The Branston client will generate the
+cucumber steps for that user story.  Then you can run:
+
+ rake cucumber:all
+
+You'll see some failures. Implement the steps and code to make your cucumber
+tests pass.
+
+== Known problems
+
+* Generating cucumber code for a story twice, or step definition files with identical names, will wipe out any customizations you did the first time through.  This sucks and is no fun.  We'll get around to fixing it unless you get around to fixing it first (pull requests welcome).
+
+* The security is at present somewhat ludicrous, anyone can sign up and automatically get access to the stories.  We use our Branston server on a private intranet and haven't bothered to get it ready for public-facing use yet. In general we only use the user accounts to see who did what.
+
+* There is no multi-project support yet.
+
+== Help options
+
+Running
+
+ branston -h
+
+will show a basic help message.  To get help on any of the top-level options, you add "-h" after that option, e.g.
+
+ branston -s -h
+
+will list out the help options for the branston server.
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
   future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Commit, do not mess with rakefile, version, or history. If you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull.
 * Send me a pull request. Bonus points for topic branches.
 
 == Copyright
 
-Copyright (c) 2009 dave@boomer. See LICENSE for details.
+Copyright (c) 2010 Headlondon - http://www.headlondon.com
+
+See LICENSE for details.
+
+== Credits
+
+Dan Garland, Dave Hrycyszyn, Steve Laing
+

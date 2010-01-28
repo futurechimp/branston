@@ -22,6 +22,43 @@ class StoryTest < ActiveSupport::TestCase
       FileUtils.rm @step_file if @step_file != nil and File.exists? @step_file
     end
     
+    should "start life with status new" do
+      assert @story.new?
+    end
+    
+    context "transisted to in_progress" do
+      setup do
+        assert @story.assign
+      end
+    
+      should "transist to in_progress" do
+        assert @story.in_progress?
+      end
+      
+      context "then transisted to completed" do
+        setup do
+          assert @story.finish
+        end
+        
+        should "transist to completed" do
+          assert @story.completed?
+        end
+    
+        should "set the completed date when in the completed state" do
+          assert_equal Date.today, @story.completed_date
+        end
+      end
+    end
+    
+    should "set a slug when its saved" do
+      assert_not_nil @story.slug
+      assert_equal 'product-search', @story.slug
+      
+      @story.title = "updated title"
+      assert @story.save
+      assert_equal 'updated-title', @story.slug
+    end
+    
     should "have a unique title" do
       assert_no_difference 'Story.count' do
         assert_raise ActiveRecord::RecordInvalid do
@@ -103,8 +140,6 @@ class StoryTest < ActiveSupport::TestCase
         assert_equal "end\n", f.gets
         assert_equal "\n", f.gets
         
-        
-        
         outcome = @story.scenarios.last.outcomes[0]
         assert_equal "Then #{regexp(outcome.to_s)} do |a|\n", f.gets
         assert_equal "\t#TODO: Define these steps\n", f.gets
@@ -126,22 +161,35 @@ class StoryTest < ActiveSupport::TestCase
     end
     
   end
- 
+  
   context "The Story class" do
     
     should "have an in_progress named_scope" do
       assert Story.respond_to?("in_progress")
     end
     
-    
     context "named_scope in_progress" do
       setup do
-        Story.make
-        Story.make(:in_progress)
+        @story = Story.make
+        @in_progress = Story.make(:in_progress)
+        @completed = Story.make(:completed)
+        @iteration = @story.iteration
       end
       
       should "only find stories that are assigned to an iteration" do
-        assert_equal 1, Story.in_progress.count
+        assert_equal @story, Story.for_iteration(@iteration.id).first
+      end
+      
+      should "only find stories that are unassigned" do
+        assert_equal @story, Story.unassigned.first
+      end
+      
+      should "only find stories that are in progress" do
+        assert_equal @in_progress, Story.in_progress.first
+      end
+      
+      should "only find stories that are completed" do
+        assert_equal @completed, Story.completed.first
       end
     end
     

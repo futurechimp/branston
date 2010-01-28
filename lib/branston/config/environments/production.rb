@@ -9,11 +9,8 @@ config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 
-# See everything in the log (default is :info)
-config.log_path = "/dev/null"
-
 # Use a different logger for distributed setups
-# config.logger = SyslogLogger.new
+config.logger = ActiveSupport::BufferedLogger.new($BRANSTON_LOG_PATH, 1)
 
 # Use a different cache store in production
 # config.cache_store = :mem_cache_store

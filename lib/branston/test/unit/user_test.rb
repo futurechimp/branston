@@ -57,6 +57,10 @@ class UserTest < ActiveSupport::TestCase
     setup do
       @quentin = User.make(:quentin)
     end
+    
+    should "print its login when to_s is called" do
+      assert_equal "quentin", @quentin.to_s
+    end
 
     should "reset_password" do
       @quentin.update_attributes(:password => 'new password', :password_confirmation => 'new password')

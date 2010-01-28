@@ -1,8 +1,22 @@
+#    This file is part of Branston.
+#
+#    Branston is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation.
+#
+#    Branston is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with Branston.  If not, see <http://www.gnu.org/licenses/>.
+
 class ScenariosController < ApplicationController
 
   layout 'main'
   before_filter :login_required
-  before_filter :find_story, :except => [:destroy, :set_scenario_title]
+  before_filter :load_iteration_and_story, :except => [:set_scenario_title]
 
   in_place_edit_for :scenario, :title
 
@@ -53,7 +67,7 @@ class ScenariosController < ApplicationController
       if @scenario.save
         @scenarios = @story.scenarios
         flash[:notice] = 'Scenario was successfully created.'
-        format.html { redirect_to story_scenario_path(@story, @scenario) }
+        format.html { redirect_to iteration_story_scenario_path(@iteration, @story, @scenario) }
         format.xml  { render :xml => @scenario, :status => :created, :location => @scenario }
         format.js
       else
@@ -70,7 +84,7 @@ class ScenariosController < ApplicationController
     respond_to do |format|
       if @scenario.update_attributes(params[:scenario])
         flash[:notice] = 'Scenario was successfully updated.'
-        format.html { redirect_to story_scenario_path(@story, @scenario) }
+        format.html { redirect_to iteration_story_scenario_path(@iteration, @story, @scenario) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -83,10 +97,11 @@ class ScenariosController < ApplicationController
   # DELETE /stories/1.xml
   def destroy
     @scenario = Scenario.find(params[:id])
+    @story = @scenario.story
     @scenario.destroy
 
     respond_to do |format|
-      format.html { redirect_to(story_scenarios_path(@scenario.story_id)) }
+      format.html { redirect_to(iteration_story_scenarios_path(@iteration, @story)) }
       format.xml  { head :ok }
       format.js
     end
@@ -95,8 +110,9 @@ class ScenariosController < ApplicationController
 
   private
 
-  def find_story
-    @story = Story.find(params[:story_id]) if @story.nil?
+  def load_iteration_and_story
+    @story = Story.find_by_slug(params[:story_id]) if @story.nil?
+    @iteration = Iteration.find(params[:iteration_id])
   end
 
 end

@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../lib/client'
 require 'optparse'
 require 'ftools'
 
-BRANSTON_HOME='/home/daniel/.branston'
+BRANSTON_HOME= Dir.pwd + '/.branston'
 PORT = 3970
 
 class Branston
@@ -22,58 +22,82 @@ class Branston
       :environment => (ENV['RAILS_ENV'] || "production").dup,
       :detach      => true,
       :debugger    => false,
-      :path        => nil
+      :path        => nil,
+      :directory   => BRANSTON_HOME
     }
     
+    actions = []
+    
     ARGV.clone.options do |opts|
+      opts.on("-i", "--init", String, "Initialise Branston") {
+        opts.on("-w", "--working=directory", String, "Initialise branston in the given " + 
+          "directory", "Default: .branston") { |v| options[:directory] =v }
+        actions << 'init'
+      }
       opts.on("-s", "--server", String, "Run a Branston Server") { 
         opts.on("-p", "--port=port", Integer,
           "Runs Branston on the specified port.", "Default: #{PORT}") { |v| options[:Port] = v }
         opts.on("-b", "--binding=ip", String,
           "Binds Branston to the specified ip.", "Default: 0.0.0.0") { |v| options[:Host] = v }
-        opts.on("-P", "--path=/path", String, "Runs Branston mounted at a specific path.", "Default: /") { |v| options[:path] = v }
-        @server = true
+        opts.on("-P", "--path=/path", String, "Runs Branston mounted at a " + 
+          "specific path.", "Default: /") { |v| options[:path] = v }
+        opts.on("-w", "--working=directory", String, "Run branston in the given " + 
+          "directory, the same directory that you branston --initialised into", 
+        "Default: .branston") { |v| options[:directory] =v }
+        opts.on("-fg", "--foreground", String) { |v| options[:foreground] = true }
+        actions << 'server'
       }
       opts.on("-g", "--generate", String, "Generate a feature from a Branston Server") { 
          opts.on("-p", "--port=port", Integer,
           "Access a branston server on the specified port.", "Default: #{PORT}") { |v| options[:Port] = v }
         opts.on("-b", "--binding=ip", String,
           "Access a branston server on the specified ip.", "Default: 0.0.0.0") { |v| options[:Host] = v }
-        opts.on("-f", "--feature=id", Integer,
-          "Generate a feature for the given story id.") { |v| options[:feature_id] = v }
-        @generator = true
+        opts.on("-f", "--feature=name", String,
+          "Generate a feature for the given story regular expression.") { |v| options[:feature] = v }
+        actions << 'generator'
       }
       opts.separator ""
       opts.on("-h", "--help", "Show this help message.") { puts opts; exit }
       opts.parse!
       
-      if ARGV.empty? or (!@server and !@generator) or (@server and @generator)
+      if ARGV.empty? or actions.size != 1
         puts opts; exit       
       end
     end
     
-    if @server
+    if actions.first == 'server'
       launch_branston_server(options)
-    elsif @generator
-      Client.new(options).generate_story_files
+    elsif actions.first == 'generator'
+      client = Client.new(options)
+      client.generate_story_files
+      client.errors.each do |error|
+        puts error
+      end
+    elsif actions.first == 'init'
+      initialise_branston(options)
     end
   end
   
   private
   
+  def initialise_branston(options)
+    File.makedirs options[:directory]
+    unless File.exists? options[:directory] + "/branston.sqlite3"
+      File.copy File.dirname(__FILE__) + "/../db/pristine.sqlite3", 
+      options[:directory] + "/branston.sqlite3"
+    end
+    
+    %w(cache pids sessions sockets).each do |dir_to_make|
+      FileUtils.mkdir_p(File.join(options[:directory], dir_to_make))
+    end
+    
+    puts "Successfully initialised branston in #{options[:directory]}"
+  end
+  
   def launch_branston_server(options)
     require 'active_support'
     require 'action_controller'
 
-    File.makedirs BRANSTON_HOME
-    
-    # TODO: Push Thin adapter upstream so we don't need worry about requiring it
-    begin
-      require_library_or_gem 'thin'
-    rescue Exception
-      # Thin not available
-    end
-    
     server = Rack::Handler.get(ARGV.first) rescue nil
     unless server
       begin
@@ -85,26 +109,22 @@ class Branston
     
     puts "Branston server starting on http://#{options[:Host]}:#{options[:Port]}#{options[:path]}"
     
-    %w(cache pids sessions sockets).each do |dir_to_make|
-      FileUtils.mkdir_p(File.join(BRANSTON_HOME, dir_to_make))
+    unless options[:foreground]
+      Process.daemon
+      pid = options[:directory] + "/pids/server.pid"
+      File.open(pid, 'w'){ |f| f.write(Process.pid) }
+      at_exit { File.delete(pid) if File.exist?(pid) }
     end
-    
-    # Process.daemon
-    # pid = BRANSTON_HOME + "/pids/server.pid"
-    # File.open(pid, 'w'){ |f| f.write(Process.pid) }
-    # at_exit { File.delete(pid) if File.exist?(pid) }
     
     ENV["RAILS_ENV"] = options[:environment]
     RAILS_ENV.replace(options[:environment]) if defined?(RAILS_ENV)
     
+    $BRANSTON_LOG_PATH = options[:directory] + '/log'
     require File.dirname(__FILE__) + "/../config/environment"
-    
-    File.copy File.dirname(__FILE__) + "/../db/development.sqlite3", 
-    BRANSTON_HOME + "/branston.sqlite3" unless File.exists? BRANSTON_HOME + "/branston.sqlite3"
-    
+
     ActiveRecord::Base.establish_connection(
       :adapter => 'sqlite3',
-      :database =>  BRANSTON_HOME + '/branston.sqlite3',
+      :database =>  options[:directory] + '/branston.sqlite3',
       :pool => 5,
       :timeout => 5000
       )

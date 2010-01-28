@@ -14,10 +14,10 @@
 </p>
 
 <%= link_to_remote 'Generate Story', :update => "output",
-:url => generate_feature_story_path, :method => 'get' %>
+:url => generate_feature_iteration_story_path(@iteration, @story), :method => 'get' %>
 
 <span id="output"></span> |
 
-<%= link_to 'Edit', edit_story_path(@story) %> |
-<%= link_to 'Back', stories_path %>
+<%= link_to 'Edit', edit_iteration_story_path(@iteration, @story) %> |
+<%= link_to 'Back', iteration_stories_path(@iteration) %>
 

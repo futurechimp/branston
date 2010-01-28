@@ -1,10 +1,15 @@
 log/*.log
-*.sqlite3
+development.sqlite3
+test.sqlite3
+production.sqlite3
+lib/branston/db/migrate
+lib/branston/db/development.sqlite3
 db/schema.rb
 db/development_structure.sql
 *~
 test/features
 coverage
 tmp
-pkq
+pkg
 lib/branston/log/*.log
+
