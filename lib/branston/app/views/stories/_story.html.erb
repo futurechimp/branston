@@ -22,7 +22,7 @@
                 </div>
             <div>
               <%= f.label :status %>
-              <%= f.select :status, ['new', 'in_progress', 'completed'], {},
+              <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'], {},
               :id => element_id(@story, 'status') %>
             </div>
             <% unless @iterations.empty? -%>
