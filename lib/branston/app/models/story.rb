@@ -32,6 +32,7 @@ class Story < ActiveRecord::Base
   #
   named_scope :unassigned, :conditions => 'status = "new"'
   named_scope :in_progress, :conditions => 'status = "in_progress"'
+  named_scope :in_quality_assurance, :conditions => 'status = "quality_assurance"'
   named_scope :completed, :conditions => 'status = "completed"'
   named_scope :for_iteration, lambda { |id| { :conditions => ['iteration_id = ?',
   id] } }
@@ -39,30 +40,44 @@ class Story < ActiveRecord::Base
   before_save :set_slug
 
   # Story states
+  #
   # New - A story that has been drafted, but is not being worked on
+  #
   # In Progress - A story that is being actioned by a member of the development
   # team
+  #
+  # Quality Assurance - A story that is being tested by the QA department
+  #
   # Completed - A story that has been implemented and tested by the development
   # team
   #
   state_machine :status, :initial => :new do
     state :new
     state :in_progress
+    state :quality_assurance
     state :completed
 
     event :assign do
-      transition :new => :in_progress
+      transition [:new, :quality_assurance, :completed] => :in_progress
+    end
+
+    event :check_quality do
+      transition [:in_progress, :quality_assurance, :completed] => :quality_assurance
     end
 
     event :finish do
-      transition :in_progress => :completed
+      transition [:in_progress, :quality_assurance] => :completed
+    end
+
+    event :back_to_new do
+      transition :in_progress => :new
     end
 
     after_transition any => :completed do |story, transition|
       story.completed_date = Date.today
     end
   end
-  
+
   attr_protected :status
 
   def to_param

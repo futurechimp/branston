@@ -9,7 +9,7 @@
   <% unless params[:action] = "new" %>
   <p class="form-fields">
     <%= f.label :status %>
-    <%= f.select :status, ['new', 'in_progress', 'completed'] %>
+    <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'] %>
   </p>
   <% end %>
   <p class="form-fields">
@@ -24,5 +24,4 @@
   <% else %>
   <%=f.hidden_field :iteration_id %>
   <% end %>
-  
 

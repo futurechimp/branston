@@ -33,6 +33,13 @@ document.observe("dom:loaded", function() {
     <%= render :partial => "story", :locals => { :story => story } %>
   <% end %>
   </div>
+
+  <h3>Quality Assurance Stories</h3>
+  <div id="quality_assurance_stories" class="accordion">
+  <% @quality_assurance_stories.each do |story| %>
+    <%= render :partial => "story", :locals => { :story => story } %>
+  <% end %>
+  </div>
 </div>
 
 <div id="backlog-wrapper">
@@ -63,3 +70,4 @@ document.observe("dom:loaded", function() {
 </div>
 
 <% end %>
+
