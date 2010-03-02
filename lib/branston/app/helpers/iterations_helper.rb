@@ -18,7 +18,7 @@ module IterationsHelper
       
       work_days = [nil]
       (iteration.start_date.to_date..iteration.end_date.to_date).to_a.each do |date|
-        work_days.push date.strftime('%d/%m') unless date.wday == 0 or date.wday == 6
+        work_days.push date.strftime('%d/%m') unless is_weekend(date)
       end
       
       # Keep adding the last value to flatline the chart
@@ -38,9 +38,13 @@ module IterationsHelper
         :data => points_data, :axis_with_labels => 'x,y',
         :axis_labels => [work_days, y_scale])
       
-      end
-      
     end
     
   end
+  
+  def is_weekend(date)
+    date.wday == 0 or date.wday == 5 or date.wday == 6
+  end
+  
+end
 

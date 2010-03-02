@@ -148,6 +148,29 @@ class IterationsControllerTest < ActionController::TestCase
         end
       end
     end
+    
+    context "showing an iteration" do
+      
+      setup do
+        
+        login_as(@user)
+        
+        @iteration = Iteration.make
+        5.times do
+          @iteration.stories.push Story.make(:completed)
+        end
+        
+        get :show, :id => @iteration.to_param
+      
+      end
+      
+      should "successfully respond with iteration data" do
+        assert_response :success
+        assert assigns(:iteration)
+        assert assigns(:iteration_data)
+      end
+      
+    end 
 
   end
 
