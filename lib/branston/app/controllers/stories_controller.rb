@@ -17,7 +17,7 @@ class StoriesController < ApplicationController
   layout 'main'
   before_filter :login_required, :except => [:show, :generate_feature]
   before_filter :retrieve_iterations, :except => [:generate_feature]
-  before_filter :load_iteration, :except => [:generate_feature]
+  before_filter :load_iteration, :except => [:generate_feature, :show]
   in_place_edit_for :story, :title
   in_place_edit_for :story, :description
   in_place_edit_for :story, :points
@@ -49,19 +49,19 @@ class StoriesController < ApplicationController
   # GET /stories/1.xml
   def show
     @story = Story.find_by_slug(params[:id])
-
+    @iteration = @story.iteration unless @story.nil?
+    
     respond_to do |format|
       if @story
-        format.html {
-          @iteration = load_iteration
+        format.html
+        format.xml {
+          render :xml => (@story.to_xml :include => { 
+            :scenarios => { :include => [:preconditions, :outcomes] }
+          })
         }
-        format.xml  {
-          render :xml => (@story.to_xml :include => { :scenarios => {
-        :include => [:preconditions, :outcomes] } } ) }
-          format.js { @active = true }
+        format.js { @active = true }
         else
           format.html {
-            @iteration = load_iteration
             render_optional_error_file 404
           }
           format.all  { render :nothing => true, :status => 404 }
