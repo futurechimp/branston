@@ -43,7 +43,7 @@ module IterationsHelper
   end
   
   def is_weekend(date)
-    date.wday == 0 or date.wday == 5 or date.wday == 6
+    date.wday == 0 or date.wday == 6
   end
   
 end
