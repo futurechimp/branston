@@ -18,7 +18,7 @@ end
 # Model class blueprints
 
 Iteration.blueprint do
-  velocity { 1 }
+  velocity { 50 }
   name
   start_date { Date.today }
   end_date { Date.today + 14 }
@@ -75,6 +75,10 @@ end
 
 Story.blueprint(:in_progress) do
   status { 'in_progress' }
+end
+
+Story.blueprint(:quality_assurance) do
+  status { 'quality_assurance' }
 end
 
 Story.blueprint(:completed) do

@@ -5,9 +5,12 @@ class StoriesControllerTest < ActionController::TestCase
   context "The StoriesController" do
     setup do
       @iteration = Iteration.make
-      @story = Factory.make_story(:iteration => @iteration)
-      @in_progress = Factory.make_story(:iteration => @iteration, :status => "in_progress")
-      @completed = Factory.make_story(:iteration => @iteration, :status => "completed")
+      2.times {
+        @story = Factory.make_story(:iteration => @iteration)
+        @quality_assurance = Factory.make_story(:iteration => @iteration, :status => "quality_assurance")
+        @in_progress = Factory.make_story(:iteration => @iteration, :status => "in_progress")
+        @completed = Factory.make_story(:iteration => @iteration, :status => "completed")
+      }
 
       @some_other_iteration = Iteration.make
       @later = Story.make(:iteration => @some_other_iteration)
@@ -32,12 +35,17 @@ class StoriesControllerTest < ActionController::TestCase
         assert_not_nil assigns(:backlog_stories)
         assert_not_nil assigns(:completed_stories)
         assert_not_nil assigns(:current_stories)
-        assert_equal 1, assigns(:backlog_stories).size
-        assert_equal 1, assigns(:completed_stories).size
-        assert_equal 1, assigns(:current_stories).size
+        assert_not_nil assigns(:quality_assurance_stories)
+        assert_equal 2, assigns(:backlog_stories).size
+        assert_equal 2, assigns(:completed_stories).size
+        assert_equal 2, assigns(:current_stories).size
+        assert_equal 2, assigns(:quality_assurance_stories).size
         assert assigns(:backlog_stories).include? @story
         assert assigns(:current_stories).include? @in_progress
         assert assigns(:completed_stories).include? @completed
+        assert assigns(:quality_assurance_stories).include? @quality_assurance
+        assert_equal 16, assigns(:total_assigned_points)
+        assert_equal -34, assigns(:assignment_difference)
       end
 
       should "show a form to edit stories" do

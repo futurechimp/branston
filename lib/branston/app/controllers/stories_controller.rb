@@ -38,7 +38,13 @@ class StoriesController < ApplicationController
     @backlog_stories = Story.for_iteration(@iteration.id).unassigned
     @quality_assurance_stories = Story.for_iteration(@iteration.id).in_quality_assurance
     @completed_stories = Story.for_iteration(@iteration.id).completed
-
+    @total_assigned_points = 0
+    Story.for_iteration(@iteration.id).map { |s|
+      @total_assigned_points += s.points
+    }
+    
+    @assignment_difference = @total_assigned_points - @iteration.velocity
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @stories }
