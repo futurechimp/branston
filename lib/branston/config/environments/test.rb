@@ -41,3 +41,4 @@ FileUtils.mkdir FEATURE_PATH + 'step_definitions' unless File.exists? FEATURE_PA
 
 require 'ruby-debug'
 Debugger.start
+
