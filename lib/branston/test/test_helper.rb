@@ -4,6 +4,7 @@ require 'test_help'
 require 'shoulda'
 require 'blueprints'
 require 'mocha'
+require 'fileutils'
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -41,7 +42,7 @@ class ActiveSupport::TestCase
   include AuthenticatedTestHelper
 
   Rails.backtrace_cleaner.add_silencer { |line| line =~ /lib\/shoulda/ }
-  
+
   def assert_false(value, message = nil)
     assert(value === false, message)
   end
