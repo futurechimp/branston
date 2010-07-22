@@ -130,6 +130,58 @@ class StoriesControllerTest < ActionController::TestCase
             assert_redirected_to iteration_story_path(@iteration, @story)
           end
 
+          context "with story status set to 'in_progress'" do
+            setup do
+              put :update,{ :id => @story.to_param,  :story => {
+                :description => "bar", :status => "in_progress"},
+              :iteration_id => @iteration.to_param }
+            end
+
+            should "set the story's status to 'in_progress'" do
+              assert_equal assigns(:story).status, "in_progress"
+            end
+          end
+
+          context "with story status set to 'quality_assurance'" do
+            setup do
+              @story.status = "in_progress"
+              @story.save
+              put :update,{ :id => @story.to_param,  :story => {
+                :description => "bar", :status => "quality_assurance"},
+              :iteration_id => @iteration.to_param }
+            end
+
+            should "set the story's status to 'quality_assurance'" do
+              assert_equal assigns(:story).status, "quality_assurance"
+            end
+          end
+
+          context "with story status set to 'new'" do
+            setup do
+              put :update,{ :id => @story.to_param,  :story => {
+                :description => "bar", :status => "new"},
+              :iteration_id => @iteration.to_param }
+            end
+
+            should "set the story's status back to 'new'" do
+              assert_equal assigns(:story).status, "new"
+            end
+          end
+
+          context "with story status set to 'completed'" do
+            setup do
+              @story.status = "quality_assurance"
+              @story.save
+              put :update,{ :id => @story.to_param,  :story => {
+                :description => "bar", :status => "completed"},
+              :iteration_id => @iteration.to_param }
+            end
+
+            should "set the story's status to 'completed'" do
+              assert_equal assigns(:story).status, "completed"
+            end
+          end
+
         end
 
         context "with invalid parameters" do
