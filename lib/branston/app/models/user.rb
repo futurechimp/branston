@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
+  include Authorization::AasmRoles
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
@@ -51,7 +52,7 @@ class User < ActiveRecord::Base
   #
   def self.authenticate(login, password)
     return nil if login.blank? || password.blank?
-    u = find_by_login(login.downcase) # need to get the salt
+    u = find_in_state :first, :active, :conditions => {:login => login.downcase}
     u && u.authenticated?(password) ? u : nil
   end
 
@@ -68,6 +69,13 @@ class User < ActiveRecord::Base
   end
 
   protected
+
+  # This is just a stub, it doesn't really need to be here except for the fact
+  # that the restful_auth plugin wants it to exist.  We're not using activation
+  # codes.
+  #
+  def make_activation_code
+  end
 
 
 

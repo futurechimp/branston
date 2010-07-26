@@ -16,6 +16,8 @@ class UsersController < ApplicationController
 
   layout 'main'
 
+  before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
+
   # render new.rhtml
   def new
     @user = User.new
@@ -24,13 +26,8 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
-    success = @user && @user.save
-    if success && @user.errors.empty?
-      # Protects against session fixation attacks, causes request forgery
-      # protection if visitor resubmits an earlier form using back
-      # button. Uncomment if you understand the tradeoffs.
-      # reset session
-      self.current_user = @user # !! now logged in
+    @user.state = "pending"
+    if @user && @user.valid? && @user.save!
       redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
@@ -38,5 +35,35 @@ class UsersController < ApplicationController
       render :action => 'new'
     end
   end
+
+  def suspend
+    @user.suspend!
+    redirect_to users_path
+  end
+
+  def unsuspend
+    @user.unsuspend!
+    redirect_to users_path
+  end
+
+  def destroy
+    @user.delete!
+    redirect_to users_path
+  end
+
+  def purge
+    @user.destroy
+    redirect_to users_path
+  end
+
+  # There's no page here to update or destroy a <%= file_name %>.  If you add those, be
+  # smart -- make sure you check that the visitor is authorized to do so, that they
+  # supply their old password along with a new one to update it, etc.
+
+protected
+  def find_user
+    @user = User.find(params[:id])
+  end
+
 end
 
