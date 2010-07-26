@@ -17,6 +17,10 @@ class UsersController < ApplicationController
   layout 'main'
 
   before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
+  before_filter :login_required
+
+  def index
+  end
 
   # render new.rhtml
   def new
