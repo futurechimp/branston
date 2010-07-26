@@ -36,7 +36,7 @@ class Iteration < ActiveRecord::Base
       WHERE iteration_id = ?
       AND status = 'completed'
       GROUP BY completed_date
-      ORDER bY completed_date", id
+      ORDER BY completed_date", id
     ]
   end
 
