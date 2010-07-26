@@ -19,6 +19,7 @@ class Iteration < ActiveRecord::Base
   # Validations
   #
   validates_presence_of :name, :velocity
+  validates_numericality_of :velocity
 
   # Associations
   #
