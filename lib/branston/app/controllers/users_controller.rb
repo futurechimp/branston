@@ -16,10 +16,11 @@ class UsersController < ApplicationController
 
   layout 'main'
 
-  before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
+  before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge, :activate]
   before_filter :login_required
 
   def index
+    @users = User.find(:all)
   end
 
   # render new.rhtml
@@ -45,18 +46,13 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  def unsuspend
-    @user.unsuspend!
+  def activate
+    @user.activate!
     redirect_to users_path
   end
 
   def destroy
     @user.delete!
-    redirect_to users_path
-  end
-
-  def purge
-    @user.destroy
     redirect_to users_path
   end
 

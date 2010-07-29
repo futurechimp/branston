@@ -7,7 +7,7 @@ CREATE TABLE "scenarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "titl
 CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
 CREATE TABLE "stories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" text, "points" integer, "iteration_id" integer, "created_at" datetime, "updated_at" datetime, "title" varchar(40), "author_id" integer, "slug" varchar(255) DEFAULT '' NOT NULL, "status" varchar(10), "completed_date" date);
 CREATE TABLE "user_roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime, "story_id" integer);
-CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'passive', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40));
+CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'pending', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40));
 CREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login");
 CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version");
 INSERT INTO schema_migrations (version) VALUES ('20091127114237');
@@ -41,3 +41,5 @@ INSERT INTO schema_migrations (version) VALUES ('20091223100903');
 INSERT INTO schema_migrations (version) VALUES ('20100723161424');
 
 INSERT INTO schema_migrations (version) VALUES ('20100726150322');
+
+INSERT INTO schema_migrations (version) VALUES ('20100729125551');

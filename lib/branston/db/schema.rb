@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100726150322) do
+ActiveRecord::Schema.define(:version => 20100729125551) do
 
   create_table "iterations", :force => true do |t|
     t.integer  "velocity"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(:version => 20100726150322) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
-    t.string   "state",                                    :default => "passive"
+    t.string   "state",                                    :default => "pending"
     t.datetime "deleted_at"
     t.datetime "activated_at"
     t.string   "activation_code",           :limit => 40

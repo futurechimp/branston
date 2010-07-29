@@ -1,0 +1,10 @@
+<% unless @users.blank? -%>
+  <ul>
+    <% @users.each do |user| -%>
+      <li>
+        <%= render :partial => "users/admin_controls", :locals => {:user => user } %>
+      </li>
+    <% end -%>
+  </ul>
+<% end -%>
+

@@ -26,6 +26,7 @@ class UsersControllerTest < ActionController::TestCase
 
       should_respond_with :success
       should_render_template :index
+      should_assign_to :users
     end
   end
 
@@ -155,28 +156,45 @@ class UsersControllerTest < ActionController::TestCase
 
   end
 
-  context "on POST to unsuspend" do
+  context "on POST to activate" do
     context "when not logged in" do
       setup do
         @user = User.make(:state => "suspended")
         @original_state = @user.state
-        post :unsuspend, :id => @user.id
+        post :activate, :id => @user.id
       end
-      should "not unsuspend the user" do
+      should "not activate the user" do
         assert_equal assigns(:user).state, @original_state
       end
     end
 
     context "when logged in" do
-      setup do
-        @user = User.make(:state => "suspended")
-        login_as(@user)
-        @original_state = @user.state
-        post :unsuspend, :id => @user.id
+      context "and user has state 'suspended'" do
+        setup do
+          @user = User.make(:state => "suspended")
+          login_as(@user)
+          @original_state = @user.state
+          @user.activated_at = Time.now
+          post :activate, :id => @user.id
+        end
+        should "activate the user" do
+          assert_equal assigns(:user).state, "active"
+        end
       end
-      should "unsuspend the user" do
-        assert_equal assigns(:user).state, "passive"
+
+      context "and user has state 'pending'" do
+        setup do
+          @user = User.make(:state => "pending")
+          login_as(@user)
+          @original_state = @user.state
+          @user.activated_at = Time.now
+          post :activate, :id => @user.id
+        end
+        should "activate the user" do
+          assert_equal assigns(:user).state, "active"
+        end
       end
+
     end
 
   end
@@ -202,33 +220,6 @@ class UsersControllerTest < ActionController::TestCase
       end
       should "delete the user" do
         assert_equal assigns(:user).state, "deleted"
-      end
-    end
-  end
-
-  context "on POST to purge" do
-    context "when not logged in" do
-      setup do
-        @user = User.make
-        @original_state = @user.state
-        post :purge, :id => @user.id
-      end
-      should "not destroy the user" do
-        assert_equal assigns(:user), @user
-      end
-    end
-
-    context "when logged in" do
-      setup do
-        @user = User.make(:state => "active")
-        login_as(@user)
-        @original_state = @user.state
-        post :purge, :id => @user.id
-      end
-      should "destroy the user" do
-        assert_raise ActiveRecord::RecordNotFound do
-          User.find(@user.id)
-        end
       end
     end
   end
