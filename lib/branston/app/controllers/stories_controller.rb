@@ -42,9 +42,9 @@ class StoriesController < ApplicationController
     Story.for_iteration(@iteration.id).map { |s|
       @total_assigned_points += s.points
     }
-    
+
     @assignment_difference = @total_assigned_points - @iteration.velocity
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @stories }
@@ -56,12 +56,12 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find_by_slug(params[:id])
     @iteration = @story.iteration unless @story.nil?
-    
+
     respond_to do |format|
       if @story
         format.html
         format.xml {
-          render :xml => (@story.to_xml :include => { 
+          render :xml => (@story.to_xml :include => {
             :scenarios => { :include => [:preconditions, :outcomes] }
           })
         }
@@ -116,21 +116,10 @@ class StoriesController < ApplicationController
       @story = Story.find_by_slug(params[:id])
 
       if params[:story] and params[:story][:status]
-        if params[:story][:status] == 'in_progress'
-          @story.assign
-        end
-
-        if params[:story][:status] == 'quality_assurance'
-          @story.check_quality
-        end
-
-        if params[:story][:status] == 'new'
-          @story.back_to_new
-        end
-
-        if params[:story][:status] == 'completed'
-          @story.finish
-        end
+        @story.assign if params[:story][:status] == 'in_progress'
+        @story.check_quality if params[:story][:status] == 'quality_assurance'
+        @story.back_to_new if params[:story][:status] == 'new'
+        @story.finish if params[:story][:status] == 'completed'
       end
 
       respond_to do |format|
@@ -144,8 +133,6 @@ class StoriesController < ApplicationController
           format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
         end
       end
-
-
     end
 
     # DELETE /stories/1
