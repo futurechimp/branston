@@ -164,8 +164,10 @@ class StoriesControllerTest < ActionController::TestCase
             end
           end
 
-          context "with story status set to 'new'" do
+          context "with story status set to 'in_progress'" do
             setup do
+              @story.status = "in_progress"
+              @story.save
               put :update,{ :id => @story.to_param,  :story => {
                 :description => "bar", :status => "new"},
               :iteration_id => @iteration.to_param }

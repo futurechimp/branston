@@ -27,15 +27,23 @@ class StoryTest < ActiveSupport::TestCase
     end
 
     context "attempting to transition from :new to :finish" do
-      should "fail" do
-        assert !@story.finish
+     should "raise AASM::InvalidTransition" do
+        assert_raise AASM::InvalidTransition do
+          @story.finish
+        end
+      end
+      should "leave the story in a :new state" do
         assert @story.new?
       end
     end
 
     context "attempting to transition from :new to :check_quality" do
-      should "fail" do
-        assert !@story.check_quality
+      should "raise AASM::InvalidTransition" do
+        assert_raise AASM::InvalidTransition do
+          @story.check_quality
+        end
+      end
+      should "leave the story in a :new state" do
         assert @story.new?
       end
     end

@@ -34,8 +34,8 @@ class Story < ActiveRecord::Base
   named_scope :in_progress, :conditions => 'status = "in_progress"'
   named_scope :in_quality_assurance, :conditions => 'status = "quality_assurance"'
   named_scope :completed, :conditions => 'status = "completed"'
-  named_scope :for_iteration, lambda { |id| { :conditions => ['iteration_id = ?',
-  id] } }
+  named_scope :for_iteration, lambda { |id| {
+    :conditions => ['iteration_id = ?', id] } }
 
   before_save :set_slug
 
@@ -51,32 +51,35 @@ class Story < ActiveRecord::Base
   # Completed - A story that has been implemented and tested by the development
   # team
   #
-  state_machine :status, :initial => :new do
-    state :new
-    state :in_progress
-    state :quality_assurance
-    state :completed
+  include AASM
+  aasm_column :status
+  aasm_initial_state :new
+  aasm_state :new
+  aasm_state :in_progress
+  aasm_state :quality_assurance
+  aasm_state :completed, :enter => Proc.new  { |story, transition|
+                                        story.completed_date = Date.today
+                                   }
 
-    event :assign do
-      transition [:new, :quality_assurance, :completed] => :in_progress
-    end
-
-    event :check_quality do
-      transition [:in_progress, :quality_assurance, :completed] => :quality_assurance
-    end
-
-    event :finish do
-      transition [:in_progress, :quality_assurance] => :completed
-    end
-
-    event :back_to_new do
-      transition :in_progress => :new
-    end
-
-    after_transition any => :completed do |story, transition|
-      story.completed_date = Date.today
-    end
+  aasm_event :assign do
+    transitions :from => [:new, :quality_assurance, :completed], :to => :in_progress
   end
+
+  aasm_event :check_quality do
+    transitions :from => [:in_progress, :quality_assurance, :completed], :to => :quality_assurance
+  end
+
+  aasm_event :finish do
+    transitions :from => [:in_progress, :quality_assurance], :to => :completed
+  end
+
+  aasm_event :back_to_new do
+    transitions :from => :in_progress, :to => :new
+  end
+
+#  after_transition any => :completed do |story, transition|
+#    story.completed_date = Date.today
+#  end
 
   attr_protected :status
 
