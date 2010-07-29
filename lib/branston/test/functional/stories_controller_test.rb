@@ -191,7 +191,6 @@ class StoriesControllerTest < ActionController::TestCase
               assert_equal assigns(:story).status, "completed"
             end
           end
-
         end
 
         context "with invalid parameters" do
@@ -206,11 +205,9 @@ class StoriesControllerTest < ActionController::TestCase
           end
         end
       end
-
     end
 
     context "Without logging in, the StoriesController" do
-
       should "show details about a story" do
         get :show, :id => @story.to_param, :iteration_id => @iteration.to_param
         assert_response :success
