@@ -8,11 +8,9 @@ class UsersControllerTest < ActionController::TestCase
 
   context "on GET to index" do
     context "when not logged in" do
-
       setup do
         get :index
       end
-
       should "redirect to login" do
         assert_redirected_to new_session_path
       end
@@ -23,7 +21,6 @@ class UsersControllerTest < ActionController::TestCase
         login_as(User.make)
         get :index
       end
-
       should_respond_with :success
       should_render_template :index
       should_assign_to :users
@@ -43,7 +40,6 @@ class UsersControllerTest < ActionController::TestCase
         login_as(User.make)
         get :new
       end
-
       should_respond_with :success
     end
   end
@@ -55,7 +51,6 @@ class UsersControllerTest < ActionController::TestCase
           create_user(:login => nil)
         end
       end
-
       should_redirect_to ("the login page"){ new_session_path }
     end
 
@@ -119,7 +114,6 @@ class UsersControllerTest < ActionController::TestCase
             create_user(:email => nil)
           end
         end
-
         should_respond_with :success
         should "have errors on the user's email" do
           assert assigns(:user).errors.on(:email)
@@ -150,10 +144,7 @@ class UsersControllerTest < ActionController::TestCase
       should "suspend the user" do
         assert_equal User.find(@user.id).state, "suspended"
       end
-
-      #should_redirect_to("the users index page"){ users_path }
     end
-
   end
 
   context "on POST to activate" do
@@ -194,9 +185,7 @@ class UsersControllerTest < ActionController::TestCase
           assert_equal assigns(:user).state, "active"
         end
       end
-
     end
-
   end
 
   context "on POST to destroy" do

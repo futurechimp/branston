@@ -23,7 +23,6 @@ class UserRolesControllerTest < ActionController::TestCase
       assert_difference('UserRole.count') do
         post :create, :user_role => { :name => 'customer' }
       end
-
       assert_redirected_to user_role_path(assigns(:user_role))
     end
 
@@ -63,7 +62,6 @@ class UserRolesControllerTest < ActionController::TestCase
       assert_difference('UserRole.count', -1) do
         delete :destroy, :id => user.to_param
       end
-
       assert_redirected_to user_roles_path
     end
   end
