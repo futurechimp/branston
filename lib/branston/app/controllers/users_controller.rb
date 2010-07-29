@@ -16,8 +16,8 @@ class UsersController < ApplicationController
 
   layout 'main'
 
-  before_filter :login_required
   before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge, :activate]
+  before_filter :login_required
 
   def index
     @users = User.find(:all)
