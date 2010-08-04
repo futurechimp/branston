@@ -123,16 +123,13 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       context "on POST to suspend" do
-        context "when logged in" do
-          setup do
-            @user = User.make(:state => "active")
-            login_as(@user)
-            @original_state = @user.state
-            post :suspend, :id => @user.id
-          end
-          should "suspend the user" do
-            assert_equal User.find(@user.id).state, "suspended"
-          end
+        setup do
+          @user = User.make(:state => "active")
+          @original_state = @user.state
+          post :suspend, :id => @user.id
+        end
+        should "suspend the user" do
+          assert_equal User.find(@user.id).state, "suspended"
         end
       end
 
@@ -140,7 +137,6 @@ class UsersControllerTest < ActionController::TestCase
         context "when user has state 'suspended'" do
           setup do
             @user = User.make(:state => "suspended")
-            login_as(@user)
             @original_state = @user.state
             @user.activated_at = Time.now
             post :activate, :id => @user.id
@@ -153,7 +149,6 @@ class UsersControllerTest < ActionController::TestCase
         context "when user has state 'pending'" do
           setup do
             @user = User.make(:state => "pending")
-            login_as(@user)
             @original_state = @user.state
             @user.activated_at = Time.now
             post :activate, :id => @user.id
