@@ -90,9 +90,9 @@ class UserRolesControllerTest < ActionController::TestCase
       end
 
       should "destroy user_role" do
-        user = @user_role
+        user_role = @user_role
         assert_difference('UserRole.count', -1) do
-          delete :destroy, :id => user.to_param
+          delete :destroy, :id => user_role.to_param
         end
         assert_redirected_to user_roles_path
       end
