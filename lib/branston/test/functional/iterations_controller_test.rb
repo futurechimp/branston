@@ -3,10 +3,6 @@ require 'test_helper'
 class IterationsControllerTest < ActionController::TestCase
 
   context "The IterationsController" do
-    setup do
-      @user = User.make
-    end
-
     context "when the user is not logged in" do
       [:index, :new, :edit].each do |action|
         context "on GET to #{action.to_s}" do
@@ -42,6 +38,7 @@ class IterationsControllerTest < ActionController::TestCase
 
     context "when the user is logged in" do
       setup do
+        @user = User.make
         login_as(@user)
       end
 
@@ -189,29 +186,28 @@ class IterationsControllerTest < ActionController::TestCase
           end
         end
       end
-    end
 
-    context "showing an iteration with 5 stories" do
-      setup do
-        login_as(@user)
-        @iteration = Iteration.make
-        5.times do
-          @iteration.stories.push Story.make(:completed)
+      context "showing an iteration with 5 stories" do
+        setup do
+          @iteration = Iteration.make
+          5.times do
+            @iteration.stories.push Story.make(:completed)
+          end
+          get :show, :id => @iteration.to_param
         end
-        get :show, :id => @iteration.to_param
-      end
 
-      should "work" do
-        assert_response :success
-      end
+        should "work" do
+          assert_response :success
+        end
 
-      should "successfully respond with iteration data" do
-        assert assigns(:iteration)
-        assert assigns(:iteration_data)
-      end
+        should "successfully respond with iteration data" do
+          assert assigns(:iteration)
+          assert assigns(:iteration_data)
+        end
 
-      should "have 5 stories assigned to it" do
-        assert_equal assigns(:iteration).stories.length, 5
+        should "have 5 stories assigned to it" do
+          assert_equal assigns(:iteration).stories.length, 5
+        end
       end
     end
   end
