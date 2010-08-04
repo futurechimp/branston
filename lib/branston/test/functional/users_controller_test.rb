@@ -177,8 +177,6 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
 
-
-
   protected
 
   def create_user(options = {})
