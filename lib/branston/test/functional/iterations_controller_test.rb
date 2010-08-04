@@ -41,9 +41,12 @@ class IterationsControllerTest < ActionController::TestCase
     end
 
     context "when the user is logged in" do
+      setup do
+        login_as(@user)
+      end
+
       context "when there are no iterations yet" do
         setup do
-          login_as(@user)
           get :index
         end
 
@@ -52,12 +55,9 @@ class IterationsControllerTest < ActionController::TestCase
           assert_not_nil assigns(:iterations)
         end
       end
-    end
 
-    context "when at least one iteration exists" do
-      context "when the user is logged in" do
+      context "when at least one iteration exists" do
         setup do
-          login_as(@user)
           @iteration = Iteration.make
         end
 
@@ -101,7 +101,6 @@ class IterationsControllerTest < ActionController::TestCase
 
           assert_redirected_to iterations_path
         end
-
 
         context "creating an iteration" do
           context "with valid params" do
