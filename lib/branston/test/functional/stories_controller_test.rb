@@ -77,7 +77,6 @@ class StoriesControllerTest < ActionController::TestCase
       end
 
       context "creating a story" do
-
         context "with valid params" do
           setup do
             assert_difference("Story.count") do
