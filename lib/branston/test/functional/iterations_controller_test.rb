@@ -33,7 +33,6 @@ class IterationsControllerTest < ActionController::TestCase
           assert_redirected_to new_session_path
         end
       end
-
     end
 
     context "when the user is logged in" do
