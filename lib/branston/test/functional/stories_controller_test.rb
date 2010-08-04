@@ -206,18 +206,25 @@ class StoriesControllerTest < ActionController::TestCase
       end
     end
 
-    context "Without logging in, the StoriesController" do
-      should "show details about a story" do
-        get :show, :id => @story.to_param, :iteration_id => @iteration.to_param
-        assert_response :success
-      end
+    context "When a request comes from the Branston client, the StoriesController" do
+      context "with a username and password" do
+        setup do
+          @user = User.make
+          get :show,
+            :id => @story.to_param, :iteration_id => @iteration.to_param,
+            :username => @user.username, :password => "password"
+        end
 
-      should "fail gracefully if the slug is not found" do
-        get :show, :id => 'none-such-story', :iteration_id => @iteration.to_param
-        assert_response 404
+        should_eventually "show details about a story" do
+          assert_response :success
+        end
+
+        should_eventually "fail gracefully if the slug is not found" do
+          get :show, :id => 'none-such-story', :iteration_id => @iteration.to_param
+          assert_response 404
+        end
       end
     end
-
   end
 end
 
