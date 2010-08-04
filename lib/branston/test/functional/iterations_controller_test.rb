@@ -9,18 +9,30 @@ class IterationsControllerTest < ActionController::TestCase
     end
 
     context "when there are no iterations yet" do
+      context "when the user is not logged in" do
+        setup do
+          get :index
+        end
 
-      should "get index" do
-        login_as(@user)
-        get :index
-        assert_response :success
-        assert_not_nil assigns(:iterations)
+        should "redirect to login" do
+          assert_redirected_to new_session_path
+        end
       end
 
+      context "when the user is logged in" do
+        setup do
+          login_as(@user)
+          get :index
+        end
+
+        should "get index" do
+          assert_response :success
+          assert_not_nil assigns(:iterations)
+        end
+      end
     end
 
     context "when at least one iteration exists" do
-
       setup do
         login_as(@user)
         @iteration = Iteration.make
@@ -58,7 +70,6 @@ class IterationsControllerTest < ActionController::TestCase
       end
 
       context "creating an iteration" do
-
         context "with valid params" do
           setup do
             login_as(@user)
@@ -86,7 +97,6 @@ class IterationsControllerTest < ActionController::TestCase
               assert assigns(:iteration).release
             end
           end
-
         end
 
         context "with invalid params" do
@@ -104,7 +114,6 @@ class IterationsControllerTest < ActionController::TestCase
           should "retrieve all releases" do
             assert assigns(:releases)
           end
-
         end
       end
 
@@ -130,7 +139,6 @@ class IterationsControllerTest < ActionController::TestCase
               assert assigns(:iteration).release
             end
           end
-
         end
 
         context "with invalid parameters" do
@@ -148,31 +156,23 @@ class IterationsControllerTest < ActionController::TestCase
         end
       end
     end
-    
+
     context "showing an iteration" do
-      
       setup do
-        
         login_as(@user)
-        
         @iteration = Iteration.make
         5.times do
           @iteration.stories.push Story.make(:completed)
         end
-        
         get :show, :id => @iteration.to_param
-      
       end
-      
+
       should "successfully respond with iteration data" do
         assert_response :success
         assert assigns(:iteration)
         assert assigns(:iteration_data)
       end
-      
-    end 
-
+    end
   end
-
 end
 
