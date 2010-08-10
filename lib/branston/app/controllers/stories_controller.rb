@@ -15,7 +15,8 @@
 class StoriesController < ApplicationController
 
   layout 'main'
-  before_filter :login_required
+  before_filter :login_or_password_required, :only => [:show, :generate_feature]
+  before_filter :login_required, :except => [:show, :generate_feature]
   before_filter :retrieve_iterations, :except => [:generate_feature]
   before_filter :load_iteration, :except => [:generate_feature, :show]
   in_place_edit_for :story, :title
@@ -155,5 +156,15 @@ class StoriesController < ApplicationController
   def load_iteration
     @iteration = Iteration.find(params[:iteration_id])
   end
+
+  def login_or_password_required
+    user = User.authenticate(params[:login], params[:password])
+    if user
+      return true
+    else
+      return false
+    end
+  end
+
 end
 
