@@ -70,6 +70,16 @@ class UsersControllerTest < ActionController::TestCase
           should_redirect_to("the home page"){ root_path }
         end
 
+        context "with the :state param set to 'active'" do
+          setup do
+            create_user(:state => "active")
+          end
+
+          should "create user with state 'pending'" do
+            assert_equal assigns(:user).state, "pending"
+          end
+        end
+
         context "with no login supplied" do
           setup do
             assert_no_difference 'User.count' do
