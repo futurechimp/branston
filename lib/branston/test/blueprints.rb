@@ -82,10 +82,6 @@ Story.blueprint(:completed) do
   status { 'completed' }
 end
 
-UserRole.blueprint do
-  name
-end
-
 module Factory
   class << self
 

@@ -5,7 +5,6 @@ class StoryTest < ActiveSupport::TestCase
 
   should_validate_presence_of :description, :points
   should_have_many :scenarios
-  should_have_one :user_role
   should_belong_to :iteration
   should_belong_to :author
 

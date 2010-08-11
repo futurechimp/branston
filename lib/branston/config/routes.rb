@@ -11,7 +11,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :preconditions
   map.resources :releases
   map.resource :session
-  map.resources :user_roles
   map.resources :users, :member => { :suspend => :get, :activate => :get }
 
   # Named routes

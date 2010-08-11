@@ -6,7 +6,6 @@ CREATE TABLE "releases" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "relea
 CREATE TABLE "scenarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "story_id" integer, "created_at" datetime, "updated_at" datetime);
 CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
 CREATE TABLE "stories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" text, "points" integer, "iteration_id" integer, "created_at" datetime, "updated_at" datetime, "title" varchar(40), "author_id" integer, "slug" varchar(255) DEFAULT '' NOT NULL, "status" varchar(10), "completed_date" date);
-CREATE TABLE "user_roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime, "story_id" integer);
 CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'pending', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40));
 CREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login");
 CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version");
@@ -15,8 +14,6 @@ INSERT INTO schema_migrations (version) VALUES ('20091127114237');
 INSERT INTO schema_migrations (version) VALUES ('20091127120627');
 
 INSERT INTO schema_migrations (version) VALUES ('20091127122422');
-
-INSERT INTO schema_migrations (version) VALUES ('20091127131037');
 
 INSERT INTO schema_migrations (version) VALUES ('20091127144645');
 
@@ -27,8 +24,6 @@ INSERT INTO schema_migrations (version) VALUES ('20091127164446');
 INSERT INTO schema_migrations (version) VALUES ('20091127164705');
 
 INSERT INTO schema_migrations (version) VALUES ('20091127172849');
-
-INSERT INTO schema_migrations (version) VALUES ('20091127172950');
 
 INSERT INTO schema_migrations (version) VALUES ('20091127173744');
 
@@ -43,3 +38,5 @@ INSERT INTO schema_migrations (version) VALUES ('20100723161424');
 INSERT INTO schema_migrations (version) VALUES ('20100726150322');
 
 INSERT INTO schema_migrations (version) VALUES ('20100729125551');
+
+INSERT INTO schema_migrations (version) VALUES ('20100810170324');
