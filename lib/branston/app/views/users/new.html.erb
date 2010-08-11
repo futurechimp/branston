@@ -1,4 +1,4 @@
-<h1>Sign up as a new user</h1>
+<h1>Create a new user</h1>
 <% @user.password = @user.password_confirmation = nil %>
 
 <%= error_messages_for :user %>
@@ -23,6 +23,6 @@
   <%= f.password_field :password_confirmation %>
 </p>
 
-<p class="form-navigation"><%= submit_tag 'Sign up' %></p>
+<p class="form-navigation"><%= submit_tag 'Create user' %></p>
 <% end -%>
 

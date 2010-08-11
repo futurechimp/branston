@@ -41,6 +41,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def suspend
     @user.suspend!
     redirect_to users_path

@@ -179,6 +179,15 @@ class UsersControllerTest < ActionController::TestCase
           assert_equal assigns(:user).state, "deleted"
         end
       end
+
+      context "on GET to edit" do
+        setup do
+          get :edit
+        end
+        should_respond_with :success
+        should_render_template "edit"
+      end
+
     end
   end
 
