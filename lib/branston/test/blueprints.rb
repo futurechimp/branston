@@ -20,6 +20,7 @@ end
 User.blueprint do
   login
   email
+  is_admin  { false }
   password { 'monkey' }
   password_confirmation { 'monkey' }
 end
@@ -32,6 +33,10 @@ User.blueprint(:quentin) do
   created_at { 5.days.ago.to_s :db  }
   remember_token_expires_at { 1.days.from_now.to_s }
   remember_token { '77de68daecd823babbb58edb1c8e14d7106e83bb' }
+end
+
+User.blueprint(:admin) do
+  is_admin { true }
 end
 
 Iteration.blueprint do

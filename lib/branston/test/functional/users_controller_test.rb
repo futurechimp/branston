@@ -182,12 +182,120 @@ class UsersControllerTest < ActionController::TestCase
 
       context "on GET to edit" do
         setup do
-          get :edit
+          @user = User.make
         end
-        should_respond_with :success
-        should_render_template "edit"
+        context "as an admin user" do
+          setup do
+            @admin = User.make(:admin)
+            login_as(@admin)
+            get :edit, :id => @user.id
+          end
+          should_respond_with :success
+          should_render_template "edit"
+          should_assign_to :user
+          should "retrieve the right user" do
+            assert_equal @user, assigns(:user)
+          end
+        end
+
+        context "for a user changing their own details" do
+          setup do
+            login_as(@user)
+            get :edit, :id => @user.id
+          end
+          should_respond_with :success
+          should_render_template "edit"
+          should_assign_to :user
+          should "retrieve the right user" do
+            assert_equal @user, assigns(:user)
+          end
+        end
+
+        context "for a non-admin user" do
+          setup do
+            get :edit, :id => @user.id
+          end
+          should_not_assign_to :user
+          should_set_the_flash_to "You are not allowed to edit users."
+          should_redirect_to("the users list") { users_path }
+        end
       end
 
+      context "on PUT to update" do
+        context "as an admin user" do
+          setup do
+            @user = User.make
+            @admin = User.make(:admin)
+            login_as(@admin)
+          end
+          context "with good params" do
+            setup do
+              put :update, :id => @user.id, :user => {:email => "foo@superfoo.org", :is_admin => true }
+            end
+            should_redirect_to("the users list") { users_path }
+            should_assign_to :user
+            should "retrieve the right user" do
+              assert_equal @user, assigns(:user)
+            end
+            should "update the email properly" do
+              assert_equal "foo@superfoo.org", assigns(:user).email
+            end
+            should "not allow the is_admin state to change" do
+              assert_equal false, assigns(:user).is_admin
+            end
+          end
+
+          context "with bad params" do
+            setup do
+              put :update, :id => @user.id, :user => {:email => "foo", :is_admin => true }
+            end
+            should_respond_with :success
+            should_render_template 'edit'
+          end
+        end
+
+        context "as the user changing their own details" do
+          setup do
+            @user = User.make
+            login_as(@user)
+          end
+
+          context "with good params" do
+            setup do
+              put :update, :id => @user.id, :user => {:email => "foo@superfoo.org", :is_admin => true }
+            end
+            should_redirect_to("the users list") { users_path }
+            should_assign_to :user
+            should "retrieve the right user" do
+              assert_equal @user, assigns(:user)
+            end
+            should "update the email properly" do
+              assert_equal "foo@superfoo.org", assigns(:user).email
+            end
+            should "not allow the is_admin state to change" do
+              assert_equal false, assigns(:user).is_admin
+            end
+          end
+          context "with bad params" do
+            setup do
+              put :update, :id => @user.id, :user => {:email => "foo", :is_admin => true }
+            end
+            should_respond_with :success
+            should_render_template 'edit'
+          end
+        end
+
+        context "as some random non-admin user" do
+          setup do
+            @user = User.make
+            @another_user = User.make
+            login_as(@another_user)
+            put :update, :id => @user.id, :user => {:email => "foo", :is_admin => true }
+          end
+          should_redirect_to("the users page") { users_path }
+          should_set_the_flash_to "You are not allowed to edit users."
+        end
+      end
     end
   end
 

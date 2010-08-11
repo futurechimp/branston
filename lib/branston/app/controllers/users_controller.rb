@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
   before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge, :activate]
   before_filter :login_required
+  before_filter :must_be_admin_or_self, :only => [:edit, :update]
 
   def index
     @users = User.find(:all)
@@ -42,6 +43,16 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      redirect_to users_path
+    else
+      render :action => 'edit'
+    end
   end
 
   def suspend
@@ -59,13 +70,19 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  # There's no page here to update or destroy a <%= file_name %>.  If you add those, be
-  # smart -- make sure you check that the visitor is authorized to do so, that they
-  # supply their old password along with a new one to update it, etc.
+  protected
 
-protected
   def find_user
     @user = User.find(params[:id])
+  end
+
+  def must_be_admin_or_self
+    user = User.find(params[:id])
+    unless current_user.is_admin || current_user == user
+      flash[:error] = "You are not allowed to edit users."
+      redirect_to users_path
+      return false
+    end
   end
 
 end
