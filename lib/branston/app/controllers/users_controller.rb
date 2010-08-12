@@ -76,6 +76,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  # A security filter which freezes out all non-admin users except the user
+  # who is the user identified by params[:id]
+  #
   def must_be_admin_or_self
     user = User.find(params[:id])
     unless current_user.is_admin || current_user == user
@@ -84,6 +87,8 @@ class UsersController < ApplicationController
     end
   end
 
+  # A security filter which freezes out all non-admin users.
+  #
   def must_be_admin
     unless current_user.is_admin
       flash[:error] = "You are not allowed to do that."
