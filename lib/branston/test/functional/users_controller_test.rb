@@ -257,8 +257,8 @@ class UsersControllerTest < ActionController::TestCase
             should "update the email properly" do
               assert_equal "foo@superfoo.org", assigns(:user).email
             end
-            should "not allow the is_admin state to change" do
-              assert_equal false, assigns(:user).is_admin
+            should "allow the is_admin state to change" do
+              assert_equal true, assigns(:user).is_admin
             end
           end
 
