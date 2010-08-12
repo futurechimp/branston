@@ -28,8 +28,8 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 
 config.gem "cucumber", :lib => false, :version => '0.4.4'
-config.gem "thoughtbot-shoulda", :lib => false, :source => "http://gems.github.com"
-config.gem "notahat-machinist", :lib => false, :source => "http://gems.github.com"
+config.gem "shoulda", :lib => false, :source => "http://gems.github.com"
+config.gem "machinist", :lib => false, :source => "http://gems.github.com"
 config.gem 'webrat', :lib => false
 config.gem "faker", :lib => false
 config.gem "relevance-rcov", :lib => false
