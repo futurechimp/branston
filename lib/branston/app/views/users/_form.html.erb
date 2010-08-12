@@ -18,8 +18,10 @@
   <%= f.password_field :password_confirmation %>
 </p>
 
-<p class="form-fields">
-  <%= label_tag 'is_admin', 'Is admin?' %>
-  <%= f.check_box :is_admin %>
-</p>
+<% if current_user.is_admin -%>
+  <p class="form-fields">
+    <%= label_tag 'is_admin', 'Is admin?' %>
+    <%= f.check_box :is_admin %>
+  </p>
+<% end -%>
 
