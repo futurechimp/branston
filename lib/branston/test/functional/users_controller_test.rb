@@ -68,11 +68,14 @@ class UsersControllerTest < ActionController::TestCase
           context "with all parameters" do
             setup do
               assert_difference 'User.count' do
-                create_user
+                create_user(:is_admin => true)
               end
             end
 
             should redirect_to("the users page"){ users_path }
+            should "set the user to be an admin" do
+              assert_equal assigns(:user).is_admin, true
+            end
           end
 
           context "with the :state param set to 'active'" do
@@ -80,8 +83,8 @@ class UsersControllerTest < ActionController::TestCase
               create_user(:state => "active")
             end
 
-            should "create user with state 'pending'" do
-              assert_equal assigns(:user).state, "pending"
+            should "create user with state 'active'" do
+              assert_equal assigns(:user).state, "active"
             end
           end
 

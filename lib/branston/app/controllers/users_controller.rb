@@ -31,9 +31,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    logout_keeping_session!
     @user = User.new(params[:user])
-    @user.state = "pending"
+    @user.is_admin = params[:user][:is_admin] if current_user.is_admin
     if @user && @user.valid? && @user.save!
       redirect_to users_url
       flash[:notice] = "User created."
