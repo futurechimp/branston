@@ -36,6 +36,19 @@ class UsersControllerTest < ActionController::TestCase
           assert_redirected_to new_session_path
         end
       end
+
+      [:activate, :suspend, :destroy].each do |action|
+        context "on POST to #{action.to_s}" do
+          setup do
+            post action
+          end
+
+          should "redirect to login" do
+            assert_redirected_to new_session_path
+          end
+        end
+      end
+
     end
 
     context "when logged in" do
@@ -53,10 +66,22 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       context "on GET to new" do
-        setup do
-          get :new
+        context "as an admin user" do
+          setup do
+            @admin = User.make(:admin)
+            login_as(@admin)
+            get :new
+          end
+          should respond_with :success
         end
-        should respond_with :success
+        context "as a non-admin user" do
+          setup do
+            login_as(User.make)
+            get :new
+          end
+          should redirect_to("the users page") { users_path }
+          should set_the_flash.to("You are not allowed to do that.")
+        end
       end
 
       context "on POST to create" do
@@ -148,55 +173,79 @@ class UsersControllerTest < ActionController::TestCase
           end
 
           should redirect_to("the users page") { users_path }
-          should set_the_flash.to("You are not allowed to create users.")
+          should set_the_flash.to("You are not allowed to do that.")
+        end
+      end
+
+      [:activate, :suspend, :destroy].each do |action|
+        context "on POST to #{action.to_s}" do
+          context "as a non-admin user" do
+            setup do
+              post action, :id => User.make.id
+            end
+            should redirect_to("the users page"){ users_path }
+            should set_the_flash.to("You are not allowed to do that.")
+          end
         end
       end
 
       context "on POST to suspend" do
-        setup do
-          @user = User.make(:state => "active")
-          @original_state = @user.state
-          post :suspend, :id => @user.id
-        end
-        should "suspend the user" do
-          assert_equal User.find(@user.id).state, "suspended"
+        context "as an admin user" do
+          setup do
+            login_as(User.make(:admin))
+            @user = User.make(:state => "active")
+            @original_state = @user.state
+            post :suspend, :id => @user.id
+          end
+          should "suspend the user" do
+            assert_equal User.find(@user.id).state, "suspended"
+          end
         end
       end
 
       context "on POST to activate" do
-        context "when user has state 'suspended'" do
-          setup do
-            @user = User.make(:state => "suspended")
-            @original_state = @user.state
-            @user.activated_at = Time.now
-            post :activate, :id => @user.id
-          end
-          should "activate the user" do
-            assert_equal assigns(:user).state, "active"
+        context "as an admin user" do
+          context "when user has state 'suspended'" do
+            setup do
+              login_as(User.make(:admin))
+              @user = User.make(:state => "suspended")
+              @original_state = @user.state
+              @user.activated_at = Time.now
+              post :activate, :id => @user.id
+            end
+            should "activate the user" do
+              assert_equal "active", assigns(:user).state
+            end
           end
         end
 
         context "when user has state 'pending'" do
-          setup do
-            @user = User.make(:state => "pending")
-            @original_state = @user.state
-            @user.activated_at = Time.now
-            post :activate, :id => @user.id
-          end
-          should "activate the user" do
-            assert_equal assigns(:user).state, "active"
+          context "as an admin user" do
+            setup do
+              login_as(User.make(:admin))
+              @user = User.make(:state => "pending")
+              @original_state = @user.state
+              @user.activated_at = Time.now
+              post :activate, :id => @user.id
+            end
+            should "activate the user" do
+              assert_equal assigns(:user).state, "active"
+            end
           end
         end
       end
 
       context "on POST to destroy" do
-        setup do
-          @user = User.make(:state => "pending")
-          @original_state = @user.state
-          post :destroy, :id => @user.id
-        end
-        should "delete the user" do
-          assert_equal assigns(:user).state, "deleted"
+        context "as an admin user" do
+          setup do
+            login_as(User.make(:admin))
+            @user = User.make(:state => "pending")
+            @original_state = @user.state
+            post :destroy, :id => @user.id
+          end
+          should "delete the user" do
+            assert_equal assigns(:user).state, "deleted"
+          end
         end
       end
 
@@ -236,7 +285,7 @@ class UsersControllerTest < ActionController::TestCase
             get :edit, :id => @user.id
           end
           should_not assign_to :user
-          should set_the_flash.to "You are not allowed to edit users."
+          should set_the_flash.to "You are not allowed to do that."
           should redirect_to("the users list") { users_path }
         end
       end
@@ -313,7 +362,7 @@ class UsersControllerTest < ActionController::TestCase
             put :update, :id => @user.id, :user => {:email => "foo", :is_admin => true }
           end
           should redirect_to("the users page") { users_path }
-          should set_the_flash.to "You are not allowed to edit users."
+          should set_the_flash.to "You are not allowed to do that."
         end
       end
     end

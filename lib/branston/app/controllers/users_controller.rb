@@ -16,16 +16,15 @@ class UsersController < ApplicationController
 
   layout 'main'
 
-  before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge, :activate]
   before_filter :login_required
+  before_filter :find_user, :only => [:suspend, :destroy, :activate]
+  before_filter :must_be_admin, :only => [:new, :create, :destroy, :suspend, :activate]
   before_filter :must_be_admin_or_self, :only => [:edit, :update]
-  before_filter :must_be_admin, :only => [:create]
 
   def index
     @users = User.find(:all)
   end
 
-  # render new.rhtml
   def new
     @user = User.new
   end
@@ -80,14 +79,14 @@ class UsersController < ApplicationController
   def must_be_admin_or_self
     user = User.find(params[:id])
     unless current_user.is_admin || current_user == user
-      flash[:error] = "You are not allowed to edit users."
+      flash[:error] = "You are not allowed to do that."
       redirect_to users_path
     end
   end
 
   def must_be_admin
     unless current_user.is_admin
-      flash[:error] = "You are not allowed to create users."
+      flash[:error] = "You are not allowed to do that."
       redirect_to users_path
     end
   end
