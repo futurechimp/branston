@@ -2,11 +2,11 @@ require 'test_helper'
 
 class ScenarioTest < ActiveSupport::TestCase
 
-  should_validate_presence_of :title
+  should validate_presence_of :title
 
-  should_belong_to :story
-  should_have_many :preconditions
-  should_have_many :outcomes
+  should belong_to :story
+  should have_many :preconditions
+  should have_many :outcomes
 
 end
 

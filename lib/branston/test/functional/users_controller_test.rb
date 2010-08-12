@@ -47,16 +47,16 @@ class UsersControllerTest < ActionController::TestCase
         setup do
           get :index
         end
-        should_respond_with :success
-        should_render_template :index
-        should_assign_to :users
+        should respond_with :success
+        should render_template :index
+        should assign_to :users
       end
 
       context "on GET to new" do
         setup do
           get :new
         end
-        should_respond_with :success
+        should respond_with :success
       end
 
       context "on POST to create" do
@@ -67,7 +67,7 @@ class UsersControllerTest < ActionController::TestCase
             end
           end
 
-          should_redirect_to("the home page"){ root_path }
+          should redirect_to("the home page"){ root_path }
         end
 
         context "with the :state param set to 'active'" do
@@ -87,7 +87,7 @@ class UsersControllerTest < ActionController::TestCase
             end
           end
 
-          should_respond_with :success
+          should respond_with :success
           should "have errors on the user's login" do
             assert assigns(:user).errors.on(:login)
           end
@@ -100,7 +100,7 @@ class UsersControllerTest < ActionController::TestCase
             end
           end
 
-          should_respond_with :success
+          should respond_with :success
           should "have errors on the user's password" do
             assert assigns(:user).errors.on(:password)
           end
@@ -113,7 +113,7 @@ class UsersControllerTest < ActionController::TestCase
             end
           end
 
-          should_respond_with :success
+          should respond_with :success
           should "have errors on the user's password_confirmation" do
             assert assigns(:user).errors.on(:password_confirmation)
           end
@@ -125,7 +125,7 @@ class UsersControllerTest < ActionController::TestCase
               create_user(:email => nil)
             end
           end
-          should_respond_with :success
+          should respond_with :success
           should "have errors on the user's email" do
             assert assigns(:user).errors.on(:email)
           end
@@ -190,9 +190,9 @@ class UsersControllerTest < ActionController::TestCase
             login_as(@admin)
             get :edit, :id => @user.id
           end
-          should_respond_with :success
-          should_render_template "edit"
-          should_assign_to :user
+          should respond_with :success
+          should render_template "edit"
+          should assign_to :user
           should "retrieve the right user" do
             assert_equal @user, assigns(:user)
           end
@@ -203,9 +203,9 @@ class UsersControllerTest < ActionController::TestCase
             login_as(@user)
             get :edit, :id => @user.id
           end
-          should_respond_with :success
-          should_render_template "edit"
-          should_assign_to :user
+          should respond_with :success
+          should render_template "edit"
+          should assign_to :user
           should "retrieve the right user" do
             assert_equal @user, assigns(:user)
           end
@@ -215,9 +215,9 @@ class UsersControllerTest < ActionController::TestCase
           setup do
             get :edit, :id => @user.id
           end
-          should_not_assign_to :user
-          should_set_the_flash_to "You are not allowed to edit users."
-          should_redirect_to("the users list") { users_path }
+          should_not assign_to :user
+          should set_the_flash.to "You are not allowed to edit users."
+          should redirect_to("the users list") { users_path }
         end
       end
 
@@ -232,8 +232,8 @@ class UsersControllerTest < ActionController::TestCase
             setup do
               put :update, :id => @user.id, :user => {:email => "foo@superfoo.org", :is_admin => true }
             end
-            should_redirect_to("the users list") { users_path }
-            should_assign_to :user
+            should redirect_to("the users list") { users_path }
+            should assign_to :user
             should "retrieve the right user" do
               assert_equal @user, assigns(:user)
             end
@@ -249,8 +249,8 @@ class UsersControllerTest < ActionController::TestCase
             setup do
               put :update, :id => @user.id, :user => {:email => "foo", :is_admin => true }
             end
-            should_respond_with :success
-            should_render_template 'edit'
+            should respond_with :success
+            should render_template 'edit'
           end
         end
 
@@ -264,8 +264,8 @@ class UsersControllerTest < ActionController::TestCase
             setup do
               put :update, :id => @user.id, :user => {:email => "foo@superfoo.org", :is_admin => true }
             end
-            should_redirect_to("the users list") { users_path }
-            should_assign_to :user
+            should redirect_to("the users list") { users_path }
+            should assign_to :user
             should "retrieve the right user" do
               assert_equal @user, assigns(:user)
             end
@@ -280,8 +280,8 @@ class UsersControllerTest < ActionController::TestCase
             setup do
               put :update, :id => @user.id, :user => {:email => "foo", :is_admin => true }
             end
-            should_respond_with :success
-            should_render_template 'edit'
+            should respond_with :success
+            should render_template 'edit'
           end
         end
 
@@ -292,8 +292,8 @@ class UsersControllerTest < ActionController::TestCase
             login_as(@another_user)
             put :update, :id => @user.id, :user => {:email => "foo", :is_admin => true }
           end
-          should_redirect_to("the users page") { users_path }
-          should_set_the_flash_to "You are not allowed to edit users."
+          should redirect_to("the users page") { users_path }
+          should set_the_flash.to "You are not allowed to edit users."
         end
       end
     end

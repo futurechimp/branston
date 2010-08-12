@@ -3,10 +3,11 @@ include StoryGenerator
 
 class StoryTest < ActiveSupport::TestCase
 
-  should_validate_presence_of :description, :points
-  should_have_many :scenarios
-  should_belong_to :iteration
-  should_belong_to :author
+  should validate_presence_of :description
+  should validate_presence_of :points
+  should have_many :scenarios
+  should belong_to :iteration
+  should belong_to :author
 
   context "a Story" do
     setup do
