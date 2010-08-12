@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(:version => 20100812143455) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
-    t.string   "state",                                    :default => "pending"
+    t.string   "state",                                    :default => "active"
     t.datetime "deleted_at"
     t.datetime "activated_at"
     t.string   "activation_code",           :limit => 40

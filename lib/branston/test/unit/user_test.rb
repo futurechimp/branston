@@ -57,7 +57,7 @@ class UserTest < ActiveSupport::TestCase
       end
 
       should "start life in the state 'pending'" do
-        assert_equal("pending", @user.state)
+        assert_equal("active", @user.state)
       end
 
       context "on activate" do
