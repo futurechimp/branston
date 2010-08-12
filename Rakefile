@@ -10,7 +10,11 @@ begin
     gem.email = "dave.hrycyszyn@headlondon.com"
     gem.homepage = "http://github.com/futurechimp/branston"
     gem.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.add_development_dependency "shoulda", ">= 0"
+    gem.add_development_dependency "machinist"
+    gem.add_development_dependency "relevance-rcov"
+    gem.add_development_dependency "ruby-prof"
+    gem.add_development_dependency "ruby-debug"
     gem.add_development_dependency "mocha"
     gem.add_dependency "rails", ">= 2.3.5"
     gem.add_dependency "calendar_date_select", ">= 1.15"
@@ -18,6 +22,7 @@ begin
     gem.add_dependency "googlecharts", ">= 1.4.0"
     gem.add_dependency "webrat", ">=0.5.3"
     gem.add_dependency "sqlite3-ruby", ">=0"
+    gem.add_dependency "aasm"
     gem.files = FileList['lib/**/*'].to_a
   end
   Jeweler::GemcutterTasks.new
