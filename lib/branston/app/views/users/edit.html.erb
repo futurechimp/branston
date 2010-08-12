@@ -1,2 +1,9 @@
-edit foo
+<h1>Edit user</h1>
+<% @user.password = @user.password_confirmation = nil %>
+
+<%= error_messages_for :user %>
+<% form_for(@user) do |f| -%>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p class="form-navigation"><%= submit_tag 'Update user' %></p>
+<% end -%>
 

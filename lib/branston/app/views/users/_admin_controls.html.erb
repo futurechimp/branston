@@ -1,4 +1,4 @@
-<%= user.login %> -
+<%= link_to user.login, edit_user_path(user) %> -
 
 <% if user.state == "active" -%>
   activate
