@@ -60,75 +60,92 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       context "on POST to create" do
-        context "with all parameters" do
+        context "as an admin user" do
           setup do
-            assert_difference 'User.count' do
-              create_user
+            @admin = User.make(:admin)
+            login_as(@admin)
+          end
+          context "with all parameters" do
+            setup do
+              assert_difference 'User.count' do
+                create_user
+              end
+            end
+
+            should redirect_to("the users page"){ users_path }
+          end
+
+          context "with the :state param set to 'active'" do
+            setup do
+              create_user(:state => "active")
+            end
+
+            should "create user with state 'pending'" do
+              assert_equal assigns(:user).state, "pending"
             end
           end
 
-          should redirect_to("the users page"){ users_path }
-        end
+          context "with no login supplied" do
+            setup do
+              assert_no_difference 'User.count' do
+                create_user(:login => nil)
+              end
+            end
 
-        context "with the :state param set to 'active'" do
-          setup do
-            create_user(:state => "active")
-          end
-
-          should "create user with state 'pending'" do
-            assert_equal assigns(:user).state, "pending"
-          end
-        end
-
-        context "with no login supplied" do
-          setup do
-            assert_no_difference 'User.count' do
-              create_user(:login => nil)
+            should respond_with :success
+            should "have errors on the user's login" do
+              assert assigns(:user).errors.on(:login)
             end
           end
 
-          should respond_with :success
-          should "have errors on the user's login" do
-            assert assigns(:user).errors.on(:login)
-          end
-        end
+          context "with no password supplied" do
+            setup do
+              assert_no_difference 'User.count' do
+                create_user(:password => nil)
+              end
+            end
 
-        context "with no password supplied" do
-          setup do
-            assert_no_difference 'User.count' do
-              create_user(:password => nil)
+            should respond_with :success
+            should "have errors on the user's password" do
+              assert assigns(:user).errors.on(:password)
             end
           end
 
-          should respond_with :success
-          should "have errors on the user's password" do
-            assert assigns(:user).errors.on(:password)
-          end
-        end
+          context "with no password_confirmation supplied" do
+            setup do
+              assert_no_difference 'User.count' do
+                create_user(:password_confirmation => nil)
+              end
+            end
 
-        context "with no password_confirmation supplied" do
-          setup do
-            assert_no_difference 'User.count' do
-              create_user(:password_confirmation => nil)
+            should respond_with :success
+            should "have errors on the user's password_confirmation" do
+              assert assigns(:user).errors.on(:password_confirmation)
             end
           end
 
-          should respond_with :success
-          should "have errors on the user's password_confirmation" do
-            assert assigns(:user).errors.on(:password_confirmation)
+          context "with no email supplied" do
+            setup do
+              assert_no_difference 'User.count' do
+                create_user(:email => nil)
+              end
+            end
+            should respond_with :success
+            should "have errors on the user's email" do
+              assert assigns(:user).errors.on(:email)
+            end
           end
         end
 
-        context "with no email supplied" do
+        context "as a non-admin user" do
           setup do
-            assert_no_difference 'User.count' do
-              create_user(:email => nil)
-            end
+            @user = User.make
+            login_as(@user)
+            post :create
           end
-          should respond_with :success
-          should "have errors on the user's email" do
-            assert assigns(:user).errors.on(:email)
-          end
+
+          should redirect_to("the users page") { users_path }
+          should set_the_flash.to("You are not allowed to create users.")
         end
       end
 

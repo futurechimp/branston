@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge, :activate]
   before_filter :login_required
   before_filter :must_be_admin_or_self, :only => [:edit, :update]
+  before_filter :must_be_admin, :only => [:create]
 
   def index
     @users = User.find(:all)
@@ -81,7 +82,13 @@ class UsersController < ApplicationController
     unless current_user.is_admin || current_user == user
       flash[:error] = "You are not allowed to edit users."
       redirect_to users_path
-      return false
+    end
+  end
+
+  def must_be_admin
+    unless current_user.is_admin
+      flash[:error] = "You are not allowed to create users."
+      redirect_to users_path
     end
   end
 
