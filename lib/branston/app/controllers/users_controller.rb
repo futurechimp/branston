@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.state = "pending"
     if @user && @user.valid? && @user.save!
-      redirect_back_or_default('/')
+      redirect_to users_url
       flash[:notice] = "User created."
     else
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."

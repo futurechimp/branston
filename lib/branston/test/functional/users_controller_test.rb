@@ -67,7 +67,7 @@ class UsersControllerTest < ActionController::TestCase
             end
           end
 
-          should redirect_to("the home page"){ root_path }
+          should redirect_to("the users page"){ users_path }
         end
 
         context "with the :state param set to 'active'" do
