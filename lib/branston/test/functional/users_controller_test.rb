@@ -359,10 +359,14 @@ class UsersControllerTest < ActionController::TestCase
             @user = User.make
             @another_user = User.make
             login_as(@another_user)
-            put :update, :id => @user.id, :user => {:email => "foo", :is_admin => true }
+            put :update, :id => @user.id, :user => {:email => "foo", :role => "admin" }
+            @user.reload
           end
           should redirect_to("the users page") { users_path }
           should set_the_flash.to "You are not allowed to do that."
+          should "not allow the role change" do
+            assert_not_equal("admin", @user.role)
+          end
         end
       end
     end
