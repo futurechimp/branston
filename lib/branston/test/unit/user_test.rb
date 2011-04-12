@@ -7,6 +7,12 @@ class UserTest < ActiveSupport::TestCase
   should have_many :participations
 
   context "the User class" do
+
+    should "have a ROLES array in a constant" do
+      assert_equal(["admin", "developer", "customer"], User::ROLES)
+    end
+
+
     should "create_user" do
       assert_difference 'User.count' do
         user = User.make
@@ -209,6 +215,32 @@ class UserTest < ActiveSupport::TestCase
 
     should "have the role 'customer'" do
       assert @quentin.has_role?("customer")
+    end
+
+    context "when setting the user's role" do
+      context "to some non-existent role" do
+        setup do
+          @quentin.role = "something that doesn't exist"
+        end
+
+        should "not allow setting of role to something not in ROLES constant" do
+          assert_raise(ActiveRecord::RecordInvalid) do
+            @quentin.save!
+          end
+        end
+
+        context "to a different, existing role" do
+          setup do
+            @quentin.role = "admin"
+          end
+
+          should "allow the role to be set" do
+            assert_nothing_raised do
+              @quentin.save!
+            end
+          end
+        end
+      end
     end
 
     should "not have the role 'admin'" do
