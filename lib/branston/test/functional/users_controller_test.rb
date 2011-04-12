@@ -93,13 +93,13 @@ class UsersControllerTest < ActionController::TestCase
           context "with all parameters" do
             setup do
               assert_difference 'User.count' do
-                create_user(:is_admin => true)
+                create_user(:role => "admin")
               end
             end
 
             should redirect_to("the users page"){ users_path }
             should "set the user to be an admin" do
-              assert_equal assigns(:user).is_admin, true
+              assert assigns(:user).has_role?("admin")
             end
           end
 
@@ -299,7 +299,7 @@ class UsersControllerTest < ActionController::TestCase
           end
           context "with good params" do
             setup do
-              put :update, :id => @user.id, :user => {:email => "foo@superfoo.org", :is_admin => true }
+              put :update, :id => @user.id, :user => {:email => "foo@superfoo.org", :role => "admin" }
             end
             should redirect_to("the users list") { users_path }
             should assign_to :user
@@ -309,14 +309,14 @@ class UsersControllerTest < ActionController::TestCase
             should "update the email properly" do
               assert_equal "foo@superfoo.org", assigns(:user).email
             end
-            should "allow the is_admin state to change" do
-              assert_equal true, assigns(:user).is_admin
+            should "allow the role change" do
+              assert_equal true, assigns(:user).has_role?("admin")
             end
           end
 
           context "with bad params" do
             setup do
-              put :update, :id => @user.id, :user => {:email => "foo", :is_admin => true }
+              put :update, :id => @user.id, :user => {:email => "foo", :role => "admin" }
             end
             should respond_with :success
             should render_template 'edit'
@@ -342,7 +342,7 @@ class UsersControllerTest < ActionController::TestCase
               assert_equal "foo@superfoo.org", assigns(:user).email
             end
             should "not allow the is_admin state to change" do
-              assert_equal false, assigns(:user).is_admin
+              assert_equal false, assigns(:user).has_role?("admin")
             end
           end
           context "with bad params" do

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100812143455) do
+ActiveRecord::Schema.define(:version => 20110408162438) do
 
   create_table "iterations", :force => true do |t|
     t.integer  "velocity"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20100812143455) do
     t.datetime "deleted_at"
     t.datetime "activated_at"
     t.string   "activation_code",           :limit => 40
-    t.boolean  "is_admin",                                 :default => false
+    t.string   "role"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

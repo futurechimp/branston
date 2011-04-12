@@ -207,6 +207,14 @@ class UserTest < ActiveSupport::TestCase
       @quentin = User.make(:quentin)
     end
 
+    should "have the role 'customer'" do
+      assert @quentin.has_role?("customer")
+    end
+
+    should "not have the role 'admin'" do
+      assert !@quentin.has_role?("admin")
+    end
+
     should "print its login when to_s is called" do
       assert_equal "quentin", @quentin.to_s
     end

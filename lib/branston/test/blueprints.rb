@@ -20,7 +20,7 @@ end
 User.blueprint do
   login
   email
-  is_admin  { false }
+  role  { "customer" }
   password { 'monkey' }
   password_confirmation { 'monkey' }
 end
@@ -36,7 +36,7 @@ User.blueprint(:quentin) do
 end
 
 User.blueprint(:admin) do
-  is_admin { true }
+  role { "admin" }
 end
 
 Iteration.blueprint do

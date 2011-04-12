@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.is_admin = params[:user][:is_admin] if current_user.is_admin
+    @user.role = params[:user][:role] if current_user.has_role?("admin")
     if @user && @user.valid? && @user.save!
       redirect_to users_url
       flash[:notice] = "User created."
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.is_admin = params[:user][:is_admin] if current_user.is_admin
+    @user.role = params[:user][:role] if current_user.has_role?("admin")
     if @user.update_attributes(params[:user])
       redirect_to users_path
     else
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
   #
   def must_be_admin_or_self
     user = User.find(params[:id])
-    unless current_user.is_admin || current_user == user
+    unless current_user.has_role?("admin") || current_user == user
       flash[:error] = "You are not allowed to do that."
       redirect_to users_path
     end
@@ -90,7 +90,7 @@ class UsersController < ApplicationController
   # A security filter which freezes out all non-admin users.
   #
   def must_be_admin
-    unless current_user.is_admin
+    unless current_user.has_role?("admin")
       flash[:error] = "You are not allowed to do that."
       redirect_to users_path
     end

@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
   end
 
 
+  def has_role?(role_name)
+    self.role == role_name
+  end
+
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
   # uff.  this is really an authorization, not authentication routine.

@@ -18,10 +18,10 @@
   <%= f.password_field :password_confirmation %>
 </p>
 
-<% if current_user.is_admin -%>
+<% if current_user.has_role?("admin") -%>
   <p class="form-fields">
-    <%= label_tag 'is_admin', 'Is admin?' %>
-    <%= f.check_box :is_admin %>
+    <%= label_tag 'role' %>
+    <%= f.select :role, ["admin", "client", "developer"] %>
   </p>
 <% end -%>
 
