@@ -31,8 +31,6 @@ GEM
     nokogiri (1.4.4)
     polyglot (0.2.9)
     rack (1.1.0)
-    rack-test (0.5.7)
-      rack (>= 1.0)
     rails (2.3.11)
       actionmailer (= 2.3.11)
       actionpack (= 2.3.11)
@@ -55,10 +53,9 @@ GEM
     term-ansicolor (1.0.4)
     treetop (1.4.2)
       polyglot (>= 0.2.5)
-    webrat (0.7.1)
+    webrat (0.5.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
-      rack-test (>= 0.5.3)
 
 PLATFORMS
   ruby
@@ -76,4 +73,4 @@ DEPENDENCIES
   ruby-prof
   shoulda
   sqlite3-ruby
-  webrat
+  webrat (~> 0.5.3)
