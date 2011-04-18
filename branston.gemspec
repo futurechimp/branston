@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{branston}
-  s.version = "0.6.4"
+  s.version = "0.6.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["dave.hrycyszyn@headlondon.com", "dan@dangarland.co.uk", "steve.laing@gmail.com"]
@@ -404,9 +404,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<mocha>, [">= 0"])
       s.add_runtime_dependency(%q<rails>, [">= 2.3.5"])
       s.add_runtime_dependency(%q<calendar_date_select>, [">= 1.15"])
-      s.add_runtime_dependency(%q<cucumber>, ["= 0.4.4"])
       s.add_runtime_dependency(%q<googlecharts>, [">= 1.4.0"])
-      s.add_runtime_dependency(%q<webrat>, [">= 0.5.3"])
       s.add_runtime_dependency(%q<aasm>, [">= 0"])
     else
       s.add_dependency(%q<shoulda>, [">= 0"])
@@ -417,9 +415,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<mocha>, [">= 0"])
       s.add_dependency(%q<rails>, [">= 2.3.5"])
       s.add_dependency(%q<calendar_date_select>, [">= 1.15"])
-      s.add_dependency(%q<cucumber>, ["= 0.4.4"])
       s.add_dependency(%q<googlecharts>, [">= 1.4.0"])
-      s.add_dependency(%q<webrat>, [">= 0.5.3"])
       s.add_dependency(%q<aasm>, [">= 0"])
     end
   else
@@ -431,9 +427,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<mocha>, [">= 0"])
     s.add_dependency(%q<rails>, [">= 2.3.5"])
     s.add_dependency(%q<calendar_date_select>, [">= 1.15"])
-    s.add_dependency(%q<cucumber>, ["= 0.4.4"])
     s.add_dependency(%q<googlecharts>, [">= 1.4.0"])
-    s.add_dependency(%q<webrat>, [">= 0.5.3"])
     s.add_dependency(%q<aasm>, [">= 0"])
   end
 end
