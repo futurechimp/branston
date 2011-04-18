@@ -21,7 +21,6 @@ begin
     gem.add_dependency "cucumber", "=0.4.4"
     gem.add_dependency "googlecharts", ">= 1.4.0"
     gem.add_dependency "webrat", ">=0.5.3"
-    gem.add_dependency "sqlite3-ruby", ">=0"
     gem.add_dependency "aasm"
     gem.files = FileList['lib/**/*'].to_a
   end
