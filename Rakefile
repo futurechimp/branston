@@ -18,9 +18,7 @@ begin
     gem.add_development_dependency "mocha"
     gem.add_dependency "rails", ">= 2.3.5"
     gem.add_dependency "calendar_date_select", ">= 1.15"
-    gem.add_dependency "cucumber", "=0.4.4"
     gem.add_dependency "googlecharts", ">= 1.4.0"
-    gem.add_dependency "webrat", ">=0.5.3"
     gem.add_dependency "aasm"
     gem.files = FileList['lib/**/*'].to_a
   end
