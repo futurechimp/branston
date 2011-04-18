@@ -122,7 +122,6 @@ Gem::Specification.new do |s|
     "lib/branston/config/locales/en.yml",
     "lib/branston/config/preinitializer.rb",
     "lib/branston/config/routes.rb",
-    "lib/branston/db/development.sqlite3",
     "lib/branston/db/development_structure.sql",
     "lib/branston/db/migrate/20091127114237_create_users.rb",
     "lib/branston/db/migrate/20091127120627_create_iterations.rb",
@@ -146,7 +145,6 @@ Gem::Specification.new do |s|
     "lib/branston/db/pristine.sqlite3",
     "lib/branston/db/schema.rb",
     "lib/branston/db/seeds.rb",
-    "lib/branston/db/test.sqlite3",
     "lib/branston/doc/README_FOR_APP",
     "lib/branston/doc/branston.zargo",
     "lib/branston/features/step_definitions/webrat_steps.rb",
@@ -162,8 +160,6 @@ Gem::Specification.new do |s|
     "lib/branston/lib/tasks/cucumber.rake",
     "lib/branston/lib/tasks/make_pristine_copy.rake",
     "lib/branston/log/cucumber.log",
-    "lib/branston/log/development.log",
-    "lib/branston/log/test.log",
     "lib/branston/public/404.html",
     "lib/branston/public/422.html",
     "lib/branston/public/500.html",
@@ -411,7 +407,6 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<cucumber>, ["= 0.4.4"])
       s.add_runtime_dependency(%q<googlecharts>, [">= 1.4.0"])
       s.add_runtime_dependency(%q<webrat>, [">= 0.5.3"])
-      s.add_runtime_dependency(%q<sqlite3-ruby>, [">= 0"])
       s.add_runtime_dependency(%q<aasm>, [">= 0"])
     else
       s.add_dependency(%q<shoulda>, [">= 0"])
@@ -425,7 +420,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<cucumber>, ["= 0.4.4"])
       s.add_dependency(%q<googlecharts>, [">= 1.4.0"])
       s.add_dependency(%q<webrat>, [">= 0.5.3"])
-      s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
       s.add_dependency(%q<aasm>, [">= 0"])
     end
   else
@@ -440,7 +434,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<cucumber>, ["= 0.4.4"])
     s.add_dependency(%q<googlecharts>, [">= 1.4.0"])
     s.add_dependency(%q<webrat>, [">= 0.5.3"])
-    s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
     s.add_dependency(%q<aasm>, [">= 0"])
   end
 end
