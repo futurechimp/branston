@@ -35,6 +35,7 @@ class Iteration < ActiveRecord::Base
       FROM stories
       WHERE iteration_id = ?
       AND status = 'completed'
+      OR status = 'quality_assurance'
       GROUP BY completed_date
       ORDER BY completed_date", id
     ]

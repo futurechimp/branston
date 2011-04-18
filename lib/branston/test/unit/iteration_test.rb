@@ -26,14 +26,10 @@ class IterationTest < ActiveSupport::TestCase
       end
     end
 
-    context "for completed stories" do
+    context "for completed and qa stories" do
       setup do
-        # TODO: why is this necessary? The blueprints seem a bit wonky.
-        users = User.all
-        users.each do |user|
-          user.destroy
-        end
         @iteration = Iteration.make
+        Story.make(:points => 5, :iteration => @iteration, :status => "quality_assurance")
         Story.make(:points => 5, :iteration => @iteration, :status => "completed")
         Story.make(:points => 2, :iteration => @iteration, :status => "completed")
       end
