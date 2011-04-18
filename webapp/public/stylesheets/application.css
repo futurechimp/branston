@@ -1,0 +1,76 @@
+/* App css */
+.clear-left {clear:left;}
+
+#flash_notice {display:block;border:2px solid green;color:green;background:#CCFFCC;padding:6px;margin:8px auto 8px auto;width:30%;text-align:center;}
+
+/* Wrappers for story lists */
+div#current-wrapper, div#backlog-wrapper {float:left;width:48%;margin-top:6px;}
+div#current-wrapper h3, div#backlog-wrapper h3 {padding:3px; font-weight:bold; text-transform:none; font-size:1.4em;}
+div#current-wrapper {margin-right:8px;}
+
+/* Add/Back link styling */
+div#content a.add { background: url(/images/icons/plus_icon_30x30.png) no-repeat left; padding-left:34px; font:1.1em verdana,arial,sans-serif; display:block; height:30px; line-height:25px;text-decoration:none;}
+div#content a.add:hover {text-decoration:underline;}
+div#content a.back { background: url(/images/icons/back_icon_30x23.png) no-repeat left; padding-left:34px; font:1.1em verdana,arial,sans-serif; display:block; height:28px; line-height:25px;text-decoration:none;}
+div#content a.add:hover {text-decoration:underline;}
+div#content a.add-small {background:url(/images/icons/plus_icon_15x15.png) no-repeat left;padding-left:18px;line-height:30px;}
+
+/* Form field and submit button styles.  */
+p.form-fields label {clear:left;float:left;text-align:right;display:block;width:100px;}
+p.form-fields input, p.form-fields textarea, p.form-fields select, p.form-fields img { margin-left:20px; }
+p.form-navigation {clear:left;margin-left:100px;padding-top:20px;}
+p.form-navigation a, p.form-navigation input {float:left; margin-left:20px;}
+
+/* Index stuff */
+div.index-head {display:block;height:40px;margin-bottom:6px;}
+div.index-head h2 {float:left;}
+div.index-head a.add {float:right;}
+
+/* Index tables TODO: rename class */
+table.index { width: 100%; }
+table.index th { -moz-border-radius: 5px; -webkit-border-radius: 5px; background:#4b3226; color:#fff; font-weight:bold; height:24px; padding:0 5px 0 5px; }
+table.index th.name {width:35%;}
+table.index tr.even {background:#fdf5e0;}
+table.index tr.odd {background:#f4e7c5;}
+table.index td {text-align:center; padding:4px; color:#321114;}
+
+/* Accordion styles */
+
+div.accordion { position: relative; width:100%; color:#321114; }
+
+div.accordion-toggle{
+	position: relative; /* required for effect */
+	z-index: 10;		/* required for effect */
+	background: #ffff69;
+	background-position: bottom;
+	cursor: pointer;
+	padding: 9px 14px 10px 14px;
+	border:1px solid #5d5852;
+    -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -webkit-border-radius: 5px;
+    height:25px;
+}
+
+div.accordion-toggle span.in_place_editor_field {float:left;font-weight:bold;display:inline-block;height:18px;}
+div.accordion-toggle a.delete-small, div.accordion-content a.delete-small {float:right;}
+div.accordion-toggle:hover, div.accordion-toggle-active{ background-color: #ffff99;}
+div.accordion-toggle-active {border-bottom:1px dotted grey;}
+div.accordion-content { overflow: hidden; background: #ffff99; padding: 0; border-left: 1px solid #a06b55; border-right: 1px solid #a06b55; border-bottom:1px solid #a06b55; min-width:449px; }
+div.accordion-content p { margin: 9px 24px 6px 24px; line-height:28px; }
+
+div.scenarios {clear:left;min-height:100px;margin:2px 4px 2px 4px;padding:3px;}
+div.scenario{border:1px dotted #b19d67;padding:3px;margin-bottom:2px;}
+div.scenarios-head h4, div.scenarios-head a {float:left;margin-left:6px;}
+div.scenarios-head a.add-small {float:right;margin-right:3px;}
+div.scenarios-foot {padding:3px;}
+
+div.scenario-title {border-bottom:1px dotted grey;height:20px;}
+div.scenario-title span {float:left;display:inline-block;height:18px;}
+
+div.preconditions, div.outcomes {border-bottom:1px dotted grey;clear:left;}
+div.preconditions ol li, div.outcomes ol li { margin:2px; font-size:0.95em;}
+
+div.story-props {display:block;height:30px;border-bottom:1px dotted grey;padding-top:4px;}
+div.story-props div {display:inline-block;float:left;margin-left:20px;line-height:25px;}
+
+#burndown_chart { margin-left:auto; margin-right:auto; width:800px; }
+#iteration_stats { margin-top : 30px; }

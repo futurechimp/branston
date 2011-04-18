@@ -1,0 +1,1220 @@
+# Logfile created on Fri Apr 08 17:09:19 +0100 2011  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (27.6ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (133.2ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (75.4ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20091127114237)
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (28.6ms)[0m   [0;1mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091127114237')[0m
+Migrating to CreateIterations (20091127120627)
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "iterations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "velocity" integer, "name" varchar(255), "start_date" datetime, "end_date" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091127120627')[0m
+Migrating to CreateStories (20091127122422)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "stories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" text, "points" integer, "iteration_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (7.9ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091127122422')[0m
+Migrating to CreateParticipations (20091127144645)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "participations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "iteration_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091127144645')[0m
+Migrating to CreateScenarios (20091127164217)
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE TABLE "scenarios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "story_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091127164217')[0m
+Migrating to CreatePreconditions (20091127164446)
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE TABLE "preconditions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar(255), "scenario_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091127164446')[0m
+Migrating to CreateOutcomes (20091127164705)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "outcomes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar(255), "scenario_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091127164705')[0m
+Migrating to AddTitleToStories (20091127172849)
+  [4;36;1mSQL (0.8ms)[0m   [0;1mALTER TABLE "stories" ADD "title" varchar(40)[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091127172849')[0m
+Migrating to AddAuthorIdToStory (20091127173744)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mALTER TABLE "stories" ADD "author_id" integer[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091127173744')[0m
+Migrating to CreateReleases (20091202105555)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "releases" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "release_date" date, "notes" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mALTER TABLE "iterations" ADD "release_id" integer[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20091202105555')[0m
+Migrating to AddSlugToStories (20091204173634)
+  [4;35;1mSQL (0.7ms)[0m   [0mALTER TABLE "stories" ADD "slug" varchar(255) DEFAULT '' NOT NULL[0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT * FROM "stories" [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091204173634')[0m
+Migrating to AddStatusToStory (20091223100903)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mALTER TABLE "stories" ADD "status" varchar(10)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mALTER TABLE "stories" ADD "completed_date" date[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20091223100903')[0m
+Migrating to AddStateToUser (20100723161424)
+  [4;35;1mSQL (0.7ms)[0m   [0mALTER TABLE "users" ADD "state" varchar(255) DEFAULT 'passive'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mALTER TABLE "users" ADD "deleted_at" datetime[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100723161424')[0m
+Migrating to AddActivationFieldsToUser (20100726150322)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mALTER TABLE "users" ADD "activated_at" datetime[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mALTER TABLE "users" ADD "activation_code" varchar(40)[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100726150322')[0m
+Migrating to SetDefaultUserStateToPending (20100729125551)
+  [4;35;1mSQL (0.4ms)[0m   [0mCREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'passive', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40)) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("altered_users")[0m
+  [4;35;1mSQL (59.3ms)[0m   [0mCREATE UNIQUE INDEX "temp_index_altered_users_on_login" ON "altered_users" ("login")[0m
+  [4;36;1mSQL (3.6ms)[0m   [0;1mDROP TABLE "users"[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'pending', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40)) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_users")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_info('temp_index_altered_users_on_login')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mDROP TABLE "altered_users"[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100729125551')[0m
+Migrating to AddIsAdminPropertyToUser (20100812133837)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mALTER TABLE "users" ADD "is_admin" boolean DEFAULT 'f'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100812133837')[0m
+Migrating to SetDefaultUserStateToActive (20100812140532)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'pending', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40), "is_admin" boolean DEFAULT 'f') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_info('index_users_on_login')[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("altered_users")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE UNIQUE INDEX "temp_index_altered_users_on_login" ON "altered_users" ("login")[0m
+  [4;35;1mSQL (1.1ms)[0m   [0mDROP TABLE "users"[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'active', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40), "is_admin" boolean DEFAULT 'f') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("altered_users")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_info('temp_index_altered_users_on_login')[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mDROP TABLE "altered_users"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100812140532')[0m
+Migrating to AddDefaultAdminUser (20100812143455)
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'admin') LIMIT 1[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'foo@bar.org') LIMIT 1[0m
+  [4;35;1mUser Create (0.7ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "activated_at", "crypted_password", "remember_token_expires_at", "updated_at", "deleted_at", "activation_code", "is_admin", "remember_token", "login", "email", "state") VALUES('', 'f31169b001f965bc8c353e228a73c8749df60a69', '2011-04-08 16:09:23', '2011-04-08 16:09:23', '594a760d3d3bf136abd88d03958215dc0d8f471d', NULL, '2011-04-08 16:09:23', NULL, NULL, 't', NULL, 'admin', 'foo@bar.org', 'active')[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100812143455')[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("iterations")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("outcomes")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("participations")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("preconditions")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("releases")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("scenarios")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("stories")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_info('index_users_on_login')[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20091127114237)
+Migrating to CreateIterations (20091127120627)
+Migrating to CreateStories (20091127122422)
+Migrating to CreateParticipations (20091127144645)
+Migrating to CreateScenarios (20091127164217)
+Migrating to CreatePreconditions (20091127164446)
+Migrating to CreateOutcomes (20091127164705)
+Migrating to AddTitleToStories (20091127172849)
+Migrating to AddAuthorIdToStory (20091127173744)
+Migrating to CreateReleases (20091202105555)
+Migrating to AddSlugToStories (20091204173634)
+Migrating to AddStatusToStory (20091223100903)
+Migrating to AddStateToUser (20100723161424)
+Migrating to AddActivationFieldsToUser (20100726150322)
+Migrating to SetDefaultUserStateToPending (20100729125551)
+Migrating to AddIsAdminPropertyToUser (20100812133837)
+Migrating to SetDefaultUserStateToActive (20100812140532)
+Migrating to AddDefaultAdminUser (20100812143455)
+Migrating to RemoveIsAdminPropertyAndAddRoleInstead (20110408162438)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mCREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'active', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40), "is_admin" boolean DEFAULT 'f') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_users")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE UNIQUE INDEX "temp_index_altered_users_on_login" ON "altered_users" ("login")[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1mDROP TABLE "users"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'active', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40)) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_users")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_info('temp_index_altered_users_on_login')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mDROP TABLE "altered_users"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSQLite3::SQLException: duplicate column name: state: ALTER TABLE "users" ADD "state" varchar(255)[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20091127114237)
+Migrating to CreateIterations (20091127120627)
+Migrating to CreateStories (20091127122422)
+Migrating to CreateParticipations (20091127144645)
+Migrating to CreateScenarios (20091127164217)
+Migrating to CreatePreconditions (20091127164446)
+Migrating to CreateOutcomes (20091127164705)
+Migrating to AddTitleToStories (20091127172849)
+Migrating to AddAuthorIdToStory (20091127173744)
+Migrating to CreateReleases (20091202105555)
+Migrating to AddSlugToStories (20091204173634)
+Migrating to AddStatusToStory (20091223100903)
+Migrating to AddStateToUser (20100723161424)
+Migrating to AddActivationFieldsToUser (20100726150322)
+Migrating to SetDefaultUserStateToPending (20100729125551)
+Migrating to AddIsAdminPropertyToUser (20100812133837)
+Migrating to SetDefaultUserStateToActive (20100812140532)
+Migrating to AddDefaultAdminUser (20100812143455)
+Migrating to RemoveIsAdminPropertyAndAddRoleInstead (20110408162438)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mCREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'active', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40), "is_admin" boolean DEFAULT 'f') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_users")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE UNIQUE INDEX "temp_index_altered_users_on_login" ON "altered_users" ("login")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mDROP TABLE "users"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime, "state" varchar(255) DEFAULT 'active', "deleted_at" datetime, "activated_at" datetime, "activation_code" varchar(40)) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_users")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_info('temp_index_altered_users_on_login')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mDROP TABLE "altered_users"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mALTER TABLE "users" ADD "role" varchar(255)[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20110408162438')[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("iterations")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("outcomes")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("participations")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("preconditions")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("releases")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("scenarios")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("stories")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_info('index_users_on_login')[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+
+
+Processing IterationsController#index (for 127.0.0.1 at 2011-04-12 18:42:05) [GET]
+  Parameters: {"action"=>"index", "controller"=>"iterations"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 31ms (DB: 0) | 302 Found [http://localhost/]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2011-04-12 18:42:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered layouts/_meta (0.6ms)
+Rendered layouts/_header (1.7ms)
+Rendered layouts/_footer (1.0ms)
+Completed in 36ms (View: 33, DB: 0) | 200 OK [http://localhost/session/new]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2011-04-12 18:42:11) [POST]
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"ge3/CWFG8h+KTsAgMJwyFywYu3qQZbSHymn/zEAqR2I=", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+  [4;36;1mUser Load (0.9ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed in 154ms (DB: 1) | 302 Found [http://localhost/session]
+
+
+Processing IterationsController#index (for 127.0.0.1 at 2011-04-12 18:42:12) [GET]
+  Parameters: {"action"=>"index", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.2ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+Rendering template within layouts/main
+Rendering iterations/index
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.3ms)
+Completed in 41ms (View: 13, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing IterationsController#new (for 127.0.0.1 at 2011-04-12 18:42:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mRelease Load (0.2ms)[0m   [0;1mSELECT * FROM "releases" [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "releases" [0m
+Rendering template within layouts/main
+Rendering iterations/new
+Rendered iterations/_form (11.0ms)
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 185ms (View: 155, DB: 0) | 200 OK [http://localhost/iterations/new]
+
+
+Processing IterationsController#create (for 127.0.0.1 at 2011-04-12 18:42:35) [POST]
+  Parameters: {"iteration"=>{"start_date"=>"April 11, 2011 6:42 PM", "name"=>"Test Iteration", "end_date"=>"April 22, 2011 6:42 PM", "velocity"=>"80"}, "commit"=>"Create", "action"=>"create", "authenticity_token"=>"ge3/CWFG8h+KTsAgMJwyFywYu3qQZbSHymn/zEAqR2I=", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Create (0.8ms)[0m   [0mINSERT INTO "iterations" ("name", "start_date", "created_at", "updated_at", "release_id", "velocity", "end_date") VALUES('Test Iteration', '2011-04-11 18:42:00', '2011-04-12 17:42:35', '2011-04-12 17:42:35', NULL, 80, '2011-04-22 18:42:00')[0m
+Redirected to http://localhost:3000/iterations
+Completed in 135ms (DB: 1) | 302 Found [http://localhost/iterations]
+
+
+Processing IterationsController#index (for 127.0.0.1 at 2011-04-12 18:42:36) [GET]
+  Parameters: {"action"=>"index", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+Rendering template within layouts/main
+Rendering iterations/index
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.3ms)
+Completed in 41ms (View: 15, DB: 1) | 200 OK [http://localhost/iterations]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2011-04-12 18:42:42) [GET]
+  Parameters: {"action"=>"index", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.2ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id = 1) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.1ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.1ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.1ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.3ms)
+Completed in 202ms (View: 26, DB: 2) | 200 OK [http://localhost/iterations/1/stories]
+
+
+Processing StoriesController#new (for 127.0.0.1 at 2011-04-12 18:42:44) [GET]
+  Parameters: {"action"=>"new", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+Rendering template within layouts/main
+Rendering stories/new
+Rendered stories/_form (8.6ms)
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 198ms (View: 155, DB: 1) | 200 OK [http://localhost/iterations/1/stories/new]
+
+
+Processing StoriesController#create (for 127.0.0.1 at 2011-04-12 18:42:55) [POST]
+  Parameters: {"commit"=>"Create", "story"=>{"title"=>"Sed pretium mattis velit, at interdum augue posuere.", "points"=>"4", "description"=>"Sed a semper lacus. Nam feugiat, lorem vel blandit pulvinar, leo ligula elementum mauris; eget placerat nibh elit eu risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum elit nec ante cursus sit amet commodo orci suscipit. Morbi malesuada elementum nulla, vitae pulvinar nisi volutpat a. Ut vulputate ipsum eget augue aliquam eget luctus nisl imperdiet. Suspendisse tempor tempor nisl sit amet hendrerit. Nulla at lacus sit amet lorem laoreet dictum! sed.\r\n", "iteration_id"=>"1"}, "action"=>"create", "authenticity_token"=>"ge3/CWFG8h+KTsAgMJwyFywYu3qQZbSHymn/zEAqR2I=", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mIteration Load (0.2ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Sed pretium mattis velit, at interdum au') LIMIT 1[0m
+  [4;35;1mStory Create (0.7ms)[0m   [0mINSERT INTO "stories" ("slug", "created_at", "title", "completed_date", "updated_at", "points", "description", "author_id", "iteration_id", "status") VALUES('sed-pretium-mattis-velit-at-interdum-augue-posuere', '2011-04-12 17:42:55', 'Sed pretium mattis velit, at interdum augue posuere.', NULL, '2011-04-12 17:42:55', 4, 'Sed a semper lacus. Nam feugiat, lorem vel blandit pulvinar, leo ligula elementum mauris; eget placerat nibh elit eu risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum elit nec ante cursus sit amet commodo orci suscipit. Morbi malesuada elementum nulla, vitae pulvinar nisi volutpat a. Ut vulputate ipsum eget augue aliquam eget luctus nisl imperdiet. Suspendisse tempor tempor nisl sit amet hendrerit. Nulla at lacus sit amet lorem laoreet dictum! sed.
+', 1, 1, 'new')[0m
+Redirected to http://localhost:3000/iterations/1/stories
+Completed in 425ms (DB: 2) | 302 Found [http://localhost/iterations/1/stories]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2011-04-12 18:42:56) [GET]
+  Parameters: {"action"=>"index", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.2ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id = 1) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.1ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (26.4ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 245ms (View: 45, DB: 3) | 200 OK [http://localhost/iterations/1/stories]
+
+
+Processing StoriesController#new (for 127.0.0.1 at 2011-04-12 18:42:57) [GET]
+  Parameters: {"action"=>"new", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mIteration Load (0.2ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+Rendering template within layouts/main
+Rendering stories/new
+Rendered stories/_form (6.1ms)
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 222ms (View: 18, DB: 1) | 200 OK [http://localhost/iterations/1/stories/new]
+
+
+Processing StoriesController#create (for 127.0.0.1 at 2011-04-12 18:43:07) [POST]
+  Parameters: {"commit"=>"Create", "story"=>{"title"=>"Curabitur dictum posuere nunc, eu lacinia cras amet.", "points"=>"3", "description"=>"Etiam elementum eros at mauris tempor imperdiet! Fusce ut neque ipsum, at sodales nisi. Pellentesque eros metus, auctor a ultrices in, hendrerit eget lectus. Pellentesque quam metus, sagittis eu egestas ac, ornare sit amet nisi. In nibh dui, condimentum sagittis tincidunt sed, dictum ut libero. Fusce consequat dui in metus dapibus elementum. In hendrerit, leo sed accumsan tempor, mi ligula luctus velit, ac sodales sem justo ut velit. Mauris placerat sem feugiat libero nullam.\r\n", "iteration_id"=>"1"}, "action"=>"create", "authenticity_token"=>"ge3/CWFG8h+KTsAgMJwyFywYu3qQZbSHymn/zEAqR2I=", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.2ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Curabitur dictum posuere nunc, eu lacini') LIMIT 1[0m
+  [4;36;1mStory Create (0.6ms)[0m   [0;1mINSERT INTO "stories" ("slug", "created_at", "title", "completed_date", "updated_at", "points", "description", "author_id", "iteration_id", "status") VALUES('curabitur-dictum-posuere-nunc-eu-lacinia-cras-amet', '2011-04-12 17:43:07', 'Curabitur dictum posuere nunc, eu lacinia cras amet.', NULL, '2011-04-12 17:43:07', 3, 'Etiam elementum eros at mauris tempor imperdiet! Fusce ut neque ipsum, at sodales nisi. Pellentesque eros metus, auctor a ultrices in, hendrerit eget lectus. Pellentesque quam metus, sagittis eu egestas ac, ornare sit amet nisi. In nibh dui, condimentum sagittis tincidunt sed, dictum ut libero. Fusce consequat dui in metus dapibus elementum. In hendrerit, leo sed accumsan tempor, mi ligula luctus velit, ac sodales sem justo ut velit. Mauris placerat sem feugiat libero nullam.
+', 1, 1, 'new')[0m
+Redirected to http://localhost:3000/iterations/1/stories
+Completed in 216ms (DB: 2) | 302 Found [http://localhost/iterations/1/stories]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2011-04-12 18:43:07) [GET]
+  Parameters: {"action"=>"index", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.4ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.5ms)[0m   [0;1mSELECT * FROM "stories" WHERE (iteration_id = 1) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (23.4ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (15.7ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.5ms)
+Completed in 268ms (View: 56, DB: 3) | 200 OK [http://localhost/iterations/1/stories]
+
+
+Processing StoriesController#new (for 127.0.0.1 at 2011-04-12 18:43:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mIteration Load (0.2ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+Rendering template within layouts/main
+Rendering stories/new
+Rendered stories/_form (177.5ms)
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 249ms (View: 193, DB: 1) | 200 OK [http://localhost/iterations/1/stories/new]
+
+
+Processing StoriesController#create (for 127.0.0.1 at 2011-04-12 18:43:17) [POST]
+  Parameters: {"commit"=>"Create", "story"=>{"title"=>"Aliquam et porttitor leo. Etiam lacus libero nullam.", "points"=>"1", "description"=>"Sed ac purus eu dui egestas lacinia. Aliquam non diam justo, ut porta elit. Praesent gravida cursus pulvinar. Duis in molestie dolor. Proin blandit pretium tellus ut commodo! Suspendisse dignissim lacus quis ligula vulputate porttitor. Nulla sit amet eros est. Donec a mi urna, id faucibus urna. Curabitur mollis turpis at quam rhoncus quis semper urna sollicitudin. Vestibulum pretium, purus vitae semper pellentesque, est diam vehicula risus, sit amet luctus sem dolor sit amet.\r\n", "iteration_id"=>"1"}, "action"=>"create", "authenticity_token"=>"ge3/CWFG8h+KTsAgMJwyFywYu3qQZbSHymn/zEAqR2I=", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Aliquam et porttitor leo. Etiam lacus li') LIMIT 1[0m
+  [4;36;1mStory Create (0.6ms)[0m   [0;1mINSERT INTO "stories" ("slug", "created_at", "title", "completed_date", "updated_at", "points", "description", "author_id", "iteration_id", "status") VALUES('aliquam-et-porttitor-leo-etiam-lacus-libero-nullam', '2011-04-12 17:43:17', 'Aliquam et porttitor leo. Etiam lacus libero nullam.', NULL, '2011-04-12 17:43:17', 1, 'Sed ac purus eu dui egestas lacinia. Aliquam non diam justo, ut porta elit. Praesent gravida cursus pulvinar. Duis in molestie dolor. Proin blandit pretium tellus ut commodo! Suspendisse dignissim lacus quis ligula vulputate porttitor. Nulla sit amet eros est. Donec a mi urna, id faucibus urna. Curabitur mollis turpis at quam rhoncus quis semper urna sollicitudin. Vestibulum pretium, purus vitae semper pellentesque, est diam vehicula risus, sit amet luctus sem dolor sit amet.
+', 1, 1, 'new')[0m
+Redirected to http://localhost:3000/iterations/1/stories
+Completed in 174ms (DB: 2) | 302 Found [http://localhost/iterations/1/stories]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2011-04-12 18:43:17) [GET]
+  Parameters: {"action"=>"index", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mIteration Load (0.2ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.6ms)[0m   [0;1mSELECT * FROM "stories" WHERE (iteration_id = 1) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (21.5ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (14.5ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (16.2ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.3ms)
+Completed in 276ms (View: 68, DB: 3) | 200 OK [http://localhost/iterations/1/stories]
+
+
+Processing StoriesController#update to js (for 127.0.0.1 at 2011-04-12 18:43:22) [PUT]
+  Parameters: {"format"=>"js", "story"=>{"points"=>"4", "iteration_id"=>"1", "status"=>"completed"}, "action"=>"update", "authenticity_token"=>"ge3/CWFG8h+KTsAgMJwyFywYu3qQZbSHymn/zEAqR2I=", "_method"=>"PUT", "id"=>"sed-pretium-mattis-velit-at-interdum-augue-posuere", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.2ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (4.0ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."slug" = 'sed-pretium-mattis-velit-at-interdum-augue-posuere') LIMIT 1[0m
+
+AASM::InvalidTransition (Event 'finish' cannot transition from 'new'):
+  aasm (2.1.5) lib/aasm/event.rb:12:in `fire'
+  aasm (2.1.5) lib/aasm/aasm.rb:154:in `aasm_fire_event'
+  aasm (2.1.5) lib/aasm/aasm.rb:56:in `finish'
+  app/controllers/stories_controller.rb:121:in `update'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (48.4ms)
+Rendered rescues/_request_and_response (1.8ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing StoriesController#update to js (for 127.0.0.1 at 2011-04-12 18:43:31) [PUT]
+  Parameters: {"format"=>"js", "story"=>{"points"=>"4", "iteration_id"=>"1", "status"=>"in_progress"}, "action"=>"update", "authenticity_token"=>"ge3/CWFG8h+KTsAgMJwyFywYu3qQZbSHymn/zEAqR2I=", "_method"=>"PUT", "id"=>"sed-pretium-mattis-velit-at-interdum-augue-posuere", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.2ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."slug" = 'sed-pretium-mattis-velit-at-interdum-augue-posuere') LIMIT 1[0m
+WARNING: Can't mass-assign these protected attributes: status
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Sed pretium mattis velit, at interdum au' AND "stories".id <> 1) LIMIT 1[0m
+  [4;35;1mStory Update (0.6ms)[0m   [0mUPDATE "stories" SET "updated_at" = '2011-04-12 17:43:31', "status" = 'in_progress' WHERE "id" = 1[0m
+Redirected to http://localhost:3000/iterations/1/stories
+Completed in 393ms (DB: 2) | 302 Found [http://localhost/iterations/1/stories/sed-pretium-mattis-velit-at-interdum-augue-posuere.js]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2011-04-12 18:43:31) [GET]
+  Parameters: {"action"=>"index", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (1.9ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.2ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.5ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id = 1) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (184.4ms)
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (17.6ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (15.8ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.3ms)
+Completed in 294ms (View: 235, DB: 5) | 200 OK [http://localhost/iterations/1/stories]
+
+
+Processing StoriesController#update to js (for 127.0.0.1 at 2011-04-12 18:43:34) [PUT]
+  Parameters: {"format"=>"js", "story"=>{"points"=>"4", "iteration_id"=>"1", "status"=>"quality_assurance"}, "action"=>"update", "authenticity_token"=>"ge3/CWFG8h+KTsAgMJwyFywYu3qQZbSHymn/zEAqR2I=", "_method"=>"PUT", "id"=>"sed-pretium-mattis-velit-at-interdum-augue-posuere", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mIteration Load (0.2ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories"."slug" = 'sed-pretium-mattis-velit-at-interdum-augue-posuere') LIMIT 1[0m
+WARNING: Can't mass-assign these protected attributes: status
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Sed pretium mattis velit, at interdum au' AND "stories".id <> 1) LIMIT 1[0m
+  [4;36;1mStory Update (1.5ms)[0m   [0;1mUPDATE "stories" SET "updated_at" = '2011-04-12 17:43:35', "status" = 'quality_assurance' WHERE "id" = 1[0m
+Redirected to http://localhost:3000/iterations/1/stories
+Completed in 171ms (DB: 3) | 302 Found [http://localhost/iterations/1/stories/sed-pretium-mattis-velit-at-interdum-augue-posuere.js]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2011-04-12 18:43:35) [GET]
+  Parameters: {"action"=>"index", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.4ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.5ms)[0m   [0;1mSELECT * FROM "stories" WHERE (iteration_id = 1) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (21.0ms)
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (15.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (14.6ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.8ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 124ms (View: 67, DB: 3) | 200 OK [http://localhost/iterations/1/stories]
+
+
+Processing StoriesController#update to js (for 127.0.0.1 at 2011-04-12 18:43:39) [PUT]
+  Parameters: {"format"=>"js", "story"=>{"points"=>"4", "iteration_id"=>"1", "status"=>"completed"}, "action"=>"update", "authenticity_token"=>"ge3/CWFG8h+KTsAgMJwyFywYu3qQZbSHymn/zEAqR2I=", "_method"=>"PUT", "id"=>"sed-pretium-mattis-velit-at-interdum-augue-posuere", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.2ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."slug" = 'sed-pretium-mattis-velit-at-interdum-augue-posuere') LIMIT 1[0m
+WARNING: Can't mass-assign these protected attributes: status
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Sed pretium mattis velit, at interdum au' AND "stories".id <> 1) LIMIT 1[0m
+  [4;35;1mStory Update (0.6ms)[0m   [0mUPDATE "stories" SET "updated_at" = '2011-04-12 17:43:39', "status" = 'completed', "completed_date" = '2011-04-12' WHERE "id" = 1[0m
+Redirected to http://localhost:3000/iterations/1/stories
+Completed in 361ms (DB: 2) | 302 Found [http://localhost/iterations/1/stories/sed-pretium-mattis-velit-at-interdum-augue-posuere.js]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2011-04-12 18:43:39) [GET]
+  Parameters: {"action"=>"index", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.2ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.5ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id = 1) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (23.7ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (15.4ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (15.7ms)
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.3ms)
+Completed in 289ms (View: 73, DB: 4) | 200 OK [http://localhost/iterations/1/stories]
+
+
+Processing IterationsController#index (for 127.0.0.1 at 2011-04-12 18:44:03) [GET]
+  Parameters: {"action"=>"index", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.5ms)[0m   [0mSELECT * FROM "iterations" [0m
+Rendering template within layouts/main
+Rendering iterations/index
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 48ms (View: 14, DB: 1) | 200 OK [http://localhost/iterations]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 18:44:05) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.3ms)
+Completed in 222ms (View: 26, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:08:54) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.5ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.7ms)
+Completed in 305ms (View: 213, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:08:57) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 68ms (View: 20, DB: 1) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:10:58) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.3ms)
+Completed in 231ms (View: 31, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:11:07) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.5ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 241ms (View: 22, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:11:28) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (1.1ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.3ms)
+Completed in 81ms (View: 21, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:14:38) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.7ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 75ms (View: 27, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:15:31) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (1.6ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.5ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (2.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.3ms)
+Completed in 260ms (View: 32, DB: 5) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:15:50) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (4.9ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.4ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.7ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 362ms (View: 259, DB: 6) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:18:11) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.7ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 93ms (View: 29, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:25:40) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (1.5ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (9.7ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.7ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.7ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 151ms (View: 55, DB: 13) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:26:08) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.8ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.8ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 397ms (View: 58, DB: 3) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:29:47) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (1.8ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.5ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.8ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (3.4ms)
+Rendered layouts/_footer (0.5ms)
+Completed in 145ms (View: 40, DB: 4) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:31:12) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.7ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.5ms)
+Completed in 153ms (View: 58, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:31:52) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.8ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.6ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (3.4ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.7ms)
+Rendered layouts/_footer (0.5ms)
+Completed in 340ms (View: 30, DB: 5) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:32:13) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (3.7ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (4.2ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.5ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (1.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 329ms (View: 246, DB: 9) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:32:29) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.7ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 104ms (View: 26, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:32:36) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (2.3ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 331ms (View: 32, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:32:54) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.5ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.5ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.7ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 476ms (View: 361, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-12 19:33:04) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 135ms (View: 23, DB: 2) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#index (for 127.0.0.1 at 2011-04-15 15:26:27) [GET]
+  Parameters: {"action"=>"index", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+Rendering template within layouts/main
+Rendering iterations/index
+Rendered layouts/_meta (0.6ms)
+Rendered layouts/_header (5.7ms)
+Rendered layouts/_footer (23.9ms)
+Completed in 458ms (View: 360, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-15 15:26:32) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 90ms (View: 26, DB: 1) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-15 15:47:25) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.9ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.9ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ OR status = 'quality_assurance'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.5ms)
+Rendered layouts/_footer (0.5ms)
+Completed in 243ms (View: 32, DB: 3) | 200 OK [http://localhost/iterations/1]
+
+
+Processing IterationsController#index (for 127.0.0.1 at 2011-04-15 15:47:33) [GET]
+  Parameters: {"action"=>"index", "controller"=>"iterations"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+Rendering template within layouts/main
+Rendering iterations/index
+Rendered layouts/_meta (0.4ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 93ms (View: 24, DB: 1) | 200 OK [http://localhost/iterations]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2011-04-15 15:47:35) [GET]
+  Parameters: {"action"=>"index", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.5ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id = 1) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (1.1ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.2ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.3ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (250.4ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (14.6ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.4ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (15.3ms)
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 537ms (View: 473, DB: 5) | 200 OK [http://localhost/iterations/1/stories]
+
+
+Processing StoriesController#update to js (for 127.0.0.1 at 2011-04-15 15:47:40) [PUT]
+  Parameters: {"format"=>"js", "story"=>{"points"=>"4", "iteration_id"=>"1", "status"=>"quality_assurance"}, "action"=>"update", "authenticity_token"=>"ge3/CWFG8h+KTsAgMJwyFywYu3qQZbSHymn/zEAqR2I=", "_method"=>"PUT", "id"=>"sed-pretium-mattis-velit-at-interdum-augue-posuere", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories"."slug" = 'sed-pretium-mattis-velit-at-interdum-augue-posuere') LIMIT 1[0m
+WARNING: Can't mass-assign these protected attributes: status
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT "stories".id FROM "stories" WHERE ("stories"."title" = 'Sed pretium mattis velit, at interdum au' AND "stories".id <> 1) LIMIT 1[0m
+  [4;35;1mStory Update (0.7ms)[0m   [0mUPDATE "stories" SET "updated_at" = '2011-04-15 14:47:40', "status" = 'quality_assurance' WHERE "id" = 1[0m
+Redirected to http://localhost:3000/iterations/1/stories
+Completed in 363ms (DB: 2) | 302 Found [http://localhost/iterations/1/stories/sed-pretium-mattis-velit-at-interdum-augue-posuere.js]
+
+
+Processing StoriesController#index (for 127.0.0.1 at 2011-04-15 15:47:40) [GET]
+  Parameters: {"action"=>"index", "controller"=>"stories", "iteration_id"=>"1"}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;35;1mIteration Load (0.3ms)[0m   [0mSELECT * FROM "iterations" [0m
+  [4;36;1mIteration Load (0.2ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.5ms)[0m   [0mSELECT * FROM "stories" WHERE (iteration_id = 1) [0m
+Rendering template within layouts/main
+Rendering stories/index
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mStory Load (0.2ms)[0m   [0;1mSELECT * FROM "stories" WHERE ((status = "in_progress") AND (iteration_id = 1)) [0m
+  [4;35;1mStory Load (0.3ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "quality_assurance") AND (iteration_id = 1)) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (20.5ms)
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ((status = "new") AND (iteration_id = 1)) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (167.1ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendered stories/_story (15.5ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ((status = "completed") AND (iteration_id = 1)) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.6ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 276ms (View: 222, DB: 3) | 200 OK [http://localhost/iterations/1/stories]
+
+
+Processing IterationsController#index (for 127.0.0.1 at 2011-04-15 15:47:44) [GET]
+  Parameters: {"action"=>"index", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" [0m
+Rendering template within layouts/main
+Rendering iterations/index
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.8ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 73ms (View: 26, DB: 1) | 200 OK [http://localhost/iterations]
+
+
+Processing IterationsController#show (for 127.0.0.1 at 2011-04-15 15:47:46) [GET]
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"iterations"}
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [4;36;1mIteration Load (0.3ms)[0m   [0;1mSELECT * FROM "iterations" WHERE ("iterations"."id" = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT SUM(points) AS points,
+ completed_date
+ FROM stories
+ WHERE iteration_id = 1
+ AND status = 'completed'
+ OR status = 'quality_assurance'
+ GROUP BY completed_date
+ ORDER BY completed_date[0m
+Rendering template within layouts/main
+Rendering iterations/show
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+  [4;35;1mStory Load (0.4ms)[0m   [0mSELECT * FROM "stories" WHERE ("stories".iteration_id = 1) [0m
+Rendered layouts/_meta (0.1ms)
+Rendered layouts/_header (0.7ms)
+Rendered layouts/_footer (0.4ms)
+Completed in 103ms (View: 26, DB: 2) | 200 OK [http://localhost/iterations/1]
