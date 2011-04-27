@@ -1,3 +1,10 @@
+  <% unless @projects.nil? or @projects.empty? -%>
+  <p class="form-fields">
+    <%= f.label :project %>
+    <%= f.select :project_id, @projects.map {|project| [project.name, project.to_param]} %>
+  </p>
+  <% end -%>
+
   <p class="form-fields">
     <%= f.label :name %>
     <%= f.text_field :name %>

@@ -15,7 +15,6 @@
 class Release < ActiveRecord::Base
 
   validates_presence_of :release_date
-  belongs_to :project
   has_many :iterations, :order => 'end_date'
 
 end

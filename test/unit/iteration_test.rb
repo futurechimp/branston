@@ -29,13 +29,15 @@ class IterationTest < ActiveSupport::TestCase
     context "for completed and qa stories" do
       setup do
         @iteration = Iteration.make
+        Story.make(:points => 3, :iteration => @iteration, :status => "new")
+        Story.make(:points => 2, :iteration => @iteration, :status => "in_progress")
         Story.make(:points => 5, :iteration => @iteration, :status => "quality_assurance")
         Story.make(:points => 5, :iteration => @iteration, :status => "completed")
         Story.make(:points => 2, :iteration => @iteration, :status => "completed")
       end
 
       should "return a points value" do
-        assert_match /7/, @iteration.burndown_data.to_s
+        assert_equal 12, @iteration.burndown_data.first.points
       end
     end
   end

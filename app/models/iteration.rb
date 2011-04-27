@@ -20,13 +20,15 @@ class Iteration < ActiveRecord::Base
   #
   validates_presence_of :name, :velocity
   validates_numericality_of :velocity
+  validates_numericality_of :project_id
 
   # Associations
   #
   has_many :stories
   has_many :participations
-  has_many :geeks, :through => :participations, :class_name => "User"
+  has_many :geeks, :through => :participations, :source => :user
   belongs_to :release
+  belongs_to :project
 
   def burndown_data
     Story.find_by_sql [

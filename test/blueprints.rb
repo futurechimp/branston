@@ -18,9 +18,9 @@ end
 
 # Model class blueprints
 Project.blueprint do
+  name
+  description
 end
-
-
 
 User.blueprint do
   login
@@ -47,6 +47,7 @@ end
 Iteration.blueprint do
   velocity { 50 }
   name
+  project
   start_date { Date.today }
   end_date { Date.today + 14 }
 end

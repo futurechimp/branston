@@ -1,6 +1,16 @@
 class ProjectsController < ApplicationController
+  
+  layout 'main'
+
   def index
-    @projects = Project.find(:all)
+     if current_user.role == 'customer'
+       @projects = Project.find(:all, 
+         :select => "DISTINCT projects.name, projects.*",
+         :conditions => ["participations.user_id = ?", current_user.to_param],
+         :joins => { :iterations => :participations })
+     else
+       @projects = Project.all
+     end
 
     respond_to do |format|
       format.html
@@ -34,7 +44,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(params[:project])
 
     respond_to do |format|
-      if @project.save
+      if Project.permit?(current_user.role, :create) && @project.save
         flash[:notice] = 'Project was successfully created.'
         format.html { redirect_to(@project) }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
@@ -49,7 +59,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     respond_to do |format|
-      if @project.update_attributes(params[:project])
+      if Project.permit?(current_user.role, :update) && @project.update_attributes(params[:project])
         flash[:notice] = 'Project was successfully updated.'
         format.html { redirect_to(@project) }
         format.xml  { head :ok }
@@ -62,7 +72,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project = Project.find(params[:id])
-    @project.destroy
+    @project.destroy if Project.permit?(current_user.role, :destroy)
 
     respond_to do |format|
       format.html { redirect_to(projects_url) }

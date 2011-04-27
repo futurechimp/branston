@@ -12,6 +12,8 @@ class AddDefaultAdminUser < ActiveRecord::Migration
   end
 
   def self.down
+    u = User.first
+    u.destroy
   end
 end
 

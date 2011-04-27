@@ -6,14 +6,50 @@ class ProjectsControllerTest < ActionController::TestCase
 
   	setup do
   		@project = Project.make
+      @admin = User.make(:admin)
+      @customer = User.make(:role => 'customer')
+      login_as(@admin)
   	end
 
 		context 'GET to index' do
 		  setup do
+		    3.times do
+		      iteration = Iteration.make
+		      @project.iterations << iteration
+		    end
 		    get :index
 		  end
 		  should_respond_with :success
 		  should_assign_to :projects
+		  
+		  should "show the projects visible to the current user" do
+		    assert_equal assigns(:projects).size, Project.count
+		  end
+		end
+		
+		context 'GET to index as a non-participating user' do
+		  setup do
+		    login_as(@customer)
+		    get :index
+		  end
+		  should "not show projects where the current user is not a participant" do
+		    assert_equal assigns(:projects).size, 0
+		  end
+		end
+		
+	  context 'GET to index as a participating user' do
+		  setup do
+		    3.times do
+		      iteration = Iteration.make
+		      iteration.geeks << @customer
+		      @project.iterations << iteration
+		    end
+		    login_as(@customer)
+		    get :index
+		  end
+		  should "not show projects where the current user is not a participant" do
+		    assert_equal 1, assigns(:projects).size
+		  end
 		end
 
 		context 'GET to new' do
@@ -30,7 +66,8 @@ class ProjectsControllerTest < ActionController::TestCase
 		  context "with valid parameters" do
         setup do
          assert_difference('Project.count') do
-            post :create, :project => {  }
+            post :create, :project => { :name => 'Chicken Village', 
+              :description => 'A village where chickens rule the roost.' }
           end
         end
 

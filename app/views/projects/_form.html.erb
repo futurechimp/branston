@@ -1,4 +1,12 @@
-<%= form.error_messages %>
-
-<dl>
-</dl>
+  
+  <%= form.error_messages %>
+  
+  <p class="form-fields">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </p>
+  
+  <p class="form-fields">
+    <%= form.label :description %>
+    <%= form.text_area :description, :rows => 5 %>
+  </p>

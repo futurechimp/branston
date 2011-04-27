@@ -50,6 +50,7 @@ class IterationsController < ApplicationController
   # GET /iterations/new
   # GET /iterations/new.xml
   def new
+    @projects = Project.all
     @releases = Release.all
     @iteration = Iteration.new
 
