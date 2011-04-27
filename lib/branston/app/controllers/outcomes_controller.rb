@@ -109,6 +109,8 @@ class OutcomesController < ApplicationController
     end
   end
 
+  private
+
   def find_scenario
     @scenario = Scenario.find(params[:scenario_id])
   end

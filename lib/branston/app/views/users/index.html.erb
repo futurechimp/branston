@@ -1,0 +1,14 @@
+<div class="index-head">
+  <h2>Users</h2>
+  <%= link_to 'New user', new_user_path, :class => "add" %>
+</div>
+<% unless @users.blank? -%>
+  <ul>
+    <% @users.each do |user| -%>
+      <li>
+        <%= render :partial => "users/admin_controls", :locals => {:user => user } %>
+      </li>
+    <% end -%>
+  </ul>
+<% end -%>
+

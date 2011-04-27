@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091223100903) do
+ActiveRecord::Schema.define(:version => 20110408162438) do
 
   create_table "iterations", :force => true do |t|
     t.integer  "velocity"
@@ -69,13 +69,6 @@ ActiveRecord::Schema.define(:version => 20091223100903) do
     t.date     "completed_date"
   end
 
-  create_table "user_roles", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "story_id"
-  end
-
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
     t.string   "name",                      :limit => 100, :default => ""
@@ -86,6 +79,11 @@ ActiveRecord::Schema.define(:version => 20091223100903) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
+    t.string   "state",                                    :default => "active"
+    t.datetime "deleted_at"
+    t.datetime "activated_at"
+    t.string   "activation_code",           :limit => 40
+    t.string   "role"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

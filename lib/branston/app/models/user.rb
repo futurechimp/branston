@@ -15,6 +15,9 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+
+  ROLES = ["admin", "developer", "customer"]
+
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
@@ -32,6 +35,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
+  validates_inclusion_of    :role,     :in => ROLES
+
   has_many :participations
   has_many :iterations, :through => :participations
   has_many :stories, :foreign_key => 'author_id'
@@ -41,7 +46,34 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :name, :password, :password_confirmation
 
+  include AASM
+  aasm_column :state
+  aasm_initial_state :pending
+  aasm_state :pending
+  aasm_state :active,  :enter => :do_activate
+  aasm_state :suspended
+  aasm_state :deleted, :enter => :do_delete
 
+  aasm_event :register do
+    transitions :from => :passive, :to => :pending, :guard => Proc.new {|u| !(u.crypted_password.blank? && u.password.blank?) }
+  end
+
+  aasm_event :activate do
+    transitions :from => [:pending, :suspended], :to => :active
+  end
+
+  aasm_event :suspend do
+    transitions :from => [:pending, :active], :to => :suspended
+  end
+
+  aasm_event :delete do
+    transitions :from => [:pending, :active, :suspended], :to => :deleted
+  end
+
+
+  def has_role?(role_name)
+    self.role == role_name
+  end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
@@ -51,7 +83,7 @@ class User < ActiveRecord::Base
   #
   def self.authenticate(login, password)
     return nil if login.blank? || password.blank?
-    u = find_by_login(login.downcase) # need to get the salt
+    u = find_in_state :first, :active, :conditions => {:login => login.downcase}
     u && u.authenticated?(password) ? u : nil
   end
 
@@ -69,7 +101,20 @@ class User < ActiveRecord::Base
 
   protected
 
+  # Returns true if the user has just been activated.
+  def recently_activated?
+    @activated
+  end
 
+  def do_delete
+    self.deleted_at = Time.now.utc
+  end
+
+  def do_activate
+    @activated = true
+    self.activated_at = Time.now.utc
+    self.deleted_at = self.activation_code = nil
+  end
 
 end
 

@@ -19,6 +19,7 @@ class Iteration < ActiveRecord::Base
   # Validations
   #
   validates_presence_of :name, :velocity
+  validates_numericality_of :velocity
 
   # Associations
   #
@@ -34,8 +35,9 @@ class Iteration < ActiveRecord::Base
       FROM stories
       WHERE iteration_id = ?
       AND status = 'completed'
+      OR status = 'quality_assurance'
       GROUP BY completed_date
-      ORDER bY completed_date", id
+      ORDER BY completed_date", id
     ]
   end
 

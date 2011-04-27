@@ -1,5 +1,18 @@
 <div class="index-head">
-  <h2>Iteration #<%=@iteration.name%> Stories</h2>
+  <h2>Iteration #<%=@iteration.name%> Stories, 
+  <%=@total_assigned_points%>/<%=@iteration.velocity%> points assigned
+  (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%)
+  </h2>
+  <p>
+  <% case (@assignment_difference <=> 0)
+  when -1 -%>
+    Undersubscribed by <%= 0 - @assignment_difference%> points
+    <% when 1 -%>
+    Oversubscribed by <%=@assignment_difference %> points
+    <% when 0 -%>
+    Spot on!
+  <% end -%>
+  </p>
   <%= link_to 'New story', new_iteration_story_path(@iteration), :class => "add" %>
 </div>
 
@@ -35,14 +48,14 @@ document.observe("dom:loaded", function() {
 <% end %>
 
 <div id="current-wrapper">
-  <h3>Current Stories</h3>
+<h3>Current Stories <%=points_label(@current_stories)%></h3>
   <div id="current_stories" class="accordion">
   <% @current_stories.each do |story| %>
     <%= render :partial => "story", :locals => { :story => story } %>
   <% end %>
   </div>
 
-  <h3>Quality Assurance Stories</h3>
+  <h3>Quality Assurance Stories <%=points_label(@quality_assurance_stories)%></h3>
   <div id="quality_assurance_stories" class="accordion">
   <% @quality_assurance_stories.each do |story| %>
     <%= render :partial => "story", :locals => { :story => story } %>
@@ -51,7 +64,7 @@ document.observe("dom:loaded", function() {
 </div>
 
 <div id="backlog-wrapper">
-  <h3>Story Backlog</h3>
+<h3>Story Backlog <%=points_label(@backlog_stories)%></h3>
   <div id="backlog_stories" class="accordion">
   <% if @backlog_stories.empty? %>
     <%=link_to "Write some more!", new_iteration_story_path(@iteration) %>
@@ -69,7 +82,7 @@ document.observe("dom:loaded", function() {
 </div>
 
 <div id="current-wrapper">
-  <h3>Completed Stories</h3>
+  <h3>Completed Stories <%=points_label(@completed_stories)%></h3>
   <div id="completed_stories" class="accordion">
   <% @completed_stories.each do |story| %>
     <%= render :partial => "story", :locals => { :story => story } %>

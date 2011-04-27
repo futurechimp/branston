@@ -106,5 +106,25 @@ module Rails
   end
 end
 
+# DH: Patching in support for Bundler, 7 April 2011.
+#
+# See: http://gembundler.com/rails23.html
+#
+class Rails::Boot
+  def run
+    load_initializer
+
+    Rails::Initializer.class_eval do
+      def load_gems
+        @bundler_loaded ||= Bundler.require :default, Rails.env
+      end
+    end
+
+    Rails::Initializer.run(:set_load_path)
+  end
+end
+
+
 # All that for this:
 Rails.boot!
+

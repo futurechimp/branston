@@ -5,9 +5,12 @@ class StoriesControllerTest < ActionController::TestCase
   context "The StoriesController" do
     setup do
       @iteration = Iteration.make
-      @story = Factory.make_story(:iteration => @iteration)
-      @in_progress = Factory.make_story(:iteration => @iteration, :status => "in_progress")
-      @completed = Factory.make_story(:iteration => @iteration, :status => "completed")
+      2.times {
+        @story = Factory.make_story(:iteration => @iteration)
+        @quality_assurance = Factory.make_story(:iteration => @iteration, :status => "quality_assurance")
+        @in_progress = Factory.make_story(:iteration => @iteration, :status => "in_progress")
+        @completed = Factory.make_story(:iteration => @iteration, :status => "completed")
+      }
 
       @some_other_iteration = Iteration.make
       @later = Story.make(:iteration => @some_other_iteration)
@@ -32,12 +35,17 @@ class StoriesControllerTest < ActionController::TestCase
         assert_not_nil assigns(:backlog_stories)
         assert_not_nil assigns(:completed_stories)
         assert_not_nil assigns(:current_stories)
-        assert_equal 1, assigns(:backlog_stories).size
-        assert_equal 1, assigns(:completed_stories).size
-        assert_equal 1, assigns(:current_stories).size
+        assert_not_nil assigns(:quality_assurance_stories)
+        assert_equal 2, assigns(:backlog_stories).size
+        assert_equal 2, assigns(:completed_stories).size
+        assert_equal 2, assigns(:current_stories).size
+        assert_equal 2, assigns(:quality_assurance_stories).size
         assert assigns(:backlog_stories).include? @story
         assert assigns(:current_stories).include? @in_progress
         assert assigns(:completed_stories).include? @completed
+        assert assigns(:quality_assurance_stories).include? @quality_assurance
+        assert_equal 16, assigns(:total_assigned_points)
+        assert_equal -34, assigns(:assignment_difference)
       end
 
       should "show a form to edit stories" do
@@ -69,7 +77,6 @@ class StoriesControllerTest < ActionController::TestCase
       end
 
       context "creating a story" do
-
         context "with valid params" do
           setup do
             assert_difference("Story.count") do
@@ -130,6 +137,59 @@ class StoriesControllerTest < ActionController::TestCase
             assert_redirected_to iteration_story_path(@iteration, @story)
           end
 
+          context "with story status set to 'in_progress'" do
+            setup do
+              put :update,{ :id => @story.to_param,  :story => {
+                :description => "bar", :status => "in_progress"},
+              :iteration_id => @iteration.to_param }
+            end
+
+            should "set the story's status to 'in_progress'" do
+              assert_equal assigns(:story).status, "in_progress"
+            end
+          end
+
+          context "with story status set to 'quality_assurance'" do
+            setup do
+              @story.status = "in_progress"
+              @story.save
+              put :update,{ :id => @story.to_param,  :story => {
+                :description => "bar", :status => "quality_assurance"},
+              :iteration_id => @iteration.to_param }
+            end
+
+            should "set the story's status to 'quality_assurance'" do
+              assert_equal assigns(:story).status, "quality_assurance"
+            end
+          end
+
+          context "with story status set to 'in_progress'" do
+            setup do
+              @story.status = "in_progress"
+              @story.save
+              put :update,{ :id => @story.to_param,  :story => {
+                :description => "bar", :status => "new"},
+              :iteration_id => @iteration.to_param }
+            end
+
+            should "set the story's status back to 'new'" do
+              assert_equal assigns(:story).status, "new"
+            end
+          end
+
+          context "with story status set to 'completed'" do
+            setup do
+              @story.status = "quality_assurance"
+              @story.save
+              put :update,{ :id => @story.to_param,  :story => {
+                :description => "bar", :status => "completed"},
+              :iteration_id => @iteration.to_param }
+            end
+
+            should "set the story's status to 'completed'" do
+              assert_equal assigns(:story).status, "completed"
+            end
+          end
         end
 
         context "with invalid parameters" do
@@ -144,22 +204,51 @@ class StoriesControllerTest < ActionController::TestCase
           end
         end
       end
-
     end
 
-    context "Without logging in, the StoriesController" do
-
-      should "show details about a story" do
-        get :show, :id => @story.to_param, :iteration_id => @iteration.to_param
-        assert_response :success
+    context "when a request comes from the Branston client" do
+      setup do
+        @user = User.make
       end
 
-      should "fail gracefully if the slug is not found" do
-        get :show, :id => 'none-such-story', :iteration_id => @iteration.to_param
-        assert_response 404
+      context "with a username and password" do
+        setup do
+          get :show,
+            :id => @story.to_param, :iteration_id => @iteration.to_param,
+            :username => @user.login, :password => "password"
+        end
+
+        should "show details about a story" do
+          assert_response :success
+          assert assigns(:story)
+          assert_match /#{@story.description.gsub('"', "&quot;")}/, @response.body
+        end
       end
+
+      context "where the the slug is not found" do
+        setup do
+          @user = User.make
+          get :show,
+            :id => 'none-such-story', :iteration_id => @iteration.to_param,
+            :username => @user.login, :password => "monkey"
+        end
+        should "fail gracefully" do
+          assert_response 404
+        end
+      end
+
+      context "without a username and password" do
+        setup do
+          get :show,
+            :id => @story.to_param, :iteration_id => @iteration.to_param
+        end
+        should "fail gracefully" do
+          get :show, :id => 'none-such-story', :iteration_id => @iteration.to_param
+          assert_response 404
+        end
+      end
+
     end
-
   end
 end
 

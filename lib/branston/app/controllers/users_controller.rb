@@ -16,27 +16,85 @@ class UsersController < ApplicationController
 
   layout 'main'
 
-  # render new.rhtml
+  before_filter :login_required
+  before_filter :find_user, :only => [:suspend, :destroy, :activate]
+  before_filter :must_be_admin, :only => [:new, :create, :destroy, :suspend, :activate]
+  before_filter :must_be_admin_or_self, :only => [:edit, :update]
+
+  def index
+    @users = User.find(:all)
+  end
+
   def new
     @user = User.new
   end
 
   def create
-    logout_keeping_session!
     @user = User.new(params[:user])
-    success = @user && @user.save
-    if success && @user.errors.empty?
-      # Protects against session fixation attacks, causes request forgery
-      # protection if visitor resubmits an earlier form using back
-      # button. Uncomment if you understand the tradeoffs.
-      # reset session
-      self.current_user = @user # !! now logged in
-      redirect_back_or_default('/')
-      flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+    @user.role = params[:user][:role] if current_user.has_role?("admin")
+    if @user && @user.valid? && @user.save!
+      redirect_to users_url
+      flash[:notice] = "User created."
     else
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
       render :action => 'new'
     end
   end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.role = params[:user][:role] if current_user.has_role?("admin")
+    if @user.update_attributes(params[:user])
+      redirect_to users_path
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def suspend
+    @user.suspend!
+    redirect_to users_path
+  end
+
+  def activate
+    @user.activate!
+    redirect_to users_path
+  end
+
+  def destroy
+    @user.delete!
+    redirect_to users_path
+  end
+
+  protected
+
+  def find_user
+    @user = User.find(params[:id])
+  end
+
+  # A security filter which freezes out all non-admin users except the user
+  # who is the user identified by params[:id]
+  #
+  def must_be_admin_or_self
+    user = User.find(params[:id])
+    unless current_user.has_role?("admin") || current_user == user
+      flash[:error] = "You are not allowed to do that."
+      redirect_to users_path
+    end
+  end
+
+  # A security filter which freezes out all non-admin users.
+  #
+  def must_be_admin
+    unless current_user.has_role?("admin")
+      flash[:error] = "You are not allowed to do that."
+      redirect_to users_path
+    end
+  end
+
 end
 

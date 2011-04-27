@@ -15,9 +15,10 @@
 class StoriesController < ApplicationController
 
   layout 'main'
+  before_filter :login_or_password_required, :only => [:show, :generate_feature]
   before_filter :login_required, :except => [:show, :generate_feature]
   before_filter :retrieve_iterations, :except => [:generate_feature]
-  before_filter :load_iteration, :except => [:generate_feature]
+  before_filter :load_iteration, :except => [:generate_feature, :show]
   in_place_edit_for :story, :title
   in_place_edit_for :story, :description
   in_place_edit_for :story, :points
@@ -38,6 +39,12 @@ class StoriesController < ApplicationController
     @backlog_stories = Story.for_iteration(@iteration.id).unassigned
     @quality_assurance_stories = Story.for_iteration(@iteration.id).in_quality_assurance
     @completed_stories = Story.for_iteration(@iteration.id).completed
+    @total_assigned_points = 0
+    Story.for_iteration(@iteration.id).map { |s|
+      @total_assigned_points += s.points
+    }
+
+    @assignment_difference = @total_assigned_points - @iteration.velocity
 
     respond_to do |format|
       format.html # index.html.erb
@@ -49,120 +56,115 @@ class StoriesController < ApplicationController
   # GET /stories/1.xml
   def show
     @story = Story.find_by_slug(params[:id])
+    @iteration = @story.iteration unless @story.nil?
 
     respond_to do |format|
       if @story
-        format.html {
-          @iteration = load_iteration
+        format.html
+        format.xml {
+          render :xml => (@story.to_xml :include => {
+            :scenarios => { :include => [:preconditions, :outcomes] }
+          })
         }
-        format.xml  {
-          render :xml => (@story.to_xml :include => { :scenarios => {
-        :include => [:preconditions, :outcomes] } } ) }
-          format.js { @active = true }
-        else
-          format.html {
-            @iteration = load_iteration
-            render_optional_error_file 404
-          }
-          format.all  { render :nothing => true, :status => 404 }
-        end
+        format.js { @active = true }
+      else
+        format.html { render_optional_error_file 404 }
+        format.all  { render :nothing => true, :status => 404 }
       end
-    end
-
-    # GET /stories/new
-    # GET /stories/new.xml
-    def new
-      @story = Story.new(:iteration => @iteration)
-
-      respond_to do |format|
-        format.html # new.html.erb
-        format.xml  { render :xml => @story }
-      end
-    end
-
-    # GET /stories/1/edit
-    def edit
-      @story = Story.find_by_slug(params[:id])
-    end
-
-    # POST /stories
-    # POST /stories.xml
-    def create
-      @story = Story.new(params[:story])
-      @story.author = current_user
-      @story.iteration = @iteration
-
-      respond_to do |format|
-        if @story.save
-          flash[:notice] = 'Story was successfully created.'
-          format.html { redirect_to iteration_stories_path(@iteration) }
-          format.xml  { render :xml => @story, :status => :created, :location => @story }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
-        end
-      end
-    end
-
-    # PUT /stories/"1
-    # PUT /stories/1.xml
-    def update
-      @story = Story.find_by_slug(params[:id])
-
-      if params[:story] and params[:story][:status]
-        if params[:story][:status] == 'in_progress'
-          @story.assign
-        end
-
-        if params[:story][:status] == 'quality_assurance'
-          @story.check_quality
-        end
-
-        if params[:story][:status] == 'new'
-          @story.back_to_new
-        end
-
-        if params[:story][:status] == 'completed'
-          @story.finish
-        end
-      end
-
-      respond_to do |format|
-        if @story.update_attributes(params[:story])
-          flash[:notice] = 'Story was successfully updated.'
-          format.html { redirect_to iteration_story_path(@iteration, @story) }
-          format.xml  { head :ok }
-          format.js { redirect_to iteration_stories_path(@iteration) }
-        else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
-        end
-      end
-
-
-    end
-
-    # DELETE /stories/1
-    # DELETE /stories/1.xml
-    def destroy
-      @story = Story.find_by_slug(params[:id])
-      @story.destroy
-
-      respond_to do |format|
-        format.html { redirect_to iteration_stories_path(@iteration) }
-        format.xml  { head :ok }
-      end
-    end
-
-
-    private
-
-    def retrieve_iterations
-      @iterations = Iteration.all
-    end
-
-    def load_iteration
-      @iteration = Iteration.find(params[:iteration_id])
     end
   end
+
+  # GET /stories/new
+  # GET /stories/new.xml
+  def new
+    @story = Story.new(:iteration => @iteration)
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @story }
+    end
+  end
+
+  # GET /stories/1/edit
+  def edit
+    @story = Story.find_by_slug(params[:id])
+  end
+
+  # POST /stories
+  # POST /stories.xml
+  def create
+    @story = Story.new(params[:story])
+    @story.author = current_user
+    @story.iteration = @iteration
+
+    respond_to do |format|
+      if @story.save
+        flash[:notice] = 'Story was successfully created.'
+        format.html { redirect_to iteration_stories_path(@iteration) }
+        format.xml  { render :xml => @story, :status => :created, :location => @story }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /stories/"1
+  # PUT /stories/1.xml
+  def update
+    @story = Story.find_by_slug(params[:id])
+
+    if params[:story] and params[:story][:status]
+      @story.assign if params[:story][:status] == 'in_progress'
+      @story.check_quality if params[:story][:status] == 'quality_assurance'
+      @story.back_to_new if params[:story][:status] == 'new'
+      @story.finish if params[:story][:status] == 'completed'
+    end
+
+    respond_to do |format|
+      if @story.update_attributes(params[:story])
+        flash[:notice] = 'Story was successfully updated.'
+        format.html { redirect_to iteration_story_path(@iteration, @story) }
+        format.xml  { head :ok }
+        format.js { redirect_to iteration_stories_path(@iteration) }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /stories/1
+  # DELETE /stories/1.xml
+  def destroy
+    @story = Story.find_by_slug(params[:id])
+    @story.destroy
+
+    respond_to do |format|
+      format.html { redirect_to iteration_stories_path(@iteration) }
+      format.xml  { head :ok }
+    end
+  end
+
+
+  private
+
+  def retrieve_iterations
+    @iterations = Iteration.all
+  end
+
+  def load_iteration
+    @iteration = Iteration.find(params[:iteration_id])
+  end
+
+  def login_or_password_required
+    user = User.authenticate(params[:login], params[:password])
+    if user
+      return true
+    else
+      return false
+    end
+  end
+
+end
 

@@ -1,0 +1,14 @@
+<%= link_to user.login, edit_user_path(user) %> -
+
+<% if user.state == "active" -%>
+  activate
+<% else %>
+  <%= link_to 'activate', activate_user_path(user) %>
+<% end -%> |
+
+<% if user.state == "pending" || user.state == "suspended" -%>
+  suspend
+<% else -%>
+  <%= link_to 'suspend', suspend_user_path(user)  %>
+<% end -%>
+
