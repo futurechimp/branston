@@ -7,6 +7,7 @@ gem 'mysql'
 gem 'calendar_date_select', '>= 1.15'
 gem 'aasm'
 gem 'googlecharts', ' ~> 1.4.0'
+gem 'rcov'
 
 group :development do
   # bundler requires these gems in development
