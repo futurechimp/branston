@@ -5,11 +5,11 @@
         <%= in_place_editor_field 'story', 'title', {}, :url => {
           :action => "set_story_title", :id => @story.id,
         :iteration_id => @iteration.to_param } %> &nbsp;
-        <%= clippy("branston -g -f #{@story.to_param} -b #{request.host} -p #{request.port} ", "#FFFF99") %>
         <%= link_to image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"),
         iteration_story_path(@iteration, @story), :confirm => 'Delete this story?',
         :method => :delete, :class => "delete-small" %>
-        <div style="clear:left">By <%=@story.author%></div>
+        <div style="clear:left">By <%=@story.author%>
+        <%= clippy("branston -g -f #{@story.to_param} -b #{request.host} -p #{request.port} ", "#FFFF99") %></div>
       </div>
 
       <div id="<%= element_id(story,'scenarios') %>" class="accordion-content">
@@ -19,10 +19,11 @@
             <%= hidden_field_tag 'id', @story.id %>
             <div>
               <%= f.select :points, (1..10).to_a, {}, :id => element_id(@story,'points') %> Points
-                </div>
+            </div>
             <div>
               <%= f.label :status %>
-              <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'], {},
+              <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'].map {
+                |s| [s.capitalize.gsub('_', ' '), s]}, {},
               :id => element_id(@story, 'status') %>
             </div>
             <% unless @iterations.empty? -%>

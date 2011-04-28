@@ -1,20 +1,26 @@
 class ProjectsController < ApplicationController
   
+  before_filter :login_required
+  
   layout 'main'
 
   def index
-     if current_user.role == 'customer'
-       @projects = Project.find(:all, 
-         :select => "DISTINCT projects.name, projects.*",
-         :conditions => ["participations.user_id = ?", current_user.to_param],
-         :joins => { :iterations => :participations })
-     else
-       @projects = Project.all
-     end
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @projects }
+    if current_user
+      if current_user.role == 'customer'
+        @projects = Project.find(:all, 
+          :select => "DISTINCT projects.name, projects.*",
+          :conditions => ["participations.user_id = ?", current_user.to_param],
+          :joins => { :iterations => :participations })
+      else
+        @projects = Project.all
+      end
+    
+      respond_to do |format|
+        format.html
+        format.xml  { render :xml => @projects }
+      end
+    else
+      redirect_to '/sessions/new' 
     end
   end
 

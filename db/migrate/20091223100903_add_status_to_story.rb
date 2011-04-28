@@ -1,6 +1,6 @@
 class AddStatusToStory < ActiveRecord::Migration
   def self.up
-    add_column :stories, :status, :string, :limit => 10
+    add_column :stories, :status, :string, :limit => 50
     add_column :stories, :completed_date, :date
   end
 

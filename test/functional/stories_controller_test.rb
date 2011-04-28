@@ -49,7 +49,7 @@ class StoriesControllerTest < ActionController::TestCase
       end
 
       should "show a form to edit stories" do
-        get :edit, :id => @story.to_param, :iteration_id => @iteration.to_param
+        get :edit, :id => @story.slug, :iteration_id => @iteration.to_param
         assert_response :success
         assert assigns(:iterations)
       end
@@ -62,7 +62,7 @@ class StoriesControllerTest < ActionController::TestCase
 
       should "delete a story" do
         assert_difference('Story.count', -1) do
-          delete :destroy, :id => @story.to_param, :iteration_id => @iteration.to_param
+          delete :destroy, :id => @story.slug, :iteration_id => @iteration.to_param
         end
 
         assert_redirected_to iteration_stories_path(@iteration)
@@ -128,7 +128,7 @@ class StoriesControllerTest < ActionController::TestCase
         context "with valid parameters" do
           setup do
             assert_no_difference("Story.count") do
-              put :update,{ :id => @story.to_param,  :story => {:description => "bar"},
+              put :update,{ :id => @story.slug,  :story => {:description => "bar"},
               :iteration_id => @iteration.to_param }
             end
           end
@@ -194,7 +194,7 @@ class StoriesControllerTest < ActionController::TestCase
 
         context "with invalid parameters" do
           setup do
-            put :update, :id => @story.to_param, :story => {:description => ""},
+            put :update, :id => @story.slug, :story => {:description => ""},
             :iteration_id => @iteration.to_param
           end
 
@@ -214,7 +214,7 @@ class StoriesControllerTest < ActionController::TestCase
       context "with a username and password" do
         setup do
           get :show,
-            :id => @story.to_param, :iteration_id => @iteration.to_param,
+            :id => @story.slug, :iteration_id => @iteration.to_param,
             :username => @user.login, :password => "password"
         end
 

@@ -30,7 +30,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # root_path
   #
-  map.root :controller => :iterations
+  map.root :controller => :projects
 
 end
 

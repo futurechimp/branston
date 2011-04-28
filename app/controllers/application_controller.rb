@@ -24,5 +24,6 @@ class ApplicationController < ActionController::Base
 
   # RESTful authentication system
   include AuthenticatedSystem
+  
 end
 

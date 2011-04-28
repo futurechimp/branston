@@ -15,7 +15,7 @@
   <% @iteration = iteration -%>
   <tr class="<%=cycle('odd','even')%>">
     <td><%= in_place_editor_field 'iteration', 'velocity' %></td>
-    <td><%= in_place_editor_field 'iteration', 'name' %></td>
+    <td><%= in_place_editor_field 'iteration', 'name' %> (<%= iteration.project.name %>)</td>
     <td><%=h iteration.start_date.strftime('%d/%m/%Y') unless iteration.start_date.nil? %></td>
     <td><%=h iteration.end_date.strftime('%d/%m/%Y') unless iteration.end_date.nil? %></td>
     <td>

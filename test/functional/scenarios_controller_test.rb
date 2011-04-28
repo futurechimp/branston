@@ -44,13 +44,13 @@ class ScenariosControllerTest < ActionController::TestCase
       end
 
       should "get index" do
-        get :index, :story_id => @story.to_param, :iteration_id => @iteration.to_param
+        get :index, :story_id => @story.slug, :iteration_id => @iteration.to_param
         assert_response :success
         assert_not_nil assigns(:scenarios)
       end
 
       should "get new" do
-        get :new, :story_id => @story.to_param, :iteration_id => @iteration.to_param
+        get :new, :story_id => @story.slug, :iteration_id => @iteration.to_param
         assert_response :success
       end
 
@@ -58,7 +58,7 @@ class ScenariosControllerTest < ActionController::TestCase
         context "with valid params" do
           setup do
             assert_difference('Scenario.count') do
-              post :create, :scenario => { :title => "Foo" }, :story_id => @story.to_param,
+              post :create, :scenario => { :title => "Foo"} , :story_id => @story.slug,
               :iteration_id => @iteration.to_param
             end
           end
@@ -92,7 +92,7 @@ class ScenariosControllerTest < ActionController::TestCase
         context "with valid params" do
           setup do
             put :update, :id => @scenario.to_param, :scenario => { :title => "Bar" },
-            :story_id => @story.to_param, :iteration_id => @iteration.to_param
+            :story_id => @story.slug, :iteration_id => @iteration.to_param
           end
           should "redirect to show" do
             assert_redirected_to iteration_story_scenario_path(@iteration, assigns(:story), assigns(:scenario))
