@@ -53,12 +53,13 @@ class Story < ActiveRecord::Base
   include AASM
   aasm_column :status
   aasm_initial_state :new
-  aasm_state :new
+  aasm_state :new, :enter => Proc.new  { |story, transition|
+                               story.transition_date = Date.today
+                             }
+
   aasm_state :in_progress
-  aasm_state :quality_assurance
-  aasm_state :completed, :enter => Proc.new  { |story, transition|
-                                        story.completed_date = Date.today
-                                   }
+  aasm_state :quality_assurance, :enter => :set_transition_date
+  aasm_state :completed, :enter => :set_transition_date
 
   aasm_event :assign do
     transitions :from => [:new, :quality_assurance, :completed], :to => :in_progress
@@ -76,10 +77,6 @@ class Story < ActiveRecord::Base
     transitions :from => :in_progress, :to => :new
   end
 
-#  after_transition any => :completed do |story, transition|
-#    story.completed_date = Date.today
-#  end
-
   attr_protected :status
 
   def to_param
@@ -89,6 +86,10 @@ class Story < ActiveRecord::Base
   private
   def set_slug
     self.slug = self.to_param
+  end
+  
+  def set_transition_date
+    transition_date = Date.today
   end
 
 end

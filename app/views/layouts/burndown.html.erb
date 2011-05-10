@@ -7,9 +7,7 @@
   <title>Branston - <%= controller.action_name %></title>
   <%= stylesheet_link_tag 'application' %>
   <%= stylesheet_link_tag 'style' %>
-  <%= javascript_include_tag :defaults %>
-  <%= calendar_date_select_includes "red" %>
-  <%= javascript_include_tag 'accordion' %>
+  <%= yield :js_includes %>
 </head>
 <body>
   <%= render :partial => "layouts/header" %>

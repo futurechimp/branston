@@ -29,7 +29,7 @@ class IterationsController < ApplicationController
     @iterations = Iteration.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml  { render :xml => @iterations }
     end
   end
@@ -39,10 +39,8 @@ class IterationsController < ApplicationController
   def show
     @iteration = Iteration.find(params[:id])
 
-    @iteration_data = @iteration.burndown_data
-
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :layout => 'burndown' }
       format.xml  { render :xml => @iteration }
     end
   end

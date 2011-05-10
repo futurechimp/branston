@@ -1,6 +1,18 @@
-<div id="burndown_chart">
-  <%= burndown_chart @iteration, @iteration_data %>
-</div>
+<% content_for :js_includes do %>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart"]})
+  google.setOnLoadCallback(drawChart)
+  function drawChart() {
+    var data = new google.visualization.DataTable(<%= burndown_data_js(@iteration) %>)
+    var chart = new google.visualization.LineChart(document.getElementById('burndown_chart'))
+    chart.draw(data, {width: 1000, height: 550, title: "<%= @iteration.name %> burndown"})
+  }
+</script>
+<% end %>
+
+<div id="burndown_chart"></div>
 
 <div id="iteration_stats">
   <h3>Iteration Stats</h3>
