@@ -20,8 +20,13 @@ module IterationsHelper
     # and decrement the iteration totals for QA/Complete stories.
     # Format the expected JSON as we go.
     work_days(iteration).each do |wd|
+      # Decrement the QA burndown total
       qa_burndown_total -= burndown_map['quality_assurance'][wd.to_s] || 0
+      # Completed stories have passed QA so the QA count needs to be decremented.
+      qa_burndown_total -= burndown_map['completed'][wd.to_s] || 0
+      # Decrement the Completed burndown total
       completed_burndown_total -= burndown_map['completed'][wd.to_s] || 0
+      # Push a formatted JS string into the cell array
       js_cell_arr << js_cell(iteration, wd, qa_burndown_total, completed_burndown_total)
     end
 
