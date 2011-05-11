@@ -20,8 +20,7 @@ group :test do
   gem 'machinist'
   gem 'webrat', '~> 0.5.3'
   gem 'faker'
-  gem 'relevance-rcov'
+# gem 'relevance-rcov'
   gem 'ruby-prof'
   gem 'ruby-debug'
 end
-

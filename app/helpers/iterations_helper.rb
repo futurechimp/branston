@@ -5,7 +5,7 @@ module IterationsHelper
   def burndown_data_js(iteration)
 
     # The JSON output for our DataTable cells.
-    cell_js = [] 
+    cell_js = []
     # The weekdays in the iteration.
     work_days = (iteration.start_date.to_date..iteration.end_date.to_date).to_a.delete_if { |d| is_weekend(d) }
     # The burndown totals for QA and completed stories
@@ -21,15 +21,15 @@ module IterationsHelper
         #end
       end
     end
-    
+
     work_days.each do |wd|
       qa_burndown_total -= burndown_map['quality_assurance'][wd.to_s] || 0
       completed_burndown_total -= burndown_map['completed'][wd.to_s] || 0
-      cell_js << "{c:[{v:'#{wd.strftime('%d/%m/%Y')}', p:{style:'font-size:10'}}, " +
+      cell_js << "{c:[{v:'#{wd.strftime('%d/%m/%y')}'}, " +
       "{v:#{qa_burndown_total}, f:'#{qa_burndown_total} points'}, " +
       "{v:#{completed_burndown_total}, f:'#{completed_burndown_total} points' }]}"
     end
-    
+
     "{
       cols: [{id: 'A', label: '#{iteration.name} burndown chart', type: 'string'},
              {id: 'B', label: 'Quality Assurance', type: 'number'},
@@ -45,4 +45,3 @@ module IterationsHelper
   end
 
 end
-
