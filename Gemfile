@@ -20,6 +20,7 @@ group :test do
   gem 'machinist'
   gem 'webrat', '~> 0.5.3'
   gem 'faker'
+  gem 'mocha'
 # gem 'relevance-rcov'
   gem 'ruby-prof'
   gem 'ruby-debug'

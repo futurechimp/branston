@@ -43,4 +43,3 @@ class Iteration < ActiveRecord::Base
   end
 
 end
-

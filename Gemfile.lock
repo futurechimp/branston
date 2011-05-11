@@ -28,6 +28,7 @@ GEM
     i18n (0.5.0)
     linecache (0.43)
     machinist (1.0.6)
+    mocha (0.9.12)
     mysql (2.8.1)
     nokogiri (1.4.4)
     polyglot (0.2.9)
@@ -65,6 +66,7 @@ DEPENDENCIES
   faker
   googlecharts (~> 1.4.0)
   machinist
+  mocha
   mysql
   rails (~> 2.3.5)
   rcov

@@ -1,23 +1,4 @@
-<% content_for :js_includes do %>
-
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-  google.load("visualization", "1", {packages:["corechart"]})
-  google.setOnLoadCallback(drawChart)
-  function drawChart() {
-    var data = new google.visualization.DataTable(<%= burndown_data_js(@iteration) %>)
-    var chart = new google.visualization.LineChart(document.getElementById('burndown_chart'))
-    chart.draw(data, {
-      width: 1000, height: 550,
-      title: "<%= @iteration.name %> burndown",
-      vAxis: {minValue:0, maxValue:<%=@iteration.velocity %>},
-      hAxis: {textStyle:{fontSize:10}}
-    })
-  }
-</script>
-<% end %>
-
-<div id="burndown_chart" style="margin-left:-150px"></div>
+<%= render :partial => "burndown_chart", :locals => { :iteration => @iteration } %>
 
 <div id="iteration_stats">
   <h3>Iteration Stats</h3>
@@ -51,9 +32,7 @@
       <b>Stories</b>
       <ul>
       <% @iteration.stories.each do |story| %>
-
-        <li><%= story.title %> | <%= story.points %></li>
-
+        <li><a title="<%= story.description %>"><%= story.title %></a> | <%= story.points %></li>
       <% end %>
       </ul>
   <% end %>
