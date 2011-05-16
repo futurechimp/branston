@@ -1,62 +1,43 @@
-<% content_for :js_includes do %>
-
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-  google.load("visualization", "1", {packages:["corechart"]})
-  google.setOnLoadCallback(drawChart)
-  function drawChart() {
-    var data = new google.visualization.DataTable(<%= burndown_data_js(@iteration) %>)
-    var chart = new google.visualization.LineChart(document.getElementById('burndown_chart'))
-    chart.draw(data, {width: 1000, height: 550, title: "<%= @iteration.name %> burndown"})
-  }
-</script>
-<% end %>
-
-<div id="burndown_chart"></div>
+<%= render :partial => "burndown_chart", :locals => { :iteration => @iteration } %>
 
 <div id="iteration_stats">
   <h3>Iteration Stats</h3>
-  
+
   <p>
     <b>Velocity:</b>
     <%=h @iteration.velocity %>
   </p>
-  
+
   <p>
     <b>Name:</b>
     <%=h @iteration.name %>
   </p>
-  
+
   <p>
     <b>Start date:</b>
     <%=h @iteration.start_date %>
   </p>
-  
+
   <p>
     <b>End date:</b>
     <%=h @iteration.end_date %>
   </p>
-  
+
   <p>
     <b>Release:</b>
     <%=h @iteration.release.release_date if @iteration.release %>
   </p>
-  
+
   <% unless @iteration.stories.empty? %>
       <b>Stories</b>
       <ul>
       <% @iteration.stories.each do |story| %>
-  
-        <li><%= story.description %> | <%= story.points %></li>
-  
+        <li><a title="<%= story.description %>"><%= story.title %></a> | <%= story.points %></li>
       <% end %>
       </ul>
   <% end %>
 </div>
-  
-  <%= link_to 'Edit', edit_iteration_path(@iteration) %> |
-  <%= link_to 'Back', iterations_path %> | 
-  <%=link_to 'Stories', iteration_stories_path(@iteration) %>
-  
-  
 
+  <%= link_to 'Edit', edit_iteration_path(@iteration) %> |
+  <%= link_to 'Back', iterations_path %> |
+  <%=link_to 'Stories', iteration_stories_path(@iteration) %>
