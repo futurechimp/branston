@@ -10,7 +10,7 @@ config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 
 # Use a different logger for distributed setups
-config.logger = ActiveSupport::BufferedLogger.new($BRANSTON_LOG_PATH, 1)
+#config.logger = ActiveSupport::BufferedLogger.new($BRANSTON_LOG_PATH, 1)
 
 # Use a different cache store in production
 # config.cache_store = :mem_cache_store
@@ -23,4 +23,3 @@ config.logger = ActiveSupport::BufferedLogger.new($BRANSTON_LOG_PATH, 1)
 
 # Enable threaded mode
 # config.threadsafe!
-
