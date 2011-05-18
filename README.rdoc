@@ -3,42 +3,20 @@
 A user story tracker that generates gherkin files and step
 definitions for use with the cucumber testing framework.
 
-After installation, Branston acts as both a server and a client.  The server
-allows you to create accounts, log in, create user stories, and group them into
-iterations and releases.  Individual user stories can be given acceptance
+Branston allows you to create accounts, log in, create user stories, and group them into
+projects, iterations and releases.  Individual user stories can be given acceptance
 conditions so that the geeks developing them know when they're done.
 
 Once a user story has been given acceptance conditions, it's possible to write a
 cucumber test for it.  On a developer machine, the Branston client allows a
 developer to auto-generate cucumber tests from the user stories on the server.
+(see https://github.com/steventux/branston-client)
 
 == Installation
 
-There's a bit of a dependency chain needed to get things running.  Cucumber has
-a dependency on Nokogiri, which itself has some libxml related dependencies
-including a dependency on a C compiler. On a clean Debian/Ubuntu box, this...
-
- sudo apt-get install libxml-ruby  libxml2-dev libxslt-ruby libxslt-dev build-essential sqlite3 libsqlite3-ruby libsqlite3-dev
- sudo gem install branston
-
-...currently does the trick.
-
-= Example Usage
-
-First, initialize a branston server:
-
- branston -i
-
-Initialization will make a hidden folder in the present working directory (called
-".branston") and make a sqlite3 database and necessary config files.
-
-Then, start the server:
-
- branston -s
-
-This will start the Branston server on port 3970.  By default, the server binds
-to the IP 0.0.0.0, so don't do this on a public-facing box unless you want to
-make your Branston server available to the entire internet.
+Branston is now split into two distinct applications, the Branston Rails webapp
+and the Branston-client cli tool. You can run the Rails app on a centralised server
+then cut the Gherkin generation commands from your story cards with old clippy.
 
 Writing stories is a two-step process.  Stories are laid out so that they look
 somewhat like the recipe cards we use in our agile processes;  on the front
@@ -78,22 +56,6 @@ tests pass.
 
 * Generating cucumber code for a story twice, or step definition files with identical names, will wipe out any customizations you did the first time through.  This sucks and is no fun.  We'll get around to fixing it unless you get around to fixing it first (pull requests welcome).
 
-* The security is at present somewhat ludicrous, anyone can sign up and automatically get access to the stories.  We use our Branston server on a private intranet and haven't bothered to get it ready for public-facing use yet. In general we only use the user accounts to see who did what.
-
-* There is no multi-project support yet.
-
-== Help options
-
-Running
-
- branston -h
-
-will show a basic help message.  To get help on any of the top-level options, you add "-h" after that option, e.g.
-
- branston -s -h
-
-will list out the help options for the branston server.
-
 == Note on Patches/Pull Requests
 
 * Fork the project.
@@ -112,4 +74,3 @@ See LICENSE for details.
 == Credits
 
 Dan Garland, Dave Hrycyszyn, Steve Laing
-
