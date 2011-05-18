@@ -29,10 +29,10 @@ class Story < ActiveRecord::Base
 
   # Named scopes
   #
-  named_scope :unassigned, :conditions => 'status = "new"'
-  named_scope :in_progress, :conditions => 'status = "in_progress"'
-  named_scope :in_quality_assurance, :conditions => 'status = "quality_assurance"'
-  named_scope :completed, :conditions => 'status = "completed"'
+  named_scope :unassigned, :conditions => "status = 'new'"
+  named_scope :in_progress, :conditions => "status = 'in_progress'"
+  named_scope :in_quality_assurance, :conditions => "status = 'quality_assurance'"
+  named_scope :completed, :conditions => "status = 'completed'"
   named_scope :for_iteration, lambda { |id| {
     :conditions => ['iteration_id = ?', id] } }
 
@@ -87,10 +87,9 @@ class Story < ActiveRecord::Base
   def set_slug
     self.slug = self.to_param
   end
-  
+
   def set_transition_date
     transition_date = Date.today
   end
 
 end
-
