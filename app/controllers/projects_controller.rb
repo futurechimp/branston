@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
 
   def index
     if current_user
-      if current_user.role == 'customer'
+      if current_user.role == 'client'
         @projects = Project.find(:all, 
           :select => "DISTINCT projects.name, projects.*",
           :conditions => ["participations.user_id = ?", current_user.to_param],

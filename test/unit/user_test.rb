@@ -9,7 +9,7 @@ class UserTest < ActiveSupport::TestCase
   context "the User class" do
 
     should "have a ROLES array in a constant" do
-      assert_equal(["admin", "developer", "customer"], User::ROLES)
+      assert_equal(["admin", "developer", "client"], User::ROLES)
     end
 
 
@@ -213,8 +213,8 @@ class UserTest < ActiveSupport::TestCase
       @quentin = User.make(:quentin)
     end
 
-    should "have the role 'customer'" do
-      assert @quentin.has_role?("customer")
+    should "have the role 'client'" do
+      assert @quentin.has_role?("client")
     end
 
     context "when setting the user's role" do

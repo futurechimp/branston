@@ -16,7 +16,7 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
 
-  ROLES = ["admin", "developer", "customer"]
+  ROLES = ["admin", "developer", "client"]
 
   include Authentication
   include Authentication::ByPassword

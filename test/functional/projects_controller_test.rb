@@ -7,7 +7,7 @@ class ProjectsControllerTest < ActionController::TestCase
   	setup do
   		@project = Project.make
       @admin = User.make(:admin)
-      @customer = User.make(:role => 'customer')
+      @client = User.make(:role => 'client')
       login_as(@admin)
   	end
 
@@ -29,7 +29,7 @@ class ProjectsControllerTest < ActionController::TestCase
 		
 		context 'GET to index as a non-participating user' do
 		  setup do
-		    login_as(@customer)
+		    login_as(@client)
 		    get :index
 		  end
 		  should "not show projects where the current user is not a participant" do
@@ -41,10 +41,10 @@ class ProjectsControllerTest < ActionController::TestCase
 		  setup do
 		    3.times do
 		      iteration = Iteration.make
-		      iteration.geeks << @customer
+		      iteration.geeks << @client
 		      @project.iterations << iteration
 		    end
-		    login_as(@customer)
+		    login_as(@client)
 		    get :index
 		  end
 		  should "not show projects where the current user is not a participant" do

@@ -25,7 +25,7 @@ end
 User.blueprint do
   login
   email
-  role  { "customer" }
+  role  { "client" }
   password { 'monkey' }
   password_confirmation { 'monkey' }
 end
