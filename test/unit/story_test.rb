@@ -57,7 +57,7 @@ class StoryTest < ActiveSupport::TestCase
         assert @story.in_progress?
       end
 
-      context "then transisted to completed" do
+      context "then transitioned to completed" do
         setup do
           assert @story.finish
         end

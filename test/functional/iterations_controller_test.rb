@@ -199,9 +199,8 @@ class IterationsControllerTest < ActionController::TestCase
           assert_response :success
         end
 
-        should "successfully respond with iteration data" do
+        should "successfully show the iteration" do
           assert assigns(:iteration)
-          assert assigns(:iteration_data)
         end
 
         should "have 5 stories assigned to it" do

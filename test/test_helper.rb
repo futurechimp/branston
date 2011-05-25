@@ -5,6 +5,7 @@ require 'shoulda'
 require 'blueprints'
 require 'mocha'
 require 'fileutils'
+require 'json'
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method

@@ -30,7 +30,7 @@ class Iteration < ActiveRecord::Base
   belongs_to :release
   belongs_to :project
 
-  def burndown_data(status)
+  def burndown_data(status="completed")
     Story.find_by_sql [
       "SELECT SUM(points) AS points,
         transition_date

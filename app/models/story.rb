@@ -53,13 +53,13 @@ class Story < ActiveRecord::Base
   include AASM
   aasm_column :status
   aasm_initial_state :new
-  aasm_state :new, :enter => Proc.new  { |story, transition|
-                               story.transition_date = Date.today
-                             }
-
+  aasm_state :new, :enter => :set_transition_date
   aasm_state :in_progress
   aasm_state :quality_assurance, :enter => :set_transition_date
-  aasm_state :completed, :enter => :set_transition_date
+  aasm_state :completed, :enter => Proc.new  { |story, transition|
+                               story.completed_date = Date.today
+                               story.transition_date = Date.today
+                             }
 
   aasm_event :assign do
     transitions :from => [:new, :quality_assurance, :completed], :to => :in_progress

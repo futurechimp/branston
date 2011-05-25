@@ -22,6 +22,7 @@ group :test do
   gem 'faker'
   gem 'mocha'
 # gem 'relevance-rcov'
+  gem 'json'
   gem 'ruby-prof'
   gem 'ruby-debug'
 end

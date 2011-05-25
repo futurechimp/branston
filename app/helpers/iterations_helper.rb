@@ -4,9 +4,10 @@ module IterationsHelper
 
     # The JSON properties for our DataTable cells.
     js_cell_arr = []
-    # The burndown totals for QA and completed stories
-    qa_burndown_total = iteration.velocity
-    completed_burndown_total = iteration.velocity
+    # The total assigned points for the iteration.
+    iteration_points = Story.sum(:points, :conditions => ["iteration_id = ?", iteration.id])
+    qa_burndown_total = iteration_points
+    completed_burndown_total = iteration_points
     # Map story points keyed by date for both QA and complete stories.
     burndown_map = {}
     ['quality_assurance','completed'].each do |burndown_state|
@@ -27,7 +28,7 @@ module IterationsHelper
       # Decrement the Completed burndown total
       completed_burndown_total -= burndown_map['completed'][wd.to_s] || 0
       # Push a formatted JS string into the cell array
-      js_cell_arr << js_cell(iteration, wd, qa_burndown_total, completed_burndown_total)
+      js_cell_arr << js_cell(wd, iteration_points, qa_burndown_total, completed_burndown_total)
     end
 
     data_js_obj iteration, js_cell_arr
@@ -39,19 +40,19 @@ module IterationsHelper
   def data_js_obj(iteration, js_cell_arr)
     template = ERB.new <<-EOF
 {
-  cols: [{id: 'A', label: '#{iteration.name} burndown chart', type: 'string'},
-         {id: 'B', label: 'Quality Assurance', type: 'number'},
-         {id: 'C', label: 'Completed', type: 'number'}
+  "cols": [{"id":"A", "label":"#{iteration.name} burndown chart", "type":"string"},
+         {"id":"B", "label":"Quality Assurance", "type":"number"},
+         {"id":"C", "label":"Completed", "type":"number"}
         ],
-  rows: [<%= js_cell_arr.join(",") %>]
+  "rows": [<%= js_cell_arr.join(",") %>]
 }
     EOF
     template.result(binding)
   end
 
-  def js_cell(iteration, date, qa_total, completed_total)
+  def js_cell(date, iteration_points, qa_total, completed_total)
     template = ERB.new <<-EOF
-{c:[{v:'<%= date.strftime('%d-%m-%Y') %>'}, {v:<%= qa_total %>, f:'<%= iteration.velocity - qa_total %> points. <%= qa_total %> remaining.'}, {v: <%= completed_total %>, f:'<%= iteration.velocity - completed_total %> points. <%= completed_total %> remaining.' }]}
+{"c":[{"v":"<%= date.strftime('%d-%m-%Y') %>"}, {"v":<%= qa_total %>, "f":"<%= iteration_points - qa_total %> points. <%= qa_total %> remaining."}, {"v":<%= completed_total %>, "f":"<%= iteration_points - completed_total %> points. <%= completed_total %> remaining." }]}
     EOF
     template.result(binding)
   end

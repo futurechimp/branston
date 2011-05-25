@@ -36,8 +36,11 @@ class IterationTest < ActiveSupport::TestCase
         Story.make(:points => 2, :iteration => @iteration, :status => "completed")
       end
 
-      should "return a points value" do
-        assert_equal 12, @iteration.burndown_data.first.points
+      should "return a points value for qa stories" do
+        assert_equal 5, @iteration.burndown_data("quality_assurance").first.points
+      end
+      should "return a points value for completed stories" do
+        assert_equal 7, @iteration.burndown_data("completed").first.points
       end
     end
   end
