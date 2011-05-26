@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   before_filter :find_user, :only => [:suspend, :destroy, :activate]
   before_filter :must_be_admin, :only => [:new, :create, :destroy, :suspend, :activate]
   before_filter :must_be_admin_or_self, :only => [:edit, :update]
+  before_filter :add_participations, :only => [:create, :update]
 
   def index
     @users = User.find(:all)
@@ -96,5 +97,15 @@ class UsersController < ApplicationController
     end
   end
 
-end
+  def add_participations
+    unless params[:user][:participations].nil?
+      # blow em away
+      Participation.find(:all,
+        :conditions => ["user_id = ?", params[:id]]).each { |p| p.destroy }
+      params[:user].delete(:participations).each do |participation|
+        Participation.create(:user_id => params[:id], :iteration_id => participation[:iteration])
+      end
+    end
+  end
 
+end

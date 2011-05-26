@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :participations
 
   include AASM
   aasm_column :state
@@ -99,6 +99,17 @@ class User < ActiveRecord::Base
     login
   end
 
+  def participant?(iteration)
+    is_participant = false
+    participations.each do |participation|
+      if iteration.to_param == participation.iteration.to_param
+        is_participant = true
+        break
+      end
+    end
+    is_participant
+  end
+
   protected
 
   # Returns true if the user has just been activated.
@@ -117,4 +128,3 @@ class User < ActiveRecord::Base
   end
 
 end
-
