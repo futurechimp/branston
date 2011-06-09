@@ -90,6 +90,7 @@ class Story < ActiveRecord::Base
 
   def set_transition_date
     transition_date = Date.today
+    save
   end
 
 end
