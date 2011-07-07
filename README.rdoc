@@ -73,4 +73,4 @@ See LICENSE for details.
 
 == Credits
 
-Dan Garland, Dave Hrycyszyn, Steve Laing
+Dan Garland, Dave Hrycyszyn, Steve Laing, Stuart Chinery
