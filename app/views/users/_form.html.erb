@@ -1,3 +1,11 @@
+<%= error_messages_for :object => @user,
+  :header_tag => 'h3',
+  :id => "errors",
+  :class => "errors",
+  :header_message => "Whoops!",
+  :message => "We had some problems saving this user."
+-%>
+
 <p class="form-fields">
   <%= label_tag 'Login' %>
   <%= f.text_field :login %>

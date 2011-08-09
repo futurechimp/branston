@@ -17,8 +17,10 @@ class ProjectsControllerTest < ActionController::TestCase
 		      iteration = Iteration.make
 		      @project.iterations << iteration
 		    end
+		
 		    get :index
 		  end
+		
 		  should respond_with :success
 		  should assign_to :projects
 		  
@@ -32,6 +34,7 @@ class ProjectsControllerTest < ActionController::TestCase
 		    login_as(@client)
 		    get :index
 		  end
+		
 		  should "not show projects where the current user is not a participant" do
 		    assert_equal assigns(:projects).size, 0
 		  end
@@ -44,9 +47,11 @@ class ProjectsControllerTest < ActionController::TestCase
 		      iteration.geeks << @client
 		      @project.iterations << iteration
 		    end
+		
 		    login_as(@client)
 		    get :index
 		  end
+		
 		  should "not show projects where the current user is not a participant" do
 		    assert_equal 1, assigns(:projects).size
 		  end
@@ -92,9 +97,11 @@ class ProjectsControllerTest < ActionController::TestCase
 		  setup do
 		    get :show, :id => @project.to_param
 		  end
+		
 		  should respond_with :success
 		  should render_template :show
 		  should assign_to :project
+			should assign_to :iterations
 		end
 
 		context 'GET to edit' do

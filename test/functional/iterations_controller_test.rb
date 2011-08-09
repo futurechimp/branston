@@ -4,7 +4,7 @@ class IterationsControllerTest < ActionController::TestCase
 
   context "The IterationsController" do
     context "when the user is not logged in" do
-      [:index, :new, :edit].each do |action|
+      [:new, :edit].each do |action|
         context "on GET to #{action.to_s}" do
           setup do
             get action
@@ -41,50 +41,28 @@ class IterationsControllerTest < ActionController::TestCase
         login_as(@user)
       end
 
-      context "when there are no iterations yet" do
-        setup do
-          get :index
-        end
-
-        should "get index" do
-          assert_response :success
-          assert_not_nil assigns(:iterations)
-        end
-      end
-
       context "when at least one iteration exists" do
         setup do
           @iteration = Iteration.make
         end
 
-        context "on GET to index" do
-          setup do
-            get :index
-          end
-
-          should "work" do
-            assert_response :success
-            assert_not_nil assigns(:iterations)
-          end
-        end
-
         should "get edit" do
-          get :edit, :id => @iteration.to_param
+          get :edit, {:project_id => @iteration.project.to_param, :id => @iteration.to_param}
           assert_response :success
           assert assigns(:releases)
         end
 
         should "get new" do
-          get :new
+          get :new, {:project_id => @iteration.project.to_param}
           assert_response :success
           assert assigns(:releases)
         end
 
-
         context "on GET to show" do
           setup do
-            get :show, :id => @iteration.to_param
+            get :show, {:project_id => @iteration.project.to_param, :id => @iteration.to_param}
           end
+
           should "show iteration" do
             assert_response :success
           end
@@ -92,10 +70,10 @@ class IterationsControllerTest < ActionController::TestCase
 
         should "destroy iteration" do
           assert_difference('Iteration.count', -1) do
-            delete :destroy, :id => @iteration.to_param
+            delete :destroy, {:project_id => @iteration.project.to_param, :id => @iteration.to_param}
           end
 
-          assert_redirected_to iterations_path
+          assert_redirected_to project_iterations_path(@iteration.project)
         end
 
         context "creating an iteration" do
@@ -103,7 +81,7 @@ class IterationsControllerTest < ActionController::TestCase
             setup do
               login_as(@user)
               assert_difference("Iteration.count") do
-                post :create, :iteration => Iteration.plan
+                post :create, {:project_id => @iteration.project.to_param, :iteration => Iteration.plan}
               end
             end
 
@@ -112,13 +90,13 @@ class IterationsControllerTest < ActionController::TestCase
             end
 
             should "redirect to show" do
-              assert_redirected_to iterations_path
+              assert_redirected_to project_iterations_path(@iteration.project)
             end
 
             context "including a release_id" do
               setup do
                 assert_difference("Iteration.count") do
-                  post :create, :iteration => Iteration.plan.merge(:release_id => Release.make.to_param)
+                  post :create, {:project_id => @iteration.project.to_param, :iteration => Iteration.plan.merge(:release_id => Release.make.to_param)}
                 end
               end
 
@@ -132,7 +110,7 @@ class IterationsControllerTest < ActionController::TestCase
             setup do
               login_as(@user)
               assert_no_difference("Iteration.count") do
-                post :create, :iteration => {}
+                post :create, {:project_id => @iteration.project.to_param, :iteration => {}}
               end
             end
 
@@ -151,17 +129,17 @@ class IterationsControllerTest < ActionController::TestCase
             setup do
               login_as(@user)
               assert_no_difference("Iteration.count") do
-                put :update,{ :id => @iteration.to_param,  :iteration => {:name => "bar"}}
+                put :update, {:project_id => @iteration.project.to_param, :id => @iteration.to_param,  :iteration => {:name => "bar"}}
               end
             end
 
             should "redirect to show" do
-              assert_redirected_to iterations_path
+              assert_redirected_to project_iterations_path(@iteration.project)
             end
 
             context "including a release_id" do
               setup do
-                put :update, :id => @iteration.to_param, :iteration => {:release_id => Release.make.to_param}
+                put :update, {:project_id => @iteration.project.to_param, :id => @iteration.to_param, :iteration => {:release_id => Release.make.to_param}}
               end
 
               should "be assigned to a release" do
@@ -172,7 +150,7 @@ class IterationsControllerTest < ActionController::TestCase
 
           context "with invalid parameters" do
             setup do
-              put :update, :id => @iteration.id, :iteration => {:name => ""}
+              put :update, {:project_id => @iteration.project.to_param, :id => @iteration.id, :iteration => {:name => ""}}
             end
 
             should "redisplay the edit template" do
@@ -192,7 +170,7 @@ class IterationsControllerTest < ActionController::TestCase
           5.times do
             @iteration.stories.push Story.make(:completed)
           end
-          get :show, :id => @iteration.to_param
+          get :show, {:project_id => @iteration.project.to_param, :id => @iteration.to_param}
         end
 
         should "work" do

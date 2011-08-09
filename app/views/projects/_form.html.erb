@@ -1,12 +1,17 @@
+<%= error_messages_for :object => @project,
+  :header_tag => 'h3',
+  :id => "errors",
+  :class => "errors",
+  :header_message => "Whoops!",
+  :message => "We had some problems saving this project."
+-%>
   
-  <%= form.error_messages %>
-  
-  <p class="form-fields">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </p>
-  
-  <p class="form-fields">
-    <%= form.label :description %>
-    <%= form.text_area :description, :rows => 5 %>
-  </p>
+<p class="form-fields">
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+</p>
+
+<p class="form-fields">
+  <%= form.label :description %>
+  <%= form.text_area :description, :rows => 5 %>
+</p>

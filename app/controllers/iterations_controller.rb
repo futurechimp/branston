@@ -17,28 +17,17 @@ class IterationsController < ApplicationController
 
   layout 'main'
 
-  in_place_edit_for :iteration, :velocity
-  in_place_edit_for :iteration, :name
-
+  # Filters
+  #
   before_filter :login_required
   before_filter :find_all_releases, :only => [:new, :edit]
-
-  # GET /iterations
-  # GET /iterations.xml
-  def index
-    @iterations = Iteration.all
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @iterations }
-    end
-  end
+	before_filter :find_project
 
   # GET /iterations/1
   # GET /iterations/1.xml
   def show
     @iteration = Iteration.find(params[:id])
-
+		
     respond_to do |format|
       format.html { render :layout => 'burndown' }
       format.xml  { render :xml => @iteration }
@@ -48,8 +37,6 @@ class IterationsController < ApplicationController
   # GET /iterations/new
   # GET /iterations/new.xml
   def new
-    @projects = Project.all
-    @releases = Release.all
     @iteration = Iteration.new
 
     respond_to do |format|
@@ -60,7 +47,6 @@ class IterationsController < ApplicationController
 
   # GET /iterations/1/edit
   def edit
-    @releases = Release.all
     @iteration = Iteration.find(params[:id])
   end
 
@@ -68,14 +54,16 @@ class IterationsController < ApplicationController
   # POST /iterations.xml
   def create
     @iteration = Iteration.new(params[:iteration])
-
+		@iteration.project = @project
+		
     respond_to do |format|
       if @iteration.save
         flash[:notice] = 'Iteration was successfully created.'
-        format.html { redirect_to iterations_path }
+        format.html { redirect_to project_iterations_path(@project) }
         format.xml  { render :xml => @iteration, :status => :created, :location => @iteration }
       else
-        @releases = Release.all
+        find_project
+        find_all_releases
         format.html { render :action => "new" }
         format.xml  { render :xml => @iteration.errors, :status => :unprocessable_entity }
       end
@@ -90,10 +78,11 @@ class IterationsController < ApplicationController
     respond_to do |format|
       if @iteration.update_attributes(params[:iteration])
         flash[:notice] = 'Iteration was successfully updated.'
-        format.html { redirect_to iterations_path }
+        format.html { redirect_to project_iterations_path(@project) }
         format.xml  { head :ok }
       else
-        @releases = Release.all
+				find_project
+        find_all_releases
         format.html { render :action => "edit" }
         format.xml  { render :xml => @iteration.errors, :status => :unprocessable_entity }
       end
@@ -107,7 +96,7 @@ class IterationsController < ApplicationController
     @iteration.destroy
 
     respond_to do |format|
-      format.html { redirect_to(iterations_url) }
+      format.html { redirect_to project_iterations_path(@project) }
       format.xml  { head :ok }
     end
   end
@@ -117,6 +106,10 @@ class IterationsController < ApplicationController
   def find_all_releases
     @releases = Release.all
   end
+
+	def find_project
+		@project = Project.find(params[:project_id]) unless params[:project_id].nil?
+	end
 
 end
 

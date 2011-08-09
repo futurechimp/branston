@@ -17,33 +17,6 @@ end
 
 
 # Model class blueprints
-Project.blueprint do
-  name
-  description
-end
-
-User.blueprint do
-  login
-  email
-  role  { "client" }
-  password { 'monkey' }
-  password_confirmation { 'monkey' }
-end
-
-User.blueprint(:quentin) do
-  login 'quentin'
-  state 'active'
-  salt { '356a192b7913b04c54574d18c28d46e6395428ab' }
-  crypted_password { 'caca9d7480e94bdd00036b4da5cdc3bb3e96da7f' }
-  created_at { 5.days.ago.to_s :db  }
-  remember_token_expires_at { 1.days.from_now.to_s }
-  remember_token { '77de68daecd823babbb58edb1c8e14d7106e83bb' }
-end
-
-User.blueprint(:admin) do
-  role { "admin" }
-end
-
 Iteration.blueprint do
   velocity { 50 }
   name
@@ -53,6 +26,11 @@ Iteration.blueprint do
 end
 
 Outcome.blueprint do
+  description
+end
+
+Project.blueprint do
+  name
   description
 end
 
@@ -91,6 +69,28 @@ end
 
 Story.blueprint(:completed) do
   status { 'completed' }
+end
+
+User.blueprint do
+  login
+  email
+  role  { "client" }
+  password { 'monkey' }
+  password_confirmation { 'monkey' }
+end
+
+User.blueprint(:quentin) do
+  login 'quentin'
+  state 'active'
+  salt { '356a192b7913b04c54574d18c28d46e6395428ab' }
+  crypted_password { 'caca9d7480e94bdd00036b4da5cdc3bb3e96da7f' }
+  created_at { 5.days.ago.to_s :db  }
+  remember_token_expires_at { 1.days.from_now.to_s }
+  remember_token { '77de68daecd823babbb58edb1c8e14d7106e83bb' }
+end
+
+User.blueprint(:admin) do
+  role { "admin" }
 end
 
 module Factory

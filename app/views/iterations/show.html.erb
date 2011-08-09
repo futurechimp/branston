@@ -1,43 +1,40 @@
-<%= render :partial => "iterations/burndown_chart", :locals => { :iteration => @iteration } %>
-
-<div id="iteration_stats">
-  <h3>Iteration Stats</h3>
-
-  <p>
-    <b>Velocity:</b>
-    <%=h @iteration.velocity %>
-  </p>
-
-  <p>
-    <b>Name:</b>
-    <%=h @iteration.name %>
-  </p>
-
-  <p>
-    <b>Start date:</b>
-    <%=h @iteration.start_date %>
-  </p>
-
-  <p>
-    <b>End date:</b>
-    <%=h @iteration.end_date %>
-  </p>
-
-  <p>
-    <b>Release:</b>
-    <%=h @iteration.release.release_date if @iteration.release %>
-  </p>
-
-  <% unless @iteration.stories.empty? %>
-      <b>Stories</b>
-      <ul>
-      <% @iteration.stories.each do |story| %>
-        <li><a title="<%= story.description %>"><%= story.title %></a> | <%= story.points %></li>
-      <% end %>
-      </ul>
-  <% end %>
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', project_path(@project) %></li>
+		<li><%= link_to 'Edit', edit_project_iteration_path(@project, @iteration) %></li>
+		<li><%=link_to 'Stories', iteration_stories_path(@iteration) %></li>
+	</ul>
 </div>
 
-  <%= link_to 'Edit', edit_iteration_path(@iteration) %> |
-  <%= link_to 'Back', iterations_path %> |
-  <%=link_to 'Stories', iteration_stories_path(@iteration) %>
+<%= render :partial => "iterations/burndown_chart", :locals => { :iteration => @iteration } %>
+
+
+<h3>Iteration Stats</h3>
+
+<p>
+  <strong>Velocity:</strong>
+  <%=h @iteration.velocity %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%=h @iteration.name %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%=h @iteration.start_date.strftime('%d/%m/%Y') unless @iteration.start_date.nil? %> %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%=h @iteration.end_date.strftime('%d/%m/%Y') unless @iteration.end_date.nil? %> %>
+</p>
+
+<!-- 
+TODO: Currently not showing releases as these need some reworking.
+<p>
+  <strong>Release:</strong>
+  <%=h @iteration.release.release_date if @iteration.release %>
+</p>
+-->

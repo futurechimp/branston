@@ -1,20 +1,23 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :projects
-
 
   # Resources
   #
-  map.resources :iterations do |i|
-    i.resources :stories, :member => { :generate_feature => :get } do |r|
-      r.resources :scenarios
+	map.resources :projects do |project|
+	  project.resources :iterations, :except => [:index]
+	end
+	
+	map.resources :iterations, :only => [] do |iteration|
+    iteration.resources :stories, :member => { :generate_feature => :get } do |story|
+      story.resources :scenarios
     end
   end
+
   map.resources :outcomes
   map.resources :preconditions
-  map.resources :releases
   map.resource :session
   map.resources :users, :member => { :suspend => :get, :activate => :get }
-
+	map.resources :releases
+	
   # Named routes
   #
   map.client_generate '/stories/:id.:format', :controller => 'stories', :action => 'show'
