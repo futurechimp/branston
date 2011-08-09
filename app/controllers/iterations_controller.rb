@@ -59,7 +59,7 @@ class IterationsController < ApplicationController
     respond_to do |format|
       if @iteration.save
         flash[:notice] = 'Iteration was successfully created.'
-        format.html { redirect_to project_iterations_path(@project) }
+        format.html { redirect_to project_iteration_path(@project, @iteration) }
         format.xml  { render :xml => @iteration, :status => :created, :location => @iteration }
       else
         find_project
@@ -78,7 +78,7 @@ class IterationsController < ApplicationController
     respond_to do |format|
       if @iteration.update_attributes(params[:iteration])
         flash[:notice] = 'Iteration was successfully updated.'
-        format.html { redirect_to project_iterations_path(@project) }
+        format.html { redirect_to project_iteration_path(@project, @iteration) }
         format.xml  { head :ok }
       else
 				find_project
@@ -96,7 +96,7 @@ class IterationsController < ApplicationController
     @iteration.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_iterations_path(@project) }
+      format.html { redirect_to project_path(@project) }
       format.xml  { head :ok }
     end
   end

@@ -73,7 +73,7 @@ class IterationsControllerTest < ActionController::TestCase
             delete :destroy, {:project_id => @iteration.project.to_param, :id => @iteration.to_param}
           end
 
-          assert_redirected_to project_iterations_path(@iteration.project)
+          assert_redirected_to project_path(@iteration.project)
         end
 
         context "creating an iteration" do
@@ -90,7 +90,7 @@ class IterationsControllerTest < ActionController::TestCase
             end
 
             should "redirect to show" do
-              assert_redirected_to project_iterations_path(@iteration.project)
+              assert_redirected_to project_iteration_path(@iteration.project, assigns(:iteration))
             end
 
             context "including a release_id" do
@@ -134,7 +134,7 @@ class IterationsControllerTest < ActionController::TestCase
             end
 
             should "redirect to show" do
-              assert_redirected_to project_iterations_path(@iteration.project)
+              assert_redirected_to project_iteration_path(@iteration.project, assigns(:iteration))
             end
 
             context "including a release_id" do

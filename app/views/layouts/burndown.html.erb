@@ -3,27 +3,31 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <%= render :partial => "layouts/meta" %>
-  <title>Branston - <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'application' %>
-  <%= stylesheet_link_tag 'style' %>
-  <%= yield :js_includes %>
+<%= render :partial => "layouts/meta" %>
+<title>Branston - <%= controller.action_name %></title>
+<%= stylesheet_link_tag 'branston' %>
+<%= yield :js_includes %>
 </head>
 <body>
+<!-- start #container -->
+<div id="container">
   <%= render :partial => "layouts/header" %>
 
   <% if flash[:notice] %>
-    <div id="flash_notice"><%= flash[:notice] %></div>
+    <div id="flash-notice"><%= flash[:notice] %></div>
   <% end %>
 
-	<div id="page">
-		<div id="content">
-    <%= yield %>
-    </div>
-  </div>
+	<div id="content">
+  	<%= yield %>
+	</div>
 
-  <%= render :partial => "layouts/footer" %>
-  <%= yield :page_end %>
+	<!-- start #clear-footer -->
+	<div id="clear-footer"></div>
+	<!-- end #clear-footer -->
+</div>
+<!-- end #container -->
+<%= render :partial => "layouts/footer" %>
+<%= yield :page_end %>
 </body>
 </html>
 

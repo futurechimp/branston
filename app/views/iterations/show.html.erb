@@ -8,7 +8,6 @@
 
 <%= render :partial => "iterations/burndown_chart", :locals => { :iteration => @iteration } %>
 
-
 <h3>Iteration Stats</h3>
 
 <p>
@@ -23,12 +22,12 @@
 
 <p>
   <strong>Start date:</strong>
-  <%=h @iteration.start_date.strftime('%d/%m/%Y') unless @iteration.start_date.nil? %> %>
+  <%=h @iteration.start_date.strftime('%d/%m/%Y') unless @iteration.start_date.nil? %>
 </p>
 
 <p>
   <strong>End date:</strong>
-  <%=h @iteration.end_date.strftime('%d/%m/%Y') unless @iteration.end_date.nil? %> %>
+  <%=h @iteration.end_date.strftime('%d/%m/%Y') unless @iteration.end_date.nil? %>
 </p>
 
 <!-- 

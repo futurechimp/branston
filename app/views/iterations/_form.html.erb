@@ -12,15 +12,15 @@
 </p>
 <p class="form-fields">
   <%= f.label :velocity %>
-  <%= f.text_field :velocity %>
+  <%= f.text_field :velocity, :size => 4, :onkeypress => "return Util.numericOnly(event);" %>
 </p>
 <p class="form-fields">
   <%= f.label :start_date %>
-  <%= f.calendar_date_select :start_date %>
+  <%= f.calendar_date_select :start_date, :time => false, :popup => 'force' %>
 </p>
 <p class="form-fields">
   <%= f.label :end_date %>
-  <%= f.calendar_date_select :end_date %>
+  <%= f.calendar_date_select :end_date, :time => false, :popup => 'force' %>
 </p>
 <!-- 
 TODO: Currently not showing releases as these need some reworking.
