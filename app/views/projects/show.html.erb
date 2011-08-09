@@ -1,8 +1,12 @@
-<h3><%= @project.name %></h3>
+<h2><%= @project.name %></h2>
+
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', projects_path %></li>
+		<li><%= link_to 'Edit', edit_project_path(@project)%></li>
+	</ul>
+</div>
+
 <p><%= @project.description %></p>
 
-<p>
-  <%= link_to 'Edit', edit_project_path(@project)%>
-  |
-  <%= link_to 'Back', projects_path %>
-</p>
+

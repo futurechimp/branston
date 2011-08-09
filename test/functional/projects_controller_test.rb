@@ -19,8 +19,8 @@ class ProjectsControllerTest < ActionController::TestCase
 		    end
 		    get :index
 		  end
-		  should_respond_with :success
-		  should_assign_to :projects
+		  should respond_with :success
+		  should assign_to :projects
 		  
 		  should "show the projects visible to the current user" do
 		    assert_equal assigns(:projects).size, Project.count
@@ -57,9 +57,9 @@ class ProjectsControllerTest < ActionController::TestCase
 		    get :new
 		  end
 
-		  should_respond_with :success
-		  should_render_template :new
-		  should_assign_to :project
+		  should respond_with :success
+		  should render_template :new
+		  should assign_to :project
 		end
 
 		context 'POST to create' do
@@ -71,8 +71,8 @@ class ProjectsControllerTest < ActionController::TestCase
           end
         end
 
-        should_redirect_to("the show page") { project_path(assigns(:project))}
-        should_assign_to :project
+        should redirect_to("the show page") { project_path(assigns(:project))}
+        should assign_to :project
       end
 
 #      context "with invalid parameters" do
@@ -82,9 +82,9 @@ class ProjectsControllerTest < ActionController::TestCase
 #          end
 #        end
 
-#        should_respond_with :success
-#        should_render_template :new
-#        should_assign_to :project
+#        should respond_with :success
+#        should render_template :new
+#        should assign_to :project
 #      end
 		end
 
@@ -92,18 +92,18 @@ class ProjectsControllerTest < ActionController::TestCase
 		  setup do
 		    get :show, :id => @project.to_param
 		  end
-		  should_respond_with :success
-		  should_render_template :show
-		  should_assign_to :project
+		  should respond_with :success
+		  should render_template :show
+		  should assign_to :project
 		end
 
 		context 'GET to edit' do
 		  setup do
 		    get :edit, :id => @project.to_param
 		  end
-		  should_respond_with :success
-		  should_render_template :edit
-		  should_assign_to :project
+		  should respond_with :success
+		  should render_template :edit
+		  should assign_to :project
 		end
 
 		context 'PUT to update' do
@@ -114,8 +114,8 @@ class ProjectsControllerTest < ActionController::TestCase
           end
         end
 
-        should_redirect_to("the show page") { project_path(assigns(:project))}
-        should_assign_to :project
+        should redirect_to("the show page") { project_path(assigns(:project))}
+        should assign_to :project
       end
 
 #      context "with invalid parameters" do
@@ -125,9 +125,9 @@ class ProjectsControllerTest < ActionController::TestCase
 #          end
 #        end
 
-#        should_respond_with :success
-#        should_render_template :edit
-#        should_assign_to :project
+#        should respond_with :success
+#        should render_template :edit
+#        should assign_to :project
 #      end
 		end
 
@@ -138,7 +138,7 @@ class ProjectsControllerTest < ActionController::TestCase
         end
       end
 
-      should_redirect_to ("the index page") { projects_path }
+      should redirect_to("the index page") { projects_path }
 		end
   end
 end
