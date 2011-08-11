@@ -32,6 +32,7 @@ class StoryTest < ActiveSupport::TestCase
           @story.finish
         end
       end
+
       should "leave the story in a :new state" do
         assert @story.new?
       end
@@ -43,6 +44,7 @@ class StoryTest < ActiveSupport::TestCase
           @story.check_quality
         end
       end
+
       should "leave the story in a :new state" do
         assert @story.new?
       end
@@ -80,6 +82,12 @@ class StoryTest < ActiveSupport::TestCase
       assert @story.save
       assert_equal 'updated-title', @story.slug
     end
+
+		should "match to_param and slug when the title is long" do
+			@story.title = "this is a really really really really long title"
+      assert @story.save
+      assert_equal @story.to_param, @story.slug
+		end
 
     should "have a unique title" do
       assert_no_difference 'Story.count' do

@@ -15,7 +15,15 @@
   <%= render :partial => "layouts/header" %>
 
   <% if flash[:notice] %>
-    <div id="flash-notice"><%= flash[:notice] %></div>
+    <div id="flash-notice">
+			<!-- Extra div needed for SlideUp effect. -->
+			<div>
+				<%= flash[:notice] %>
+			</div>
+		</div>
+		<script type="text/javascript">
+			Util.FadeFlash();
+		</script>
   <% end %>
 
 	<div id="content">

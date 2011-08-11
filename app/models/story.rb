@@ -18,7 +18,7 @@ class Story < ActiveRecord::Base
 
   # Validations
   #
-  validates_presence_of :description, :points, :title
+  validates_presence_of :title, :description, :points 
   validates_uniqueness_of :title
 
   # Associations
@@ -74,7 +74,7 @@ class Story < ActiveRecord::Base
   end
 
   aasm_event :back_to_new do
-    transitions :from => :in_progress, :to => :new
+    transitions :from => [:new, :in_progress], :to => :new
   end
 
   attr_protected :status
@@ -84,6 +84,7 @@ class Story < ActiveRecord::Base
   end
 
   private
+
   def set_slug
     self.slug = self.to_param
   end

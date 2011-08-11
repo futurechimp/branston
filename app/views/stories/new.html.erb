@@ -1,13 +1,13 @@
 <h2>New story</h2>
 
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', iteration_stories_path(@iteration) %></li>
+	</ul>
+</div>
+
 <% form_for @story, :url => iteration_stories_path(@iteration) do |f| %>
-  <%= f.error_messages %>
-
   <%= render :partial => 'form', :locals => {:f => f} %>
-
-  <p class="form-navigation">
-    <%= link_to 'Back', iteration_stories_path(@iteration), :class => "back" %>
-    <%= f.submit 'Create' %>
-  </p>
+  <p><%= f.submit 'Create' %></p>
 <% end %>
 

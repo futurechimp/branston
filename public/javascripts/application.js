@@ -34,5 +34,11 @@ var Util = {
         } catch(e) {
             alert("numericOnly exception: " + e);
         }
-    }
+    },
+
+	FadeFlash: function(){
+		window.setTimeout(function() {
+			Effect.SlideUp('flash-notice'); 
+		}, 5000);
+	}
 }
