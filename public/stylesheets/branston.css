@@ -47,6 +47,9 @@ hr{margin:0 0 15px;}
 /* #flash-notice */
 #flash-notice {width:50%;margin:8px auto;padding:6px;background:#ccffcc;border:2px solid #258a05;color:#258a05;text-align:center;}
 
+/* #flash-error */
+#flash-error {width:50%;margin:8px auto;padding:6px;background:#f8b7bd;border:2px solid #ff0000;color:#ff0000;text-align:center;}
+
 /* #errors */
 #errors{margin:0 0 15px;padding:10px;background:#f8b7bd;border:2px solid #ff0000;color:#ff0000;}
 

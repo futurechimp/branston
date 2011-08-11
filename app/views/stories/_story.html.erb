@@ -49,11 +49,11 @@
 <% content_for :page_end do -%>
 <script type="text/javascript">
 	document.observe("dom:loaded", function() {
-	  $("<%= element_id(@story, 'points') %>").observe("change", Util.Form.selectChange);
+	  $("<%= element_id(@story, 'points') %>").observe("change", Branston.Form.selectChange);
 	  <% unless @iterations.empty? %>
-	  $("<%= element_id(@story, 'iterations') %>").observe("change", Util.Form.selectChange);
+	  $("<%= element_id(@story, 'iterations') %>").observe("change", Branston.Form.selectChange);
 	  <% end %>
-	  $("<%= element_id(@story, 'status') %>").observe("change", Util.Form.selectChange);
+	  $("<%= element_id(@story, 'status') %>").observe("change", Branston.Form.selectChange);
 	});
 </script>
 <% end -%>

@@ -13,15 +13,12 @@
   </div>
   <% end -%>
 	<div id="menu">
-		<ul>
+		
 		<% if logged_in? -%>
+		<ul>
 		  <li <%= tab_on("projects") %>><%= link_to 'Projects', projects_path %></li>
 			<li <%= tab_on("users") %>><%= link_to 'Users', users_path %></li>
-		<% else -%>
-			<li <%= tab_on("login") %>><%= link_to 'Log In', login_path %></li>
-		<% end -%>
 		</ul>
-		<% if logged_in? -%>
 		<form method="get" action="">
 			<fieldset>
 			<input type="text" name="s" id="search-text" size="15" />

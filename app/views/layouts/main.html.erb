@@ -22,7 +22,19 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			Util.FadeFlash();
+			Branston.Utils.fadeFlash("flash-notice");
+		</script>
+  <% end %>
+
+	<% if flash[:error] %>
+    <div id="flash-error">
+			<!-- Extra div needed for SlideUp effect. -->
+			<div>
+				<%= flash[:error] %>
+			</div>
+		</div>
+		<script type="text/javascript">
+			Branston.Utils.fadeFlash("flash-error");
 		</script>
   <% end %>
 
