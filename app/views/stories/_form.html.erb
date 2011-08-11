@@ -7,11 +7,11 @@
 -%>
 <p class="form-fields">
   <%= f.label :title %>
-  <%= f.text_field :title, :size => 52 %>
+  <%= f.text_field :title, :size => 255 %>
 </p>
 <p class="form-fields">
   <%= f.label :description %>
-  <%= f.text_area :description, :size => "60x8" %>
+  <%= f.text_area :description %>
 </p>
 <% unless params[:action] = "new" %>
 <p class="form-fields">

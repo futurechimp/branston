@@ -1,6 +1,5 @@
 <% @story = story -%>
 <div id="<%= element_id(story) %>" class="story">
-  <div class="accordion-toggle<%= ' accordion-toggle-active' if @active %>">
     <h3>
 			<%= in_place_editor_field :story, :title, {}, 
 				:url => { :controller => 'stories', :action => 'set_story_title', :id => story.id, :iteration_id => @iteration.id } %>
@@ -8,10 +7,8 @@
 		</h3>
     <%= link_to "Delete", iteration_story_path(@iteration, @story), 
 			:confirm => 'Delete this story?', :method => :delete, :class => "delete" %>
-  </div>
 
-  <div id="<%= element_id(story,'scenarios') %>" class="accordion-content">
-    <div class="story-props">
+  <div id="<%= element_id(story,'scenarios') %>">
       <% remote_form_for :story, @story, :url => "#{iteration_story_path(@iteration, @story)}.js" do |f| -%>
         <%= hidden_field_tag '_method', 'PUT' %>
         <%= hidden_field_tag 'id', @story.id %>
@@ -33,7 +30,6 @@
         </p>
         <% end -%>
       <% end -%>
-    </div>
     <p>
 			<%= in_place_editor_field :story, :description, {}, 
 				:url => { :controller => 'stories', :action => 'set_story_description', :id => story.id, :iteration_id => @iteration.id } %>
@@ -50,9 +46,9 @@
 <script type="text/javascript">
 	document.observe("dom:loaded", function() {
 	  $("<%= element_id(@story, 'points') %>").observe("change", Branston.Form.selectChange);
-	  <% unless @iterations.empty? %>
+	  <% unless @iterations.empty? -%>
 	  $("<%= element_id(@story, 'iterations') %>").observe("change", Branston.Form.selectChange);
-	  <% end %>
+	  <% end -%>
 	  $("<%= element_id(@story, 'status') %>").observe("change", Branston.Form.selectChange);
 	});
 </script>

@@ -1,19 +1,14 @@
-<!-- outcomes/_outcome.html.erb -->
-    <li id="<%= element_id(@outcome) %>" class="outcome">
-    <% if @outcome.created_at.nil? -%>
-      <% remote_form_for @outcome do |f| -%>
-        <%= hidden_field_tag 'scenario_id', @scenario.id %>
-        <div>
-          <%= f.label :description %>
-          <%= f.text_area :description, :size => "50x2" %>
-          <%= f.submit 'Create' %>
-        </div>
-      <% end -%>
-    <% else -%>
-      <p>
-        <%= in_place_editor_field 'outcome', 'description' %>&nbsp;&bull;
-        <%= link_to_remote "Delete", :url => @outcome, :confirm => 'Delete this expected result?', :method => :delete, :class => "delete" %>
-      </p>
-    <% end -%>
-    </li>
+<p id="<%= element_id(@outcome) %>" class="outcome">
+<% if @outcome.created_at.nil? -%>
+  <% remote_form_for @outcome do |f| -%>
+    <%= hidden_field_tag 'scenario_id', @scenario.id %>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+      <%= f.submit 'Create' %>
+  <% end -%>
+<% else -%>
+    <%= in_place_editor_field 'outcome', 'description' %>&nbsp;&bull;
+    <%= link_to_remote "Delete", :url => @outcome, :confirm => 'Delete this expected result?', :method => :delete, :class => "delete" %>
+<% end -%>
+</p>
 

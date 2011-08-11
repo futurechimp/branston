@@ -1,28 +1,31 @@
-<!-- scenarios/_scenario.html.erb -->
-    <div id="<%= element_id(@scenario) %>" class="scenario">
-    <% if @scenario.created_at.nil? -%>
-      <% remote_form_for :scenario, @scenario, :url => iteration_story_scenarios_path(@iteration, @story) do |f| -%>
-      <div class="scenario-form">
-        <%= f.text_area :title, :value => "Add a scenario description here.", 
-        :size => '58x2' %>
-        <%= f.submit 'Save' %>
-      </div>
-      <% end -%>
-    <% else -%>
-      <div class="scenario-title">
-        <%= in_place_editor_field 'scenario', 'title' %>
-        <%= link_to_remote image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"), 
-        {:url => iteration_story_scenario_path(@iteration, @story,@scenario), 
-        :confirm => 'Delete this scenario?', :method => :delete}, :class => "delete-small" %>
-      </div>
-      <div id="<%= element_id(@scenario,'preconditions') %>" class="preconditions">
-        <%= link_to_remote "Preconditions",
-          :url => preconditions_path(:scenario_id => @scenario.id), :method => :get %>
-      </div>
-      <div id="<%= element_id(@scenario,'outcomes') %>" class="outcomes">
-        <%= link_to_remote "Outcomes",
-          :url => outcomes_path(:scenario_id => @scenario.id), :method => :get %>
-      </div>
-    <% end -%>
-    </div>
+<div id="<%= element_id(@scenario) %>" class="scenario">
+	<% if @scenario.created_at.nil? -%>
+		<% remote_form_for :scenario, @scenario, :url => iteration_story_scenarios_path(@iteration, @story) do |f| -%>
+			<p>
+				<%= f.text_area :title, :value => "Add a scenario description here.", :rows => 5 %>
+				<%= f.submit 'Save' %>
+			</p>
+		<% end -%>
+	<% else -%>
+		<h4>
+			<%= in_place_editor_field 'scenario', 'title' %>
+		</h4>
+		<%= link_to_remote "Delete", {:url => iteration_story_scenario_path(@iteration, @story,@scenario), 
+			:confirm => 'Delete this scenario?', :method => :delete}, :class => "delete" %>
+		
+		<div id="<%= element_id(@scenario,'preconditions') %>" class="preconditions">
+			<p>
+				<%= link_to_remote "Preconditions",
+			  	:url => preconditions_path(:scenario_id => @scenario.id), :method => :get %>
+			</p>
+		</div>
+		
+		<div id="<%= element_id(@scenario,'outcomes') %>" class="outcomes">
+			<p>
+				<%= link_to_remote "Outcomes",
+			  	:url => outcomes_path(:scenario_id => @scenario.id), :method => :get %>
+			</p>
+		</div>
+	<% end -%>
+</div>
 

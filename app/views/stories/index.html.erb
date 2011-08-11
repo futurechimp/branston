@@ -21,37 +21,6 @@
 
 <p><%= link_to 'New story', new_iteration_story_path(@iteration), :class => "add" %></p>
 
-<% content_for :page_end do %>
-<script type="text/javascript">
-// document.observe("dom:loaded", function() {
-//   // Extend Accordion class to force some dynamic DOM elements to appear.
-//   Accordion.addMethods({
-//       forceExpand : function() {
-//           var scenarios = $('.scenarios');
-//           if (scenarios && scenarios.length > 0)
-//               new Effect.Scale(scenarios[0], 100, {scaleY:true,scaleX:false,scaleMode:'contents'});
-//       }
-//   });
-//   <% unless @current_stories.nil? or @current_stories.empty? -%>
-//   var currentStories = new Accordion("current_stories", 1);
-//   //$('accordion-toggle').each(function(e) {e.observe('click', currentStories.forceExpand);});
-//   <% end -%>
-//   <% unless @backlog_stories.nil? or @backlog_stories.empty? -%>
-//   var backlogStories = new Accordion("backlog_stories", 1);
-//   //$('accordion-toggle').each(function(e) {e.observe('click', backlogStories.forceExpand);});
-//   <% end -%>
-//   <% unless @completed_stories.nil? or @completed_stories.empty? -%>
-//   var completedStories = new Accordion("completed_stories", 1);
-//   //$('accordion-toggle').each(function(e) {e.observe('click', completedStories.forceExpand);});
-//   <% end -%>
-//   <% unless @quality_assurance_stories.nil? or @quality_assurance_stories.empty? -%>
-//   var qualityAssuranceStories = new Accordion("quality_assurance_stories", 1);
-//   //$('accordion-toggle').each(function(e) {e.observe('click', qualityAssurance.forceExpand);});
-//   <% end -%>
-// });
-</script>
-<% end %>
-
 <div id="backlog-wrapper">
 <h3>New stories <%=points_label(@backlog_stories)%></h3>
   <div id="backlog_stories" class="story-holder">

@@ -1,18 +1,18 @@
-<!-- scenarios/_scenario.html.erb -->
-  <div class="scenarios-head">
-    <h4>Story scenarios</h4>
-    <%= link_to_remote 'Add scenario', { :url => new_iteration_story_scenario_path(@iteration, @story), 
-    :method => 'GET'}, :class => 'add-small' %>
-  </div>
-  <div class="scenarios">
-    <% @scenarios.each do |scenario| %>
-      <% @scenario = scenario -%>
-      <%= render :partial => "scenario" %>
-    <% end %>
-  </div>
-  <div class="scenarios-foot">
-  <%= link_to_remote '&laquo; Back to story overview', {
-    :url => iteration_story_path(@iteration, @story), :method => 'GET'}, 
-    :class => 'back-small' %>
-  </div>
+<h4>Story scenarios</h4>
+
+<div class="scenarios">
+	<p>
+		<%= link_to_remote 'Add scenario', { :url => new_iteration_story_scenario_path(@iteration, @story), :method => 'GET'} %>
+	</p>
+	
+	<% @scenarios.each do |scenario| %>
+		<% @scenario = scenario -%>
+		<%= render :partial => "scenario" %>
+	<% end %>
+</div>
+
+<p>
+	<%= link_to_remote '&laquo; Back to story overview', {
+		:url => iteration_story_path(@iteration, @story), :method => 'GET'} %>
+</p>
 

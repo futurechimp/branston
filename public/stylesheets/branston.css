@@ -1,12 +1,14 @@
 /* --- Reset everything --- */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, ul, li, frameset, frame{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;text-decoration:none;list-style:none;letter-spacing:0}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, 
+code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, 
+ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, ul, li, frameset, frame{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;text-decoration:none;list-style:none;letter-spacing:0}
 
 /* General */
 html, body{height:100%;}
 body{background:#fff;font-family:Georgia, "Courier New", "Times New Roman";}
-h1, h2, h3{font-family:Helvetica, Verdana, Arial, sans-serif;}
+h1, h2, h3, h4{font-family:Helvetica, Verdana, Arial, sans-serif;}
 h2{padding:0 0 20px;}
-h3{padding:0 0 15px;}
+h3, h4{padding:0 0 15px;}
 a{color:#1d76b9;}
 a:hover{text-decoration:underline;}
 hr{margin:0 0 15px;}
@@ -71,11 +73,28 @@ hr{margin:0 0 15px;}
 #content form p{overflow:hidden;}
 #content form p label{width:150px;padding:1px 0 0 ;float:left;}
 
+/* .delete */
+.delete{width:26px;height:26px;display:block;overflow:hidden;text-indent:-1000px;background:url("/images/icons/delete.png") no-repeat;}
+
 /* .story-holder */
 .story-holder{margin:0 -15px 0 0;padding:0 0 15px;overflow:hidden;}
 
 /* .story */
-.story{width:450px;margin:0 15px 15px 0;padding:10px;position:relative;float:left;border:1px solid #000;}
+.story{width:450px;min-height:400px;margin:0 15px 15px 0;padding:10px;position:relative;float:left;border:1px solid #000;}
 .story h3{width:390px;}
-.story .delete{width:26px;height:26px;position:absolute;top:10px;right:10px;display:block;overflow:hidden;text-indent:-1000px;background:url("/images/icons/delete.png") no-repeat;}
+.story .delete{position:absolute;top:10px;right:10px;}
 #content .story form p label{width:70px;}
+
+/* .scenarios */
+.scenarios{height:274px;margin:0 0 10px;padding:0 5px 0 0;overflow:auto;}
+
+/* .scenario */
+.scenario{position:relative;}
+.scenario h4{width:390px;font-weight:normal;}
+.scenario .delete{position:absolute;top:0;right:0;}
+
+/* .preconditions */
+.preconditions{}
+	
+/* .outcomes */
+.outcomes{}
