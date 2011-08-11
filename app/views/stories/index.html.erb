@@ -1,5 +1,11 @@
 <h2>Stories for <%=@iteration.name%></h2> 
 
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', project_path(@iteration.project) %></li>
+		<li><%= link_to 'Show', project_iteration_path(@iteration.project, @iteration) %></li>
+	</ul>
+</div>
 
 <p>
 	<%=@total_assigned_points%>/<%=@iteration.velocity%> points assigned (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%) - 

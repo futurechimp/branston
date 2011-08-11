@@ -1,7 +1,11 @@
 <% @story = story -%>
 <div id="<%= element_id(story) %>" class="story">
   <div class="accordion-toggle<%= ' accordion-toggle-active' if @active %>">
-    <h3><%= in_place_editor_field 'story', 'title' %> <%= clippy("branston -g -f #{@story.to_param} -b #{request.host} -p #{request.port} ", "#FFFF99") %></h3>
+    <h3>
+			<%= in_place_editor_field :story, :title, {}, 
+				:url => { :controller => 'stories', :action => 'set_story_title', :id => story.id, :iteration_id => @iteration.id } %>
+			<%= clippy("branston -g -f #{@story.to_param} -b #{request.host} -p #{request.port} ", "#FFFF99") %>
+		</h3>
     <%= link_to "Delete", iteration_story_path(@iteration, @story), 
 			:confirm => 'Delete this story?', :method => :delete, :class => "delete" %>
   </div>
@@ -31,7 +35,8 @@
       <% end -%>
     </div>
     <p>
-      <%= in_place_editor_field 'story', 'description' %>
+			<%= in_place_editor_field :story, :description, {}, 
+				:url => { :controller => 'stories', :action => 'set_story_description', :id => story.id, :iteration_id => @iteration.id } %>
     </p>
 
     <p>
