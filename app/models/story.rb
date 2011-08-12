@@ -70,7 +70,7 @@ class Story < ActiveRecord::Base
   end
 
   aasm_event :finish do
-    transitions :from => [:in_progress, :quality_assurance], :to => :completed
+    transitions :from => [:in_progress, :quality_assurance, :completed], :to => :completed
   end
 
   aasm_event :back_to_new do

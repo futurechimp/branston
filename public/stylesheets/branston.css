@@ -72,6 +72,8 @@ hr{margin:0 0 15px;}
 #content form{}
 #content form p{overflow:hidden;}
 #content form p label{width:150px;padding:1px 0 0 ;float:left;}
+#content form input[type="text"]{width:400px;} 
+#content form textarea{width:405px;}
 
 /* .delete */
 .delete{width:26px;height:26px;display:block;overflow:hidden;text-indent:-1000px;background:url("/images/icons/delete.png") no-repeat;}
@@ -98,3 +100,6 @@ hr{margin:0 0 15px;}
 	
 /* .outcomes */
 .outcomes{}
+
+/* #burndown-chart */
+#burndown-chart {width:960px;;margin-left:-50px;}

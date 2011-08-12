@@ -1,4 +1,4 @@
-<h2>Stories for <%=@iteration.name%></h2> 
+<h2>Stories for <%= @iteration.name%></h2> 
 
 <div id="actions">
 	<ul>
@@ -8,7 +8,7 @@
 </div>
 
 <p>
-	<%=@total_assigned_points%>/<%=@iteration.velocity%> points assigned (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%) - 
+	<%= @total_assigned_points %>/<%= @iteration.velocity %> points assigned (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%) - 
   <% case (@assignment_difference <=> 0)
   when -1 -%>
     Undersubscribed by <%= 0 - @assignment_difference%> points
