@@ -1,4 +1,5 @@
-<h2>Stories for <%= @iteration.name%></h2> 
+<% @page_title = "Stories for #{@iteration.name}" %>
+<h2><%=h @page_title %></h2>
 
 <div id="actions">
 	<ul>
