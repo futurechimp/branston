@@ -36,11 +36,16 @@ var Branston = {
 	    }
     },
 
-   	Utils: {
-		fadeFlash: function(flash){
-			window.setTimeout(function() {
-				Effect.SlideUp(flash); 
-			}, 5000);
+   	Utils: {		
+		toggleStoryDetails: function(heading){
+			$(heading).next(".details-and-scenarios").toggle();
+			return false;
+		},
+		
+		toggleDetailAndScenario: function(link){
+			var story = $(link).up("div.story")
+			story.down("div.details").toggle();
+			story.down("div.scenarios").toggle();
 		}
 	}
 }

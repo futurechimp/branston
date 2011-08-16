@@ -5,13 +5,14 @@
   :header_message => "Whoops!",
   :message => "We had some problems saving this project."
 -%>
-  
-<p class="form-fields">
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-</p>
+<div class="form">
+	<p>
+	  <%= form.label :name %>
+	  <%= form.text_field :name %>
+	</p>
 
-<p class="form-fields">
-  <%= form.label :description %>
-  <%= form.text_area :description, :rows => 5 %>
-</p>
+	<p>
+	  <%= form.label :description %>
+	  <%= form.text_area :description, :rows => 5 %>
+	</p>
+</div>

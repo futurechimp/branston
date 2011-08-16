@@ -43,8 +43,7 @@ class IterationsHelperTest < ActionView::TestCase
     end
 
     context "data_js_obj method" do
-
-      setup do
+ 			setup do
         @iteration = Iteration.make_unsaved
         @js_cell_arr = [js_cell(Date.today, 38, 30, 35), js_cell(Date.today + 1, 38, 20, 25)]
         @data_js_obj = data_js_obj @iteration, @js_cell_arr

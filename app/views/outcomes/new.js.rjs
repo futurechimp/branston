@@ -1,3 +1,1 @@
 page.replace_html element_id(@scenario,'outcomes'), :partial => "outcomes"
-# page << %Q!new Effect.Scale("#{element_id(@scenario.story,'scenarios')}", 100, {scaleY:true,scaleX:false,scaleMode:'contents'});!
-

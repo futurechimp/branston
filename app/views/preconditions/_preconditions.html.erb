@@ -4,6 +4,6 @@
 <% unless @preconditions.nil? or @preconditions.empty? -%>
 	<% @preconditions.each do |precondition| -%>
 		<% @precondition = precondition -%>
-   	<%= render :partial => "precondition" %>
+   	<%= render :partial => "preconditions/precondition" %>
  <% end -%>
 <% end -%>

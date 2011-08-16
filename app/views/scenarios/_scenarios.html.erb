@@ -1,18 +1,12 @@
-<h4>Story scenarios</h4>
-
-<div class="scenarios">
-	<p>
-		<%= link_to_remote 'Add scenario', { :url => new_iteration_story_scenario_path(@iteration, @story), :method => 'GET'} %>
-	</p>
-	
-	<% @scenarios.each do |scenario| %>
-		<% @scenario = scenario -%>
-		<%= render :partial => "scenario" %>
-	<% end %>
-</div>
-
 <p>
-	<%= link_to_remote '&laquo; Back to story overview', {
-		:url => iteration_story_path(@iteration, @story), :method => 'GET'} %>
+	<%= link_to_remote 'Add scenario', { :url => new_iteration_story_scenario_path(@iteration, @story), :method => 'GET'} %>
 </p>
 
+<% @scenarios.each do |scenario| %>
+	<% @scenario = scenario -%>
+	<%= render :partial => "scenario" %>
+<% end %>
+
+<p>
+	<a href="#" onclick="Branston.Utils.toggleDetailAndScenario(this); return false;">Show Details &raquo;</a></p>
+</p>

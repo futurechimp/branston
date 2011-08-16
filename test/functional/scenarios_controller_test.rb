@@ -4,7 +4,7 @@ class ScenariosControllerTest < ActionController::TestCase
 
   context "The ScenariosController" do
     context "when the user is not logged in" do
-      [:index, :new, :edit].each do |action|
+      [:new, :edit].each do |action|
         context "on GET to #{action.to_s}" do
           setup do
             get action
@@ -43,12 +43,6 @@ class ScenariosControllerTest < ActionController::TestCase
         @scenario = @story.scenarios.first
       end
 
-      should "get index" do
-        get :index, :story_id => @story.slug, :iteration_id => @iteration.to_param
-        assert_response :success
-        assert_not_nil assigns(:scenarios)
-      end
-
       should "get new" do
         get :new, :story_id => @story.slug, :iteration_id => @iteration.to_param
         assert_response :success
@@ -63,10 +57,9 @@ class ScenariosControllerTest < ActionController::TestCase
             end
           end
 
-          should "redirect to show" do
-            assert_redirected_to iteration_story_scenario_path(@iteration, assigns(:story), assigns(:scenario))
+          should "redisplay" do
+            assert_response :success
           end
-
         end
 
         context "with invalid params" do
@@ -77,63 +70,25 @@ class ScenariosControllerTest < ActionController::TestCase
             end
           end
 
-          should "redisplay" do
-            assert_response :success
-          end
-
-          should "use new template" do
+          should_eventually "do something with invalid params" do
+						assert_response :success
             assert_template 'new'
           end
 
         end
       end
 
-      context "updating a scenario" do
-        context "with valid params" do
-          setup do
-            put :update, :id => @scenario.to_param, :scenario => { :title => "Bar" },
-            :story_id => @story.slug, :iteration_id => @iteration.to_param
-          end
-          should "redirect to show" do
-            assert_redirected_to iteration_story_scenario_path(@iteration, assigns(:story), assigns(:scenario))
-          end
-        end
-
-        context "with invalid params" do
-          setup do
-            put :update, :id => @scenario.to_param, :scenario => { :title => "" },
-            :story_id => @story.to_param, :iteration_id => @iteration.to_param
-          end
-
-          should "redisplay" do
-            assert_response :success
-          end
-
-          should "use edit template" do
-            assert_template :edit
-          end
-        end
-      end
-
-
-      should "show scenario" do
-        get :show, :id => @scenario.to_param, :story_id => @story.to_param,
-        :iteration_id => @iteration.to_param
-        assert_response :success
-      end
-
-      should "get edit" do
-        get :edit, :id => @scenario.to_param, :story_id => @story.to_param,
-        :iteration_id => @iteration.to_param
-        assert_response :success
-      end
-
-      should "destroy scenario" do
-        assert_difference('Scenario.count', -1) do
-          delete :destroy, :id => @scenario.to_param, :story_id => @story.to_param,
-          :iteration_id => @iteration.to_param
-        end
-        assert_redirected_to iteration_story_scenarios_path(@iteration, @story.to_param)
+      context "destroy scenario" do
+				setup do
+	        assert_difference('Scenario.count', -1) do
+	          delete :destroy, :id => @scenario.to_param, :story_id => @story.to_param,
+	          :iteration_id => @iteration.to_param
+	        end
+				end
+				
+				should "do something" do
+					assert_response  :success
+				end
       end
     end
   end

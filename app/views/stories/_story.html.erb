@@ -1,45 +1,62 @@
 <% @story = story -%>
 <div id="<%= element_id(story) %>" class="story">
-    <h3>
+	<div class="heading">
+    <h4>
 			<%= in_place_editor_field :story, :title, {}, 
 				:url => { :controller => 'stories', :action => 'set_story_title', :id => story.id, :iteration_id => @iteration.id } %>
-			<%= clippy("branston -g -f #{@story.to_param} -b #{request.host} -p #{request.port} ", "#FFFF99") %>
-		</h3>
-    <%= link_to "Delete", iteration_story_path(@iteration, @story), 
-			:confirm => 'Delete this story?', :method => :delete, :class => "delete" %>
+				<%= link_to "Delete", iteration_story_path(@iteration, @story), 
+					:confirm => 'Delete this story?', :method => :delete, :class => "delete" %>
+		</h4>
+	</div>
+	<div class="details-and-scenarios" style="display:none;">
+  	<div id="<%= element_id(story,'details') %>" class="details">
+				<p><%= clippy("branston -g -f #{@story.to_param} -b #{request.host} -p #{request.port} ", "") %></p>
+	      <% remote_form_for :story, @story, :url => "#{iteration_story_path(@iteration, @story)}.js" do |f| -%>
+	        <%= hidden_field_tag '_method', 'PUT' %>
+	        <%= hidden_field_tag 'id', @story.id %>
+	        <p>
+						<%= f.label :points %>
+	          <%= f.select :points, (1..10).to_a, {}, :id => element_id(@story,'points') %>
+	        </p>
+	        <p>
+	          <%= f.label :status %>
+	          <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'].map {
+	            |s| [s.capitalize.gsub('_', ' '), s]}, {},
+	          	:id => element_id(@story, 'status') %>
+	        </p>
+	        <% unless @iterations.empty? -%>
+	        <p>
+	          <%= f.label :iteration_id, "Iteration" %>
+	          <%= f.select :iteration_id, @iterations.map{|i|[i.name,i.id]},
+	          {:prompt => "Assign Iteration"}, :id => element_id(@story,'iterations') %>
+	        </p>
+	        <% end -%>
+	      <% end -%>
+	    <p>
+				<%= in_place_editor_field :story, :description, {}, 
+					:url => { :controller => 'stories', :action => 'set_story_description', :id => story.id, :iteration_id => @iteration.id }, :rows => 5 %>
+	    </p>
+		
+			<p>
+				<a href="#" onclick="Branston.Utils.toggleDetailAndScenario(this); return false;">Show Scenarios &raquo;</a>
+			</p>
+	  </div>
 
-  <div id="<%= element_id(story,'scenarios') %>">
-      <% remote_form_for :story, @story, :url => "#{iteration_story_path(@iteration, @story)}.js" do |f| -%>
-        <%= hidden_field_tag '_method', 'PUT' %>
-        <%= hidden_field_tag 'id', @story.id %>
-        <p>
-					<%= f.label :points %>
-          <%= f.select :points, (1..10).to_a, {}, :id => element_id(@story,'points') %>
-        </p>
-        <p>
-          <%= f.label :status %>
-          <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'].map {
-            |s| [s.capitalize.gsub('_', ' '), s]}, {},
-          	:id => element_id(@story, 'status') %>
-        </p>
-        <% unless @iterations.empty? -%>
-        <p>
-          <%= f.label :iteration_id, "Iteration" %>
-          <%= f.select :iteration_id, @iterations.map{|i|[i.name,i.id]},
-          {:prompt => "Assign Iteration"}, :id => element_id(@story,'iterations') %>
-        </p>
-        <% end -%>
-      <% end -%>
-    <p>
-			<%= in_place_editor_field :story, :description, {}, 
-				:url => { :controller => 'stories', :action => 'set_story_description', :id => story.id, :iteration_id => @iteration.id } %>
-    </p>
+		<div id="<%= element_id(story,'scenarios') %>" class="scenarios" style="display:none;">
+			<p>
+				<%= link_to_remote 'Add scenario', { :url => new_iteration_story_scenario_path(@iteration, @story), :method => 'GET'} %>
+			</p>
 
-    <p>
-      <%= link_to_remote "Scenarios &raquo;", :method => 'GET',
-      	:url => iteration_story_scenarios_path(@iteration, @story)  %>
-    </p>
-  </div>
+			<% @story.scenarios.each do |scenario| %>
+				<% @scenario = scenario -%>
+				<%= render :partial => "scenarios/scenario" %>
+			<% end %>
+		
+			<p>
+				<a href="#" onclick="Branston.Utils.toggleDetailAndScenario(this); return false;">Show Details &raquo;</a></p>
+			</p>
+		</div>
+	</div>
 </div>
 
 <% content_for :page_end do -%>

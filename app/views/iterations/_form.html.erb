@@ -5,30 +5,30 @@
   :header_message => "Whoops!",
   :message => "We had some problems saving this iteration."
 -%>
-
-<p class="form-fields">
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-</p>
-<p class="form-fields">
-  <%= f.label :velocity %>
-  <%= f.text_field :velocity, :size => 4, :onkeypress => "return Branston.Form.numericOnly(event);" %>
-</p>
-<p class="form-fields">
-  <%= f.label :start_date %>
-  <%= f.calendar_date_select :start_date, :time => false, :popup => 'force' %>
-</p>
-<p class="form-fields">
-  <%= f.label :end_date %>
-  <%= f.calendar_date_select :end_date, :time => false, :popup => 'force' %>
-</p>
-<!-- 
-TODO: Currently not showing releases as these need some reworking.
-<% unless @releases.nil? -%>
-<p class="form-fields">
-  <%= f.label :release %>
-  <%= f.select :release_id, @releases.map {|release| [release.release_date.strftime('%d/%m/%Y'), release.id]} %>
-</p>
--->
-<% end -%>
-
+<div class="form">
+	<p class="form-fields">
+	  <%= f.label :name %>
+	  <%= f.text_field :name %>
+	</p>
+	<p class="form-fields">
+	  <%= f.label :velocity %>
+	  <%= f.text_field :velocity, :size => 4, :onkeypress => "return Branston.Form.numericOnly(event);" %>
+	</p>
+	<p class="form-fields">
+	  <%= f.label :start_date %>
+	  <%= f.calendar_date_select :start_date, :time => false, :popup => 'force' %>
+	</p>
+	<p class="form-fields">
+	  <%= f.label :end_date %>
+	  <%= f.calendar_date_select :end_date, :time => false, :popup => 'force' %>
+	</p>
+	<!-- 
+	TODO: Currently not showing releases as these need some reworking.
+	<% unless @releases.nil? -%>
+	<p class="form-fields">
+	  <%= f.label :release %>
+	  <%= f.select :release_id, @releases.map {|release| [release.release_date.strftime('%d/%m/%Y'), release.id]} %>
+	</p>
+	-->
+	<% end -%>
+</div>

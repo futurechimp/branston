@@ -1,3 +1,3 @@
-page.replace element_id(@story), :partial => "story", :locals => {:story => @story}
-page << %Q!new Effect.Scale("#{element_id(@story,'scenarios')}", 100, {scaleY:true,scaleX:false,scaleMode:'contents'});!
+page.replace element_id(@story), :partial => "story", :locals => {:story => @story, :show_story => true}
+# page << %Q!new Effect.Scale("#{element_id(@story,'scenarios')}", 100, {scaleY:true,scaleX:false,scaleMode:'contents'});!
 

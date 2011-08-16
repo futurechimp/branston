@@ -54,12 +54,9 @@ class Story < ActiveRecord::Base
   aasm_column :status
   aasm_initial_state :new
   aasm_state :new, :enter => :set_transition_date
-  aasm_state :in_progress
+  aasm_state :in_progress, :enter => :set_transition_date
   aasm_state :quality_assurance, :enter => :set_transition_date
-  aasm_state :completed, :enter => Proc.new  { |story, transition|
-                               story.completed_date = Date.today
-                               story.transition_date = Date.today
-                             }
+  aasm_state :completed, :enter => :set_completed_date
 
   aasm_event :assign do
     transitions :from => [:new, :quality_assurance, :completed], :to => :in_progress
@@ -90,7 +87,12 @@ class Story < ActiveRecord::Base
   end
 
   def set_transition_date
-    transition_date = Date.today
+    self.transition_date = Date.today
   end
+
+	def set_completed_date
+		self.completed_date = Date.today
+    self.transition_date = Date.today
+	end
 
 end

@@ -2,20 +2,23 @@
 <h2><%=h @page_title %></h2>
 
 <% form_tag session_path do -%>
-	<p class="form-fields">
-		<%= label_tag 'login' %>
-		<%= text_field_tag 'login', @login %>
-	</p>
+	<div class="form">
+		<p>
+			<%= label_tag 'login' %>
+			<%= text_field_tag 'login', @login %>
+		</p>
 
-	<p class="form-fields">
-		<%= label_tag 'password' %>
-		<%= password_field_tag 'password', nil %>
-	</p>
+		<p>
+			<%= label_tag 'password' %>
+			<%= password_field_tag 'password', nil %>
+		</p>
 
-	<p class="form-fields">
-		<%= label_tag 'remember_me', 'Remember me' %>
-		<%= check_box_tag 'remember_me', '1', @remember_me %>
+		<p>
+			<%= label_tag 'remember_me', 'Remember me' %>
+			<%= check_box_tag 'remember_me', '1', @remember_me %>
+		</p>
+	</div>
+	<p>
+		<%= submit_tag 'Log in' %>
 	</p>
-
-	<p id="login-button" class="form-navigtion"><%= submit_tag 'Log in' %></p>
 <% end -%>

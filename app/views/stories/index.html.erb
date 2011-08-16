@@ -22,40 +22,64 @@
 
 <p><%= link_to 'New story', new_iteration_story_path(@iteration), :class => "add" %></p>
 
-<div id="backlog-wrapper">
-<h3>New stories <%=points_label(@backlog_stories)%></h3>
-  <div id="backlog_stories" class="story-holder">
-  <% if @backlog_stories.empty? %>
-		<p>There are currently no stories for this iteration, <%=link_to "add story", new_iteration_story_path(@iteration) %></p>
-  <% else %>
-    <% @backlog_stories.each do |story| %>
-      <%= render :partial => "story", :locals => { :story => story } %>
-    <% end %>
-  <% end %>
-  </div>
+<div id="columns">
+	<div id="completed-stories-bg" class="column-bg">
+		<div id="qa-stories-bg" class="column-bg">
+			<div id="in-progress-stories-bg" class="column-bg">
+				<div id="new-stories-bg" class="column-bg">
+					<div id="new-stories" class="column">
+						<!-- Column one start -->
+						<h3>New stories <%=points_label(@backlog_stories)%></h3>
+						  <% if @backlog_stories.empty? %>
+								<p>There are currently no stories for this iteration, <%=link_to "add story", new_iteration_story_path(@iteration) %></p>
+						  <% else %>
+						    <% @backlog_stories.each do |story| %>
+						      <%= render :partial => "story", :locals => { :story => story } %>
+						    <% end %>
+						  <% end %>
+						<!-- Column one end -->
+					</div>
+					<div id="in-progress-stories" class="column">
+
+						<!-- Column two start -->
+							<h3>In progress stories <%=points_label(@current_stories)%></h3>
+						  <% @current_stories.each do |story| %>
+						    <%= render :partial => "story", :locals => { :story => story } %>
+						  <% end %>
+						<!-- Column two end -->
+					</div>
+
+					<div id="qa-stories" class="column">
+						<!-- Column three start -->
+						<h3>Quality assurance stories <%=points_label(@quality_assurance_stories)%></h3>
+					  <% @quality_assurance_stories.each do |story| %>
+					    <%= render :partial => "story", :locals => { :story => story } %>
+					  <% end %>
+						<!-- Column three end -->
+					</div>
+				
+					<div id="completed-stories" class="column">
+						<!-- Column four start -->
+						<h3>Completed stories <%=points_label(@completed_stories)%></h3>
+					  <% @completed_stories.each do |story| %>
+					    <%= render :partial => "story", :locals => { :story => story } %>
+					  <% end %>
+						<!-- Column four end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div id="current-wrapper">
-<h3>In progress stories <%=points_label(@current_stories)%></h3>
-  <div id="current_stories" class="story-holder">
-  <% @current_stories.each do |story| %>
-    <%= render :partial => "story", :locals => { :story => story } %>
-  <% end %>
-  </div>
-
-  <h3>Quality assurance stories <%=points_label(@quality_assurance_stories)%></h3>
-  <div id="quality_assurance_stories" class="story-holder">
-  <% @quality_assurance_stories.each do |story| %>
-    <%= render :partial => "story", :locals => { :story => story } %>
-  <% end %>
-  </div>
-</div>
-
-<div id="current-wrapper">
-  <h3>Completed stories <%=points_label(@completed_stories)%></h3>
-  <div id="completed_stories" class="story-holder">
-  <% @completed_stories.each do |story| %>
-    <%= render :partial => "story", :locals => { :story => story } %>
-  <% end %>
-  </div>
-</div>
+<% content_for :page_end do -%>
+<script type="text/javascript">
+document.observe("dom:loaded", function() {
+  $$("#columns .heading").each(function(e) {
+		e.observe('click', function(){
+			Branston.Utils.toggleStoryDetails(e);
+		});
+	});
+});
+</script>
+<% end %>

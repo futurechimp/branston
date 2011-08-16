@@ -7,7 +7,7 @@
   <% if logged_in? -%>
   <div id="logged-in">
     <ul>
-      <li>Logged in as <%= current_user.login %>&nbsp;&nbsp;&nbsp;</li>
+      <li>Logged in as <%= current_user.login %></li>
       <li><%= link_to 'Log Out', logout_path %></li>
     </ul>
   </div>

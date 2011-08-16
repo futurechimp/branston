@@ -4,7 +4,7 @@
 <% unless @outcomes.nil? or @outcomes.empty? -%>
 	<% @outcomes.each do |outcome| -%>
 		<% @outcome = outcome -%>
-		<%= render :partial => "outcome" %>
+		<%= render :partial => "outcomes/outcome" %>
 	<% end -%>
 <% end -%>
 
