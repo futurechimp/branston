@@ -14,21 +14,21 @@ default_run_options[:pty]=true
 
 desc <<-DESC
 Does a clean deploy by removing the cached-copy folder first,
-then runs full_deploy
+then runs deploy.full
 To run: cap RAILS_ENV deploy:clean_deploy
 RAILS_ENV = Is the rails environment to deploy to
 DESC
-deploy.task :clean_deploy do
+deploy.task :clean do
   deploy.remove_cached
-  deploy.long_deploy
+  deploy.full
 end
 
 desc <<-DESC
 Does a full deploy, then syncs all statics.
-To run: cap RAILS_ENV deploy:long_deploy
+To run: cap RAILS_ENV deploy:full
 RAILS_ENV = Is the rails environment to deploy to
 DESC
-deploy.task :long_deploy do
+deploy.task :full do
   transaction do
     update_code
     deploy.web:disable
