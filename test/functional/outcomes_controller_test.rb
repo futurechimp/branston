@@ -4,7 +4,7 @@ class OutcomesControllerTest < ActionController::TestCase
 
   context "The OutcomesController" do
     context "when the user is not logged in" do
-      [:index, :new, :edit].each do |action|
+      [:new].each do |action|
         context "on GET to #{action.to_s}" do
           setup do
             get action
@@ -13,15 +13,6 @@ class OutcomesControllerTest < ActionController::TestCase
           should "redirect to login" do
             assert_redirected_to new_session_path
           end
-        end
-      end
-
-      context "on PUT to :update" do
-        setup do
-          put :update
-        end
-        should "redirect to login" do
-          assert_redirected_to new_session_path
         end
       end
 
@@ -42,13 +33,7 @@ class OutcomesControllerTest < ActionController::TestCase
         @outcome = Outcome.make
       end
 
-      should "show a list of all the outcomes" do
-        get :index, :scenario_id => @scenario.id
-        assert_response :success
-        assert_not_nil assigns(:outcomes)
-      end
-
-      should "show a form to add stories" do
+      should "get new" do
         get :new, :scenario_id => @scenario.id
         assert_response :success
       end
@@ -62,7 +47,7 @@ class OutcomesControllerTest < ActionController::TestCase
           end
 
           should "redirect after creation" do
-            assert_redirected_to outcome_path(assigns(:outcome))
+            assert_response :success
           end
 
         end
@@ -74,56 +59,23 @@ class OutcomesControllerTest < ActionController::TestCase
             end
           end
 
-          should "redisplay" do
-            assert_response :success
+          should_eventually "do something with invalid params" do
+						assert_response :success
+            assert_template 'new'
           end
         end
       end
 
-      context "updating an outcome" do
-        context "with valid params" do
-          setup do
-            put :update, :id => @outcome.to_param, :outcome => {:description =>  "bar" }, :scenario_id => @scenario.id
-          end
+			context "destroy outcome" do
+				setup do
+	        assert_difference('Outcome.count', -1) do
+	          delete :destroy, :id => @outcome.to_param
+	        end
+				end
 
-          should "redirect after update" do
-            assert_redirected_to outcome_path(assigns(:outcome))
-          end
-        end
-
-        context "with invalid params" do
-          setup do
-            put :update, :id => @outcome.to_param, :outcome => {:description => "" }, :scenario_id => @scenario.id
-          end
-
-          should "redisplay" do
-            assert_response :success
-          end
-        end
-      end
-
-      should "update outcome" do
-        put :update, :id => @outcome.to_param, :outcome => { }, :scenario_id => @scenario.id
-        assert_redirected_to outcome_path(assigns(:outcome))
-      end
-
-      should "show outcome" do
-        get :show, :id => @outcome.to_param, :scenario_id => @scenario.id
-        assert_response :success
-      end
-
-      should "get edit" do
-        get :edit, :id => @outcome.to_param, :scenario_id => @scenario.id
-        assert_response :success
-      end
-
-
-      should "destroy outcome" do
-        assert_difference('Outcome.count', -1) do
-          delete :destroy, :id => @outcome.to_param
-        end
-
-        assert_redirected_to outcomes_path
+        should "do something" do
+					assert_response  :success
+				end
       end
     end
   end

@@ -1,19 +1,19 @@
 <% content_for :js_includes do %>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-  google.load("visualization", "1", {packages:["corechart"]})
+  google.load("visualization", "1", { packages:["corechart"] })
   google.setOnLoadCallback(drawChart)
   function drawChart() {
     var data = new google.visualization.DataTable(<%= burndown_data_js(@iteration) %>)
-    var chart = new google.visualization.LineChart(document.getElementById('burndown_chart'))
+    var chart = new google.visualization.LineChart(document.getElementById('burndown-chart'))
     chart.draw(data, {
-      width: 1000, height: 550,
-      title: "<%= @iteration.name %> burndown chart.",
-      vAxis: {title:'Story Points', minValue:0, maxValue:<%=@iteration.velocity %>},
-      hAxis: {textStyle:{fontSize:12},slantedText:true,slantedTextAngle:60}
+      width: 960, height: 550,
+      title: "",
+      vAxis: { title:'Story Points', minValue:0, maxValue:<%=@iteration.velocity %> },
+      hAxis: { ßtextStyle: { fontSize:12 }, slantedText:true, slantedTextAngle:60 }
     })
   }
 </script>
 <% end %>
 
-<div id="burndown_chart" style="margin-left:-150px"></div>
+<div id="burndown-chart"></div>

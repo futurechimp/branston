@@ -67,7 +67,7 @@ tests pass.
 
 == Copyright
 
-Copyright (c) 2010 Headlondon - http://www.headlondon.com
+Copyright (c) 2011 Headlondon - http://www.headlondon.com
 
 See LICENSE for details.
 

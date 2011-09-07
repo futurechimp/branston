@@ -18,7 +18,7 @@ class Story < ActiveRecord::Base
 
   # Validations
   #
-  validates_presence_of :description, :points, :title
+  validates_presence_of :title, :description, :points 
   validates_uniqueness_of :title
 
   # Associations
@@ -54,12 +54,9 @@ class Story < ActiveRecord::Base
   aasm_column :status
   aasm_initial_state :new
   aasm_state :new, :enter => :set_transition_date
-  aasm_state :in_progress
+  aasm_state :in_progress, :enter => :set_transition_date
   aasm_state :quality_assurance, :enter => :set_transition_date
-  aasm_state :completed, :enter => Proc.new  { |story, transition|
-                               story.completed_date = Date.today
-                               story.transition_date = Date.today
-                             }
+  aasm_state :completed, :enter => :set_completed_date
 
   aasm_event :assign do
     transitions :from => [:new, :quality_assurance, :completed], :to => :in_progress
@@ -70,11 +67,11 @@ class Story < ActiveRecord::Base
   end
 
   aasm_event :finish do
-    transitions :from => [:in_progress, :quality_assurance], :to => :completed
+    transitions :from => [:in_progress, :quality_assurance, :completed], :to => :completed
   end
 
   aasm_event :back_to_new do
-    transitions :from => :in_progress, :to => :new
+    transitions :from => [:new, :in_progress], :to => :new
   end
 
   attr_protected :status
@@ -84,12 +81,18 @@ class Story < ActiveRecord::Base
   end
 
   private
+
   def set_slug
     self.slug = self.to_param
   end
 
   def set_transition_date
-    transition_date = Date.today
+    self.transition_date = Date.today
   end
+
+	def set_completed_date
+		self.completed_date = Date.today
+    self.transition_date = Date.today
+	end
 
 end

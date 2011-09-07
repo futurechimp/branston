@@ -1,14 +1,16 @@
-<h1>Editing iteration</h1>
+<% @page_title = "Edit  #{@iteration.name}" %>
+<h2><%=h @page_title %></h2>
 
-<% form_for(@iteration) do |f| %>
-  <%= f.error_messages %>
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', project_path(@project) %></li>
+		<li><%= link_to 'Show', project_iteration_path(@project, @iteration) %></li>
+	</ul>
+</div>
 
+<% form_for :iteration, :url => project_iteration_path(@project, @iteration), 
+	:html => { :method => 'PUT' } do |f| %>
   <%= render :partial => 'form', :locals => {:f => f } %>
-
-  <p class="form-navigation">
-    <%= link_to 'Show', @iteration %>
-    <%= link_to 'Back', iterations_path %>
-    <%= f.submit 'Update' %>
-  </p>
+  <p><%= f.submit 'Update' %></p>
 <% end %>
 

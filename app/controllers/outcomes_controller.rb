@@ -19,29 +19,6 @@ class OutcomesController < ApplicationController
 
   in_place_edit_for :outcome, :description
 
-  # GET /outcomes
-  # GET /outcomes.xml
-  def index
-    @outcomes = @scenario.outcomes
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @outcomes }
-      format.js
-    end
-  end
-
-  # GET /outcomes/1
-  # GET /outcomes/1.xml
-  def show
-    @outcome = Outcome.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @outcome }
-    end
-  end
-
   # GET /outcomes/new
   # GET /outcomes/new.xml
   def new
@@ -49,15 +26,9 @@ class OutcomesController < ApplicationController
     @outcomes = @scenario.outcomes
     @outcomes.push @outcome
     respond_to do |format|
-      format.html # new.html.erb
       format.xml  { render :xml => @outcome }
       format.js
     end
-  end
-
-  # GET /outcomes/1/edit
-  def edit
-    @outcome = Outcome.find(params[:id])
   end
 
   # POST /outcomes
@@ -68,30 +39,11 @@ class OutcomesController < ApplicationController
     @outcomes = @scenario.outcomes
     respond_to do |format|
       if @outcome.save
-        flash[:notice] = 'Outcome was successfully created.'
-        format.html { redirect_to(@outcome) }
         format.xml  { render :xml => @outcome, :status => :created, :location => @outcome }
         format.js
       else
-        format.html { render :action => "new" }
         format.xml  { render :xml => @outcome.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /outcomes/1
-  # PUT /outcomes/1.xml
-  def update
-    @outcome = Outcome.find(params[:id])
-
-    respond_to do |format|
-      if @outcome.update_attributes(params[:outcome])
-        flash[:notice] = 'Outcome was successfully updated.'
-        format.html { redirect_to(@outcome) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @outcome.errors, :status => :unprocessable_entity }
+				format.js
       end
     end
   end
@@ -103,7 +55,6 @@ class OutcomesController < ApplicationController
     @outcome.destroy
 
     respond_to do |format|
-      format.html { redirect_to(outcomes_url) }
       format.xml  { head :ok }
       format.js
     end

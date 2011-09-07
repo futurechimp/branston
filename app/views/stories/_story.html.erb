@@ -1,60 +1,73 @@
-<!-- stories/_story.html.erb -->
-    <% @story = story -%>
-    <div id="<%= element_id(story) %>" class="story">
-      <div class="accordion-toggle<%= ' accordion-toggle-active' if @active %>">
-        <%= in_place_editor_field 'story', 'title', {}, :url => {
-          :action => "set_story_title", :id => @story.id,
-        :iteration_id => @iteration.to_param } %> &nbsp;
-        <%= link_to image_tag("/images/icons/delete_icon_20x19.png", :alt => "Delete"),
-        iteration_story_path(@iteration, @story), :confirm => 'Delete this story?',
-        :method => :delete, :class => "delete-small" %>
-        <div style="clear:left">By <%=@story.author%>
-        <%= clippy("branston -g -f #{@story.to_param} -b #{request.host} -p #{request.port} ", "#FFFF99") %></div>
-      </div>
+<% @story = story -%>
+<div id="<%= element_id(story) %>" class="story">
+	<div class="heading">
+    <h4>
+			<%= in_place_editor_field :story, :title, {}, 
+				:url => { :controller => 'stories', :action => 'set_story_title', :id => story.id, :iteration_id => @iteration.id } %>
+				<%= link_to "Delete", iteration_story_path(@iteration, @story), 
+					:confirm => 'Delete this story?', :method => :delete, :class => "delete" %>
+		</h4>
+	</div>
+	<div class="details-and-scenarios" style="display:none;">
+  	<div id="<%= element_id(story,'details') %>" class="details">
+				<p><%= clippy("branston -g -f #{@story.to_param} -b #{request.host} -p #{request.port} ", "") %></p>
+	      <% remote_form_for :story, @story, :url => "#{iteration_story_path(@iteration, @story)}.js" do |f| -%>
+	        <%= hidden_field_tag '_method', 'PUT' %>
+	        <%= hidden_field_tag 'id', @story.id %>
+	        <p>
+						<%= f.label :points %>
+	          <%= f.select :points, (1..10).to_a, {}, :id => element_id(@story,'points') %>
+	        </p>
+	        <p>
+	          <%= f.label :status %>
+	          <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'].map {
+	            |s| [s.capitalize.gsub('_', ' '), s]}, {},
+	          	:id => element_id(@story, 'status') %>
+	        </p>
+	        <% unless @iterations.empty? -%>
+	        <p>
+	          <%= f.label :iteration_id, "Iteration" %>
+	          <%= f.select :iteration_id, @iterations.map{|i|[i.name,i.id]},
+	          {:prompt => "Assign Iteration"}, :id => element_id(@story,'iterations') %>
+	        </p>
+	        <% end -%>
+	      <% end -%>
+	    <p>
+				<%= in_place_editor_field :story, :description, {}, 
+					:url => { :controller => 'stories', :action => 'set_story_description', :id => story.id, :iteration_id => @iteration.id }, :rows => 5 %>
+	    </p>
+		
+			<p>
+				<a href="#" onclick="Branston.Utils.toggleDetailAndScenario(this); return false;">Show Scenarios &raquo;</a>
+			</p>
+	  </div>
 
-      <div id="<%= element_id(story,'scenarios') %>" class="accordion-content">
-        <div class="story-props">
-          <% remote_form_for :story, @story, :url => "#{iteration_story_path(@iteration, @story)}.js" do |f| -%>
-            <%= hidden_field_tag '_method', 'PUT' %>
-            <%= hidden_field_tag 'id', @story.id %>
-            <div>
-              <%= f.select :points, (1..10).to_a, {}, :id => element_id(@story,'points') %> Points
-            </div>
-            <div>
-              <%= f.label :status %>
-              <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'].map {
-                |s| [s.capitalize.gsub('_', ' '), s]}, {},
-              :id => element_id(@story, 'status') %>
-            </div>
-            <% unless @iterations.empty? -%>
-            <div>
-              <%= f.label :iteration_id, "Iteration" %>
-              <%= f.select :iteration_id, @iterations.map{|i|[i.name,i.id]},
-              {:prompt => "Assign Iteration"}, :id => element_id(@story,'iterations') %>
-            </div>
-            <% end -%>
-          <% end -%>
-        </div>
-        <p>
-          <%= in_place_editor_field 'story', 'description' %>
-        </p>
+		<div id="<%= element_id(story,'scenarios') %>" class="scenarios" style="display:none;">
+			<p>
+				<%= link_to_remote 'Add scenario', { :url => new_iteration_story_scenario_path(@iteration, @story), :method => 'GET'} %>
+			</p>
 
-        <div>
-          <%= link_to_remote "Scenarios &raquo;", :method => 'GET',
-          :url => iteration_story_scenarios_path(@iteration, @story)  %>
-        </div>
-      </div>
-    </div>
+			<% @story.scenarios.each do |scenario| %>
+				<% @scenario = scenario -%>
+				<%= render :partial => "scenarios/scenario" %>
+			<% end %>
+		
+			<p>
+				<a href="#" onclick="Branston.Utils.toggleDetailAndScenario(this); return false;">Show Details &raquo;</a></p>
+			</p>
+		</div>
+	</div>
+</div>
 
 <% content_for :page_end do -%>
 <script type="text/javascript">
-document.observe("dom:loaded", function() {
-  $("<%= element_id(@story, 'points') %>").observe("change", Util.Form.selectChange);
-  <% unless @iterations.empty? %>
-  $("<%= element_id(@story, 'iterations') %>").observe("change", Util.Form.selectChange);
-  <% end %>
-  $("<%= element_id(@story, 'status') %>").observe("change", Util.Form.selectChange);
-});
+	document.observe("dom:loaded", function() {
+	  $("<%= element_id(@story, 'points') %>").observe("change", Branston.Form.selectChange);
+	  <% unless @iterations.empty? -%>
+	  $("<%= element_id(@story, 'iterations') %>").observe("change", Branston.Form.selectChange);
+	  <% end -%>
+	  $("<%= element_id(@story, 'status') %>").observe("change", Branston.Form.selectChange);
+	});
 </script>
 <% end -%>
 

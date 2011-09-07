@@ -1,14 +1,37 @@
-<div class="index-head">
-  <h2>Users</h2>
-  <%= link_to 'New user', new_user_path, :class => "add" %>
+<% @page_title = "Manage Users" %>
+<h2><%=h @page_title %></h2>
+
+<div id="actions">
+	<ul>
+		<li><%= link_to 'New user', new_user_path, :class => "add" %></li>
+	</ul>
 </div>
-<% unless @users.blank? -%>
-  <ul>
-    <% @users.each do |user| -%>
-      <li>
-        <%= render :partial => "users/admin_controls", :locals => {:user => user } %>
-      </li>
-    <% end -%>
-  </ul>
-<% end -%>
+
+<table class="table">
+  <tr>
+    <th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+  </tr>
+
+  <% for user in @users %>
+  <tr class="<%=cycle('odd','even')%>">
+    <td><%= link_to user.login, edit_user_path(user) %></td>
+    <td class="action">
+			<% if user.state == "active" -%>
+		  	activate
+			<% else %>
+			  <%= link_to 'activate', activate_user_path(user) %>
+			<% end -%>
+		</td>
+    <td class="action">
+			<% if user.state == "pending" || user.state == "suspended" -%>
+			  suspend
+			<% else -%>
+			  <%= link_to 'suspend', suspend_user_path(user)  %>
+			<% end -%>
+		</td>
+  </tr>
+  <% end %>
+</table>
 

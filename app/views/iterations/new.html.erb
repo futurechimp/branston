@@ -1,13 +1,15 @@
-<h2>New iteration</h2>
+<% @page_title = "New Iteration" %>
+<h2><%=h @page_title %></h2>
 
-<% form_for(@iteration) do |f| %>
-  <%= f.error_messages %>
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', project_path(@project) %></li>
+	</ul>
+</div>
 
-   <%= render :partial => 'form', :locals => {:f => f } %>
-
-  <p class="form-navigation">
-    <%= link_to 'Back', iterations_path, :class => "back" %>
-    <%= f.submit 'Create' %>
-  </p>
+<% form_for :iteration, :url => project_iterations_path(@project), 
+	:html => { :method => 'POST' } do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f } %>
+  <p><%= f.submit 'Create' %></p>
 <% end %>
 

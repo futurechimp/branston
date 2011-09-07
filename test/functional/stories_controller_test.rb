@@ -70,7 +70,7 @@ class StoriesControllerTest < ActionController::TestCase
 
       should "generate the cucumber feature file for a story" do
         get :generate_feature, :id => @story.to_param, :path => 'test/features/',
-        :iteration_id => @iteration.to_param
+        	:iteration_id => @iteration.to_param
         assert_response :success
         assert File.exists? FEATURE_PATH + @story.feature_filename
         assert File.exists? FEATURE_PATH + @story.step_filename
@@ -124,14 +124,18 @@ class StoriesControllerTest < ActionController::TestCase
         end
       end
 
-      context "updating a story" do
+      context "updating a story" do				
         context "with valid parameters" do
           setup do
             assert_no_difference("Story.count") do
               put :update,{ :id => @story.slug,  :story => {:description => "bar"},
-              :iteration_id => @iteration.to_param }
+              	:iteration_id => @iteration.to_param }
             end
           end
+
+					should "leave the story as new" do
+						assert @story.new?
+					end
 
           should "redirect to show" do
             assert_redirected_to iteration_story_path(@iteration, @story)
@@ -140,8 +144,8 @@ class StoriesControllerTest < ActionController::TestCase
           context "with story status set to 'in_progress'" do
             setup do
               put :update,{ :id => @story.to_param,  :story => {
-                :description => "bar", :status => "in_progress"},
-              :iteration_id => @iteration.to_param }
+                	:description => "bar", :status => "in_progress"
+								}, :iteration_id => @iteration.to_param }
             end
 
             should "set the story's status to 'in_progress'" do
@@ -232,6 +236,7 @@ class StoriesControllerTest < ActionController::TestCase
             :id => 'none-such-story', :iteration_id => @iteration.to_param,
             :username => @user.login, :password => "monkey"
         end
+
         should "fail gracefully" do
           assert_response 404
         end
@@ -242,6 +247,7 @@ class StoriesControllerTest < ActionController::TestCase
           get :show,
             :id => @story.to_param, :iteration_id => @iteration.to_param
         end
+
         should "fail gracefully" do
           get :show, :id => 'none-such-story', :iteration_id => @iteration.to_param
           assert_response 404

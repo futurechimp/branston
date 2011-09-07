@@ -39,5 +39,10 @@ Rails::Initializer.run do |config|
 
 end
 
+# Override the base field error action. This is so the validation errors don't
+# mess up the HTML code by inserting <div class="fieldWithErrors">
+#
+ActionView::Base.field_error_proc = Proc.new {|html_tag, instance|  %(#{html_tag})}
+
 #require 'gchart'
 

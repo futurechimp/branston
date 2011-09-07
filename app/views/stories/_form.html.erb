@@ -1,27 +1,33 @@
-  <p class="form-fields">
-    <%= f.label :title %>
-    <%= f.text_field :title, :size => 52 %>
-  </p>
-  <p class="form-fields">
-    <%= f.label :description %>
-    <%= f.text_area :description, :size => "60x8" %>
-  </p>
-  <% unless params[:action] = "new" %>
-  <p class="form-fields">
-    <%= f.label :status %>
-    <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'] %>
-  </p>
-  <% end %>
-  <p class="form-fields">
-    <%= f.label :points %>
-    <%= f.select :points, (1..10).to_a %>
-  </p>
-  <% unless params[:action] = "new" %>
-    <p class="form-fields">
-      <%= f.label :iteration %>
-      <%= f.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]}.insert(0,["Not Assigned",'']) %>
-    </p>
-  <% else %>
-  <%=f.hidden_field :iteration_id %>
-  <% end %>
-
+<%= error_messages_for :object => @story,
+  :header_tag => 'h3',
+  :id => "errors",
+  :class => "errors",
+  :header_message => "Whoops!",
+  :message => "We had some problems saving this story."
+-%>
+<div class="form">
+	<p>
+	  <%= f.label :title %>
+	  <%= f.text_field :title %>
+	</p>
+	<p>
+	  <%= f.label :description %>
+	  <%= f.text_area :description, :rows => 5 %>
+	</p>
+	<% unless params[:action] = "new" %>
+	<p>
+	  <%= f.label :status %>
+	  <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'] %>
+	</p>
+	<% end %>
+	<p>
+	  <%= f.label :points %>
+	  <%= f.select :points, (1..10).to_a %>
+	</p>
+	<% unless params[:action] = "new" %>
+	  <p>
+	    <%= f.label :iteration %>
+	    <%= f.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]}.insert(0,["Not Assigned",'']) %>
+	  </p>
+	<% end %>
+</div>

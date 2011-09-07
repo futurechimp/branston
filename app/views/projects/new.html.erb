@@ -1,4 +1,11 @@
-<h1>New Project</h1>
+<% @page_title = "New Project" %>
+<h2><%=h @page_title %></h2>
+
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', projects_path %></li>
+	</ul>
+</div>
 
 <% form_for(@project) do |form| %>
   <%= form.error_messages %>
@@ -6,4 +13,4 @@
   <p><%= form.submit 'Create' %></p>
 <% end %>
 
-<p><%= link_to 'Back', projects_path %></p>
+

@@ -1,9 +1,15 @@
-<div class="index-head">
-  <h2>Iteration #<%=@iteration.name%> Stories, 
-  <%=@total_assigned_points%>/<%=@iteration.velocity%> points assigned
-  (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%)
-  </h2>
-  <p>
+<% @page_title = "Stories for #{@iteration.name}" %>
+<h2><%=h @page_title %></h2>
+
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', project_path(@iteration.project) %></li>
+		<li><%= link_to 'Show', project_iteration_path(@iteration.project, @iteration) %></li>
+	</ul>
+</div>
+
+<p>
+	<%= @total_assigned_points %>/<%= @iteration.velocity %> points assigned (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%) - 
   <% case (@assignment_difference <=> 0)
   when -1 -%>
     Undersubscribed by <%= 0 - @assignment_difference%> points
@@ -12,83 +18,68 @@
     <% when 0 -%>
     Spot on!
   <% end -%>
-  </p>
-  <%= link_to 'New story', new_iteration_story_path(@iteration), :class => "add" %>
+</p>
+
+<p><%= link_to 'New story', new_iteration_story_path(@iteration), :class => "add" %></p>
+
+<div id="columns">
+	<div id="completed-stories-bg" class="column-bg">
+		<div id="qa-stories-bg" class="column-bg">
+			<div id="in-progress-stories-bg" class="column-bg">
+				<div id="new-stories-bg" class="column-bg">
+					<div id="new-stories" class="column">
+						<!-- Column one start -->
+						<h3>New stories <%=points_label(@backlog_stories)%></h3>
+						  <% if @backlog_stories.empty? %>
+								<p>There are currently no stories for this iteration, <%=link_to "add story", new_iteration_story_path(@iteration) %></p>
+						  <% else %>
+						    <% @backlog_stories.each do |story| %>
+						      <%= render :partial => "story", :locals => { :story => story } %>
+						    <% end %>
+						  <% end %>
+						<!-- Column one end -->
+					</div>
+					<div id="in-progress-stories" class="column">
+
+						<!-- Column two start -->
+							<h3>In progress stories <%=points_label(@current_stories)%></h3>
+						  <% @current_stories.each do |story| %>
+						    <%= render :partial => "story", :locals => { :story => story } %>
+						  <% end %>
+						<!-- Column two end -->
+					</div>
+
+					<div id="qa-stories" class="column">
+						<!-- Column three start -->
+						<h3>Quality assurance stories <%=points_label(@quality_assurance_stories)%></h3>
+					  <% @quality_assurance_stories.each do |story| %>
+					    <%= render :partial => "story", :locals => { :story => story } %>
+					  <% end %>
+						<!-- Column three end -->
+					</div>
+				
+					<div id="completed-stories" class="column">
+						<!-- Column four start -->
+						<h3>Completed stories <%=points_label(@completed_stories)%></h3>
+					  <% @completed_stories.each do |story| %>
+					    <%= render :partial => "story", :locals => { :story => story } %>
+					  <% end %>
+						<!-- Column four end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-<% content_for :page_end do %>
+<% content_for :page_end do -%>
 <script type="text/javascript">
 document.observe("dom:loaded", function() {
-  // Extend Accordion class to force some dynamic DOM elements to appear.
-  Accordion.addMethods({
-      forceExpand : function() {
-          var scenarios = $('.scenarios');
-          if (scenarios && scenarios.length > 0)
-              new Effect.Scale(scenarios[0], 100, {scaleY:true,scaleX:false,scaleMode:'contents'});
-      }
-  });
-  <% unless @current_stories.nil? or @current_stories.empty? -%>
-  var currentStories = new Accordion("current_stories", 1);
-  //$('accordion-toggle').each(function(e) {e.observe('click', currentStories.forceExpand);});
-  <% end -%>
-  <% unless @backlog_stories.nil? or @backlog_stories.empty? -%>
-  var backlogStories = new Accordion("backlog_stories", 1);
-  //$('accordion-toggle').each(function(e) {e.observe('click', backlogStories.forceExpand);});
-  <% end -%>
-  <% unless @completed_stories.nil? or @completed_stories.empty? -%>
-  var completedStories = new Accordion("completed_stories", 1);
-  //$('accordion-toggle').each(function(e) {e.observe('click', completedStories.forceExpand);});
-  <% end -%>
-  <% unless @quality_assurance_stories.nil? or @quality_assurance_stories.empty? -%>
-  var qualityAssuranceStories = new Accordion("quality_assurance_stories", 1);
-  //$('accordion-toggle').each(function(e) {e.observe('click', qualityAssurance.forceExpand);});
-  <% end -%>
+  $$("#columns .heading").each(function(e) {
+		e.observe('click', function(){
+			Branston.Utils.toggleStoryDetails(e);
+		});
+	});
 });
 </script>
 <% end %>
-
-<div id="current-wrapper">
-<h3>Current Stories <%=points_label(@current_stories)%></h3>
-  <div id="current_stories" class="accordion">
-  <% @current_stories.each do |story| %>
-    <%= render :partial => "story", :locals => { :story => story } %>
-  <% end %>
-  </div>
-
-  <h3>Quality Assurance Stories <%=points_label(@quality_assurance_stories)%></h3>
-  <div id="quality_assurance_stories" class="accordion">
-  <% @quality_assurance_stories.each do |story| %>
-    <%= render :partial => "story", :locals => { :story => story } %>
-  <% end %>
-  </div>
-</div>
-
-<div id="backlog-wrapper">
-<h3>Story Backlog <%=points_label(@backlog_stories)%></h3>
-  <div id="backlog_stories" class="accordion">
-  <% if @backlog_stories.empty? %>
-    <%=link_to "Write some more!", new_iteration_story_path(@iteration) %>
-  <% else %>
-    <% @backlog_stories.each do |story| %>
-      <%= render :partial => "story", :locals => { :story => story } %>
-    <% end %>
-  <% end %>
-  </div>
-</div>
-
-<% unless @completed_stories.empty? %>
-
-<div style="clear:both">
-</div>
-
-<div id="current-wrapper">
-  <h3>Completed Stories <%=points_label(@completed_stories)%></h3>
-  <div id="completed_stories" class="accordion">
-  <% @completed_stories.each do |story| %>
-    <%= render :partial => "story", :locals => { :story => story } %>
-  <% end %>
-  </div>
-</div>
-
-<% end %>
-

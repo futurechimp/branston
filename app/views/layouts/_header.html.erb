@@ -1,38 +1,32 @@
-<!-- layouts/_header.html.erb -->
+<!-- start #header -->
+<div id="header">
   <div id="logo">
-		<h1><a href="#">Branston</a></h1>
-		<p><em> Small chunk pickle</em></p>
-	</div>
-	<% if logged_in? -%>
-  <p style="float:right">Logged in as <%= current_user.login %>&nbsp;&nbsp;&nbsp;
-    <%= link_to 'Log Out', logout_path %></p>
+	  <h1><a href="#">Branston</a></h1>
+	  <p><em> Small chunk pickle</em></p>
+  </div>
+  <% if logged_in? -%>
+  <div id="logged-in">
+    <ul>
+      <li>Logged in as <%= current_user.login %></li>
+      <li><%= link_to 'Log Out', logout_path %></li>
+    </ul>
+  </div>
   <% end -%>
-	<hr />
-	<!-- end #logo -->
-	<div id="header">
-		<div id="menu">
-			<ul>
-			<% if logged_in? -%>
-			  <li <%= tab_on("projects") %>><%= link_to 'Projects', projects_path %></li>
-				<li <%= tab_on("iterations") %>><%= link_to 'Iterations', iterations_path %></li>
-				<li <%= tab_on("releases") %>><%= link_to 'Releases', releases_path %></li>
-				<li <%= tab_on("users") %>><%= link_to 'Users', users_path %></li>
-			<% else -%>
-				<li <%= tab_on("login") %>><%= link_to 'Log In', login_path %></li>
-			<% end -%>
-			</ul>
-		</div>
-		<!-- end #menu -->
-		<div id="search">
-			<form method="get" action="">
-				<fieldset>
-				<input type="text" name="s" id="search-text" size="15" />
-				<input type="submit" id="search-submit" value="GO" />
-				</fieldset>
-			</form>
-		</div>
-		<!-- end #search -->
+	<div id="menu">
+		
+		<% if logged_in? -%>
+		<ul>
+		  <li <%= tab_on("projects") %>><%= link_to 'Projects', projects_path %></li>
+			<li <%= tab_on("users") %>><%= link_to 'Users', users_path %></li>
+		</ul>
+		<form method="get" action="">
+			<fieldset>
+			<input type="text" name="s" id="search-text" size="15" />
+			<input type="submit" id="search-submit" value="GO" />
+			</fieldset>
+		</form>
+		<% end -%>
 	</div>
-	<!-- end #header -->
-	<!-- end #header-wrapper -->
-
+	<!-- end #menu -->
+</div>
+<!-- end #header -->
