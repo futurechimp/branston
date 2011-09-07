@@ -29,6 +29,20 @@ class StoriesControllerTest < ActionController::TestCase
         login_as(@user)
       end
 
+      context "for the index action, when it retrieves iterations," do
+        setup do
+          @iteration.project = Project.make
+          @iteration.save
+          get :index, :iteration_id => @iteration.to_param
+        end
+
+        should "retrieve only iterations for the current project" do
+          assigns(:iterations).each do |iteration|
+            assert_equal(@iteration.project, iteration.project)
+          end
+        end
+      end
+
       should "show a list of all the stories in the current iteration" do
         get :index, :iteration_id => @iteration.to_param
         assert_response :success

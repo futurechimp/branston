@@ -18,8 +18,8 @@ class StoriesController < ApplicationController
 
   before_filter :login_or_password_required, :only => [:show, :generate_feature]
   before_filter :login_required, :except => [:show, :generate_feature]
+  before_filter :load_iteration, :except => [:generate_feature]
   before_filter :retrieve_iterations, :except => [:generate_feature]
-  before_filter :load_iteration, :except => [:generate_feature, :show]
 
   in_place_edit_for :story, :title
   in_place_edit_for :story, :description
@@ -153,7 +153,7 @@ class StoriesController < ApplicationController
   private
 
   def retrieve_iterations
-    @iterations = Iteration.all
+    @iterations = @iteration.project.iterations
   end
 
   def load_iteration
