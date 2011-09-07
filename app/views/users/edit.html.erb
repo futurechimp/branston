@@ -1,9 +1,17 @@
-<h1>Edit user</h1>
-<% @user.password = @user.password_confirmation = nil %>
+<% 
+	@page_title = "Edit #{@user.login}" 
+	@user.password = @user.password_confirmation = nil
+%>
+<h2><%=h @page_title %></h2>
 
-<%= error_messages_for :user %>
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', users_path %></li>
+	</ul>
+</div>
+
 <% form_for(@user) do |f| -%>
   <%= render :partial => 'form', :locals => { :f => f } %>
-  <p class="form-navigation"><%= submit_tag 'Update user' %></p>
+  <p><%= submit_tag 'Update user' %></p>
 <% end -%>
 

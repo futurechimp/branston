@@ -26,7 +26,8 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-
+		@iterations = Iteration.find(:all, :conditions => ["project_id = ?", params[:id]])
+		
     respond_to do |format|
       format.html
       format.xml  { render :xml => @project }

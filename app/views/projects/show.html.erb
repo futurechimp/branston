@@ -1,8 +1,39 @@
-<h3><%= @project.name %></h3>
+<% @page_title = @project.name %>
+<h2><%=h @page_title %></h2>
+
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', projects_path %></li>
+		<li><%= link_to 'Edit', edit_project_path(@project)%></li>
+	</ul>
+</div>
+
 <p><%= @project.description %></p>
 
-<p>
-  <%= link_to 'Edit', edit_project_path(@project)%>
-  |
-  <%= link_to 'Back', projects_path %>
-</p>
+<h3>Iterations</h3>
+
+<table class="table">
+  <tr>
+		<th>Name</th>
+    <th>Velocity</th>  
+    <th>Start date</th>
+    <th>End date</th>
+    <th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+  </tr>
+
+<% @iterations.each do |iteration| %>
+  <tr class="<%=cycle('odd','even')%>">
+    <td><%=link_to iteration.name, project_iteration_path(@project, iteration) %></td>
+		<td><%= iteration.velocity %></td>
+    <td><%=h iteration.start_date.strftime('%d/%m/%Y') unless iteration.start_date.nil? %></td>
+    <td><%=h iteration.end_date.strftime('%d/%m/%Y') unless iteration.end_date.nil? %></td>
+    <td class="action"><%=link_to 'Stories', iteration_stories_path(iteration) %></td>
+    <td class="action"><%= link_to 'Edit', edit_project_iteration_path(@project, iteration) %></td>
+    <td class="action"><%= link_to 'Destroy', project_iteration_path(@project), :confirm => 'Are you sure you want to delete this iteration?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<p><%= link_to 'New iteration', new_project_iteration_path(@project) %></p>

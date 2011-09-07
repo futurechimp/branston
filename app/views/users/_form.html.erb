@@ -1,36 +1,44 @@
-<p class="form-fields">
-  <%= label_tag 'Login' %>
-  <%= f.text_field :login %>
-</p>
+<%= error_messages_for :object => @user,
+  :header_tag => 'h3',
+  :id => "errors",
+  :class => "errors",
+  :header_message => "Whoops!",
+  :message => "We had some problems saving this user."
+-%>
 
-<p class="form-fields">
-  <%= label_tag 'Email' %>
-  <%= f.text_field :email %>
-</p>
+<div class="form">
+	<p>
+	  <%= label_tag 'Login' %>
+	  <%= f.text_field :login %>
+	</p>
 
-<p class="form-fields">
-  <%= label_tag 'Password' %>
-  <%= f.password_field :password %>
-</p>
+	<p>
+	  <%= label_tag 'Email' %>
+	  <%= f.text_field :email %>
+	</p>
 
-<p class="form-fields">
-  <%= label_tag 'password_confirmation', 'Confirm' %>
-  <%= f.password_field :password_confirmation %>
-</p>
+	<p>
+	  <%= label_tag 'Password' %>
+	  <%= f.password_field :password %>
+	</p>
 
-<% if current_user.has_role?("admin") -%>
-  <hr/>
-  <p class="form-fields">
-    <%= label_tag 'Role' %>
-    <%= f.select :role, ["admin", "client", "developer"] %>
-  </p>
-  <p class="form-fields">
-    <%= label_tag 'Project Access' %>
-    <div>
-      <% Iteration.all.each_with_index do |iteration, index| -%>
-        <%= check_box_tag "user[participations][][iteration]", iteration.to_param, @user.participant?(iteration) %>
-        &nbsp;<%= iteration.name %>&nbsp;(<%= iteration.project.name %>)<br/>
-      <% end -%>
-    </div>
-  </p>
-<% end -%>
+	<p>
+	  <%= label_tag 'password_confirmation', 'Confirm' %>
+	  <%= f.password_field :password_confirmation %>
+	</p>
+
+	<% if current_user.has_role?("admin") -%>
+	  <hr/>
+	  <p>
+	    <%= label_tag 'Role' %>
+	    <%= f.select :role, ["admin", "client", "developer"] %>
+	  </p>
+	  <p>
+	    <%= label_tag 'Project Access' %>
+	      <% Iteration.all.each_with_index do |iteration, index| -%>
+	        <%= check_box_tag "user[participations][][iteration]", iteration.to_param, @user.participant?(iteration) %>
+	        &nbsp;<%= iteration.name %>&nbsp;(<%= iteration.project.name %>)<br/>
+	      <% end -%>
+	  </p>
+	<% end -%>
+</div>

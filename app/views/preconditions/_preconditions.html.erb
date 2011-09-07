@@ -1,13 +1,9 @@
-<!-- preconditions/_preconditions.html.erb -->
-  <div>
-    <%= link_to_remote 'Add condition', {:url => new_precondition_path(:scenario_id => @scenario.id), :method => 'GET'}, :class => "add-small" %>
-    <% unless @preconditions.nil? or @preconditions.empty? -%>
-    <ol>
-    <% @preconditions.each do |precondition| -%>
-      <% @precondition = precondition -%>
-      <%= render :partial => "precondition" %>
-    <% end -%>
-    </ol>
-    <% end -%>
-  </div>
-
+<p>
+	<%= link_to_remote 'Add precondition', {:url => new_precondition_path(:scenario_id => @scenario.id), :method => 'GET'}, :class => "add-small" %>
+</p>
+<% unless @preconditions.nil? or @preconditions.empty? -%>
+	<% @preconditions.each do |precondition| -%>
+		<% @precondition = precondition -%>
+   	<%= render :partial => "preconditions/precondition" %>
+ <% end -%>
+<% end -%>

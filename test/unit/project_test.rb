@@ -8,8 +8,8 @@ class ProjectTest < ActiveSupport::TestCase
   		@project = Project.make
   	end
 
-    should_validate_presence_of :name
-    should_validate_uniqueness_of :name
+    should validate_presence_of :name
+    should validate_uniqueness_of :name
 
     subject { @project }
 

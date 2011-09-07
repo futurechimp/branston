@@ -3,27 +3,45 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <%= render :partial => "layouts/meta" %>
-  <title>Branston - <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'application' %>
-  <%= stylesheet_link_tag 'style' %>
-  <%= yield :js_includes %>
+<%= render :partial => "layouts/meta" %>
+<title><%=h(@page_title) + " | " unless @page_title.nil? %>Branston</title>
+<%= stylesheet_link_tag 'branston' %>
+<%= yield :js_includes %>
 </head>
 <body>
+<!-- start #container -->
+<div id="container">
   <%= render :partial => "layouts/header" %>
 
-  <% if flash[:notice] %>
-    <div id="flash_notice"><%= flash[:notice] %></div>
-  <% end %>
+  <% if flash[:notice] -%>
+	  <div id="flash-notice">
+			<!-- Extra div needed for SlideUp effect. -->
+			<div>
+				<%= flash[:notice] -%>
+			</div>
+		</div>
+	<% end -%>
 
-	<div id="page">
-		<div id="content">
-    <%= yield %>
-    </div>
-  </div>
+	<% if flash[:error] -%>
+	  <div id="flash-error">
+			<!-- Extra div needed for SlideUp effect. -->
+			<div>
+				<%= flash[:error] -%>
+			</div>
+		</div>
+	<% end -%>
 
-  <%= render :partial => "layouts/footer" %>
-  <%= yield :page_end %>
+	<div id="content">
+  	<%= yield %>
+	</div>
+
+	<!-- start #clear-footer -->
+	<div id="clear-footer"></div>
+	<!-- end #clear-footer -->
+</div>
+<!-- end #container -->
+<%= render :partial => "layouts/footer" %>
+<%= yield :page_end %>
 </body>
 </html>
 

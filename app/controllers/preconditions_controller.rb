@@ -20,29 +20,6 @@ class PreconditionsController < ApplicationController
 
   in_place_edit_for :precondition, :description
 
-  # GET /preconditions
-  # GET /preconditions.xml
-  def index
-    @preconditions = @scenario.preconditions
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @preconditions }
-      format.js
-    end
-  end
-
-  # GET /preconditions/1
-  # GET /preconditions/1.xml
-  def show
-    @precondition = Precondition.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @precondition }
-    end
-  end
-
   # GET /preconditions/new
   # GET /preconditions/new.xml
   def new
@@ -50,15 +27,9 @@ class PreconditionsController < ApplicationController
     @preconditions = @scenario.preconditions
     @preconditions.push @precondition
     respond_to do |format|
-      format.html # new.html.erb
       format.xml  { render :xml => @precondition }
       format.js
     end
-  end
-
-  # GET /preconditions/1/edit
-  def edit
-    @precondition = Precondition.find(params[:id])
   end
 
   # POST /preconditions
@@ -69,30 +40,11 @@ class PreconditionsController < ApplicationController
     @preconditions = @scenario.preconditions
     respond_to do |format|
       if @precondition.save
-        flash[:notice] = 'Precondition was successfully created.'
-        format.html { redirect_to(@precondition) }
-        format.xml  { render :xml => @precondition, :status => :created, :location => @precondition }
+        format.xml  { render :xml => @precondition, :status => :created }
         format.js
       else
-        format.html { render :action => "new" }
         format.xml  { render :xml => @precondition.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /preconditions/1
-  # PUT /preconditions/1.xml
-  def update
-    @precondition = Precondition.find(params[:id])
-
-    respond_to do |format|
-      if @precondition.update_attributes(params[:precondition])
-        flash[:notice] = 'Precondition was successfully updated.'
-        format.html { redirect_to(@precondition) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @precondition.errors, :status => :unprocessable_entity }
+				format.js
       end
     end
   end
@@ -104,7 +56,6 @@ class PreconditionsController < ApplicationController
     @precondition.destroy
 
     respond_to do |format|
-      format.html { redirect_to(preconditions_url(:scenario_id => @precondition.scenario_id)) }
       format.xml  { head :ok }
       format.js
     end
@@ -117,4 +68,3 @@ class PreconditionsController < ApplicationController
   end
 
 end
-

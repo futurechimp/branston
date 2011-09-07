@@ -15,10 +15,12 @@
 class StoriesController < ApplicationController
 
   layout 'main'
+
   before_filter :login_or_password_required, :only => [:show, :generate_feature]
   before_filter :login_required, :except => [:show, :generate_feature]
   before_filter :retrieve_iterations, :except => [:generate_feature]
   before_filter :load_iteration, :except => [:generate_feature, :show]
+
   in_place_edit_for :story, :title
   in_place_edit_for :story, :description
   in_place_edit_for :story, :points
@@ -40,6 +42,7 @@ class StoriesController < ApplicationController
     @quality_assurance_stories = Story.for_iteration(@iteration.id).in_quality_assurance
     @completed_stories = Story.for_iteration(@iteration.id).completed
     @total_assigned_points = 0
+
     Story.for_iteration(@iteration.id).map { |s|
       @total_assigned_points += s.points
     }
@@ -141,11 +144,11 @@ class StoriesController < ApplicationController
     @story.destroy
 
     respond_to do |format|
+			flash[:notice] = 'Story was successfully deleted.'
       format.html { redirect_to iteration_stories_path(@iteration) }
       format.xml  { head :ok }
     end
   end
-
 
   private
 

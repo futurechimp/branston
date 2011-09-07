@@ -1,14 +1,14 @@
-<h1>Editing story</h1>
+<h2>Editing story</h2>
+
+<div id="actions">
+	<ul>
+		<li><%= link_to 'Back', iteration_stories_path(@iteration) %></li>
+		<li><%= link_to 'Show', iteration_story_path(@iteration, @story) %></li>
+	</ul>
+</div>
 
 <% form_for @story, :url => iteration_story_path(@iteration, @story) do |f| %>
-  <%= f.error_messages %>
-
   <%= render :partial => 'form', :locals => {:f => f} %>
-
-  <p class="form-navigation">
-    <%= link_to 'Show', iteration_story_path(@iteration, @story) %>
-    <%= link_to 'Back', iteration_stories_path(@iteration), :class => "back" %>
-    <%= f.submit 'Update' %>
-  </p>
+  <p><%= f.submit 'Update' %></p>
 <% end %>
 

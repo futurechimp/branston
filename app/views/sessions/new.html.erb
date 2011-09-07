@@ -1,27 +1,24 @@
-<h1>Log In</h1>
+<% @page_title = "Log In" %>
+<h2><%=h @page_title %></h2>
 
-<div id="login">
+<% form_tag session_path do -%>
+	<div class="form">
+		<p>
+			<%= label_tag 'login' %>
+			<%= text_field_tag 'login', @login %>
+		</p>
 
-  <% form_tag session_path do -%>
+		<p>
+			<%= label_tag 'password' %>
+			<%= password_field_tag 'password', nil %>
+		</p>
 
-  <p class="form-fields">
-    <%= label_tag 'login' %>
-    <%= text_field_tag 'login', @login %>
-  </p>
-
-  <p class="form-fields">
-    <%= label_tag 'password' %>
-    <%= password_field_tag 'password', nil %>
-  </p>
-
-  <p class="form-fields">
-    <%= label_tag 'remember_me', 'Remember me' %>
-    <%= check_box_tag 'remember_me', '1', @remember_me %>
-  </p>
-
-
-   <p id="login-button" class="form-navigtion"><%= submit_tag 'Log in' %></p>
-  <% end -%>
-
-</div>
-
+		<p>
+			<%= label_tag 'remember_me', 'Remember me' %>
+			<%= check_box_tag 'remember_me', '1', @remember_me %>
+		</p>
+	</div>
+	<p>
+		<%= submit_tag 'Log in' %>
+	</p>
+<% end -%>
