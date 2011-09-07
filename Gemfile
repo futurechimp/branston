@@ -25,4 +25,5 @@ group :test do
   gem 'json'
   gem 'ruby-prof'
   gem 'ruby-debug'
+  gem 'phocus'
 end

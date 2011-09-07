@@ -32,6 +32,7 @@ GEM
     mocha (0.9.12)
     mysql (2.8.1)
     nokogiri (1.4.4)
+    phocus (1.1)
     polyglot (0.2.9)
     rack (1.1.0)
     rails (2.3.11)
@@ -70,6 +71,7 @@ DEPENDENCIES
   machinist
   mocha
   mysql
+  phocus
   rails (~> 2.3.5)
   rcov
   ruby-debug
