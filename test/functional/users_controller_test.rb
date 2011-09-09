@@ -325,7 +325,7 @@ class UsersControllerTest < ActionController::TestCase
 
         context "as the user changing their own details" do
           setup do
-            @user = User.make
+            @user = User.make(:login => "foo")
             login_as(@user)
           end
 

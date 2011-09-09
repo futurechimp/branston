@@ -43,17 +43,19 @@ class ProjectsControllerTest < ActionController::TestCase
 	  context 'GET to index as a participating user' do
 		  setup do
 		    3.times do
-		      iteration = Iteration.make
-		      iteration.geeks << @client
-		      @project.iterations << iteration
+		      @project = Project.make
+		      @project.participants << @client
 		    end
+		    
+		    @unproject = Project.make
 		
 		    login_as(@client)
 		    get :index
 		  end
 		
 		  should "not show projects where the current user is not a participant" do
-		    assert_equal 1, assigns(:projects).size
+		    assert_equal 3, assigns(:projects).size
+		    assert !assigns(:projects).include?(@unproject)
 		  end
 		end
 

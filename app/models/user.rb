@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   validates_inclusion_of    :role,     :in => ROLES
 
   has_many :participations
-  has_many :iterations, :through => :participations
+  has_many :projects, :through => :participations
   has_many :stories, :foreign_key => 'author_id'
 
   # HACK HACK HACK -- how to do attr_accessible from here?

@@ -7,8 +7,6 @@ class IterationTest < ActiveSupport::TestCase
   should validate_numericality_of :velocity
 
   should have_many :stories
-  should have_many(:geeks).through(:participations)
-  should have_many :participations
   should belong_to :release
 
   context "An Iterations's burndown data method" do

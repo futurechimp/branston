@@ -4,6 +4,8 @@ class ProjectTest < ActiveSupport::TestCase
 
   context "The Project model" do
 
+    should have_many :participations
+    should have_many(:participants).through(:participations)
   	setup do
   		@project = Project.make
   	end

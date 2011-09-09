@@ -15,7 +15,6 @@
 class Participation < ActiveRecord::Base
 
   belongs_to :user
-  belongs_to :iteration
+  belongs_to :project
 
 end
-

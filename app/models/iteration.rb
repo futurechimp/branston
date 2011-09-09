@@ -25,8 +25,6 @@ class Iteration < ActiveRecord::Base
   # Associations
   #
   has_many :stories
-  has_many :participations
-  has_many :geeks, :through => :participations, :source => :user
   belongs_to :release
   belongs_to :project
 

@@ -3,8 +3,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 class UserTest < ActiveSupport::TestCase
 
   should have_many :stories
-  should have_many(:iterations).through(:participations)
   should have_many :participations
+  should have_many(:projects).through(:participations)
 
   context "the User class" do
 
