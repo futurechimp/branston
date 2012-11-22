@@ -28,17 +28,24 @@
 	</p>
 
 	<% if current_user.has_role?("admin") -%>
-	  <hr/>
 	  <p>
 	    <%= label_tag 'Role' %>
 	    <%= f.select :role, ["admin", "client", "developer"] %>
 	  </p>
-	  <p>
-	    <%= label_tag 'Project Access' %>
-	      <% Iteration.all.each_with_index do |iteration, index| -%>
-	        <%= check_box_tag "user[participations][][iteration]", iteration.to_param, @user.participant?(iteration) %>
-	        &nbsp;<%= iteration.name %>&nbsp;(<%= iteration.project.name %>)<br/>
+	  <hr/>
+	  <h2>Project access</h2>
+
+	  <% @projects.each do |project| %>
+	  	<h3><%= project.name %></h3>
+		  <ul>
+	      <% project.iterations.each_with_index do |iteration, index| -%>
+	        <li>
+	        	<%= check_box_tag "user[participations][][iteration]",
+	        				iteration.to_param, @user.participant?(iteration) %>
+	        	<%= iteration.name %>
+	        </li>
 	      <% end -%>
-	  </p>
+		  </ul>
+	  <% end %>
 	<% end -%>
 </div>

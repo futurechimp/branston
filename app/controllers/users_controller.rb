@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @projects = Project.all
   end
 
   def create
@@ -38,12 +39,14 @@ class UsersController < ApplicationController
       flash[:notice] = "User created."
     else
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
+      @projects = Project.all
       render :action => 'new'
     end
   end
 
   def edit
     @user = User.find(params[:id])
+    @projects = Project.all
   end
 
   def update
@@ -52,6 +55,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(params[:user])
       redirect_to users_path
     else
+      @projects = Project.all
       render :action => 'edit'
     end
   end
