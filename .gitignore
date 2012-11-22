@@ -12,3 +12,5 @@ tmp
 pkg
 lib/branston/log/*.log
 
+
+.rvmrc
