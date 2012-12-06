@@ -1,6 +1,19 @@
 module UsersHelper
 
+  # Creates a link if the current_user's role is included in the given roles.
   #
+  # @param [String] text - Text to display in the link
+  # @param [String] path - The path/url of the link
+  # @param [Array] roles - The roles allowed to view the link
+  # @return [String] - A formatted link
+  #
+  # Example:
+  #   slink_to('Users', users_path, "admin")
+  #
+  def slink_to(text, path, *roles)
+    link_to('Users', users_path) if roles.include?(current_user.role)
+  end
+
   # Use this to wrap view elements that the user can't access.
   # !! Note: this is an *interface*, not *security* feature !!
   # You need to do all access control at the controller level.
@@ -89,5 +102,4 @@ module UsersHelper
       link_to_login_with_IP content_text, options
     end
   end
-
 end

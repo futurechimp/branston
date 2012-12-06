@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   before_filter :login_required
   before_filter :find_user, :only => [:suspend, :destroy, :activate]
-  before_filter :must_be_admin, :only => [:new, :create, :destroy, :suspend, :activate]
+  before_filter :must_be_admin, :only => [:index, :new, :create, :destroy, :suspend, :activate]
   before_filter :must_be_admin_or_self, :only => [:edit, :update]
   before_filter :capture_participations, :only => [:create, :update]
 
@@ -90,7 +90,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     unless current_user.has_role?("admin") || current_user == user
       flash[:error] = "You are not allowed to do that."
-      redirect_to users_path
+      redirect_to projects_path
     end
   end
 
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
   def must_be_admin
     unless current_user.has_role?("admin")
       flash[:error] = "You are not allowed to do that."
-      redirect_to users_path
+      redirect_to projects_path
     end
   end
 
@@ -119,5 +119,4 @@ class UsersController < ApplicationController
       end
     end
   end
-
 end

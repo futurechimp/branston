@@ -57,12 +57,24 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       context "on GET to index" do
-        setup do
-          get :index
+        context "as an admin user" do
+          setup do
+            @admin = User.make(:admin)
+            login_as(@admin)
+            get :index
+          end
+          should respond_with :success
+          should render_template :index
+          should assign_to :users
         end
-        should respond_with :success
-        should render_template :index
-        should assign_to :users
+
+        context "as a non-admin user" do
+          setup do
+            get :index
+          end
+          should redirect_to("the projects page") { projects_path }
+          should set_the_flash.to("You are not allowed to do that.")
+        end
       end
 
       context "on GET to new" do
@@ -77,10 +89,9 @@ class UsersControllerTest < ActionController::TestCase
 
         context "as a non-admin user" do
           setup do
-            login_as(User.make)
             get :new
           end
-          should redirect_to("the users page") { users_path }
+          should redirect_to("the projects page") { projects_path }
           should set_the_flash.to("You are not allowed to do that.")
         end
       end
@@ -175,12 +186,10 @@ class UsersControllerTest < ActionController::TestCase
 
         context "as a non-admin user" do
           setup do
-            @user = User.make
-            login_as(@user)
             post :create
           end
 
-          should redirect_to("the users page") { users_path }
+          should redirect_to("the projects page") { projects_path }
           should set_the_flash.to("You are not allowed to do that.")
         end
       end
@@ -191,7 +200,7 @@ class UsersControllerTest < ActionController::TestCase
             setup do
               post action, :id => User.make.id
             end
-            should redirect_to("the users page"){ users_path }
+            should redirect_to("the projects page") { projects_path }
             should set_the_flash.to("You are not allowed to do that.")
           end
         end
@@ -293,8 +302,8 @@ class UsersControllerTest < ActionController::TestCase
             get :edit, :id => @user.id
           end
           should_not assign_to :user
+          should redirect_to("the projects page") { projects_path }
           should set_the_flash.to "You are not allowed to do that."
-          should redirect_to("the users list") { users_path }
         end
       end
 
@@ -376,7 +385,8 @@ class UsersControllerTest < ActionController::TestCase
             put :update, :id => @user.id, :user => {:email => "foo", :role => "admin" }
             @user.reload
           end
-          should redirect_to("the users page") { users_path }
+
+          should redirect_to("the projects page") { projects_path }
           should set_the_flash.to "You are not allowed to do that."
           should "not allow the role change" do
             assert_not_equal("admin", @user.role)

@@ -1,7 +1,7 @@
 <!-- start #header -->
 <div id="header">
   <div id="logo">
-	  <h1><a href="#">Branston</a></h1>
+	  <h1><a href="/">Branston</a></h1>
 	  <p><em> Small chunk pickle</em></p>
   </div>
   <% if logged_in? -%>
@@ -13,20 +13,18 @@
   </div>
   <% end -%>
 	<div id="menu">
-		
 		<% if logged_in? -%>
-		<ul>
-		  <li <%= tab_on("projects") %>><%= link_to 'Projects', projects_path %></li>
-			<li <%= tab_on("users") %>><%= link_to 'Users', users_path %></li>
-		</ul>
-		<form method="get" action="">
-			<fieldset>
-			<input type="text" name="s" id="search-text" size="15" />
-			<input type="submit" id="search-submit" value="GO" />
-			</fieldset>
-		</form>
+  		<ul>
+  		  <li><%= link_to 'Projects', projects_path %></li>
+  			<li><%= slink_to 'Users', users_path, "admin" %></li>
+  		</ul>
+  		<!-- <form method="get" action="">
+  			<fieldset>
+  			<input type="text" name="s" id="search-text" size="15" />
+  			<input type="submit" id="search-submit" value="GO" />
+  			</fieldset>
+  		</form>-->
 		<% end -%>
 	</div>
-	<!-- end #menu -->
 </div>
 <!-- end #header -->
