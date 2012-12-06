@@ -1,6 +1,6 @@
 <div class="index-head">
   <h2>Releases</h2>
-  <%= link_to 'New release', new_release_path, :class => "add" %>
+  <%= link_to 'New release', new_release_path %>
 </div>
 
 <table class="index">
@@ -23,6 +23,7 @@
   </tr>
 <% end %>
 </table>
-<br />
-<%= link_to 'New release', new_release_path, :class => "add" if @releases.size > 10  %>
 
+<br />
+
+<%= link_to 'New release', new_release_path if @releases.size > 10  %>

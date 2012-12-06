@@ -9,7 +9,7 @@
 </div>
 
 <p>
-	<%= @total_assigned_points %>/<%= @iteration.velocity %> points assigned (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%) - 
+	<%= @total_assigned_points %>/<%= @iteration.velocity %> points assigned (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%) -
   <% case (@assignment_difference <=> 0)
   when -1 -%>
     Undersubscribed by <%= 0 - @assignment_difference%> points
@@ -20,7 +20,7 @@
   <% end -%>
 </p>
 
-<p><%= link_to 'New story', new_iteration_story_path(@iteration), :class => "add" %></p>
+<p><%= link_to 'New story', new_iteration_story_path(@iteration) %></p>
 
 <div id="columns">
 	<div id="completed-stories-bg" class="column-bg">
@@ -57,7 +57,7 @@
 					  <% end %>
 						<!-- Column three end -->
 					</div>
-				
+
 					<div id="completed-stories" class="column">
 						<!-- Column four start -->
 						<h3>Completed stories <%=points_label(@completed_stories)%></h3>

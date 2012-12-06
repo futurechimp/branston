@@ -23,11 +23,14 @@ class UsersController < ApplicationController
   before_filter :capture_participations, :only => [:create, :update]
 
   def index
+    @page_title = "Users"
     @users = User.find(:all)
   end
 
   def new
+    @page_title = "New User"
     @user = User.new
+    @user.password = @user.password_confirmation = nil
     @projects = Project.all
   end
 
@@ -47,6 +50,8 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @page_title = "Edit #{@user.login}"
+    @user.password = @user.password_confirmation = nil
     @projects = Project.all
   end
 
