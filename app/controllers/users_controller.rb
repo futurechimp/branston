@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   before_filter :find_user, :only => [:suspend, :destroy, :activate]
   before_filter :must_be_admin, :only => [:new, :create, :destroy, :suspend, :activate]
   before_filter :must_be_admin_or_self, :only => [:edit, :update]
-  before_filter :add_participations, :only => [:create, :update]
+  before_filter :capture_participations, :only => [:create, :update]
 
   def index
     @users = User.find(:all)
@@ -35,6 +35,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.role = params[:user][:role] if current_user.has_role?("admin")
     if @user && @user.valid? && @user.save!
+      add_participations(@user)
       redirect_to users_url
       flash[:notice] = "User created."
     else
@@ -53,6 +54,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.role = params[:user][:role] if current_user.has_role?("admin")
     if @user.update_attributes(params[:user])
+      add_participations(@user)
       redirect_to users_path
     else
       @projects = Project.all
@@ -101,13 +103,19 @@ class UsersController < ApplicationController
     end
   end
 
-  def add_participations
+  def capture_participations
     unless params[:user][:participations].nil?
+      @participations = params[:user][:participations]
+      params[:user].delete(:participations)
+    end
+  end
+
+  def add_participations(user)
+    if @participations
       # blow em away
-      Participation.find(:all,
-        :conditions => ["user_id = ?", params[:id]]).each { |p| p.destroy }
-      params[:user].delete(:participations).each do |participation|
-        Participation.create(:user_id => params[:id], :iteration_id => participation[:iteration])
+      Participation.find(:all, :conditions => ["user_id = ?", user.to_param]).each { |p| p.destroy }
+      @participations.each do |participation|
+        Participation.create(:user_id => user.to_param, :project_id => participation[:project])
       end
     end
   end

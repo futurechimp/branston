@@ -12,7 +12,6 @@ class UserTest < ActiveSupport::TestCase
       assert_equal(["admin", "developer", "client"], User::ROLES)
     end
 
-
     should "create_user" do
       assert_difference 'User.count' do
         user = User.make
@@ -87,7 +86,6 @@ class UserTest < ActiveSupport::TestCase
           should "set the user's state to 'activated'" do
             assert_equal("active", @user.state)
           end
-
         end
 
         context "from state :deleted" do
@@ -104,7 +102,6 @@ class UserTest < ActiveSupport::TestCase
           should "leave the user's state as 'deleted'" do
             assert_equal("deleted", @user.state)
           end
-
         end
       end
 
@@ -205,10 +202,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-
-
   context "A user called quentin" do
-
     setup do
       @quentin = User.make(:quentin)
     end
@@ -303,7 +297,6 @@ class UserTest < ActiveSupport::TestCase
       assert_not_nil @quentin.remember_token_expires_at
       assert @quentin.remember_token_expires_at.between?(before, after)
     end
-
   end
 end
 

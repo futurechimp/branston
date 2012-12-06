@@ -99,10 +99,10 @@ class User < ActiveRecord::Base
     login
   end
 
-  def participant?(iteration)
+  def participant?(project)
     is_participant = false
     participations.each do |participation|
-      if iteration.to_param == participation.iteration.to_param
+      if project.to_param == participation.project.to_param
         is_participant = true
         break
       end

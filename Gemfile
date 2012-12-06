@@ -23,6 +23,7 @@ group :test do
   gem 'mocha'
 # gem 'relevance-rcov'
   gem 'json'
+  gem 'redgreen'
   gem 'ruby-prof'
   gem 'ruby-debug'
   gem 'phocus'

@@ -14,3 +14,5 @@ lib/branston/log/*.log
 
 
 .rvmrc
+
+config/database.yml

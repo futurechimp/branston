@@ -7,45 +7,41 @@
 -%>
 
 <div class="form">
-	<p>
-	  <%= label_tag 'Login' %>
-	  <%= f.text_field :login %>
-	</p>
+  <p>
+    <%= label_tag 'Login' %>
+    <%= f.text_field :login %>
+  </p>
 
-	<p>
-	  <%= label_tag 'Email' %>
-	  <%= f.text_field :email %>
-	</p>
+  <p>
+    <%= label_tag 'Email' %>
+    <%= f.text_field :email %>
+  </p>
 
-	<p>
-	  <%= label_tag 'Password' %>
-	  <%= f.password_field :password %>
-	</p>
+  <p>
+    <%= label_tag 'Password' %>
+    <%= f.password_field :password %>
+  </p>
 
-	<p>
-	  <%= label_tag 'password_confirmation', 'Confirm' %>
-	  <%= f.password_field :password_confirmation %>
-	</p>
+  <p>
+    <%= label_tag 'password_confirmation', 'Confirm' %>
+    <%= f.password_field :password_confirmation %>
+  </p>
 
-	<% if current_user.has_role?("admin") -%>
-	  <p>
-	    <%= label_tag 'Role' %>
-	    <%= f.select :role, ["admin", "client", "developer"] %>
-	  </p>
-	  <hr/>
-	  <h2>Project access</h2>
-
-	  <% @projects.each do |project| %>
-	  	<h3><%= project.name %></h3>
-		  <ul>
-	      <% project.iterations.each_with_index do |iteration, index| -%>
-	        <li>
-	        	<%= check_box_tag "user[participations][][iteration]",
-	        				iteration.to_param, @user.participant?(iteration) %>
-	        	<%= iteration.name %>
-	        </li>
-	      <% end -%>
-		  </ul>
-	  <% end %>
-	<% end -%>
+  <% if current_user.has_role?("admin") -%>
+    <p>
+      <%= label_tag 'Role' %>
+      <%= f.select :role, ["admin", "client", "developer"] %>
+    </p>
+    <hr/>
+    <h2>Project access</h2>
+    <ul>
+      <% @projects.each_with_index do |project, index| %>
+        <li>
+          <%= check_box_tag "user[participations][][project]",
+                project.to_param, @user.participant?(project) %>
+          <%= project.name %>
+        </li>
+      <% end %>
+    </ul>
+  <% end -%>
 </div>

@@ -74,6 +74,7 @@ class UsersControllerTest < ActionController::TestCase
           end
           should respond_with :success
         end
+
         context "as a non-admin user" do
           setup do
             login_as(User.make)
@@ -92,14 +93,21 @@ class UsersControllerTest < ActionController::TestCase
           end
           context "with all parameters" do
             setup do
+              @project = Project.make
+
               assert_difference 'User.count' do
-                create_user(:role => "admin")
+                create_user(:role => "admin", :participations => [{:project => @project.to_param}])
               end
             end
 
             should redirect_to("the users page"){ users_path }
+
             should "set the user to be an admin" do
               assert assigns(:user).has_role?("admin")
+            end
+
+            should "create a project participation" do
+              assert assigns(:user).participant?(@project)
             end
           end
 
@@ -294,12 +302,14 @@ class UsersControllerTest < ActionController::TestCase
         context "as an admin user" do
           setup do
             @user = User.make
+            @project = Project.make
             @admin = User.make(:admin)
             login_as(@admin)
           end
+
           context "with good params" do
             setup do
-              put :update, :id => @user.id, :user => {:email => "foo@superfoo.org", :role => "admin" }
+              put :update, :id => @user.id, :user => {:email => "foo@superfoo.org", :role => "admin",  :participations => [{:project => @project.to_param}] }
             end
             should redirect_to("the users list") { users_path }
             should assign_to :user
@@ -311,6 +321,10 @@ class UsersControllerTest < ActionController::TestCase
             end
             should "allow the role change" do
               assert_equal true, assigns(:user).has_role?("admin")
+            end
+
+            should "create a project participation" do
+              assert assigns(:user).participant?(@project)
             end
           end
 

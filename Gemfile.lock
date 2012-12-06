@@ -44,6 +44,7 @@ GEM
       rake (>= 0.8.3)
     rake (0.8.7)
     rcov (0.9.9)
+    redgreen (1.2.2)
     ruby-debug (0.10.4)
       columnize (>= 0.1)
       ruby-debug-base (~> 0.10.4.0)
@@ -74,6 +75,7 @@ DEPENDENCIES
   phocus
   rails (~> 2.3.5)
   rcov
+  redgreen
   ruby-debug
   ruby-prof
   shoulda
