@@ -66,8 +66,8 @@ hr{margin:0 0 15px;}
 .table tr.even {background:#eee;}
 .table tr.odd {background:#fff;}
 .table td {padding:4px;}
-.table td.action{width:20px;}
-
+.table td.actions{width:20px;white-space:nowrap;text-align:right;}
+.table td.actions a{margin-left:5px;}
 /* .form */
 .form{}
 .form p{overflow:hidden;}

@@ -20,7 +20,7 @@
   <% end -%>
 </p>
 
-<p><%= link_to 'New story', new_iteration_story_path(@iteration) %></p>
+<p><%= slink_to 'New story', new_iteration_story_path(@iteration), {}, "admin" %></p>
 
 <div id="columns">
 	<div id="completed-stories-bg" class="column-bg">
@@ -31,7 +31,9 @@
 						<!-- Column one start -->
 						<h3>New stories <%=points_label(@backlog_stories)%></h3>
 						  <% if @backlog_stories.empty? %>
-								<p>There are currently no stories for this iteration, <%=link_to "add story", new_iteration_story_path(@iteration) %></p>
+								<p>
+									There are currently no stories for this iteration. <%= slink_to "add story", new_iteration_story_path(@iteration), {}, "admin" %>
+								</p>
 						  <% else %>
 						    <% @backlog_stories.each do |story| %>
 						      <%= render :partial => "story", :locals => { :story => story } %>

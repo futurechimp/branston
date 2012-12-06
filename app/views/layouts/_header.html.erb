@@ -16,7 +16,7 @@
 		<% if logged_in? -%>
   		<ul>
   		  <li><%= link_to 'Projects', projects_path %></li>
-  			<li><%= slink_to 'Users', users_path, "admin" %></li>
+  			<li><%= slink_to 'Users', users_path, {}, "admin" %></li>
   		</ul>
   		<!-- <form method="get" action="">
   			<fieldset>

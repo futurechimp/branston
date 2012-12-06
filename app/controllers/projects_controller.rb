@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
-  
+
   before_filter :login_required
-  
+
   layout 'main'
 
   def index
@@ -11,20 +11,21 @@ class ProjectsController < ApplicationController
       else
         @projects = Project.all
       end
-    
+
       respond_to do |format|
         format.html
         format.xml  { render :xml => @projects }
       end
     else
-      redirect_to '/sessions/new' 
+      redirect_to '/sessions/new'
     end
   end
 
   def show
     @project = Project.find(params[:id])
+    @page_title = @project.name
 		@iterations = Iteration.find(:all, :conditions => ["project_id = ?", params[:id]])
-		
+
     respond_to do |format|
       format.html
       format.xml  { render :xml => @project }

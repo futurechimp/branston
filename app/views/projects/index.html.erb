@@ -3,7 +3,7 @@
 
 <div id="actions">
 	<ul>
-		<li><%= slink_to 'New Project', new_project_path, "admin" %></li>
+		<li><%= slink_to 'New Project', new_project_path, {}, "admin" %></li>
 	</ul>
 </div>
 
@@ -11,14 +11,15 @@
   <tr>
     <th>&nbsp;</th>
 		<th>&nbsp;</th>
-		<th>&nbsp;</th>
   </tr>
 
   <% for project in @projects %>
   <tr class="<%=cycle('odd','even')%>">
     <td><%= link_to project.name, project, :title => project.description %></td>
-    <td class="action"><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td class="action"><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td class="actions">
+      <%= slink_to 'Edit', edit_project_path(project), {}, "admin" %>
+      <%= slink_to 'Destroy', project, { :confirm => 'Are you sure?', :method => :delete }, "admin" %>
+    </td>
   </tr>
   <% end %>
 </table>

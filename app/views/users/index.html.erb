@@ -10,20 +10,17 @@
   <tr>
     <th>&nbsp;</th>
 		<th>&nbsp;</th>
-		<th>&nbsp;</th>
   </tr>
 
   <% for user in @users %>
   <tr class="<%=cycle('odd','even')%>">
     <td><%= link_to user.login, edit_user_path(user) %></td>
-    <td class="action">
+    <td class="actions">
 			<% if user.state == "active" -%>
 		  	activate
 			<% else %>
 			  <%= link_to 'activate', activate_user_path(user) %>
 			<% end -%>
-		</td>
-    <td class="action">
 			<% if user.state == "pending" || user.state == "suspended" -%>
 			  suspend
 			<% else -%>
