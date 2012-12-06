@@ -10,8 +10,8 @@ module UsersHelper
   # Example:
   #   slink_to('Users', users_path, "admin")
   #
-  def slink_to(text, path, *roles)
-    link_to('Users', users_path) if roles.include?(current_user.role)
+  def slink_to(text, path, roles)
+    link_to(text, path) if roles.include?(current_user.role)
   end
 
   # Use this to wrap view elements that the user can't access.
