@@ -117,8 +117,9 @@ class UsersController < ApplicationController
 
   def add_participations(user)
     if @participations
-      # blow em away
+      # Blow em away
       Participation.find(:all, :conditions => ["user_id = ?", user.to_param]).each { |p| p.destroy }
+      # Now re-add them.
       @participations.each do |participation|
         Participation.create(:user_id => user.to_param, :project_id => participation[:project])
       end
