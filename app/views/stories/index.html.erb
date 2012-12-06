@@ -20,7 +20,10 @@
   <% end -%>
 </p>
 
-<p><%= slink_to 'New story', new_iteration_story_path(@iteration), {}, "admin" %></p>
+<% if current_user.has_role?("admin") %>
+	<p><%= link_to 'New story', new_iteration_story_path(@iteration) %></p>
+<% end %>
+
 
 <div id="columns">
 	<div id="completed-stories-bg" class="column-bg">
@@ -32,7 +35,8 @@
 						<h3>New stories <%=points_label(@backlog_stories)%></h3>
 						  <% if @backlog_stories.empty? %>
 								<p>
-									There are currently no stories for this iteration. <%= slink_to "add story", new_iteration_story_path(@iteration), {}, "admin" %>
+									There are currently no stories for this iteration.
+									<%= link_to_unless current_user.has_role?("admin"), "add story", new_iteration_story_path(@iteration) %>
 								</p>
 						  <% else %>
 						    <% @backlog_stories.each do |story| %>

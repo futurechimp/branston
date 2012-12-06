@@ -3,7 +3,9 @@
 
 <div id="actions">
 	<ul>
-		<li><%= slink_to 'New Project', new_project_path, {}, "admin" %></li>
+    <% if current_user.has_role?("admin") %>
+      <li><%= link_to 'New Project', new_project_path %></li>
+    <% end %>
 	</ul>
 </div>
 
@@ -17,8 +19,8 @@
   <tr class="<%=cycle('odd','even')%>">
     <td><%= link_to project.name, project, :title => project.description %></td>
     <td class="actions">
-      <%= slink_to 'Edit', edit_project_path(project), {}, "admin" %>
-      <%= slink_to 'Destroy', project, { :confirm => 'Are you sure?', :method => :delete }, "admin" %>
+      <%= link_to_unless current_user.has_role?("admin"), 'Edit', edit_project_path(project) %>
+      <%= link_to_unless current_user.has_role?("admin"), 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %>
     </td>
   </tr>
   <% end %>
