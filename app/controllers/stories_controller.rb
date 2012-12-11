@@ -127,7 +127,7 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if @story.update_attributes(params[:story])
         flash[:notice] = 'Story was successfully updated.'
-        format.html { redirect_to iteration_story_path(@iteration, @story) }
+        format.html { redirect_to iteration_stories_path(@iteration) }
         format.xml  { head :ok }
         format.js { redirect_to iteration_stories_path(@iteration) }
       else

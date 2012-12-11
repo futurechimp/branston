@@ -138,7 +138,7 @@ class StoriesControllerTest < ActionController::TestCase
         end
       end
 
-      context "updating a story" do				
+      context "updating a story" do
         context "with valid parameters" do
           setup do
             assert_no_difference("Story.count") do
@@ -152,7 +152,7 @@ class StoriesControllerTest < ActionController::TestCase
 					end
 
           should "redirect to show" do
-            assert_redirected_to iteration_story_path(@iteration, @story)
+            assert_redirected_to iteration_stories_path(@iteration)
           end
 
           context "with story status set to 'in_progress'" do

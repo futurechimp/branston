@@ -35,24 +35,38 @@ branston.forms = (function(){
 			} catch(e) {
 				alert("numericOnly exception: " + e);
 			}
+		},
+
+		selectChange: function(element) {
+			if (element.options[element.options.selectedIndex].value != ""){
+				element.form.submit();
+			}
+			return false;
 		}
 	}
-});
+})();
 
 branston.stories = (function(){
 
 	return{
 		init: function(){
 			$(".thumbnail .caption").each(function(){
-				$caption = $(this);
-		    $caption.find("h3").bind("click", function(e){
+				var $caption = $(this);
+				var $heading = $caption.find("h3");
+		    $heading.wrapContentsWith("<a>", {"href":"#"});
+		    $heading.find("a").bind("click", function(e){
 		    	e.preventDefault();
 		      $caption.find(".details").toggleClass("hidden");
+		  	});
+
+		  	var $statusSelect = $caption.find("select.status");
+		  	$statusSelect.bind("change", function(e){
+		    	branston.forms.selectChange(this);
 		  	});
 		  });
 		}
 	}
-});
+})();
 
 $(function() {
 	if($(".thumbnail .caption").exists()){

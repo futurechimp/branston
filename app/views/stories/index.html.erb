@@ -38,7 +38,7 @@
 <div class="row">
   <div class="span3">
     <h3>New <br /><%=points_label(@backlog_stories)%></h3>
-    <% if @backlog_stories.empty? %>
+    <% if @iteration.stories.empty? %>
       <p>
         There are currently no stories for this iteration.
         <%= link_to "Add a add story", new_iteration_story_path(@iteration) if current_user.has_role?("admin") %>

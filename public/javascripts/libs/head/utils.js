@@ -51,3 +51,22 @@
     return results[1] || 0;
   };
 })(jQuery);
+
+/**
+* jQuery function to wrap an element's inner content with an another tag
+*
+* @param [String] tag
+*   The tag to use
+*
+* @param [String] options
+*   Options for the tag
+*
+* @example
+*   $.fn.wrapContentsWith("a", {"href":"#"})
+*/
+(function($){
+  $.fn.wrapContentsWith = function(tag, options){
+    var contents = this.html();
+    this.html($(tag, options).html(contents));
+  };
+})(jQuery);

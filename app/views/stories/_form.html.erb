@@ -1,33 +1,50 @@
 <%= error_messages_for :object => @story,
   :header_tag => 'h3',
   :id => "errors",
-  :class => "errors",
-  :header_message => "Whoops!",
-  :message => "We had some problems saving this story."
+  :class => "alert alert-error",
+  :header_message => "",
+  :message => "We had some problems saving this story"
 -%>
-<div class="form">
-	<p>
-	  <%= f.label :title %>
-	  <%= f.text_field :title %>
-	</p>
-	<p>
-	  <%= f.label :description %>
-	  <%= f.text_area :description, :rows => 5 %>
-	</p>
-	<% unless params[:action] = "new" %>
-	<p>
-	  <%= f.label :status %>
-	  <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'] %>
-	</p>
-	<% end %>
-	<p>
-	  <%= f.label :points %>
-	  <%= f.select :points, (1..10).to_a %>
-	</p>
-	<% unless params[:action] = "new" %>
-	  <p>
-	    <%= f.label :iteration %>
-	    <%= f.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]}.insert(0,["Not Assigned",'']) %>
-	  </p>
-	<% end %>
+
+<div class="control-group">
+  <%= form.label :title, nil, :class => "control-label" %>
+  <div class="controls">
+    <%= form.text_field :title, :class => "input-xxlarge" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= form.label :points, nil, :class => "control-label" %>
+  <div class="controls">
+    <%= form.select :points, (1..10).to_a %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= form.label :description, nil, :class => "control-label" %>
+  <div class="controls">
+    <%= form.text_area :description, :rows => 5, :class => "input-xxlarge" %>
+  </div>
+</div>
+
+<% unless @story.new_record? %>
+  <div class="control-group">
+    <%= form.label :status, nil, :class => "control-label" %>
+    <div class="controls">
+      <%= form.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'].map {
+            |s| [s.capitalize.gsub('_', ' '), s]}, {} %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= form.label :iteration, nil, :class => "control-label" %>
+    <div class="controls">
+      <%= form.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]} %>
+    </div>
+  </div>
+<% end %>
+
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="button" class="btn" onclick="window.location='<%= iteration_stories_path(@iteration) %>';">Cancel</button>
 </div>

@@ -1,14 +1,29 @@
-<% @page_title = "New Story" %>
-<h2><%=h @page_title %></h2>
+<%
+  @page_title = "New Story"
+%>
 
-<div id="actions">
-	<ul>
-		<li><%= link_to 'Back', iteration_stories_path(@iteration) %></li>
-	</ul>
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li><a href="<%= projects_path %>">Projects</a> <span class="divider">/</span></li>
+      <li><a href="<%= project_path(@iteration.project) %>"><%= @iteration.project.name %></a> <span class="divider">/</span></li>
+      <li><a href="<%= iteration_stories_path(@iteration) %>">Stories for iteration '<%= @iteration.name %>'</a> <span class="divider">/</span></li>
+      <li class="active"><%= @page_title %></li>
+    </ul>
+  </div>
 </div>
 
-<% form_for @story, :url => iteration_stories_path(@iteration) do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
-  <p><%= f.submit 'Create' %></p>
-<% end %>
+<div class="row heading">
+  <div class="span12">
+    <h1 class="muted"><%=h @page_title %></h1>
+  </div>
+</div>
 
+<div class="row">
+  <div class="span12">
+    <% form_for @story, :url => iteration_stories_path(@iteration),
+        :html => { :class => "form-horizontal" } do |form| %>
+      <%= render :partial => 'form', :locals => {:form => form} %>
+    <% end %>
+  </div>
+</div>

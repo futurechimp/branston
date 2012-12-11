@@ -1,6 +1,6 @@
-<div id="<%= element_id(@scenario) %>" class="scenario">
-	<% if @scenario.created_at.nil? -%>
-		<% remote_form_for :scenario, @scenario, :url => iteration_story_scenarios_path(@iteration, @story) do |f| -%>
+<!-- <div id="<%= element_id(scenario) %>" class="scenario">
+	<% if scenario.created_at.nil? -%>
+		<% remote_form_for :scenario, scenario, :url => iteration_story_scenarios_path(@iteration, @story) do |f| -%>
 			<p>
 				<%= f.text_area :title, :value => "Add a scenario description here.", :rows => 5 %>
 				<%= f.submit 'Save' %>
@@ -9,19 +9,18 @@
 	<% else -%>
 		<h5>
 			<%= in_place_editor_field 'scenario', 'title' %>
-			<%= link_to_remote "Delete", {:url => iteration_story_scenario_path(@iteration, @story,@scenario),
+			<%= link_to_remote "Delete", {:url => iteration_story_scenario_path(@iteration, @story,scenario),
 				:confirm => 'Delete this scenario?', :method => :delete} %>
 		</h5>
 
-		<div id="<%= element_id(@scenario, 'preconditions') %>" class="preconditions">
-				<% @preconditions = @scenario.preconditions %>
+		<div id="<%= element_id(scenario, 'preconditions') %>" class="preconditions">
+				<% @preconditions = scenario.preconditions %>
 				<%= render :partial => "preconditions/preconditions" %>
 		</div>
 
-		<div id="<%= element_id(@scenario, 'outcomes') %>" class="outcomes">
-			<% @outcomes = @scenario.outcomes %>
+		<div id="<%= element_id(scenario, 'outcomes') %>" class="outcomes">
+			<% @outcomes = scenario.outcomes %>
 			<%= render :partial => "outcomes/outcomes" %>
 		</div>
 	<% end -%>
-</div>
-
+</div>-->

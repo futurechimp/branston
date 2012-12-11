@@ -1,14 +1,29 @@
-<h2>Editing story</h2>
+<%
+  @page_title = "Edit '#{@story.title}'"
+%>
 
-<div id="actions">
-	<ul>
-		<li><%= link_to 'Back', iteration_stories_path(@iteration) %></li>
-		<li><%= link_to 'Show', iteration_story_path(@iteration, @story) %></li>
-	</ul>
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li><a href="<%= projects_path %>">Projects</a> <span class="divider">/</span></li>
+      <li><a href="<%= project_path(@iteration.project) %>"><%= @iteration.project.name %></a> <span class="divider">/</span></li>
+      <li><a href="<%= iteration_stories_path(@iteration) %>">Stories for iteration '<%= @iteration.name %>'</a> <span class="divider">/</span></li>
+      <li class="active"><%= @page_title %></li>
+    </ul>
+  </div>
 </div>
 
-<% form_for @story, :url => iteration_story_path(@iteration, @story) do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
-  <p><%= f.submit 'Update' %></p>
-<% end %>
+<div class="row heading">
+  <div class="span12">
+    <h1 class="muted"><%=h @page_title %></h1>
+  </div>
+</div>
 
+<div class="row">
+  <div class="span12">
+    <% form_for @story, :url => iteration_story_path(@iteration, @story),
+        :html => { :class => "form-horizontal"} do |form| %>
+      <%= render :partial => 'form', :locals => {:form => form} %>
+    <% end %>
+  </div>
+</div>

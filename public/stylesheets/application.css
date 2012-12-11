@@ -11,10 +11,19 @@
 
 h1, h2, h3, h4, h5, h6{
   margin:0;
+}
+
+h1, h2{
   padding-bottom:25px;
 }
 
-.thumbnail .form-actions{
+h3, h4, h5, h6{
+  padding-bottom:10px;
+}
+
+.thumbnail form,
+.thumbnail .form-actions,
+select.status{
   margin-bottom:0;
 }
 
