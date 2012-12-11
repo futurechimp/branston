@@ -129,7 +129,6 @@ class StoriesController < ApplicationController
         flash[:notice] = 'Story was successfully updated.'
         format.html { redirect_to iteration_stories_path(@iteration) }
         format.xml  { head :ok }
-        format.js { redirect_to iteration_stories_path(@iteration) }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
