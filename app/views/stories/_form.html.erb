@@ -7,42 +7,61 @@
 -%>
 
 <div class="control-group">
-  <%= form.label :title, nil, :class => "control-label" %>
+  <%= f.label :title, nil, :class => "control-label" %>
   <div class="controls">
-    <%= form.text_field :title, :class => "input-xxlarge" %>
+    <%= f.text_field :title, :class => "input-xxlarge" %>
   </div>
 </div>
 
 <div class="control-group">
-  <%= form.label :points, nil, :class => "control-label" %>
+  <%= f.label :points, nil, :class => "control-label" %>
   <div class="controls">
-    <%= form.select :points, (1..10).to_a %>
+    <%= f.select :points, (1..10).to_a %>
   </div>
 </div>
 
 <div class="control-group">
-  <%= form.label :description, nil, :class => "control-label" %>
+  <%= f.label :description, nil, :class => "control-label" %>
   <div class="controls">
-    <%= form.text_area :description, :rows => 5, :class => "input-xxlarge" %>
+    <%= f.text_area :description, :rows => 5, :class => "input-xxlarge" %>
   </div>
 </div>
 
 <% unless @story.new_record? %>
   <div class="control-group">
-    <%= form.label :status, nil, :class => "control-label" %>
+    <%= f.label :status, nil, :class => "control-label" %>
     <div class="controls">
-      <%= form.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'].map {
+      <%= f.select :status, ['new', 'in_progress', 'quality_assurance', 'completed'].map {
             |s| [s.capitalize.gsub('_', ' '), s]}, {} %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= form.label :iteration, nil, :class => "control-label" %>
+    <%= f.label :iteration, nil, :class => "control-label" %>
     <div class="controls">
-      <%= form.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]} %>
+      <%= f.select :iteration_id, @iterations.map {|iteration| [iteration.name, iteration.id]} %>
     </div>
   </div>
 <% end %>
+
+<hr />
+
+<div class="row heading">
+  <div class="span12">
+    <h2>
+      Scenarios
+      <% if current_user.has_role?("admin") %>
+        <%= add_form_object(f, Scenario, "btn btn-primary") %>
+      <% end %>
+    </h2>
+
+    <div class="scenarios">
+      <% f.fields_for :scenarios do |nested| -%>
+          <%= render :partial => 'scenarios/form', :locals => { :f => nested } -%>
+      <% end -%>
+    </div>
+  </div>
+</div>
 
 <div class="form-actions">
   <button type="submit" class="btn btn-primary">Save</button>

@@ -27,6 +27,10 @@ select.status{
   margin-bottom:0;
 }
 
+.thumbnail{
+  margin:0 0 20px;
+}
+
 /*
 
  */
@@ -38,6 +42,10 @@ select.status{
 
 .heading{
   padding-bottom:10px;
+}
+
+.stories{
+  padding-bottom:25px;
 }
 
 .hidden{

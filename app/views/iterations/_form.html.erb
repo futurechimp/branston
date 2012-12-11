@@ -7,30 +7,30 @@
 -%>
 
 <div class="control-group">
-  <%= form.label :name, nil, :class => "control-label" %>
+  <%= f.label :name, nil, :class => "control-label" %>
   <div class="controls">
-	  <%= form.text_field :name, :class => "input-xxlarge" %>
+	  <%= f.text_field :name, :class => "input-xxlarge" %>
   </div>
 </div>
 
 <div class="control-group">
-  <%= form.label :velocity, nil, :class => "control-label" %>
+  <%= f.label :velocity, nil, :class => "control-label" %>
   <div class="controls">
-	  <%= form.text_field :velocity, :class => "input-xxlarge", :onkeypress => "return branston.forms.numericOnly(event);", :size => 4 %>
+	  <%= f.text_field :velocity, :class => "input-xxlarge", :onkeypress => "return branston.forms.numericOnly(event);", :size => 4 %>
   </div>
 </div>
 
 <div class="control-group">
-  <%= form.label :start_date, nil, :class => "control-label" %>
+  <%= f.label :start_date, nil, :class => "control-label" %>
   <div class="controls">
-	  <%= form.text_field :start_date, :class => "input-xxlarge" %> Add calendar select
+	  <%= f.text_field :start_date, :class => "input-xxlarge" %> Add calendar select
   </div>
 </div>
 
 <div class="control-group">
-  <%= form.label :end_date, nil, :class => "control-label" %>
+  <%= f.label :end_date, nil, :class => "control-label" %>
   <div class="controls">
-	  <%= form.text_field :end_date, :class => "input-xxlarge" %> Add calendar select
+	  <%= f.text_field :end_date, :class => "input-xxlarge" %> Add calendar select
   </div>
 </div>
 

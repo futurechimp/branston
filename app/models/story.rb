@@ -18,7 +18,7 @@ class Story < ActiveRecord::Base
 
   # Validations
   #
-  validates_presence_of :title, :description, :points 
+  validates_presence_of :title, :description, :points
   validates_uniqueness_of :title
 
   # Associations
@@ -26,6 +26,8 @@ class Story < ActiveRecord::Base
   belongs_to :iteration
   belongs_to :author, :class_name => "User", :foreign_key => "author_id"
   has_many :scenarios, :dependent => :destroy
+  accepts_nested_attributes_for :scenarios, :allow_destroy => true,
+    :reject_if => :all_blank
 
   # Named scopes
   #

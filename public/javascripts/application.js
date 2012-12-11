@@ -42,6 +42,20 @@ branston.forms = (function(){
 				element.form.submit();
 			}
 			return false;
+		},
+
+		// $(this).parent().next(\"#{append_to}\").append('#{escape_javascript(html)}');" #.replace(/NEW_RECORD/g, new Date().getTime()));"
+		addNewObject:function(e, html){
+			e.preventDefault();
+			var element = $(e.target);
+			if(e.target.tagName != "A"){
+				element = element.parent("a");
+			}
+			element.parent().next().append(html); //.replace(/NEW_RECORD/g, new Date().getTime()));"
+		},
+
+		removeNewObject: function(element){
+
 		}
 	}
 })();

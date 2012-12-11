@@ -17,8 +17,14 @@ class Scenario < ActiveRecord::Base
   # Assocations
   #
   belongs_to :story
-  has_many :outcomes, :dependent => :destroy
+
   has_many :preconditions, :dependent => :destroy
+  accepts_nested_attributes_for :preconditions, :allow_destroy => true,
+    :reject_if => :all_blank
+
+  has_many :outcomes, :dependent => :destroy
+  accepts_nested_attributes_for :outcomes, :allow_destroy => true,
+    :reject_if => :all_blank
 
   # Validations
   #

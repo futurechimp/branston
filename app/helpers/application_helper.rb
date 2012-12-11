@@ -67,5 +67,33 @@ module ApplicationHelper
     end
   end
 
+  def add_form_object(form_builder, klass, css_class)
+    text = klass.name
+    fields_for = text.tableize.to_sym
+    partial = "#{text.tableize}/form"
+    html = ""
+    form_builder.fields_for(fields_for, klass.new, :child_index => 'NEW_RECORD') do |form|
+      html = render(:partial => partial, :locals => { :f => form }).gsub!('NEW_RECORD', DateTime.now.to_s.gsub!(":","").gsub!("+",""))
+    end
+    # debugger
+    html = escape_javascript(h(html))
+    # html.gsub!('\\\\', '\\')
+    # html.gsub!('\\\\\\', '\\\\')
+
+    render :partial => "shared/add_form_object", :locals => {:html => html, :css_class => css_class}
+  end
+
+  # TODO: This is also due some loving and pulling out into JS.
+  def delete_item(form_builder, text, css_class)
+    text = "<i class=\"icon-minus icon-white\"></i> #{text}"
+    fieldset = "$(this).parent().parent().parent('fieldset')"
+    if form_builder.object.new_record?
+      link_to_function("#{text}", "#{fieldset}.remove()", :class => css_class)
+    else
+      form_builder.hidden_field(:_destroy) +
+      link_to_function("#{text}", "#{fieldset}.hide(); $(this).prev().val('1');", :class => css_class)
+    end
+  end
+
 end
 

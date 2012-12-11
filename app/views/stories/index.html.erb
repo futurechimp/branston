@@ -12,7 +12,7 @@
 
 <div class="row heading">
   <div class="span9">
-    <h1 class="muted"><%=h @page_title %></h1>
+    <h1><%=h @page_title %></h1>
     <p>
       <%= @total_assigned_points %>/<%= @iteration.velocity %> points assigned (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%) -
       <% case (@assignment_difference <=> 0)
@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row stories">
   <div class="span3">
     <h3>New <br /><%=points_label(@backlog_stories)%></h3>
     <% if @iteration.stories.empty? %>

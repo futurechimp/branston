@@ -13,7 +13,7 @@
 
 <div class="row heading">
   <div class="span12">
-    <h1 class="muted"><%=h @page_title %></h1>
+    <h1><%=h @page_title %></h1>
     <p><%= @project.description %></p>
     <hr/>
   </div>
@@ -21,7 +21,7 @@
 
 <div class="row heading">
   <div class="span9">
-    <h2 class="muted">Iterations</h2>
+    <h2>Iterations</h2>
   </div>
   <div class="span3">
     <% if current_user.has_role?("admin") %>
