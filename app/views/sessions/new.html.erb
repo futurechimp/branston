@@ -1,24 +1,51 @@
-<% @page_title = "Log In" %>
-<h2><%=h @page_title %></h2>
+<%
+  @page_title = "Log in"
+%>
 
-<% form_tag session_path do -%>
-	<div class="form">
-		<p>
-			<%= label_tag 'login' %>
-			<%= text_field_tag 'login', @login %>
-		</p>
+<div class="row heading">
+  <div class="span12">
+    <h1 class="muted"><%=h @page_title %></h1>
+  </div>
+</div>
 
-		<p>
-			<%= label_tag 'password' %>
-			<%= password_field_tag 'password', nil %>
-		</p>
+<div class="row">
+  <div class="span12">
+    <% form_tag session_path, :class => "form-horizontal" do -%>
 
-		<p>
-			<%= label_tag 'remember_me', 'Remember me' %>
-			<%= check_box_tag 'remember_me', '1', @remember_me %>
-		</p>
-	</div>
-	<p>
-		<%= submit_tag 'Log in' %>
-	</p>
-<% end -%>
+      <% if @error %>
+        <div id="errors" class="alert alert-error">
+          <p>We had a problem logging you in</p>
+          <ul>
+            <li><%= @error %></li>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="control-group">
+        <%= label_tag 'login', nil, :class => "control-label" %>
+        <div class="controls">
+          <%= text_field_tag 'login', @login, :class => "input-large" %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= label_tag 'password', nil, :class => "control-label" %>
+        <div class="controls">
+          <%= password_field_tag 'password', nil, :class => "input-large" %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox inline" for="remember_me">
+            <%= check_box_tag 'remember_me', '1', @remember_me %> Remember me
+          </label>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Log in</button>
+      </div>
+    <% end -%>
+  </div>
+</div>

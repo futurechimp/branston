@@ -1,42 +1,42 @@
-<% @page_title = "Burndown chart for  #{@iteration.name}" %>
-<h2><%=h @page_title %></h2>
+<% @page_title = "Burndown" %>
 
-<div id="actions">
-	<ul>
-		<li><%= link_to 'Back', project_path(@project) %></li>
-		<li><%= link_to 'Edit', edit_project_iteration_path(@project, @iteration) %></li>
-		<li><%=link_to 'Stories', iteration_stories_path(@iteration) %></li>
-	</ul>
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li><a href="<%= projects_path %>">Projects</a> <span class="divider">/</span></li>
+      <li><a href="<%= project_path(@iteration.project) %>"><%= @iteration.project.name %></a> <span class="divider">/</span></li>
+      <li class="active"><%= @page_title %></li>
+    </ul>
+  </div>
 </div>
 
-<%= render :partial => "iterations/burndown_chart", :locals => { :iteration => @iteration } %>
+<div class="row heading">
+  <div class="span12">
+    <h1 class="muted"><%=h @page_title %></h1>
+    <p>This is the current burndown chart for '<%= @iteration.name %>'.</p>
+  </div>
+</div>
 
-<h3>Iteration Stats</h3>
+<div class="row">
+  <div class="span12">
+    <%= render :partial => "iterations/burndown_chart", :locals => { :iteration => @iteration } %>
+ </div>
+</div>
 
-<p>
-  <strong>Velocity:</strong>
-  <%=h @iteration.velocity %>
-</p>
+<div class="row">
+  <div class="span12">
+    <p>
+      <strong>Velocity:</strong>
+      <%=h @iteration.velocity %>
+    </p>
+    <p>
+      <strong>Start date:</strong>
+      <%=h @iteration.start_date.strftime('%d/%m/%Y') unless @iteration.start_date.nil? %>
+    </p>
 
-<p>
-  <strong>Name:</strong>
-  <%=h @iteration.name %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%=h @iteration.start_date.strftime('%d/%m/%Y') unless @iteration.start_date.nil? %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%=h @iteration.end_date.strftime('%d/%m/%Y') unless @iteration.end_date.nil? %>
-</p>
-
-<!-- 
-TODO: Currently not showing releases as these need some reworking.
-<p>
-  <strong>Release:</strong>
-  <%=h @iteration.release.release_date if @iteration.release %>
-</p>
--->
+    <p>
+      <strong>End date:</strong>
+      <%=h @iteration.end_date.strftime('%d/%m/%Y') unless @iteration.end_date.nil? %>
+    </p>
+  </div>
+</div>

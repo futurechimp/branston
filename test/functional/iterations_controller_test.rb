@@ -89,8 +89,8 @@ class IterationsControllerTest < ActionController::TestCase
               assert assigns(:iteration).release.nil?
             end
 
-            should "redirect to show" do
-              assert_redirected_to project_iteration_path(@iteration.project, assigns(:iteration))
+            should "redirect to project show" do
+              assert_redirected_to project_path(@iteration.project)
             end
 
             context "including a release_id" do
@@ -133,8 +133,8 @@ class IterationsControllerTest < ActionController::TestCase
               end
             end
 
-            should "redirect to show" do
-              assert_redirected_to project_iteration_path(@iteration.project, assigns(:iteration))
+            should "redirect to project show" do
+              assert_redirected_to project_path(@iteration.project)
             end
 
             context "including a release_id" do

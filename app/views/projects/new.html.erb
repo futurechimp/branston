@@ -1,16 +1,26 @@
-<% @page_title = "New Project" %>
-<h2><%=h @page_title %></h2>
+<%
+  @page_title = "New Project"
+%>
 
-<div id="actions">
-	<ul>
-		<li><%= link_to 'Back', projects_path %></li>
-	</ul>
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li><a href="<%= projects_path %>">Projects</a> <span class="divider">/</span></li>
+      <li class="active"><%= @page_title %></li>
+    </ul>
+  </div>
 </div>
 
-<% form_for(@project) do |form| %>
-  <%= form.error_messages %>
-  <%= render :partial => 'form', :locals => {:form => form} %>
-  <p><%= form.submit 'Create' %></p>
-<% end %>
+<div class="row heading">
+  <div class="span12">
+    <h1 class="muted"><%=h @page_title %></h1>
+  </div>
+</div>
 
-
+<div class="row">
+  <div class="span12">
+    <% form_for(@project, :html => { :class => "form-horizontal"}) do |form| %>
+      <%= render :partial => 'form', :locals => {:form => form} %>
+    <% end %>
+  </div>
+</div>

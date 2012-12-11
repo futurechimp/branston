@@ -23,15 +23,13 @@ class UsersController < ApplicationController
   before_filter :capture_participations, :only => [:create, :update]
 
   def index
-    @page_title = "Users"
     @users = User.find(:all)
   end
 
   def new
-    @page_title = "New User"
     @user = User.new
     @user.password = @user.password_confirmation = nil
-    @projects = Project.all
+    @projects = Project.alphabetical
   end
 
   def create
@@ -43,16 +41,15 @@ class UsersController < ApplicationController
       flash[:notice] = "User created."
     else
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
-      @projects = Project.all
+      @projects = Project.alphabetical
       render :action => 'new'
     end
   end
 
   def edit
     @user = User.find(params[:id])
-    @page_title = "Edit #{@user.login}"
     @user.password = @user.password_confirmation = nil
-    @projects = Project.all
+    @projects = Project.alphabetical
   end
 
   def update
@@ -62,7 +59,7 @@ class UsersController < ApplicationController
       add_participations(@user)
       redirect_to users_path
     else
-      @projects = Project.all
+      @projects = Project.alphabetical
       render :action => 'edit'
     end
   end

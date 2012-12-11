@@ -1,0 +1,42 @@
+<!-- start .navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <% if logged_in? -%>
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+      <% end -%>
+      <a class="brand" href="/">Branston</a>
+      <% if logged_in? -%>
+        <!-- start .nav-collapse -->
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li<%= ' class="active"' if is_active?("projects", "stories") %>>
+              <%= link_to 'Projects', projects_path %>
+            </li>
+            <% if current_user.has_role?("admin") %>
+              <li<%= ' class="active"' if is_active?("users") %>>
+                <%= link_to 'Users', users_path %>
+              </li>
+            <% end %>
+          </ul>
+          <ul class="nav pull-right">
+            <li></li>
+            <li><%= link_to 'Log Out', logout_path, :title => "Logged in as #{current_user.login}" %></li>
+          </ul>
+          <!-- <form method="get" action="">
+            <fieldset>
+            <input type="text" name="s" id="search-text" size="15" />
+            <input type="submit" id="search-submit" value="GO" />
+            </fieldset>
+          </form>-->
+        </div>
+        <!-- end .nav-collapse -->
+      <% end -%>
+    </div>
+  </div>
+</div>
+<!-- end .navbar -->

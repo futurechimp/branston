@@ -1,18 +1,26 @@
 <%= error_messages_for :object => @project,
   :header_tag => 'h3',
   :id => "errors",
-  :class => "errors",
-  :header_message => "Whoops!",
-  :message => "We had some problems saving this project."
+  :class => "alert alert-error",
+  :header_message => "",
+  :message => "We had some problems saving this project"
 -%>
-<div class="form">
-	<p>
-	  <%= form.label :name %>
-	  <%= form.text_field :name %>
-	</p>
 
-	<p>
-	  <%= form.label :description %>
-	  <%= form.text_area :description, :rows => 5 %>
-	</p>
+<div class="control-group">
+  <%= form.label :name, nil, :class => "control-label" %>
+  <div class="controls">
+	  <%= form.text_field :name, :class => "input-xxlarge" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= form.label :description, nil, :class => "control-label" %>
+  <div class="controls">
+    <%= form.text_area :description, :rows => 5, :class => "input-xxlarge" %>
+  </div>
+</div>
+
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="button" class="btn" onclick="window.location='<%= projects_path %>';">Cancel</button>
 </div>

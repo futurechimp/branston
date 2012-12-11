@@ -1,91 +1,85 @@
-<% @page_title = "Stories for #{@iteration.name}" %>
-<h2><%=h @page_title %></h2>
+<% @page_title = "Stories for iteration '#{@iteration.name}'" %>
 
-<div id="actions">
-	<ul>
-		<li><%= link_to 'Back', project_path(@iteration.project) %></li>
-		<li><%= link_to 'Show', project_iteration_path(@iteration.project, @iteration) %></li>
-	</ul>
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li><a href="<%= projects_path %>">Projects</a> <span class="divider">/</span></li>
+      <li><a href="<%= project_path(@iteration.project) %>"><%= @iteration.project.name %></a> <span class="divider">/</span></li>
+      <li class="active"><%= @page_title %></li>
+    </ul>
+  </div>
 </div>
 
-<p>
-	<%= @total_assigned_points %>/<%= @iteration.velocity %> points assigned (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%) -
-  <% case (@assignment_difference <=> 0)
-  when -1 -%>
-    Undersubscribed by <%= 0 - @assignment_difference%> points
-    <% when 1 -%>
-    Oversubscribed by <%=@assignment_difference %> points
-    <% when 0 -%>
-    Spot on!
-  <% end -%>
-</p>
+<div class="row heading">
+  <div class="span9">
+    <h1 class="muted"><%=h @page_title %></h1>
+    <p>
+      <%= @total_assigned_points %>/<%= @iteration.velocity %> points assigned (<%=((@total_assigned_points.to_f/@iteration.velocity.to_f)*100).to_i%>%) -
+      <% case (@assignment_difference <=> 0)
+      when -1 -%>
+        Undersubscribed by <%= 0 - @assignment_difference%> points
+        <% when 1 -%>
+        Oversubscribed by <%=@assignment_difference %> points
+        <% when 0 -%>
+        Spot on!
+      <% end -%>
+    </p>
+  </div>
+  <div class="span3">
+    <% if current_user.has_role?("admin") %>
+      <% link_to new_iteration_story_path(@iteration), :class => "btn btn-primary pull-right" do %>
+        <i class="icon-plus icon-white"></i>
+        Add story
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
-<% if current_user.has_role?("admin") %>
-	<p><%= link_to 'New story', new_iteration_story_path(@iteration) %></p>
-<% end %>
+<div class="row">
+  <div class="span3">
+    <h3>New <br /><%=points_label(@backlog_stories)%></h3>
+    <% if @backlog_stories.empty? %>
+      <p>
+        There are currently no stories for this iteration.
+        <%= link_to "Add a add story", new_iteration_story_path(@iteration) if current_user.has_role?("admin") %>
+      </p>
+    <% else %>
+      <% @backlog_stories.each do |story| %>
+        <%= render :partial => "story", :locals => { :story => story } %>
+      <% end %>
+    <% end %>
+  </div>
 
+  <div class="span3">
+    <h3>In progress <br /><%=points_label(@current_stories)%></h3>
+    <% @current_stories.each do |story| %>
+      <%= render :partial => "story", :locals => { :story => story } %>
+    <% end %>
+  </div>
 
-<div id="columns">
-	<div id="completed-stories-bg" class="column-bg">
-		<div id="qa-stories-bg" class="column-bg">
-			<div id="in-progress-stories-bg" class="column-bg">
-				<div id="new-stories-bg" class="column-bg">
-					<div id="new-stories" class="column">
-						<!-- Column one start -->
-						<h3>New stories <%=points_label(@backlog_stories)%></h3>
-						  <% if @backlog_stories.empty? %>
-								<p>
-									There are currently no stories for this iteration.
-									<%= link_to_unless current_user.has_role?("admin"), "add story", new_iteration_story_path(@iteration) %>
-								</p>
-						  <% else %>
-						    <% @backlog_stories.each do |story| %>
-						      <%= render :partial => "story", :locals => { :story => story } %>
-						    <% end %>
-						  <% end %>
-						<!-- Column one end -->
-					</div>
-					<div id="in-progress-stories" class="column">
+  <div class="span3">
+    <h3>Quality assurance <br /><%=points_label(@quality_assurance_stories)%></h3>
+    <% @quality_assurance_stories.each do |story| %>
+      <%= render :partial => "story", :locals => { :story => story } %>
+    <% end %>
+  </div>
 
-						<!-- Column two start -->
-							<h3>In progress stories <%=points_label(@current_stories)%></h3>
-						  <% @current_stories.each do |story| %>
-						    <%= render :partial => "story", :locals => { :story => story } %>
-						  <% end %>
-						<!-- Column two end -->
-					</div>
-
-					<div id="qa-stories" class="column">
-						<!-- Column three start -->
-						<h3>Quality assurance stories <%=points_label(@quality_assurance_stories)%></h3>
-					  <% @quality_assurance_stories.each do |story| %>
-					    <%= render :partial => "story", :locals => { :story => story } %>
-					  <% end %>
-						<!-- Column three end -->
-					</div>
-
-					<div id="completed-stories" class="column">
-						<!-- Column four start -->
-						<h3>Completed stories <%=points_label(@completed_stories)%></h3>
-					  <% @completed_stories.each do |story| %>
-					    <%= render :partial => "story", :locals => { :story => story } %>
-					  <% end %>
-						<!-- Column four end -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="span3">
+    <h3>Completed <br /><%=points_label(@completed_stories)%></h3>
+    <% @completed_stories.each do |story| %>
+      <%= render :partial => "story", :locals => { :story => story } %>
+    <% end %>
+  </div>
 </div>
 
 <% content_for :page_end do -%>
 <script type="text/javascript">
-document.observe("dom:loaded", function() {
-  $$("#columns .heading").each(function(e) {
-		e.observe('click', function(){
-			Branston.Utils.toggleStoryDetails(e);
-		});
-	});
-});
+// document.observe("dom:loaded", function() {
+//   $$("#columns .heading").each(function(e) {
+//     e.observe('click', function(){
+//       Branston.Utils.toggleStoryDetails(e);
+//     });
+//   });
+// });
 </script>
 <% end %>

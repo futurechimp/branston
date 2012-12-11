@@ -1,51 +1,61 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
-var Branston = {
-    Form: {
-        selectChange: function(event) {
-            var el = event.element();
-            if (el.options[el.options.selectedIndex].value != "") el.form.submit();
-            return false;
-        },
+//create singleton to namespace js
+if (!branston) {
+  var branston = {};
+}
 
-		numericOnly: function(e) {
-	        try {
-	            var key;
-	            var keychar;
-	            if (window.event) {
-	                key = window.event.keyCode;
-	            } else if (e) {
-	                key = e.which;
-	            } else {
-	                return true;
-	            }
+branston.forms = (function(){
 
-	            keychar = String.fromCharCode(key);
-	            if (key == 13) {
-	                this.jump();
-	            } else if ((key == null) || (key == 0) || (key == 8) || (key == 9) || (key == 27)) {
-	                return true;
-	            } else if ((("0123456789").indexOf(keychar) > -1)) {
-	                return true;
-	            } else {
-	                return false;
-	            }
-	        } catch(e) {
-	            alert("numericOnly exception: " + e);
-	        }
-	    }
-    },
+	function isNumberKey(e){
+		var key;
+		var keychar;
+		if (window.event) {
+			key = window.event.keyCode;
+		} else if (e) {
+			key = e.which;
+		} else {
+			return true;
+		}
 
-   	Utils: {		
-		toggleStoryDetails: function(heading){
-			$(heading).next(".details-and-scenarios").toggle();
+		keychar = String.fromCharCode(key);
+		if (key == 13) {
+			this.jump();
+		} else if ((key == null) || (key == 0) || (key == 8) || (key == 9) || (key == 27)) {
+			return true;
+		} else if ((("0123456789").indexOf(keychar) > -1)) {
+			return true;
+		} else {
 			return false;
-		},
-		
-		toggleDetailAndScenario: function(link){
-			var story = $(link).up("div.story")
-			story.down("div.details").toggle();
-			story.down("div.scenarios").toggle();
 		}
 	}
-}
+
+	return{
+		numericOnly: function(e) {
+			try {
+				isNumberKey(e);
+			} catch(e) {
+				alert("numericOnly exception: " + e);
+			}
+		}
+	}
+});
+
+branston.stories = (function(){
+
+	return{
+		init: function(){
+			$(".thumbnail .caption").each(function(){
+				$caption = $(this);
+		    $caption.find("h3").bind("click", function(e){
+		    	e.preventDefault();
+		      $caption.find(".details").toggleClass("hidden");
+		  	});
+		  });
+		}
+	}
+});
+
+$(function() {
+	if($(".thumbnail .caption").exists()){
+		branston.stories.init();
+	}
+});

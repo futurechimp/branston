@@ -1,0 +1,36 @@
+/*
+  Bootstrap overwrites
+ */
+[class^="icon-"], [class*=" icon-"] {
+  background-image: url("/images/icons/glyphicons-halflings.png");
+}
+
+.icon-white, .nav-pills > .active > a > [class^="icon-"], .nav-pills > .active > a > [class*=" icon-"], .nav-list > .active > a > [class^="icon-"], .nav-list > .active > a > [class*=" icon-"], .navbar-inverse .nav > .active > a > [class^="icon-"], .navbar-inverse .nav > .active > a > [class*=" icon-"], .dropdown-menu > li > a:hover > [class^="icon-"], .dropdown-menu > li > a:hover > [class*=" icon-"], .dropdown-menu > .active > a > [class^="icon-"], .dropdown-menu > .active > a > [class*=" icon-"], .dropdown-submenu:hover > a > [class^="icon-"], .dropdown-submenu:hover > a > [class*=" icon-"] {
+    background-image: url("/images/icons/glyphicons-halflings-white.png");
+}
+
+h1, h2, h3, h4, h5, h6{
+  margin:0;
+  padding-bottom:25px;
+}
+
+.thumbnail .form-actions{
+  margin-bottom:0;
+}
+
+/*
+
+ */
+
+.actions{
+  width:20px;/* Shrink wrap the td */
+  white-space:nowrap;/* So the buttons don't wrap */
+}
+
+.heading{
+  padding-bottom:10px;
+}
+
+.hidden{
+  display:none;
+}

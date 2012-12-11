@@ -1,1 +1,1 @@
-page.replace_html element_id(@scenario,'outcomes'), :partial => "outcomes"
+page.replace_html element_id(@scenario, 'outcomes'), :partial => "outcomes"

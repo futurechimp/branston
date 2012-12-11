@@ -5,25 +5,20 @@ class ProjectsController < ApplicationController
   layout 'main'
 
   def index
-    if current_user
-      if current_user.role == 'client'
-        @projects = current_user.projects
-      else
-        @projects = Project.all
-      end
-
-      respond_to do |format|
-        format.html
-        format.xml  { render :xml => @projects }
-      end
+    if current_user.has_role?("admin")
+      @projects = Project.alphabetical
     else
-      redirect_to '/sessions/new'
+      @projects = current_user.projects.alphabetical
+    end
+
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @projects }
     end
   end
 
   def show
     @project = Project.find(params[:id])
-    @page_title = @project.name
 		@iterations = Iteration.find(:all, :conditions => ["project_id = ?", params[:id]])
 
     respond_to do |format|

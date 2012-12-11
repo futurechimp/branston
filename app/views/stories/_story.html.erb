@@ -1,13 +1,7 @@
 <% @story = story -%>
-<div id="<%= element_id(story) %>" class="story">
-	<div class="heading">
-    <h4>
-			<%= in_place_editor_field :story, :title, {}, 
-				:url => { :controller => 'stories', :action => 'set_story_title', :id => story.id, :iteration_id => @iteration.id } %>
-				<%= link_to "Delete", iteration_story_path(@iteration, @story), 
-					:confirm => 'Delete this story?', :method => :delete, :class => "delete" %>
-		</h4>
-	</div>
+
+<!-- <div id="<%= element_id(story) %>" class="story">
+
 	<div class="details-and-scenarios" style="display:none;">
   	<div id="<%= element_id(story,'details') %>" class="details">
 				<p><%= clippy("branston -g -f #{@story.to_param} -b #{request.host} -p #{request.port} ", "") %></p>
@@ -33,10 +27,10 @@
 	        <% end -%>
 	      <% end -%>
 	    <p>
-				<%= in_place_editor_field :story, :description, {}, 
+				<%= in_place_editor_field :story, :description, {},
 					:url => { :controller => 'stories', :action => 'set_story_description', :id => story.id, :iteration_id => @iteration.id }, :rows => 5 %>
 	    </p>
-		
+
 			<p>
 				<a href="#" onclick="Branston.Utils.toggleDetailAndScenario(this); return false;">Show Scenarios &raquo;</a>
 			</p>
@@ -51,23 +45,24 @@
 				<% @scenario = scenario -%>
 				<%= render :partial => "scenarios/scenario" %>
 			<% end %>
-		
+
 			<p>
 				<a href="#" onclick="Branston.Utils.toggleDetailAndScenario(this); return false;">Show Details &raquo;</a></p>
 			</p>
 		</div>
 	</div>
+</div>-->
+
+<div class="thumbnail">
+  <div class="caption">
+    <h3><%= @story.title %></h3>
+    <div id="story-<%= story.id %>" class="details hidden">
+	    <p><%= @story.description%></p>
+	    <div class="form-actions">
+	    	<%= link_to "Edit", edit_iteration_story_path(@iteration, @story), :class => "btn btn-primary" %>
+	    	<%= link_to "Delete", iteration_story_path(@iteration, @story),
+						:confirm => 'Delete this story?', :method => :delete, :class => "btn btn-danger" %>
+		  </div>
+		</div>
+  </div>
 </div>
-
-<% content_for :page_end do -%>
-<script type="text/javascript">
-	document.observe("dom:loaded", function() {
-	  $("<%= element_id(@story, 'points') %>").observe("change", Branston.Form.selectChange);
-	  <% unless @iterations.empty? -%>
-	  $("<%= element_id(@story, 'iterations') %>").observe("change", Branston.Form.selectChange);
-	  <% end -%>
-	  $("<%= element_id(@story, 'status') %>").observe("change", Branston.Form.selectChange);
-	});
-</script>
-<% end -%>
-

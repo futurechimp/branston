@@ -1,8 +1,18 @@
 module ApplicationHelper
 
-  # Applies an html class attribute where the controller name contains the 'tab_name'.
-  def tab_on(tab_name, html_class="current_page_item")
-    controller_name.match(Regexp.new("#{tab_name}")) ? " class=\"#{html_class}\"" : ''
+  #
+  #
+  #
+  # @returns [String] -
+  #
+  def is_active?(*controllers)
+    controllers.each do |controller|
+      if controller_name.match(Regexp.new("#{controller}"))
+        return true
+      end
+    end
+
+    return false
   end
 
   # Produces a string id using the type and id of obj plus any field suffix supplied useful when
@@ -37,6 +47,24 @@ module ApplicationHelper
       />
       </object>
     EOF
+  end
+
+  # Translates default Padrino flash keys into default Twitter Bootstrap
+  # alert CSS class name extension.
+  #
+  # @param [Symbol] flash - The flash key
+  # @return [String] the CSS class name
+  def bootstrap_alert_for(flash)
+    case flash
+      when :error
+        return "error"
+      when :warning
+        return "block"
+      when :notice
+        return "success"
+      when :info
+        return "info"
+    end
   end
 
 end

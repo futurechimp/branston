@@ -27,9 +27,9 @@ class IterationsController < ApplicationController
   # GET /iterations/1.xml
   def show
     @iteration = Iteration.find(params[:id])
-		
+
     respond_to do |format|
-      format.html { render :layout => 'burndown' }
+      format.html #{ render :layout => 'burndown' }
       format.xml  { render :xml => @iteration }
     end
   end
@@ -55,11 +55,11 @@ class IterationsController < ApplicationController
   def create
     @iteration = Iteration.new(params[:iteration])
 		@iteration.project = @project
-		
+
     respond_to do |format|
       if @iteration.save
         flash[:notice] = 'Iteration was successfully created.'
-        format.html { redirect_to project_iteration_path(@project, @iteration) }
+        format.html { redirect_to project_path(@project) }
         format.xml  { render :xml => @iteration, :status => :created, :location => @iteration }
       else
         find_project
@@ -78,7 +78,7 @@ class IterationsController < ApplicationController
     respond_to do |format|
       if @iteration.update_attributes(params[:iteration])
         flash[:notice] = 'Iteration was successfully updated.'
-        format.html { redirect_to project_iteration_path(@project, @iteration) }
+        format.html { redirect_to project_path(@project) }
         format.xml  { head :ok }
       else
 				find_project

@@ -1,16 +1,27 @@
 <% @page_title = "Edit  #{@iteration.name}" %>
-<h2><%=h @page_title %></h2>
 
-<div id="actions">
-	<ul>
-		<li><%= link_to 'Back', project_path(@project) %></li>
-		<li><%= link_to 'Show', project_iteration_path(@project, @iteration) %></li>
-	</ul>
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li><a href="<%= projects_path %>">Projects</a> <span class="divider">/</span></li>
+      <li><a href="<%= project_path(@project) %>"><%= @project.name %></a> <span class="divider">/</span></li>
+      <li class="active"><%= @page_title %></li>
+    </ul>
+  </div>
 </div>
 
-<% form_for :iteration, :url => project_iteration_path(@project, @iteration), 
-	:html => { :method => 'PUT' } do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f } %>
-  <p><%= f.submit 'Update' %></p>
-<% end %>
+<div class="row heading">
+  <div class="span12">
+    <h1 class="muted"><%=h @page_title %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <% form_for :iteration, :url => project_iteration_path(@project, @iteration),
+        :html => { :method => 'PUT', :class => "form-horizontal"} do |form| %>
+      <%= render :partial => 'form', :locals => {:form => form} %>
+    <% end %>
+  </div>
+</div>
 

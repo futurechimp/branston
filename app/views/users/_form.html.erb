@@ -1,47 +1,74 @@
 <%= error_messages_for :object => @user,
   :header_tag => 'h3',
   :id => "errors",
-  :class => "errors",
-  :header_message => "Whoops!",
-  :message => "We had some problems saving this user."
+  :class => "alert alert-error",
+  :header_message => "",
+  :message => "We had some problems saving this user"
 -%>
 
-<div class="form">
-  <p>
-    <%= label_tag 'Login' %>
-    <%= f.text_field :login %>
-  </p>
+<div class="control-group">
+  <%= form.label :login, nil, :class => "control-label" %>
+  <div class="controls">
+    <%= form.text_field :login, :class => "input-xxlarge" %>
+  </div>
+</div>
 
-  <p>
-    <%= label_tag 'Email' %>
-    <%= f.text_field :email %>
-  </p>
+<div class="control-group">
+  <%= form.label :email, nil, :class => "control-label" %>
+  <div class="controls">
+    <%= form.text_field :email, :class => "input-xxlarge" %>
+  </div>
+</div>
 
-  <p>
-    <%= label_tag 'Password' %>
-    <%= f.password_field :password %>
-  </p>
+<div class="control-group">
+  <%= form.label :password, nil, :class => "control-label" %>
+  <div class="controls">
+    <%= form.password_field :password, :class => "input-xxlarge" %>
+  </div>
+</div>
 
-  <p>
-    <%= label_tag 'password_confirmation', 'Confirm' %>
-    <%= f.password_field :password_confirmation %>
-  </p>
+<div class="control-group">
+  <%= form.label :password_confirmation, nil, :class => "control-label" %>
+  <div class="controls">
+    <%= form.password_field :password_confirmation, :class => "input-xxlarge" %>
+  </div>
+</div>
 
-  <% if current_user.has_role?("admin") -%>
-    <p>
-      <%= label_tag 'Role' %>
-      <%= f.select :role, ["admin", "client", "developer"] %>
-    </p>
-    <hr/>
-    <h2>Project access</h2>
-    <ul>
-      <% @projects.each_with_index do |project, index| %>
-        <li>
-          <%= check_box_tag "user[participations][][project]",
-                project.to_param, @user.participant?(project) %>
-          <%= project.name %>
-        </li>
-      <% end %>
-    </ul>
-  <% end -%>
+<% if current_user.has_role?("admin") -%>
+
+<div class="control-group">
+  <%= form.label :role, nil, :class => "control-label" %>
+  <div class="controls">
+    <%= form.select :role, ["admin", "client", "developer"] %>
+  </div>
+</div>
+
+<hr/>
+
+<div class="row heading">
+  <div class="span12">
+    <h3 class="muted">Project access</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <% @projects.each_with_index do |project, index| %>
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox inline" for="<%# TODO: figure out how to set this for each checkox %>">
+            <%= check_box_tag "user[participations][][project]",
+                  project.to_param, @user.participant?(project) %>
+            <%= project.name %>
+          </label>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% end -%>
+
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="button" class="btn" onclick="window.location='<%= users_path %>';">Cancel</button>
 </div>
