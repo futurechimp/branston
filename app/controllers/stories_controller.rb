@@ -21,10 +21,6 @@ class StoriesController < ApplicationController
   before_filter :load_iteration, :except => [:generate_feature]
   before_filter :retrieve_iterations, :except => [:generate_feature]
 
-  in_place_edit_for :story, :title
-  in_place_edit_for :story, :description
-  in_place_edit_for :story, :points
-
   def generate_feature
     @story = Story.find_by_slug(params[:id])
     if @story.nil?
