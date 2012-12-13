@@ -34,7 +34,7 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
-  
+
   config.log_level = :debug
 
 end
@@ -46,3 +46,6 @@ ActionView::Base.field_error_proc = Proc.new {|html_tag, instance|  %(#{html_tag
 
 #require 'gchart'
 
+# my_date_formats = { :default => '%d/%m/%Y' }
+# ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(my_date_formats)
+# ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(my_date_formats)

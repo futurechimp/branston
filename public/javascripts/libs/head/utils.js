@@ -21,21 +21,6 @@
 })(jQuery);
 
 /**
-* jQuery function to check if something exists.
-*
-* @returns [Boolean]
-*   If the jQuery element(s) exists
-*
-* @example
-*   $("#some-id").exists();
-*/
-(function($){
-  $.fn.exists = function() {
-    return this.length > 0;
-  };
-})(jQuery);
-
-/**
 * jQuery function to a param from URL params
 *
 * @returns [String]
@@ -68,5 +53,21 @@
   $.fn.wrapContentsWith = function(tag, options){
     var contents = this.html();
     this.html($(tag, options).html(contents));
+  };
+})(jQuery);
+
+/**
+* jQuery function to make an input field only accept numeric values
+*
+* @example
+*   $.fn.numericOnly()
+*/
+(function($){
+  $.fn.numericOnly = function(){
+    this.bind("keypress", function(e){
+      if((e.which!=8) && (e.which!=0) && (e.which<48 || e.which>57)) {
+        e.preventDefault();
+      }
+    });
   };
 })(jQuery);

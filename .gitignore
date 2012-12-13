@@ -11,8 +11,5 @@ coverage
 tmp
 pkg
 lib/branston/log/*.log
-
-
 .rvmrc
-
 config/database.yml

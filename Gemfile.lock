@@ -13,7 +13,6 @@ GEM
       activesupport (= 2.3.11)
     activesupport (2.3.11)
     builder (2.1.2)
-    calendar_date_select (1.16.1)
     columnize (0.3.2)
     cucumber (0.4.4)
       builder (= 2.1.2)
@@ -64,7 +63,6 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
-  calendar_date_select (>= 1.15)
   cucumber (= 0.4.4)
   faker
   googlecharts (~> 1.4.0)

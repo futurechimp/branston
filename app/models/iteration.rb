@@ -40,4 +40,12 @@ class Iteration < ActiveRecord::Base
     ]
   end
 
+  def start_date=(date)
+    if date.is_a?(String)
+      self.start_date = Date.strptime(date, "%d/%m/%Y")
+    else
+      self.start_date = date
+    end
+  end
+
 end

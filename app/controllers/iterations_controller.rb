@@ -54,6 +54,9 @@ class IterationsController < ApplicationController
   # POST /iterations.xml
   def create
     @iteration = Iteration.new(params[:iteration])
+    @iteration.start_date = Date.strptime(params[:iteration][:start_date], "%d/%m/%Y") if params[:iteration][:start_date]
+    @iteration.end_date = Date.strptime(params[:iteration][:end_date], "%d/%m/%Y") if params[:iteration][:end_date]
+
 		@iteration.project = @project
 
     respond_to do |format|
@@ -73,9 +76,13 @@ class IterationsController < ApplicationController
   # PUT /iterations/1
   # PUT /iterations/1.xml
   def update
+    puts "hitting controller"
     @iteration = Iteration.find(params[:id])
+    # @iteration.start_date = params[:iteration][:start_date] if params[:iteration][:start_date]
+    # @iteration.end_date = Date.strptime(params[:iteration][:end_date], "%d/%m/%Y") if params[:iteration][:end_date]
 
     respond_to do |format|
+      puts "respond to block"
       if @iteration.update_attributes(params[:iteration])
         flash[:notice] = 'Iteration was successfully updated.'
         format.html { redirect_to project_path(@project) }

@@ -32,7 +32,14 @@ module IterationsHelper
     end
 
     data_js_obj iteration, js_cell_arr
+  end
 
+  # Formats a date value into a more readable format for news items
+  #
+  # @param [DateTime] date
+  # @returns [String] the formatted date
+  def format_date_for_iteration(date)
+    date.strftime "%m/%d/%Y" unless date.nil?
   end
 
   protected
