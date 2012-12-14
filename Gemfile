@@ -1,30 +1,40 @@
-source :gemcutter
+source :rubygems
 
-gem 'rails', '~> 2.3.11'
-gem 'mysql'
-#gem 'sqlite3-ruby', '>=1.2.5', :require => 'sqlite3'
+# Server requirements
+# gem 'thin' # or mongrel
+# gem 'trinidad', :platform => 'jruby'
 
-# bundler requires these gems in all environments
-gem 'aasm'
-gem 'googlecharts', ' ~> 1.4.0'
-gem 'rcov'
+# Project requirements
+gem 'rake'
+gem 'sinatra-flash', :require => 'sinatra/flash'
+
+# Component requirements
+gem 'compass'
+gem 'erubis', "~> 2.7.0"
+gem 'activerecord', :require => "active_record"
+gem 'mysql2'
 
 group :development do
-  # bundler requires these gems in development
-  # currently nothing...
+  gem 'thin'
+  gem 'debugger'
+  gem 'faker'
+  gem 'capistrano'
+  gem 'capistrano-ext'
+  gem "capistrano_colors"
+  gem 'rvm-capistrano'
 end
 
+# Test requirements
 group :test do
-  gem 'cucumber', '0.4.4'
-  gem 'shoulda'
-  gem 'machinist'
-  gem 'webrat', '~> 0.5.3'
+  gem 'database_cleaner'
+  gem 'debugger'
   gem 'faker'
-  gem 'mocha'
-# gem 'relevance-rcov'
-  gem 'json'
-  gem 'redgreen'
-  gem 'ruby-prof'
-  gem 'ruby-debug'
-  gem 'phocus'
+  gem 'machinist'
+  gem 'minitest', "~>2.6.0", :require => "minitest/autorun"
+  gem 'minitest-matchers'
+  gem 'rack-test', :require => "rack/test"
+  gem 'turn', "~> 0.9.5"
 end
+
+# Padrino Stable Gem
+gem 'padrino', '0.10.7'
