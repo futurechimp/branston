@@ -14,7 +14,7 @@
         <!-- start .nav-collapse -->
         <div class="nav-collapse collapse">
           <ul class="nav">
-            <li<%= ' class="active"' if is_active?("projects", "stories") %>>
+            <li<%= ' class="active"' if is_active?("projects", "iterations", "stories") %>>
               <%= link_to 'Projects', projects_path %>
             </li>
             <% if current_user.has_role?("admin") %>
