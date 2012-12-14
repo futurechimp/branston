@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :name, :password, :password_confirmation, :participations
 
+  # scopes
+  #
+  named_scope :alphabetical, :order => "login ASC"
+
   include AASM
   aasm_column :state
   aasm_initial_state :pending

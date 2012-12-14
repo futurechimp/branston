@@ -21,7 +21,8 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th>User login</th>
+          <th>Login</th>
+          <th>Email</th>
           <th>Current State</th>
           <% if current_user.has_role?("admin") %>
             <th>Actions</th>
@@ -32,6 +33,7 @@
       <% for user in @users %>
         <tr>
           <td><%= link_to user.login, edit_user_path(user) %></td>
+          <td><%= user.email %></td>
           <td><%= user.state %></td>
           <% if current_user.has_role?("admin") %>
             <td class="actions">
