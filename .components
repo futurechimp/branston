@@ -1,7 +1,0 @@
---- 
-:script: jquery
-:test: minitest
-:renderer: erb
-:orm: activerecord
-:mock: none
-:stylesheet: compass
