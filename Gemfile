@@ -15,8 +15,17 @@ gem 'activerecord', :require => "active_record"
 gem 'mysql2'
 
 # Test requirements
-gem 'minitest', "~>2.6.0", :require => "minitest/autorun", :group => "test"
-gem 'rack-test', :require => "rack/test", :group => "test"
+group :test do
+  gem 'database_cleaner'
+  gem 'debugger'
+  gem 'faker'
+  gem 'machinist'
+  gem 'minitest', :require => "minitest/autorun"
+  gem 'minitest-matchers'
+  gem 'rack-test', :require => "rack/test"
+  gem 'turn'
+  gem 'valid_attribute'
+end
 
 # Padrino Stable Gem
 gem 'padrino', '0.10.7'
