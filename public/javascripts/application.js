@@ -5,6 +5,23 @@ if (!branston) {
 
 branston.forms = (function(){
 
+  function setCorrectTarget(e){
+    var $element = $(e.target);
+    if(e.target.tagName != "A"){
+      $element = $element.parent("a");
+    }
+    return $element;
+  }
+
+  function checkScenarios(){
+    $("div.scenario").each(function(){
+      var $scenario = $(this);
+      if($scenario.html().trim() == "" || $scenario.find("> fieldset").is(":hidden")){
+        $scenario.remove();
+      }
+    });
+  }
+
   return{
     selectChange: function(element) {
       if (element.options[element.options.selectedIndex].value != ""){
@@ -14,21 +31,25 @@ branston.forms = (function(){
     },
 
     // $(this).parent().next(\"#{append_to}\").append('#{escape_javascript(html)}');" #.replace(/NEW_RECORD/g, new Date().getTime()));"
-    addNewObject:function(e, html){
+    addFormObject:function(e, html){
       e.preventDefault();
-      var element = $(e.target);
-      if(e.target.tagName != "A"){
-        element = element.parent("a");
+      var $element = setCorrectTarget(e);
+      $element.parent().next().append(html); //.replace(/NEW_RECORD/g, new Date().getTime()));"
+    },
+
+    deleteFormObject: function(e, isNew){
+      e.preventDefault();
+      var $element = setCorrectTarget(e);
+      var $fieldset = $element.parent().parent().parent('fieldset')
+
+      if(isNew){
+        $fieldset.remove();
+      }else{
+        $fieldset.hide();
+        $element.prev().val('1');
       }
-      element.parent().next().append(html); //.replace(/NEW_RECORD/g, new Date().getTime()));"
-    },
 
-    removeNewObject: function(element){
-      // TODO:
-    },
-
-    removeExistingObject: function(element){
-      // TODO:
+      checkScenarios();
     }
   }
 })();

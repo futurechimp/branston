@@ -1,5 +1,6 @@
 source :gemcutter
-gem 'rails', '~> 2.3.5'
+
+gem 'rails', '~> 2.3.11'
 gem 'mysql'
 #gem 'sqlite3-ruby', '>=1.2.5', :require => 'sqlite3'
 

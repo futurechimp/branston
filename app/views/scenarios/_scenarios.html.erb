@@ -1,5 +1,25 @@
-<div id="story-scenarios-<%= story.id %>">
+<% if story.scenarios.count > 0 %>
   <% story.scenarios.each do |scenario| %>
-  	<%= render :partial => "scenario", :locals => {:scenario => scenario} %>
+    <p><%= scenario.title %></p>
+
+    <% if scenario.preconditions.count > 0 %>
+      <h5>Preconditions</h5>
+      <% scenario.preconditions.each do |precondition| %>
+        <p><%= precondition.description %></p>
+      <% end %>
+    <% end %>
+
+    <% if scenario.preconditions.count > 0 %>
+      <h5>Outcomes</h5>
+      <% scenario.outcomes.each do |outcome| %>
+        <p><%= outcome.description %></p>
+      <% end %>
+    <% end %>
+
+    <% unless scenario == story.scenarios.last %>
+      <hr />
+    <% end %>
   <% end %>
-</div>
+<% else %>
+  <p>There are currently no scenarios for this story.</p>
+<% end %>

@@ -39,13 +39,4 @@ class Iteration < ActiveRecord::Base
       ORDER BY transition_date", id, status
     ]
   end
-
-  def start_date=(date)
-    if date.is_a?(String)
-      @start_date = Date.strptime(date, "%d/%m/%Y")
-    else
-      @start_date = date
-    end
-  end
-
 end

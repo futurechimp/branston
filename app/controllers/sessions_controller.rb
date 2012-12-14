@@ -19,7 +19,10 @@ class SessionsController < ApplicationController
 
   # render new.rhtml
   def new
-
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @project }
+    end
   end
 
   def create

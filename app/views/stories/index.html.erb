@@ -36,7 +36,7 @@
 </div>
 
 <div class="row stories">
-  <div class="span3">
+  <div class="span3 new">
     <h3>New <br /><%=points_label(@backlog_stories)%></h3>
     <% if @iteration.stories.empty? %>
       <p>
@@ -50,21 +50,21 @@
     <% end %>
   </div>
 
-  <div class="span3">
+  <div class="span3 inprogress">
     <h3>In progress <br /><%=points_label(@current_stories)%></h3>
     <% @current_stories.each do |story| %>
       <%= render :partial => "story", :locals => { :story => story } %>
     <% end %>
   </div>
 
-  <div class="span3">
+  <div class="span3 qa">
     <h3>Quality assurance <br /><%=points_label(@quality_assurance_stories)%></h3>
     <% @quality_assurance_stories.each do |story| %>
       <%= render :partial => "story", :locals => { :story => story } %>
     <% end %>
   </div>
 
-  <div class="span3">
+  <div class="span3 completed">
     <h3>Completed <br /><%=points_label(@completed_stories)%></h3>
     <% @completed_stories.each do |story| %>
       <%= render :partial => "story", :locals => { :story => story } %>

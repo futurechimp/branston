@@ -1,48 +1,50 @@
-<fieldset>
-  <div class="control-group">
-    <%= f.label :title, nil, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :title, :class => "input-xxlarge" %> <%= delete_item(f, "", "btn btn-danger") %>
+<div class="scenario">
+  <fieldset>
+    <div class="control-group">
+      <%= f.label :title, nil, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :title, :class => "input-xxlarge" %> <%= delete_item(f, "", "btn btn-danger") %>
+      </div>
     </div>
-  </div>
 
-  <div class="control-group">
-    <div class="controls">
-      <div class="row">
-        <div class="span12">
-          <h3>
-            Preconditions
-            <% if current_user.has_role?("admin") %>
-              <%= add_form_object(f, Precondition, "btn btn-primary") %>
-            <% end %>
-          </h3>
-          <div class="preconditions">
-            <% f.fields_for :preconditions do |nested| -%>
-              <%= render :partial => 'preconditions/form', :locals => { :f => nested } -%>
-            <% end -%>
+    <div class="control-group">
+      <div class="controls">
+        <div class="row">
+          <div class="span12">
+            <h3>
+              Preconditions
+              <% if current_user.has_role?("admin") %>
+                <%= add_form_object(f, Precondition, "btn btn-primary") %>
+              <% end %>
+            </h3>
+            <div class="preconditions">
+              <% f.fields_for :preconditions do |nested| -%>
+                <%= render :partial => 'preconditions/form', :locals => { :f => nested } -%>
+              <% end -%>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="control-group">
-    <div class="controls">
-      <div class="row">
-        <div class="span12">
-          <h3>
-            Outcomes
-            <% if current_user.has_role?("admin") %>
-              <%= add_form_object(f, Outcome, "btn btn-primary") %>
-            <% end %>
-          </h3>
-          <div class="outcomes">
-            <% f.fields_for :outcomes do |nested| -%>
-              <%= render :partial => 'outcomes/form', :locals => { :f => nested } -%>
-            <% end -%>
+    <div class="control-group">
+      <div class="controls">
+        <div class="row">
+          <div class="span12">
+            <h3>
+              Outcomes
+              <% if current_user.has_role?("admin") %>
+                <%= add_form_object(f, Outcome, "btn btn-primary") %>
+              <% end %>
+            </h3>
+            <div class="outcomes">
+              <% f.fields_for :outcomes do |nested| -%>
+                <%= render :partial => 'outcomes/form', :locals => { :f => nested } -%>
+              <% end -%>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</fieldset>
+  </fieldset>
+</div>

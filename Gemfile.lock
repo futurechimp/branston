@@ -71,7 +71,7 @@ DEPENDENCIES
   mocha
   mysql
   phocus
-  rails (~> 2.3.5)
+  rails (~> 2.3.11)
   rcov
   redgreen
   ruby-debug

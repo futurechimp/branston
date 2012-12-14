@@ -23,8 +23,8 @@
 <div class="control-group">
   <%= f.label :start_date, nil, :class => "control-label" %>
   <div class="controls">
-    <div class="input-append date calendar" data-date-format="dd/mm/yyyy" data-date="">
-      <%= f.text_field :start_date, :class => "input-small" %>
+    <div class="input-append date calendar" data-date-format="dd/mm/yyyy" data-date="<%= @iteration.try(:start_date).try(:strftime,'%d/%m/%Y') %>">
+      <%= f.text_field :start_date, :class => "input-small", :value => @iteration.try(:start_date).try(:strftime,'%d/%m/%Y'), :readonly => true %>
       <span class="add-on">
         <i class="icon-calendar"></i>
       </span>
@@ -35,8 +35,8 @@
 <div class="control-group">
   <%= f.label :end_date, nil, :class => "control-label" %>
   <div class="controls">
-    <div class="input-append date calendar" data-date-format="dd/mm/yyyy" data-date="">
-      <%= f.text_field :end_date, :class => "input-small" %>
+    <div class="input-append date calendar" data-date-format="dd/mm/yyyy" data-date="<%= @iteration.try(:end_date).try(:strftime,'%d/%m/%Y') %>">
+      <%= f.text_field :end_date, :class => "input-small", :value => @iteration.try(:end_date).try(:strftime,'%d/%m/%Y'), :readonly => true %>
       <span class="add-on">
         <i class="icon-calendar"></i>
       </span>
@@ -46,5 +46,5 @@
 
 <div class="form-actions">
   <button type="submit" class="btn btn-primary">Save</button>
-  <button type="button" class="btn" onclick="window.location='<%= projects_path %>';">Cancel</button>
+  <button type="button" class="btn" onclick="window.location='<%= project_path(@project) %>';">Cancel</button>
 </div>

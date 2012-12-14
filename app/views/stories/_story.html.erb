@@ -15,31 +15,7 @@
     	<p>Points: <%= story.points %></p>
 	    <p><%= story.description%></p>
 			<h4>Scenarios</h4>
-			<% if story.scenarios.count > 0 %>
-				<% story.scenarios.each do |scenario| %>
-          <p><%= scenario.title %></p>
-
-          <% if scenario.preconditions.count > 0 %>
-            <h5>Preconditions</h5>
-            <% scenario.preconditions.each do |precondition| %>
-              <p><%= precondition.description %></p>
-            <% end %>
-          <% end %>
-
-          <% if scenario.preconditions.count > 0 %>
-            <h5>Outcomes</h5>
-            <% scenario.outcomes.each do |outcome| %>
-              <p><%= outcome.description %></p>
-            <% end %>
-          <% end %>
-
-          <% unless scenario == story.scenarios.last %>
-            <hr />
-          <% end %>
-			  <% end %>
-		  <% else %>
-		  	<p>There are currently no scenarios for this story.</p>
-		  <% end %>
+			<%= render :partial => "scenarios/scenarios", :locals => {:story=> story} %>
 	    <div class="form-actions">
 	    	<%= link_to "Edit", edit_iteration_story_path(@iteration, story), :class => "btn btn-primary" %>
 	    	<%= link_to "Delete", iteration_story_path(@iteration, story),

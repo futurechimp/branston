@@ -75,24 +75,19 @@ module ApplicationHelper
     form_builder.fields_for(fields_for, klass.new, :child_index => 'NEW_RECORD') do |form|
       html = render(:partial => partial, :locals => { :f => form }).gsub!('NEW_RECORD', DateTime.now.to_s.gsub!(":","").gsub!("+",""))
     end
-    # debugger
     html = escape_javascript(h(html))
-    # html.gsub!('\\\\', '\\')
-    # html.gsub!('\\\\\\', '\\\\')
 
-    render :partial => "shared/add_form_object", :locals => {:html => html, :css_class => css_class}
+    render :partial => "shared/add_form_object", :locals => {:html => html, :css_class => css_class, :text => text}
   end
 
   # TODO: This is also due some loving and pulling out into JS.
   def delete_item(form_builder, text, css_class)
-    text = "<i class=\"icon-minus icon-white\"></i> #{text}"
-    fieldset = "$(this).parent().parent().parent('fieldset')"
-    if form_builder.object.new_record?
-      link_to_function("#{text}", "#{fieldset}.remove()", :class => css_class)
-    else
-      form_builder.hidden_field(:_destroy) +
-      link_to_function("#{text}", "#{fieldset}.hide(); $(this).prev().val('1');", :class => css_class)
+    is_new = true
+    unless form_builder.object.new_record?
+      is_new = false
     end
+
+    render :partial => "shared/delete_form_object", :locals => {:f => form_builder, :is_new => is_new, :css_class => css_class}
   end
 
 end

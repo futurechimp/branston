@@ -81,7 +81,9 @@ class IterationsControllerTest < ActionController::TestCase
             setup do
               login_as(@user)
               assert_difference("Iteration.count") do
-                post :create, {:project_id => @iteration.project.to_param, :iteration => Iteration.plan}
+                post :create, {:project_id => @iteration.project.to_param,
+                  :iteration => Iteration.plan.merge(:start_date => Date.today.strftime("%d/%m/%Y"),
+                    :end_date => (Date.today + 14).strftime("%d/%m/%Y"))}
               end
             end
 
@@ -96,7 +98,10 @@ class IterationsControllerTest < ActionController::TestCase
             context "including a release_id" do
               setup do
                 assert_difference("Iteration.count") do
-                  post :create, {:project_id => @iteration.project.to_param, :iteration => Iteration.plan.merge(:release_id => Release.make.to_param)}
+                  post :create, {:project_id => @iteration.project.to_param,
+                    :iteration => Iteration.plan.merge(:release_id => Release.make.to_param,
+                      :start_date => Date.today.strftime("%d/%m/%Y"),
+                      :end_date => (Date.today + 14).strftime("%d/%m/%Y"))}
                 end
               end
 
