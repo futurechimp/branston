@@ -13,3 +13,5 @@ pkg
 lib/branston/log/*.log
 .rvmrc
 config/database.yml
+
+.DS_Store
