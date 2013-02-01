@@ -31,12 +31,13 @@ DESC
 deploy.task :full do
   transaction do
     update_code
-    deploy.web:disable
+#    deploy.web:disable
     symlink
+    cpdbconfig
     migrate
   end
   restart
-  deploy.web:enable
+#  deploy.web:enable
   cleanup
 end
 
@@ -59,6 +60,13 @@ namespace :deploy do
     desc "#{t} task is a no-op with mod_rails"
     task t, :roles => :app do ; end
   end
+
+  desc "Copy the release database.yml file into place after the code deploys."
+  task :cpdbconfig  do
+    db_config = "#{shared_path}/database.yml"
+    run "cp #{db_config} #{release_path}/config/database.yml"
+  end
+  
 end
 
 desc "Copy the release database.yml file into place after the code deploys."
