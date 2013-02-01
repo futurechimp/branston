@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   before_filter :capture_participations, :only => [:create, :update]
 
   def index
-    @users = User.find(:all)
+    @users = User.alphabetical
   end
 
   def new

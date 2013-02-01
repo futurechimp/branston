@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem 'rails', '~> 2.3.11'
+gem 'rails', '~> 2.3.16'
 gem 'mysql'
 #gem 'sqlite3-ruby', '>=1.2.5', :require => 'sqlite3'
 
@@ -8,6 +8,7 @@ gem 'mysql'
 gem 'aasm'
 gem 'googlecharts', ' ~> 1.4.0'
 gem 'rcov'
+gem 'rdoc'
 
 group :development do
   # bundler requires these gems in development
@@ -15,7 +16,7 @@ group :development do
 end
 
 group :test do
-  gem 'cucumber', '0.4.4'
+  gem 'cucumber'
   gem 'shoulda'
   gem 'machinist'
   gem 'webrat', '~> 0.5.3'
