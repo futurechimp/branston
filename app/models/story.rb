@@ -53,28 +53,50 @@ class Story < ActiveRecord::Base
   # team
   #
   include AASM
-  aasm_column :status
-  aasm_initial_state :new
-  aasm_state :new, :enter => :set_transition_date
-  aasm_state :in_progress, :enter => :set_transition_date
-  aasm_state :quality_assurance, :enter => :set_transition_date
-  aasm_state :completed, :enter => :set_completed_date
 
-  aasm_event :assign do
-    transitions :from => [:new, :quality_assurance, :completed], :to => :in_progress
+  aasm :column => :status, :whiny_transitions => false do
+    state :new, :initial => true, :after_enter => :set_transition_date
+    state :in_progress, :after_enter => :set_transition_date
+    state :quality_assurance, :after_enter => :set_transition_date
+    state :completed, :after_enter => :set_completed_date
+    event :assign do
+      transitions :from => [:new, :quality_assurance, :completed], :to => :in_progress
+    end
+
+    event :check_quality do
+      transitions :from => [:in_progress, :quality_assurance, :completed], :to => :quality_assurance
+    end
+
+    event :finish do
+      transitions :from => [:in_progress, :quality_assurance, :completed], :to => :completed
+    end
+
+    event :back_to_new do
+      transitions :from => [:new, :in_progress], :to => :new
+    end
   end
 
-  aasm_event :check_quality do
-    transitions :from => [:in_progress, :quality_assurance, :completed], :to => :quality_assurance
-  end
+  # aasm_initial_state :new
+  # aasm_state :new, :enter => :set_transition_date
+  # aasm_state :in_progress, :enter => :set_transition_date
+  # aasm_state :quality_assurance, :enter => :set_transition_date
+  # aasm_state :completed, :enter => :set_completed_date
 
-  aasm_event :finish do
-    transitions :from => [:in_progress, :quality_assurance, :completed], :to => :completed
-  end
+  # aasm_event :assign do
+  #   transitions :from => [:new, :quality_assurance, :completed], :to => :in_progress
+  # end
 
-  aasm_event :back_to_new do
-    transitions :from => [:new, :in_progress], :to => :new
-  end
+  # aasm_event :check_quality do
+  #   transitions :from => [:in_progress, :quality_assurance, :completed], :to => :quality_assurance
+  # end
+
+  # aasm_event :finish do
+  #   transitions :from => [:in_progress, :quality_assurance, :completed], :to => :completed
+  # end
+
+  # aasm_event :back_to_new do
+  #   transitions :from => [:new, :in_progress], :to => :new
+  # end
 
   attr_protected :status
 
