@@ -213,7 +213,7 @@ class StoriesControllerTest < ActionController::TestCase
         context "with invalid parameters" do
           setup do
             put :update, :id => @story.slug, :story => {:description => ""},
-            :iteration_id => @iteration.to_param
+              :iteration_id => @iteration.to_param, :format => 'html'
           end
 
           should "redisplay the edit template" do
