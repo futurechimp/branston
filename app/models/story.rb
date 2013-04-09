@@ -64,39 +64,17 @@ class Story < ActiveRecord::Base
     end
 
     event :check_quality do
-      transitions :from => [:in_progress, :quality_assurance, :completed], :to => :quality_assurance
+      transitions :from => [:new, :in_progress, :completed], :to => :quality_assurance
     end
 
     event :finish do
-      transitions :from => [:in_progress, :quality_assurance, :completed], :to => :completed
+      transitions :from => [:new, :in_progress, :quality_assurance, :completed], :to => :completed
     end
 
     event :back_to_new do
-      transitions :from => [:new, :in_progress], :to => :new
+      transitions :from => [:in_progress, :quality_assurance, :completed], :to => :new
     end
   end
-
-  # aasm_initial_state :new
-  # aasm_state :new, :enter => :set_transition_date
-  # aasm_state :in_progress, :enter => :set_transition_date
-  # aasm_state :quality_assurance, :enter => :set_transition_date
-  # aasm_state :completed, :enter => :set_completed_date
-
-  # aasm_event :assign do
-  #   transitions :from => [:new, :quality_assurance, :completed], :to => :in_progress
-  # end
-
-  # aasm_event :check_quality do
-  #   transitions :from => [:in_progress, :quality_assurance, :completed], :to => :quality_assurance
-  # end
-
-  # aasm_event :finish do
-  #   transitions :from => [:in_progress, :quality_assurance, :completed], :to => :completed
-  # end
-
-  # aasm_event :back_to_new do
-  #   transitions :from => [:new, :in_progress], :to => :new
-  # end
 
   attr_protected :status
 
