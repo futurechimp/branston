@@ -60,11 +60,11 @@ class Story < ActiveRecord::Base
     state :quality_assurance, :after_enter => :set_transition_date
     state :completed, :after_enter => :set_completed_date
     event :assign do
-      transitions :from => [:new, :quality_assurance, :completed], :to => :in_progress
+      transitions :from => [:new, :in_progress, :quality_assurance, :completed], :to => :in_progress
     end
 
     event :check_quality do
-      transitions :from => [:new, :in_progress, :completed], :to => :quality_assurance
+      transitions :from => [:new, :in_progress, :quality_assurance, :completed], :to => :quality_assurance
     end
 
     event :finish do
@@ -72,7 +72,7 @@ class Story < ActiveRecord::Base
     end
 
     event :back_to_new do
-      transitions :from => [:in_progress, :quality_assurance, :completed], :to => :new
+      transitions :from => [:new, :in_progress, :quality_assurance, :completed], :to => :new
     end
   end
 
