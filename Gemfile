@@ -1,8 +1,7 @@
-source :gemcutter
+source 'https://rubygems.org'
 
-gem 'rails', '~> 2.3.16'
+gem 'rails', '~> 2.3.18'
 gem 'mysql'
-#gem 'sqlite3-ruby', '>=1.2.5', :require => 'sqlite3'
 
 # bundler requires these gems in all environments
 gem 'aasm'
@@ -22,10 +21,9 @@ group :test do
   gem 'webrat', '~> 0.5.3'
   gem 'faker'
   gem 'mocha'
-# gem 'relevance-rcov'
   gem 'json'
-  gem 'redgreen'
+  gem 'minitest-colorize'
   gem 'ruby-prof'
-  gem 'ruby-debug'
+  gem 'debugger'
   gem 'phocus'
 end
