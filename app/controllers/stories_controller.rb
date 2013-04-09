@@ -127,6 +127,8 @@ class StoriesController < ApplicationController
         format.xml  { head :ok }
         format.js { redirect_to iteration_stories_path(@iteration) }
       else
+        flash[:error] = "You need to move along the swim lanes in order"
+        format.js { redirect_to iteration_stories_path(@iteration) }
         format.html { render :action => "edit" }
         format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
       end

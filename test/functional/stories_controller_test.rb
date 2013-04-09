@@ -221,6 +221,17 @@ class StoriesControllerTest < ActionController::TestCase
             assert assigns(:iterations)
           end
         end
+
+        context "with an illegal state change, using javascript" do
+          setup do
+            put :update, :id => @story.slug, :story => { :status => "completed"},
+              :iteration_id => @iteration.to_param, :format => 'js'
+          end
+
+          should "display the stories and display a flash message" do
+            assert_redirected_to iteration_stories_path(@iteration)
+          end
+        end
       end
     end
 
